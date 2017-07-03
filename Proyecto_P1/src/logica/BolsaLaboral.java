@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class BolsaLaboral {
 	private ArrayList<Empresa> misEmpresas;
-	private ArrayList<Solicitante> misPersonas;
+	private ArrayList<Solicitante> misSolicitantes;
 	private ArrayList<Solicitud> misSolicitudes;
 	private static BolsaLaboral bolsa;
 
@@ -12,7 +12,7 @@ public class BolsaLaboral {
 		super();
 		this.bolsa = null;
 		this.misEmpresas = new ArrayList<>();
-		this.misPersonas = new ArrayList<>();
+		this.misSolicitantes = new ArrayList<>();
 		this.misSolicitudes = new ArrayList<>();
 	}
 
@@ -21,7 +21,7 @@ public class BolsaLaboral {
 	}
 
 	public ArrayList<Solicitante> getMisPersonas() {
-		return misPersonas;
+		return misSolicitantes;
 	}
 
 	public ArrayList<Solicitud> getMisSolicitudes() {
@@ -33,6 +33,7 @@ public class BolsaLaboral {
 			bolsa = new BolsaLaboral();
 		}
 		return bolsa;
+
 	}
 
 }
