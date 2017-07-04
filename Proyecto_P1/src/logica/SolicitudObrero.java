@@ -5,23 +5,23 @@ import java.util.ArrayList;
 
 
 public class SolicitudObrero extends Solicitud {
-	ArrayList<String> Habilidades;
+	private ArrayList<String> habilidades;
 
 	public SolicitudObrero(int cantVacantes, int annosExperiencia, int edadMax,
 			int edadMin, String tipoContrato, boolean vehiculoPropio,
-			String localidad, Empresa empresa, boolean mudarse,ArrayList<String> Habilidades) {
+			String localidad, Empresa empresa, boolean mudarse,ArrayList<String> habilidades) {
 		super(cantVacantes, annosExperiencia, edadMax, edadMin, tipoContrato,
 				vehiculoPropio, localidad, empresa, mudarse);
-		this.Habilidades= new ArrayList<String>();
+		this.habilidades= new ArrayList<>();
 	
 	}
 
 	public ArrayList<String> getHabilidades() {
-		return Habilidades;
+		return habilidades;
 	}
 
 	public void setHabilidades(ArrayList<String> habilidades) {
-		Habilidades = habilidades;
+		this.habilidades = habilidades;
 	}
 
 }

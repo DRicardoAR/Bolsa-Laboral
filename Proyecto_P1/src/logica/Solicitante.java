@@ -8,7 +8,7 @@ public abstract class Solicitante {
 	protected String nombres;
 	protected String apellidos;
 	protected String telefono;
-	protected LocalDate FechaNacimiento;
+	protected LocalDate fechaNacimiento;
 	protected String nacionalidad;
 	protected String sexo;
 	protected String estadoCivil;
@@ -33,7 +33,7 @@ public abstract class Solicitante {
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.telefono = telefono;
-		FechaNacimiento = fechaNacimiento;
+		this.fechaNacimiento = fechaNacimiento;
 		this.nacionalidad = nacionalidad;
 		this.sexo = sexo;
 		this.estadoCivil = estadoCivil;
@@ -97,11 +97,11 @@ public abstract class Solicitante {
 	}
 
 	public LocalDate getFechaNacimiento() {
-		return FechaNacimiento;
+		return fechaNacimiento;
 	}
 
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
-		FechaNacimiento = fechaNacimiento;
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	public String getNacionalidad() {

@@ -2,16 +2,16 @@ package logica;
 
 public class Empresa {
 	private String RNC;
-	private String Nombre;
+	private String nombre;
 	private String telefono;
 	private String email;
 	private String area;
 	private String direccion;
 
-	public Empresa(String rNC, String nombre, String telefono, String email, String area, String direccion) {
+	public Empresa(String RNC, String nombre, String telefono, String email, String area, String direccion) {
 		super();
-		RNC = rNC;
-		Nombre = nombre;
+		this.RNC = RNC;
+		this.nombre = nombre;
 		this.telefono = telefono;
 		this.email = email;
 		this.area = area;
@@ -27,11 +27,11 @@ public class Empresa {
 	}
 
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
 
 	public String getTelefono() {

@@ -3,27 +3,27 @@ package logica;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class SolicitanteTecnico extends Solicitante {
-	ArrayList<String> Habilidades;
+public class Obrero extends Solicitante {
+	ArrayList<String> habilidades;
 
-	public SolicitanteTecnico(String cedula, String nombres, String apellidos,
+	public Obrero(String cedula, String nombres, String apellidos,
 			String telefono, LocalDate fechaNacimiento, String nacionalidad,
 			String sexo, String estadoCivil, String direccion,
 			String provincia, String email, boolean vehiculoPropio,
 			boolean licencia, int categoriaLicencia, int annosExperiencia,
-			String idiomas, boolean mudarse,ArrayList<String> Habilidades) {
+			String idiomas, boolean mudarse,ArrayList<String> habilidades) {
 		super(cedula, nombres, apellidos, telefono, fechaNacimiento, nacionalidad,
 				sexo, estadoCivil, direccion, provincia, email, vehiculoPropio,
 				licencia, categoriaLicencia, annosExperiencia, idiomas, mudarse);
-		this.Habilidades= new ArrayList<String>();
+		this.habilidades= new ArrayList<>();
 	}
 
 	public ArrayList<String> getHabilidades() {
-		return Habilidades;
+		return habilidades;
 	}
 
 	public void setHabilidades(ArrayList<String> habilidades) {
-		Habilidades = habilidades;
+		this.habilidades = habilidades;
 	}
 
 }

@@ -1,25 +1,25 @@
 package logica;
 
-import java.util.ArrayList;
 
 public class SolicitudTecnico extends Solicitud {
-	ArrayList<String> Habilidades;
+	private String area;
 
 	public SolicitudTecnico(int cantVacantes, int annosExperiencia,
 			int edadMax, int edadMin, String tipoContrato,
 			boolean vehiculoPropio, String localidad, Empresa empresa,
-			boolean mudarse,ArrayList<String> Habilidades) {
+			boolean mudarse, String area) {
 		super(cantVacantes, annosExperiencia, edadMax, edadMin, tipoContrato,
 				vehiculoPropio, localidad, empresa, mudarse);
-		this.Habilidades= new ArrayList<String>();
+	
 	}
 
-	public ArrayList<String> getHabilidades() {
-		return Habilidades;
+	public String getArea() {
+		return area;
 	}
 
-	public void setHabilidades(ArrayList<String> habilidades) {
-		Habilidades = habilidades;
+	public void setArea(String area) {
+		this.area = area;
 	}
 
+	
 }

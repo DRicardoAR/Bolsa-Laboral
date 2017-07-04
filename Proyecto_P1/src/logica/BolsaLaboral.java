@@ -38,5 +38,12 @@ public class BolsaLaboral {
 	public void insertEmpresa(Empresa empresa){
 		misEmpresas.add(empresa);
 	}
+	public void insertSolicitante(Solicitante pSolicitante){
+		misSolicitantes.add(pSolicitante);
+	}
+	public void insertSolicitud(Solicitud pSolicitud){
+		misSolicitudes.add(pSolicitud);
+	}
+	
 
 }

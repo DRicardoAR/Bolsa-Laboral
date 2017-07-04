@@ -2,10 +2,10 @@ package logica;
 
 import java.time.LocalDate;
 
-public class SolicitanteUniversitario extends Solicitante {
-	boolean PostGrado;
-	String Carrera;
-	public SolicitanteUniversitario(String cedula, String nombres,
+public class Universitario extends Solicitante {
+	private boolean PostGrado;
+	private String Carrera;
+	public Universitario(String cedula, String nombres,
 			String apellidos, String telefono, LocalDate fechaNacimiento,
 			String nacionalidad, String sexo, String estadoCivil,
 			String direccion, String provincia, String email,

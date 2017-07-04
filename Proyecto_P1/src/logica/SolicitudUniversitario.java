@@ -1,8 +1,8 @@
 package logica;
 
 public class SolicitudUniversitario extends Solicitud {
-	boolean PostGrado;
-	String Carrera;
+	private boolean PostGrado;
+	private String Carrera;
 
 	public SolicitudUniversitario(int cantVacantes, int annosExperiencia,
 			int edadMax, int edadMin, String tipoContrato,
