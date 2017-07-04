@@ -1,6 +1,7 @@
 package logica;
 
 public abstract class Solicitud {
+	protected String codigo;
 	protected int cantVacantes;
 	protected int annosExperiencia;
 	protected int edadMax;
@@ -23,6 +24,15 @@ public abstract class Solicitud {
 		this.localidad = localidad;
 		this.empresa = empresa;
 		this.mudarse = mudarse;
+		this.codigo = codigo;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public int getCantVacantes() {
