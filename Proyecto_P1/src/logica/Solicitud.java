@@ -25,6 +25,7 @@ public abstract class Solicitud {
 		this.empresa = empresa;
 		this.mudarse = mudarse;
 		this.codigo = codigo;
+		
 	}
 
 	public String getCodigo() {
