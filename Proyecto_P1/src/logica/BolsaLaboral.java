@@ -36,19 +36,23 @@ public class BolsaLaboral {
 		return bolsa;
 
 	}
-	public void insertEmpresa(Empresa empresa){
+
+	public void insertEmpresa(Empresa empresa) {
 		misEmpresas.add(empresa);
 	}
-	public void insertSolicitante(Solicitante pSolicitante){
+
+	public void insertSolicitante(Solicitante pSolicitante) {
 		String code = getCodeSolicitante();
 		pSolicitante.setCodigo(code);
 		misSolicitantes.add(pSolicitante);
 	}
-	public void insertSolicitud(Solicitud pSolicitud){
+
+	public void insertSolicitud(Solicitud pSolicitud) {
 		String code = getCodeSolicitud();
-	    pSolicitud.setCodigo(code);
+		pSolicitud.setCodigo(code);
 		misSolicitudes.add(pSolicitud);
 	}
+
 	// Generacion de Codigos....
 	public String getCodeSolicitante() {
 		String code = "";
@@ -63,9 +67,10 @@ public class BolsaLaboral {
 			}
 
 		}
-		codigo ="S"+code;
+		codigo = "S" + code;
 		return codigo;
 	}
+
 	public String getCodeSolicitud() {
 		String code = "";
 		String codigo = "";
@@ -79,8 +84,19 @@ public class BolsaLaboral {
 			}
 
 		}
-		codigo ="SO"+code;
+		codigo = "SO" + code;
 		return codigo;
+	}
+
+	// Funciones de empresa
+	public int cantSolicitudes(String RNC) {
+		int cant = 0;
+		for (Empresa empresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(RNC)) {
+				cant++;
+			}
+		}
+		return cant;
 	}
 
 }
