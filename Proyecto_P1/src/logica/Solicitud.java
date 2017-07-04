@@ -19,7 +19,7 @@ public abstract class Solicitud {
 		this.annosExperiencia = annosExperiencia;
 		this.edadMax = edadMax;
 		this.edadMin = edadMin;
-		TipoContrato = tipoContrato;
+		tipoContrato = tipoContrato;
 		this.vehiculoPropio = vehiculoPropio;
 		this.localidad = localidad;
 		this.empresa = empresa;
@@ -68,11 +68,11 @@ public abstract class Solicitud {
 	}
 
 	public String getTipoContrato() {
-		return TipoContrato;
+		return tipoContrato;
 	}
 
 	public void setTipoContrato(String tipoContrato) {
-		TipoContrato = tipoContrato;
+		tipoContrato = tipoContrato;
 	}
 
 	public boolean isVehiculoPropio() {
