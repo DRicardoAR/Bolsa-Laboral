@@ -6,7 +6,7 @@ public abstract class Solicitud {
 	protected int annosExperiencia;
 	protected int edadMax;
 	protected int edadMin;
-	protected String TipoContrato;
+	protected String tipoContrato;
 	protected boolean vehiculoPropio;
 	protected String localidad;
 	protected Empresa empresa;
