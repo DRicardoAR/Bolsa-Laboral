@@ -98,6 +98,14 @@ public class BolsaLaboral {
 		}
 		return cant;
 	}
+	public boolean buscarSolicitud(Solicitud pSolicitud){
+		boolean find = false;
+		if(misSolicitudes.contains(pSolicitud)){
+			find = true;
+		}
+		return find;
+	}
+	
 	
 	public boolean buscarSolicitante(Solicitante pSolicitante){
 		boolean find = false;

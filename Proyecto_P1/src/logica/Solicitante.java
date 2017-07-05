@@ -1,6 +1,8 @@
 package logica;
 
 import java.time.LocalDate;
+import java.time.Year;
+import java.time.temporal.ChronoUnit;
 
 public abstract class Solicitante {
 	protected String codigo;
@@ -21,7 +23,7 @@ public abstract class Solicitante {
 	protected int annosExperiencia;
 	protected String idiomas;
 	protected boolean contratado;
-	protected int edad;
+	protected long edad;
 	protected boolean mudarse;
 
 	public Solicitante(String cedula, String nombres, String apellidos, String telefono, LocalDate fechaNacimiento,
@@ -200,12 +202,20 @@ public abstract class Solicitante {
 		this.contratado = contratado;
 	}
 
-	public int getEdad() {
+	public long getEdad() {
 		return edad;
 	}
 
-	public void setEdad(int edad) {
+	public void setEdad(long edad) {
 		this.edad = edad;
 	}
+	
+	public void setEdadSoli()
+	{
+		LocalDate now = LocalDate.now();
+		 edad = ChronoUnit.YEARS.between(fechaNacimiento, now);
+	}
+
+	
 
 }
