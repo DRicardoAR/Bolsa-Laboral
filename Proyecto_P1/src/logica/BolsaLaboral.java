@@ -98,5 +98,45 @@ public class BolsaLaboral {
 		}
 		return cant;
 	}
+	
+	public boolean buscarSolicitante(Solicitante pSolicitante){
+		boolean find = false;
+		if(misSolicitantes.contains(pSolicitante)){
+			find = true;
+		}
+		return find;
+	}
+	
+	public int cantSolicitanteUniversitario(){
+		int cant = 0;
+		for (Solicitante solicitante : misSolicitantes) {
+			if(solicitante instanceof Universitario){
+				cant++;
+			}	
+		}
+		
+		return cant;
+	}
+	public int cantSolicitanteTecnico(){
+		int cant = 0;
+		for (Solicitante solicitante : misSolicitantes) {
+			if(solicitante instanceof Tecnico){
+				cant++;
+			}
+		}
+		
+		return cant;
+	}
+	public int cantSolicitanteObrero(){
+		int cant = 0;
+		for (Solicitante solicitante : misSolicitantes) {
+			if(solicitante instanceof Obrero){
+				cant++;
+			}	
+		}
+		
+		return cant;
+	}
+	
 
 }
