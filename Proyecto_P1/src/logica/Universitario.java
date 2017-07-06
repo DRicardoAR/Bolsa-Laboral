@@ -1,6 +1,7 @@
 package logica;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Universitario extends Solicitante {
 	private boolean PostGrado;
@@ -10,7 +11,7 @@ public class Universitario extends Solicitante {
 			String nacionalidad, String sexo, String estadoCivil,
 			String direccion, String provincia, String email,
 			boolean vehiculoPropio, boolean licencia, int categoriaLicencia,
-			int annosExperiencia, String idiomas, boolean mudarse,boolean PostGrado, String Carrera) {
+			int annosExperiencia,ArrayList<String> idiomas, boolean mudarse,boolean PostGrado, String Carrera) {
 		super(cedula, nombres, apellidos, telefono, fechaNacimiento, nacionalidad,
 				sexo, estadoCivil, direccion, provincia, email, vehiculoPropio,
 				licencia, categoriaLicencia, annosExperiencia, idiomas, mudarse);

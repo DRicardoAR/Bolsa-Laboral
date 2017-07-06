@@ -1,33 +1,35 @@
 package logica;
 
-public class SolicitudUniversitario extends Solicitud {
-	private boolean PostGrado;
-	private String Carrera;
+import java.util.ArrayList;
 
-	public SolicitudUniversitario(int cantVacantes, int annosExperiencia,
-			int edadMax, int edadMin, String tipoContrato,
-			boolean vehiculoPropio, String localidad, Empresa empresa,
-			boolean mudarse, boolean PostGrado, String Carrera) {
-		super(cantVacantes, annosExperiencia, edadMax, edadMin, tipoContrato,
-				vehiculoPropio, localidad, empresa, mudarse);
-		this.PostGrado=PostGrado;
-		this.Carrera=Carrera;
+public class SolicitudUniversitario extends Solicitud {
+	private boolean postGrado;
+	private String carrera;
+	
+	public SolicitudUniversitario(int cantVacantes, int annosExperiencia, int edadMax, int edadMin, String tipoContrato,
+			boolean vehiculoPropio, String localidad, Empresa empresa, boolean mudarse, ArrayList<String> idiomas,
+			int categoriaLicencia,boolean postGrado,String carrera) {
+		super(cantVacantes, annosExperiencia, edadMax, edadMin, tipoContrato, vehiculoPropio, localidad, empresa, mudarse,
+				idiomas, categoriaLicencia);
+		this.postGrado= postGrado;
+		this.carrera = carrera;
 	}
 
+
 	public boolean isPostGrado() {
-		return PostGrado;
+		return postGrado;
 	}
 
 	public void setPostGrado(boolean postGrado) {
-		PostGrado = postGrado;
+		this.postGrado = postGrado;
 	}
 
 	public String getCarrera() {
-		return Carrera;
+		return carrera;
 	}
 
 	public void setCarrera(String carrera) {
-		Carrera = carrera;
+		this.carrera = carrera;
 	}
 
 }

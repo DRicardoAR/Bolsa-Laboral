@@ -11,7 +11,7 @@ public class Tecnico extends Solicitante {
 			String sexo, String estadoCivil, String direccion,
 			String provincia, String email, boolean vehiculoPropio,
 			boolean licencia, int categoriaLicencia, int annosExperiencia,
-			String idiomas, boolean mudarse,String area) {
+			ArrayList<String> idiomas, boolean mudarse,String area) {
 		super(cedula, nombres, apellidos, telefono, fechaNacimiento, nacionalidad,
 				sexo, estadoCivil, direccion, provincia, email, vehiculoPropio,
 				licencia, categoriaLicencia, annosExperiencia, idiomas, mudarse);

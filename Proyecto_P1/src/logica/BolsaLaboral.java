@@ -88,7 +88,7 @@ public class BolsaLaboral {
 		return codigo;
 	}
 
-	// Funciones de empresa
+	// Funciones de Empresa
 	public int cantSolicitudes(String RNC) {
 		int cant = 0;
 		for (Empresa empresa : misEmpresas) {
@@ -98,53 +98,105 @@ public class BolsaLaboral {
 		}
 		return cant;
 	}
-	public boolean buscarSolicitud(Solicitud pSolicitud){
+
+	// Funciones de Solicitantes
+	public boolean buscarSolicitud(Solicitud pSolicitud) {
 		boolean find = false;
-		if(misSolicitudes.contains(pSolicitud)){
+		if (misSolicitudes.contains(pSolicitud)) {
 			find = true;
 		}
 		return find;
 	}
-	
-	
-	public boolean buscarSolicitante(Solicitante pSolicitante){
+
+	public boolean buscarSolicitante(Solicitante pSolicitante) {
 		boolean find = false;
-		if(misSolicitantes.contains(pSolicitante)){
+		if (misSolicitantes.contains(pSolicitante)) {
 			find = true;
 		}
 		return find;
 	}
-	
-	public int cantSolicitanteUniversitario(){
+
+	public int cantSolicitanteUniversitario() {
 		int cant = 0;
 		for (Solicitante solicitante : misSolicitantes) {
-			if(solicitante instanceof Universitario){
-				cant++;
-			}	
-		}
-		
-		return cant;
-	}
-	public int cantSolicitanteTecnico(){
-		int cant = 0;
-		for (Solicitante solicitante : misSolicitantes) {
-			if(solicitante instanceof Tecnico){
+			if (solicitante instanceof Universitario) {
 				cant++;
 			}
 		}
-		
+
 		return cant;
 	}
-	public int cantSolicitanteObrero(){
+
+	public int cantSolicitanteTecnico() {
 		int cant = 0;
 		for (Solicitante solicitante : misSolicitantes) {
-			if(solicitante instanceof Obrero){
+			if (solicitante instanceof Tecnico) {
 				cant++;
-			}	
+			}
 		}
-		
+
 		return cant;
 	}
-	
 
+	public int cantSolicitanteObrero() {
+		int cant = 0;
+		for (Solicitante solicitante : misSolicitantes) {
+			if (solicitante instanceof Obrero) {
+				cant++;
+			}
+		}
+
+		return cant;
+	}
+
+	// Funciones de Matching
+public boolean validarGeneral(Solicitante persona, Solicitud solicitud){
+	boolean valido = true;
+		if(persona.isVehiculoPropio()==solicitud.isVehiculoPropio()){
+			if(persona.isMudarse() == solicitud.isMudarse()){
+			if(persona.getCategoriaLicencia()==solicitud.getCategoriaLicencia()){
+				
+			}
+			}
+		}
+	
+	return valido;
+}
+	public ArrayList<Solicitante> matcheo(Solicitud soli) {
+		ArrayList<Solicitante> misSolicitantes = new ArrayList<>();
+		boolean  validar= false;
+		if (soli instanceof SolicitudObrero) {
+			for (Solicitante solicitante : misSolicitantes) {
+				if (solicitante instanceof Obrero) {
+					validar = validarGeneral(solicitante , soli);
+					if(validar){
+						
+					}
+				}
+			}
+
+		}
+		if (soli instanceof SolicitudTecnico) {
+			for (Solicitante solicitante : misSolicitantes) {
+				if (solicitante instanceof Tecnico) {
+					validar = validarGeneral(solicitante , soli);
+					if(validar){
+						
+					}
+				}
+			}
+		}
+		if (soli instanceof SolicitudUniversitario) {
+			for (Solicitante solicitante : misSolicitantes) {
+				if (solicitante instanceof Universitario) {
+					validar = validarGeneral(solicitante , soli);
+					if(validar){
+						
+					}
+				}
+			}
+		}
+
+		return misSolicitantes;
+	}
 }

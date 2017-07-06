@@ -1,5 +1,7 @@
 package logica;
 
+import java.util.ArrayList;
+
 public abstract class Solicitud {
 	protected String codigo;
 	protected int cantVacantes;
@@ -8,12 +10,14 @@ public abstract class Solicitud {
 	protected int edadMin;
 	protected String tipoContrato;
 	protected boolean vehiculoPropio;
+	protected int categoriaLicencia;
 	protected String localidad;
 	protected Empresa empresa;
 	protected boolean mudarse;
+	protected ArrayList<String> idiomas;
 
 	public Solicitud(int cantVacantes, int annosExperiencia, int edadMax, int edadMin, String tipoContrato,
-			boolean vehiculoPropio, String localidad, Empresa empresa, boolean mudarse) {
+			boolean vehiculoPropio, String localidad, Empresa empresa, boolean mudarse, ArrayList<String> idiomas,int categoriaLicencia) {
 		super();
 		this.cantVacantes = cantVacantes;
 		this.annosExperiencia = annosExperiencia;
@@ -25,7 +29,25 @@ public abstract class Solicitud {
 		this.empresa = empresa;
 		this.mudarse = mudarse;
 		this.codigo = codigo;
-		
+		this.categoriaLicencia = categoriaLicencia;
+		this.idiomas = new ArrayList<>();
+
+	}
+
+	public int getCategoriaLicencia() {
+		return categoriaLicencia;
+	}
+
+	public void setCategoriaLicencia(int categoriaLicencia) {
+		this.categoriaLicencia = categoriaLicencia;
+	}
+
+	public ArrayList<String> getIdiomas() {
+		return idiomas;
+	}
+
+	public void setIdiomas(ArrayList<String> idiomas) {
+		this.idiomas = idiomas;
 	}
 
 	public String getCodigo() {

@@ -3,6 +3,7 @@ package logica;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 public abstract class Solicitante {
 	protected String codigo;
@@ -21,14 +22,14 @@ public abstract class Solicitante {
 	protected boolean licencia;
 	protected int categoriaLicencia;
 	protected int annosExperiencia;
-	protected String idiomas;
+	protected ArrayList<String> idiomas;
 	protected boolean contratado;
 	protected long edad;
 	protected boolean mudarse;
 
 	public Solicitante(String cedula, String nombres, String apellidos, String telefono, LocalDate fechaNacimiento,
 			String nacionalidad, String sexo, String estadoCivil, String direccion, String provincia, String email,
-			boolean vehiculoPropio, boolean licencia, int categoriaLicencia, int annosExperiencia, String idiomas,
+			boolean vehiculoPropio, boolean licencia, int categoriaLicencia, int annosExperiencia, ArrayList<String> idiomas,
 			boolean mudarse) {
 		super();
 		this.cedula = cedula;
@@ -48,6 +49,7 @@ public abstract class Solicitante {
 		this.annosExperiencia = annosExperiencia;
 		this.idiomas = idiomas;
 		this.mudarse = mudarse;
+		this.idiomas = new ArrayList<>();
 	}
 
 	public boolean isMudarse() {
@@ -186,11 +188,11 @@ public abstract class Solicitante {
 		this.annosExperiencia = annosExperiencia;
 	}
 
-	public String getIdiomas() {
+	public ArrayList<String>  getIdiomas() {
 		return idiomas;
 	}
 
-	public void setIdiomas(String idiomas) {
+	public void setIdiomas(ArrayList<String> idiomas) {
 		this.idiomas = idiomas;
 	}
 
@@ -214,6 +216,7 @@ public abstract class Solicitante {
 	{
 		LocalDate now = LocalDate.now();
 		 edad = ChronoUnit.YEARS.between(fechaNacimiento, now);
+		 
 	}
 
 	
