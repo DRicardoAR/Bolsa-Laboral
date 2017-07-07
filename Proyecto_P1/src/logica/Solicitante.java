@@ -30,8 +30,8 @@ public abstract class Solicitante {
 
 	public Solicitante(String cedula, String nombres, String apellidos, String telefono, LocalDate fechaNacimiento,
 			String nacionalidad, String sexo, String estadoCivil, String direccion, String provincia, String email,
-			boolean vehiculoPropio, boolean licencia, int categoriaLicencia, int annosExperiencia, ArrayList<String> idiomas,
-			boolean mudarse) {
+			boolean vehiculoPropio, boolean licencia, int categoriaLicencia, int annosExperiencia,
+			ArrayList<String> idiomas, boolean mudarse) {
 		super();
 		this.cedula = cedula;
 		this.nombres = nombres;
@@ -189,7 +189,7 @@ public abstract class Solicitante {
 		this.annosExperiencia = annosExperiencia;
 	}
 
-	public ArrayList<String>  getIdiomas() {
+	public ArrayList<String> getIdiomas() {
 		return idiomas;
 	}
 
@@ -206,23 +206,21 @@ public abstract class Solicitante {
 	}
 
 	public long getEdad() {
+		setEdadSolicitante();
 		return edad;
 	}
-	//creo que este set no es necesaria
+
+	// creo que este set no es necesaria
 	public void setEdad(long edad) {
 		this.edad = edad;
 	}
-	
-	public int setEdadSoli()
-	{	
-		LocalDate now = LocalDate.now();
-		Period periodo = Period.between(fechaNacimiento,now);
-		int edad = periodo.getYears();
-		
-		
-		return edad; 
-	}
 
-	
+	public int setEdadSolicitante() {
+		LocalDate now = LocalDate.now();
+		Period periodo = Period.between(fechaNacimiento, now);
+		int edad = periodo.getYears();
+		setEdad(edad);
+		return edad;
+	}
 
 }
