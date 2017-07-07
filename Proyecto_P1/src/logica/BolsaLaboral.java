@@ -213,7 +213,9 @@ public class BolsaLaboral {
 		if (((Universitario) solicitante).getCarrera().equalsIgnoreCase(((SolicitudUniversitario) soli).getCarrera())) {
 			if (((Universitario) solicitante).isPostGrado() && ((SolicitudUniversitario) soli).isPostGrado()) {
 				validar = true;
-
+			}
+			if(((Universitario) solicitante).isPostGrado() && !((SolicitudUniversitario) soli).isPostGrado()){
+				validar = true;
 			}
 		}
 		return validar;
