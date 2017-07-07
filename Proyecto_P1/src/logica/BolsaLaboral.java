@@ -150,31 +150,74 @@ public class BolsaLaboral {
 	}
 
 	// Funciones de Matching
-public boolean validarGeneral(Solicitante persona, Solicitud solicitud){
-	boolean valido = true;
-		if(persona.isVehiculoPropio()==solicitud.isVehiculoPropio()){
-			if(persona.isMudarse() == solicitud.isMudarse()){
-				if(persona.getCategoriaLicencia()==solicitud.getCategoriaLicencia()){
-					if(persona.getAnnosExperiencia()==solicitud.getAnnosExperiencia()){
-						if((persona.setEdadSoli()>=solicitud.getEdadMin())&&(persona.setEdadSoli()<=solicitud.getEdadMax())){
-							if(persona.getIdiomas().size()==solicitud.getIdiomas().size()){
-								if(validarIdiomas(persona, solicitud)){
-								
-																	  }
-																						  }
+	public boolean validarGeneral(Solicitante persona, Solicitud solicitud) {
+		boolean valido = false;
+		if (persona.isVehiculoPropio() == solicitud.isVehiculoPropio()) {
+			if (persona.isMudarse() == solicitud.isMudarse()) {
+				if (persona.getCategoriaLicencia() == solicitud.getCategoriaLicencia()) {
+					if (persona.getAnnosExperiencia() == solicitud.getAnnosExperiencia()) {
+						if ((persona.setEdadSoli() >= solicitud.getEdadMin())
+								&& (persona.setEdadSoli() <= solicitud.getEdadMax())) {
+							if (persona.getIdiomas().size() == solicitud.getIdiomas().size()) {
+								if (validarIdiomas(persona, solicitud)) {
+									valido = true;
+
+								}
+							}
+						}
+
 					}
-						
-					
-					
-				                                                                                                            }
-				
-			                                                                         }
+
+				}
 			}
 		}
-	
-	return valido;
+
+		return valido;
+	}
+//Validacion Obrero con solicitud
+private boolean ValidarObrero(Solicitante solicitante,Solicitud solicitud) {
+	boolean validar = false;
+	int cant=0;
+	ArrayList<String> listaSolicitud = ((SolicitudObrero)solicitud).getHabilidades();
+	ArrayList<String> listaObrero = ((Obrero)solicitante).getHabilidades();
+	if(listaSolicitud.size() == listaSolicitud.size()){
+		for (String habilidadObrero : listaObrero) {
+			for (String habilidadSolicitud :  listaSolicitud) {
+				if(habilidadObrero.equalsIgnoreCase(habilidadSolicitud));{
+					cant++;
+				}
+			}	
+		}
+		if(cant == listaSolicitud.size()){
+			validar = true;
+		}
+	}
+	return validar;
 }
 
+//Validacion Tecnico con solicitud
+private boolean ValidarTecnico(Solicitante solicitante, Solicitud soli) {
+	boolean validar = false;
+	if(((Tecnico)solicitante).getArea().equalsIgnoreCase(((SolicitudTecnico)soli).getArea())){
+		validar = true;
+	}
+	return validar;
+}
+
+//Validacion Universitario con solicitud
+private boolean validarUniversitario(Solicitante solicitante, Solicitud soli) {
+	boolean validar = false;
+	if(((Universitario)solicitante).getCarrera().equalsIgnoreCase(((SolicitudUniversitario)soli).getCarrera())){
+		if(((Universitario)solicitante).isPostGrado() && ((SolicitudUniversitario)soli).isPostGrado()){
+			validar = true;
+			
+		}
+	}
+	return validar;
+}
+
+
+//Validar Idiomas
 public boolean validarIdiomas(Solicitante persona,Solicitud soli){
 	boolean aux = false;
 	for (int i = 0; i < persona.getIdiomas().size(); i++) {
@@ -188,24 +231,26 @@ public boolean validarIdiomas(Solicitante persona,Solicitud soli){
 
 	public ArrayList<Solicitante> matcheo(Solicitud soli) {
 		ArrayList<Solicitante> misSolicitantes = new ArrayList<>();
-		boolean  validar= false;
-		
 		if (soli instanceof SolicitudObrero) {
 			for (Solicitante solicitante : misSolicitantes) {
 				if (solicitante instanceof Obrero) {
-					validar = validarGeneral(solicitante , soli);
-					if(validar){
-						
+					if(validarGeneral(solicitante , soli)){
+						if(ValidarObrero(solicitante,soli)){
+							misSolicitantes.add(solicitante);
+						}		
 					}
 				}
 			}
 
 		}
+		
 		if (soli instanceof SolicitudTecnico) {
 			for (Solicitante solicitante : misSolicitantes) {
-				if (solicitante instanceof Tecnico) {
-					validar = validarGeneral(solicitante , soli);
-					if(validar){
+				if (solicitante instanceof Tecnico) { 
+					if(validarGeneral(solicitante , soli)){
+						if(ValidarTecnico(solicitante, soli)){
+							misSolicitantes.add(solicitante);
+						}
 						
 					}
 				}
@@ -214,8 +259,10 @@ public boolean validarIdiomas(Solicitante persona,Solicitud soli){
 		if (soli instanceof SolicitudUniversitario) {
 			for (Solicitante solicitante : misSolicitantes) {
 				if (solicitante instanceof Universitario) {
-					validar = validarGeneral(solicitante , soli);
-					if(validar){
+					if(validarGeneral(solicitante , soli)){
+						if(validarUniversitario(solicitante, soli)){
+							misSolicitantes.add(solicitante);
+						}
 						
 					}
 				}
@@ -224,4 +271,6 @@ public boolean validarIdiomas(Solicitante persona,Solicitud soli){
 
 		return misSolicitantes;
 	}
+
+	
 }
