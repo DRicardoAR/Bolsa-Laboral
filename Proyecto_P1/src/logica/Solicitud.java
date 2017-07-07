@@ -23,7 +23,7 @@ public abstract class Solicitud {
 		this.annosExperiencia = annosExperiencia;
 		this.edadMax = edadMax;
 		this.edadMin = edadMin;
-		tipoContrato = tipoContrato;
+		this.tipoContrato = tipoContrato;
 		this.vehiculoPropio = vehiculoPropio;
 		this.localidad = localidad;
 		this.empresa = empresa;
