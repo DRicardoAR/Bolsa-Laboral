@@ -154,14 +154,38 @@ public boolean validarGeneral(Solicitante persona, Solicitud solicitud){
 	boolean valido = true;
 		if(persona.isVehiculoPropio()==solicitud.isVehiculoPropio()){
 			if(persona.isMudarse() == solicitud.isMudarse()){
-			if(persona.getCategoriaLicencia()==solicitud.getCategoriaLicencia()){
+				if(persona.getCategoriaLicencia()==solicitud.getCategoriaLicencia()){
+					if(persona.getAnnosExperiencia()==solicitud.getAnnosExperiencia()){
+						if((persona.setEdadSoli()>=solicitud.getEdadMin())&&(persona.setEdadSoli()<=solicitud.getEdadMax())){
+							if(persona.getIdiomas().size()==solicitud.getIdiomas().size()){
+								if(validarIdiomas(persona, solicitud)){
+								
+																	  }
+																						  }
+					}
+						
+					
+					
+				                                                                                                            }
 				
-			}
+			                                                                         }
 			}
 		}
 	
 	return valido;
 }
+
+public boolean validarIdiomas(Solicitante persona,Solicitud soli){
+	boolean aux = false;
+	for (int i = 0; i < persona.getIdiomas().size(); i++) {
+		if(persona.getIdiomas().get(i).equalsIgnoreCase(soli.getIdiomas().get(i)))
+		{
+		aux= true;
+		}
+	}
+	return aux;
+}
+
 	public ArrayList<Solicitante> matcheo(Solicitud soli) {
 		ArrayList<Solicitante> misSolicitantes = new ArrayList<>();
 		boolean  validar= false;

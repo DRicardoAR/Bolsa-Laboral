@@ -1,6 +1,7 @@
 package logica;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -207,16 +208,19 @@ public abstract class Solicitante {
 	public long getEdad() {
 		return edad;
 	}
-
+	//creo que este set no es necesaria
 	public void setEdad(long edad) {
 		this.edad = edad;
 	}
 	
-	public void setEdadSoli()
-	{
+	public int setEdadSoli()
+	{	
 		LocalDate now = LocalDate.now();
-		 edad = ChronoUnit.YEARS.between(fechaNacimiento, now);
-		 
+		Period periodo = Period.between(fechaNacimiento,now);
+		int edad = periodo.getYears();
+		
+		
+		return edad; 
 	}
 
 	
