@@ -152,22 +152,25 @@ public class BolsaLaboral {
 	// Funciones de Matching
 	public boolean validarGeneral(Solicitante persona, Solicitud solicitud) {
 		boolean valido = false;
-		if (persona.isVehiculoPropio() == solicitud.isVehiculoPropio()) {
-			if (persona.isMudarse() == solicitud.isMudarse()) {
-				if (persona.getCategoriaLicencia() == solicitud.getCategoriaLicencia()) {
-					if (persona.getAnnosExperiencia() >= solicitud.getAnnosExperiencia()) {
-						if ((persona.setEdadSolicitante() >= solicitud.getEdadMin())
-								&& (persona.setEdadSolicitante() <= solicitud.getEdadMax())) {
-							if (persona.getIdiomas().size() == solicitud.getIdiomas().size()) {
-								if (validarIdiomas(persona, solicitud)) {
-									valido = true;
+		if (persona.isContratado()) {
 
+			if (persona.isVehiculoPropio() == solicitud.isVehiculoPropio()) {
+				if (persona.isMudarse() == solicitud.isMudarse()) {
+					if (persona.getCategoriaLicencia() == solicitud.getCategoriaLicencia()) {
+						if (persona.getAnnosExperiencia() >= solicitud.getAnnosExperiencia()) {
+							if ((persona.setEdadSolicitante() >= solicitud.getEdadMin())
+									&& (persona.setEdadSolicitante() <= solicitud.getEdadMax())) {
+								if (persona.getIdiomas().size() == solicitud.getIdiomas().size()) {
+									if (validarIdiomas(persona, solicitud)) {
+										valido = true;
+
+									}
 								}
 							}
+
 						}
 
 					}
-
 				}
 			}
 		}
