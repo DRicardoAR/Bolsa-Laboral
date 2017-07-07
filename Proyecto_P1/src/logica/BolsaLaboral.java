@@ -165,6 +165,7 @@ public boolean validarGeneral(Solicitante persona, Solicitud solicitud){
 	public ArrayList<Solicitante> matcheo(Solicitud soli) {
 		ArrayList<Solicitante> misSolicitantes = new ArrayList<>();
 		boolean  validar= false;
+		
 		if (soli instanceof SolicitudObrero) {
 			for (Solicitante solicitante : misSolicitantes) {
 				if (solicitante instanceof Obrero) {
