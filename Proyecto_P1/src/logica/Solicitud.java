@@ -1,8 +1,13 @@
 package logica;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public abstract class Solicitud {
+public abstract class Solicitud implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String codigo;
 	protected int cantVacantes;
 	protected int annosExperiencia;

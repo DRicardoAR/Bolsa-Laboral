@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Obrero extends Solicitante {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	ArrayList<String> habilidades;
 
 	public Obrero(String cedula, String nombres, String apellidos,

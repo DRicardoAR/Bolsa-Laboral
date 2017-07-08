@@ -1,4 +1,5 @@
 package logica;
+import java.io.Serializable;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -6,7 +7,11 @@ import java.time.Year;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-public abstract class Solicitante {
+public abstract class Solicitante implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String codigo;
 	protected String cedula;
 	protected String nombres;

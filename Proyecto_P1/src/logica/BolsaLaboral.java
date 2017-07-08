@@ -1,13 +1,25 @@
 package logica;
 
 import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Random;
 
-public class BolsaLaboral {
+public class BolsaLaboral implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Empresa> misEmpresas;
 	private ArrayList<Solicitante> misSolicitantes;
 	private ArrayList<Solicitud> misSolicitudes;
 	private static BolsaLaboral bolsa;
+	private String archivo = "BolsaLaboral.dat";
 
 	public BolsaLaboral() {
 		super();
@@ -15,6 +27,7 @@ public class BolsaLaboral {
 		this.misEmpresas = new ArrayList<>();
 		this.misSolicitantes = new ArrayList<>();
 		this.misSolicitudes = new ArrayList<>();
+		
 	}
 
 	public ArrayList<Empresa> getMisEmpresas() {
@@ -284,5 +297,49 @@ public class BolsaLaboral {
 
 		return misContratados;
 	}
-
+// Escritura & Lectura Binarios
+	public void esribirBolsa(){
+		FileOutputStream bolsaFile = null;
+		ObjectOutputStream bolsaOut = null;
+		
+		try {
+			bolsaFile = new FileOutputStream(archivo);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			bolsaOut = new ObjectOutputStream(bolsaFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			bolsaOut.writeObject(bolsa);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void leerBolsa(){
+		FileInputStream bolsaFile = null;
+		ObjectInputStream bolsaIn = null;
+		try {
+			bolsaFile = new FileInputStream("Biblioteca.dat");
+			bolsaIn = new ObjectInputStream(bolsaFile);
+			try {
+				bolsa = (BolsaLaboral) bolsaIn.readObject();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

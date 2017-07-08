@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Universitario extends Solicitante {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean PostGrado;
 	private String Carrera;
 	public Universitario(String cedula, String nombres,

@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Tecnico extends Solicitante {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String area;
 
 	public Tecnico(String cedula, String nombres, String apellidos,

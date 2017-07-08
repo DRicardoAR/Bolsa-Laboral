@@ -3,6 +3,10 @@ package logica;
 import java.util.ArrayList;
 
 public class SolicitudUniversitario extends Solicitud {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean postGrado;
 	private String carrera;
 	
