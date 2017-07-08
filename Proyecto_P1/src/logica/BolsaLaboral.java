@@ -29,7 +29,7 @@ public class BolsaLaboral {
 		return misSolicitudes;
 	}
 
-	public BolsaLaboral getInstance() {
+	public static BolsaLaboral getInstance() {
 		if (bolsa == null) {
 			bolsa = new BolsaLaboral();
 		}
@@ -44,6 +44,7 @@ public class BolsaLaboral {
 	public void insertSolicitante(Solicitante pSolicitante) {
 		String code = getCodeSolicitante();
 		pSolicitante.setCodigo(code);
+		pSolicitante.setContratado(false);
 		misSolicitantes.add(pSolicitante);
 	}
 
@@ -152,11 +153,10 @@ public class BolsaLaboral {
 	// Funciones de Matching
 	public boolean validarGeneral(Solicitante persona, Solicitud solicitud) {
 		boolean valido = false;
-		if (persona.isContratado()) {
-
+		if (persona.contratado==false) {
 			if (persona.isVehiculoPropio() == solicitud.isVehiculoPropio()) {
 				if (persona.isMudarse() == solicitud.isMudarse()) {
-					if (persona.getCategoriaLicencia() == solicitud.getCategoriaLicencia()) {
+					if (persona.getCategoriaLicencia() >= solicitud.getCategoriaLicencia()) {
 						if (persona.getAnnosExperiencia() >= solicitud.getAnnosExperiencia()) {
 							if ((persona.setEdadSolicitante() >= solicitud.getEdadMin())
 									&& (persona.setEdadSolicitante() <= solicitud.getEdadMax())) {
@@ -214,9 +214,7 @@ public class BolsaLaboral {
 	private boolean validarUniversitario(Solicitante solicitante, Solicitud soli) {
 		boolean validar = false;
 		if (((Universitario) solicitante).getCarrera().equalsIgnoreCase(((SolicitudUniversitario) soli).getCarrera())) {
-			if (((Universitario) solicitante).isPostGrado() && ((SolicitudUniversitario) soli).isPostGrado()) {
-				validar = true;
-			}
+			validar = true;
 			if(((Universitario) solicitante).isPostGrado() && !((SolicitudUniversitario) soli).isPostGrado()){
 				validar = true;
 			}
@@ -228,7 +226,7 @@ public class BolsaLaboral {
 	public boolean validarIdiomas(Solicitante persona, Solicitud soli) {
 		boolean aux = false;
 		int i = 0;
-		for (String idioma : persona.idiomas) {
+		for (String idioma : persona.getIdiomas()) {
 			if (idioma.equalsIgnoreCase(soli.getIdiomas().get(i))) {
 				aux = true;
 				i++;
@@ -239,13 +237,15 @@ public class BolsaLaboral {
 	}
 
 	public ArrayList<Solicitante> matcheo(Solicitud soli) {
-		ArrayList<Solicitante> misSolicitantes = new ArrayList<>();
+		ArrayList<Solicitante> misContratados = new ArrayList<>();
 		if (soli instanceof SolicitudObrero) {
 			for (Solicitante solicitante : misSolicitantes) {
 				if (solicitante instanceof Obrero) {
 					if (validarGeneral(solicitante, soli)) {
 						if (ValidarObrero(solicitante, soli)) {
-							misSolicitantes.add(solicitante);
+							solicitante.setContratado(true);
+							misContratados.add(solicitante);
+							soli.getEmpresa().insertContratado(solicitante);
 						}
 					}
 				}
@@ -258,7 +258,9 @@ public class BolsaLaboral {
 				if (solicitante instanceof Tecnico) {
 					if (validarGeneral(solicitante, soli)) {
 						if (ValidarTecnico(solicitante, soli)) {
-							misSolicitantes.add(solicitante);
+							solicitante.setContratado(true);
+							misContratados.add(solicitante);
+							soli.getEmpresa().insertContratado(solicitante);
 						}
 
 					}
@@ -270,7 +272,9 @@ public class BolsaLaboral {
 				if (solicitante instanceof Universitario) {
 					if (validarGeneral(solicitante, soli)) {
 						if (validarUniversitario(solicitante, soli)) {
-							misSolicitantes.add(solicitante);
+							solicitante.setContratado(true);
+							misContratados.add(solicitante);
+							soli.getEmpresa().insertContratado(solicitante);
 						}
 
 					}
@@ -278,7 +282,7 @@ public class BolsaLaboral {
 			}
 		}
 
-		return misSolicitantes;
+		return misContratados;
 	}
 
 }

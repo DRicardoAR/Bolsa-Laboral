@@ -50,7 +50,7 @@ public abstract class Solicitante {
 		this.annosExperiencia = annosExperiencia;
 		this.idiomas = idiomas;
 		this.mudarse = mudarse;
-		this.idiomas = new ArrayList<>();
+		this.idiomas = idiomas;
 	}
 
 	public boolean isMudarse() {

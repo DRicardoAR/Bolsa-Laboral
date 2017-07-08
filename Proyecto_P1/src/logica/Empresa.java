@@ -1,5 +1,7 @@
 package logica;
 
+import java.util.ArrayList;
+
 public class Empresa {
 	private String RNC;
 	private String nombre;
@@ -7,6 +9,7 @@ public class Empresa {
 	private String email;
 	private String area;
 	private String direccion;
+	private ArrayList<Solicitante>misContratados;
 
 	public Empresa(String RNC, String nombre, String telefono, String email, String area, String direccion) {
 		super();
@@ -16,7 +19,16 @@ public class Empresa {
 		this.email = email;
 		this.area = area;
 		this.direccion = direccion;
+		misContratados = new ArrayList<>();
 	}
+
+	public ArrayList<Solicitante> getMisContratados() {
+		return misContratados;
+	}
+public void insertContratado(Solicitante trabajador){
+	trabajador.setContratado(true);
+	misContratados.add(trabajador);
+}
 
 	public String getRNC() {
 		return RNC;

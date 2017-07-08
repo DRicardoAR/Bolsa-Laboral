@@ -30,7 +30,7 @@ public abstract class Solicitud {
 		this.mudarse = mudarse;
 		this.codigo = codigo;
 		this.categoriaLicencia = categoriaLicencia;
-		this.idiomas = new ArrayList<>();
+		this.idiomas = idiomas;
 
 	}
 
