@@ -26,7 +26,6 @@ public class Main {
 	BolsaLaboral.getInstance().insertSolicitud(soli);
 	System.out.println(BolsaLaboral.getInstance().getMisSolicitudes().get(0).getCantVacantes());
 	ArrayList<Solicitante>contratado = new ArrayList<>();
-	
 	contratado= BolsaLaboral.getInstance().matcheo(soli);
 	System.out.println(contratado.size());
 	System.out.println(contratado.get(0).getNombres());
