@@ -238,13 +238,14 @@ public class BolsaLaboral implements Serializable {
 	// Validar Idiomas
 	public boolean validarIdiomas(Solicitante persona, Solicitud soli) {
 		boolean aux = false;
-		int i = 0;
-		for (String idioma : persona.getIdiomas()) {
-			if (idioma.equalsIgnoreCase(soli.getIdiomas().get(i))) {
-				aux = true;
-				i++;
-			}
+		for (String idiomas : soli.getIdiomas()) {
+		if(persona.getIdiomas().contains(idiomas)){
+			aux = true;
+		}else {
+			aux = false;
+		}	
 		}
+		
 
 		return aux;
 	}
