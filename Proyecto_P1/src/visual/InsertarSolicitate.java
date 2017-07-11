@@ -546,7 +546,7 @@ public class InsertarSolicitate extends JDialog {
 		panel_Obreo.add(separator_1);
 		
 	    cbxHabilidades = new JComboBox();
-		cbxHabilidades.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >"}));
+		cbxHabilidades.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Arsano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
 		cbxHabilidades.setBounds(305, 28, 123, 20);
 		panel_Obreo.add(cbxHabilidades);
 		
@@ -643,6 +643,45 @@ public class InsertarSolicitate extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 			    btnRegistrar = new JButton("Registrar");
+			    btnRegistrar.addActionListener(new ActionListener() {
+			    	public void actionPerformed(ActionEvent e) {
+			    		String cedula = textCedula.getText();
+			    		String nombre = txtNombre.getText();
+			    		String apellido = txtApellidos.getText();
+			    		String estadoCivil = cbxEstadoCilvil.getSelectedItem().toString();
+			    		String nacionalidad = cbxNacionalidad.getSelectedItem().toString();
+			    		String sexo = "";
+			    		String provincia =cbxProvincia.getSelectedItem().toString();
+			    		String direccion = "Ciudad: "+txtCiudad.getText()+" Secotr: "+txtSector+" Calle: "+txtCalle+" Número: "+" "+spnNumeroCasa.getValue().toString()+" Referencia: "+txtReferencia;
+			    		String email = txtEmail.getText();
+			    		boolean vehiculoP =false;
+			    		boolean mudarse = false;
+			    		//j list idiomas
+			    		if(rdbSiReelocalizacion.isSelected()){
+			    			mudarse = true;
+			    		}
+			    		if(rdbSiVehiculo.isSelected()){
+			    			vehiculoP = true;
+			    		}
+			    		int licencia = 0;
+			    		if(cbxLicencia.getSelectedIndex()==1){
+			    			licencia=0;
+			    		}if(cbxLicencia.getSelectedIndex()==2){
+			    			licencia=1;
+			    		}if(cbxLicencia.getSelectedIndex()==3){
+			    			licencia=2;
+			    		}if(cbxLicencia.getSelectedIndex()==4){
+			    			licencia=3;
+			    		}if(cbxLicencia.getSelectedIndex()==5){
+			    			licencia=4;
+			    		}
+			    		if(rdbFemenino.isSelected()){
+			    			sexo = "Femenino";
+			    		}if(rdbMasculino.isSelected()){
+			    			sexo = "Masculino";
+			    		}
+			    	}
+			    });
 				buttonPane.add(btnRegistrar);
 			}
 			{
