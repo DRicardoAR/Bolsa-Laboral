@@ -197,15 +197,10 @@ public class BolsaLaboral implements Serializable {
 		int cant = 0;
 		ArrayList<String> listaSolicitud = ((SolicitudObrero) solicitud).getHabilidades();
 		ArrayList<String> listaObrero = ((Obrero) solicitante).getHabilidades();
+		
 		if (listaSolicitud.size() == listaSolicitud.size()) {
 			for (String habilidadObrero : listaObrero) {
-				for (String habilidadSolicitud : listaSolicitud) {
-					if (habilidadObrero.equalsIgnoreCase(habilidadSolicitud))
-						;
-					{
-						cant++;
-					}
-				}
+				
 			}
 			if (cant == listaSolicitud.size()) {
 				validar = true;

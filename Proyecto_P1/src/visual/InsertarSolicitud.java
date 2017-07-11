@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JFormattedTextField;
@@ -32,7 +34,6 @@ public class InsertarSolicitud extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
-	private JTextField textField_1;
 	private JRadioButton rbtnObrero;
 	private JRadioButton rbtnTecnico;
 	private JRadioButton rbtnUniversitario;
@@ -45,6 +46,7 @@ public class InsertarSolicitud extends JDialog {
 	private JPanel panelTecnico;
 	private JPanel panelObrero;
 	private JPanel panelUniversitario;
+	private JFormattedTextField ftxtRNC;
 
 	/**
 	 * Launch the application.
@@ -73,7 +75,7 @@ public class InsertarSolicitud extends JDialog {
 		});
 		setResizable(false);
 		setTitle("Solicitud");
-		setBounds(100, 100, 543, 551);
+		setBounds(100, 100, 543, 585);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -87,7 +89,7 @@ public class InsertarSolicitud extends JDialog {
 			
 			JPanel panelEmpresa = new JPanel();
 			panelEmpresa.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Empresa", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelEmpresa.setBounds(10, 11, 507, 72);
+			panelEmpresa.setBounds(10, 22, 507, 72);
 			panel.add(panelEmpresa);
 			panelEmpresa.setLayout(null);
 			
@@ -95,9 +97,16 @@ public class InsertarSolicitud extends JDialog {
 			lblRnc.setBounds(15, 31, 46, 14);
 			panelEmpresa.add(lblRnc);
 			
-			JFormattedTextField formattedTextField = new JFormattedTextField();
-			formattedTextField.setBounds(81, 28, 122, 21);
-			panelEmpresa.add(formattedTextField);
+			try {
+				MaskFormatter mascara = new MaskFormatter("##########");
+				ftxtRNC = new JFormattedTextField(mascara);
+				ftxtRNC.setBounds(81, 28, 122, 21);
+				panelEmpresa.add(ftxtRNC);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 			
 			JButton btnNewButton = new JButton("");
 			btnNewButton.setBounds(204, 28, 27, 21);
@@ -115,7 +124,7 @@ public class InsertarSolicitud extends JDialog {
 			
 			JPanel PanelGeneral = new JPanel();
 			PanelGeneral.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "General", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			PanelGeneral.setBounds(10, 83, 507, 150);
+			PanelGeneral.setBounds(10, 94, 507, 150);
 			panel.add(PanelGeneral);
 			PanelGeneral.setLayout(null);
 			
@@ -124,6 +133,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblNewLabel_1);
 			
 			JComboBox comboBox = new JComboBox();
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Seleccionar>", "Largo Plazo", "Corto Plazo", "Temporal"}));
 			comboBox.setBounds(81, 24, 149, 21);
 			PanelGeneral.add(comboBox);
 			
@@ -185,11 +195,6 @@ public class InsertarSolicitud extends JDialog {
 			lblLocalidad.setBounds(263, 68, 83, 14);
 			PanelGeneral.add(lblLocalidad);
 			
-			textField_1 = new JTextField();
-			textField_1.setColumns(10);
-			textField_1.setBounds(338, 65, 160, 20);
-			PanelGeneral.add(textField_1);
-			
 			JLabel lblCategoriaLic = new JLabel("Licencia:");
 			lblCategoriaLic.setBounds(263, 109, 83, 14);
 			PanelGeneral.add(lblCategoriaLic);
@@ -198,14 +203,34 @@ public class InsertarSolicitud extends JDialog {
 			spinner_3.setBounds(338, 106, 160, 21);
 			PanelGeneral.add(spinner_3);
 			
+			JComboBox cbxLocalidad = new JComboBox();
+			cbxLocalidad.setModel(new DefaultComboBoxModel(new String[] {"<Seleccionar>", "Azua ", "Bahoruco ", "Barahona ", "Dajab\u00F3n ", "Distrito Nacional ", "Duarte ", "El\u00EDas Pi\u00F1a ", "El Seibo ", "Espaillat ", "Hato Mayor ", "Independencia ", "La Altagracia ", "La Romana ", "La Vega ", "Mar\u00EDa Trinidad S\u00E1nchez ", "Monse\u00F1or Nouel ", "Montecristi ", "Monte Plata ", "Pedernales ", "Peravia ", "Puerto Plata ", "Hermanas Mirabal ", "Saman\u00E1 ", "S\u00E1nchez Ram\u00EDrez ", "San Crist\u00F3bal ", "San Jos\u00E9 de Ocoa ", "San Juan ", "San Pedro de Macor\u00EDs ", "Santiago ", "Santiago Rodr\u00EDguez ", "Santo Domingo ", "Valverde "}));
+			cbxLocalidad.setBounds(338, 65, 160, 21);
+			PanelGeneral.add(cbxLocalidad);
+			
+			JLabel label_2 = new JLabel("*");
+			label_2.setForeground(Color.RED);
+			label_2.setBounds(10, 27, 46, 14);
+			PanelGeneral.add(label_2);
+			
+			JLabel label_3 = new JLabel("*");
+			label_3.setForeground(Color.RED);
+			label_3.setBounds(255, 27, 46, 14);
+			PanelGeneral.add(label_3);
+			
+			JLabel label_4 = new JLabel("*");
+			label_4.setForeground(Color.RED);
+			label_4.setBounds(255, 68, 46, 14);
+			PanelGeneral.add(label_4);
+			
 			JPanel panelEdad = new JPanel();
 			panelEdad.setLayout(null);
 			panelEdad.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Rango De Edad", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelEdad.setBounds(10, 236, 245, 59);
+			panelEdad.setBounds(10, 247, 245, 59);
 			panel.add(panelEdad);
 			
 			JLabel lblNewLabel = new JLabel("Minima:");
-			lblNewLabel.setBounds(10, 28, 60, 14);
+			lblNewLabel.setBounds(15, 28, 60, 14);
 			panelEdad.add(lblNewLabel);
 			
 			JLabel lblMxima = new JLabel("M\u00E1xima:");
@@ -214,18 +239,23 @@ public class InsertarSolicitud extends JDialog {
 			
 			JSpinner spinner = new JSpinner();
 			spinner.setModel(new SpinnerNumberModel(18, 17, 65, 1));
-			spinner.setBounds(58, 25, 51, 21);
+			spinner.setBounds(60, 25, 51, 21);
 			panelEdad.add(spinner);
 			
 			JSpinner spinner_1 = new JSpinner();
 			spinner_1.setModel(new SpinnerNumberModel(19, 18, 19, 1));
-			spinner_1.setBounds(184, 25, 51, 21);
+			spinner_1.setBounds(180, 25, 51, 21);
 			panelEdad.add(spinner_1);
+			
+			JLabel label_5 = new JLabel("*");
+			label_5.setForeground(Color.RED);
+			label_5.setBounds(8, 15, 46, 14);
+			panelEdad.add(label_5);
 			
 			JPanel panelIdioma = new JPanel();
 			panelIdioma.setLayout(null);
 			panelIdioma.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Idiomas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelIdioma.setBounds(10, 298, 245, 164);
+			panelIdioma.setBounds(10, 309, 245, 164);
 			panel.add(panelIdioma);
 			
 			JLabel lblIdioma = new JLabel("Idioma:");
@@ -248,7 +278,7 @@ public class InsertarSolicitud extends JDialog {
 			JPanel PanelVacante = new JPanel();
 			PanelVacante.setLayout(null);
 			PanelVacante.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Tipo Vacante", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			PanelVacante.setBounds(255, 236, 265, 59);
+			PanelVacante.setBounds(255, 247, 265, 59);
 			panel.add(PanelVacante);
 			
 			rbtnTecnico = new JRadioButton("T\u00E9cnico ");
@@ -280,6 +310,11 @@ public class InsertarSolicitud extends JDialog {
 			 rbtnObrero = new JRadioButton("Obrero");
 			 rbtnObrero.setBounds(184, 22, 75, 23);
 			 PanelVacante.add(rbtnObrero);
+			 
+			 JLabel label_6 = new JLabel("*");
+			 label_6.setBounds(6, 15, 46, 14);
+			 PanelVacante.add(label_6);
+			 label_6.setForeground(Color.RED);
 			 rbtnObrero.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent e) {
 			 		rbtnUniversitario.setSelected(false);
@@ -295,7 +330,7 @@ public class InsertarSolicitud extends JDialog {
 			panelUniversitario = new JPanel();
 			panelUniversitario.setLayout(null);
 			panelUniversitario.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Universitario", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelUniversitario.setBounds(255, 298, 265, 164);
+			panelUniversitario.setBounds(255, 309, 265, 164);
 			panel.add(panelUniversitario);
 			
 			JLabel lblExperiencia = new JLabel("Experiencia:");
@@ -337,10 +372,15 @@ public class InsertarSolicitud extends JDialog {
 			cbxCarrera.setBounds(93, 62, 160, 20);
 			panelUniversitario.add(cbxCarrera);
 			
+			JLabel label_7 = new JLabel("*");
+			label_7.setForeground(Color.RED);
+			label_7.setBounds(10, 65, 46, 14);
+			panelUniversitario.add(label_7);
+			
 			panelTecnico = new JPanel();
 			panelTecnico.setLayout(null);
 			panelTecnico.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "T\u00E9cnico", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelTecnico.setBounds(255, 298, 265, 164);
+			panelTecnico.setBounds(255, 309, 265, 164);
 			panel.add(panelTecnico);
 			
 			JLabel label = new JLabel("Experiencia:");
@@ -350,6 +390,11 @@ public class InsertarSolicitud extends JDialog {
 			JSpinner spnTecnicoExperiencia = new JSpinner();
 			spnTecnicoExperiencia.setBounds(93, 26, 160, 21);
 			panelTecnico.add(spnTecnicoExperiencia);
+			
+			JLabel label_8 = new JLabel("*");
+			label_8.setForeground(Color.RED);
+			label_8.setBounds(10, 65, 46, 14);
+			panelTecnico.add(label_8);
 			
 			JLabel lblArea = new JLabel("Area:");
 			lblArea.setBounds(18, 65, 72, 14);
@@ -363,7 +408,7 @@ public class InsertarSolicitud extends JDialog {
 			panelObrero = new JPanel();
 			panelObrero.setLayout(null);
 			panelObrero.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelObrero.setBounds(255, 298, 265, 164);
+			panelObrero.setBounds(255, 309, 265, 164);
 			panel.add(panelObrero);
 			
 			JLabel label_1 = new JLabel("Experiencia:");
@@ -378,6 +423,11 @@ public class InsertarSolicitud extends JDialog {
 			lblHabilidades.setBounds(18, 65, 72, 14);
 			panelObrero.add(lblHabilidades);
 			
+			JLabel label_9 = new JLabel("*");
+			label_9.setForeground(Color.RED);
+			label_9.setBounds(10, 65, 46, 14);
+			panelObrero.add(label_9);
+			
 			JComboBox cbxHabilidades = new JComboBox();
 			cbxHabilidades.setBounds(93, 62, 160, 20);
 			panelObrero.add(cbxHabilidades);
@@ -388,6 +438,11 @@ public class InsertarSolicitud extends JDialog {
 			
 			JList list_1 = new JList();
 			scrollPane_1.setViewportView(list_1);
+			
+			JLabel lblcampos = new JLabel("* Campos Obligatorios");
+			lblcampos.setForeground(Color.RED);
+			lblcampos.setBounds(390, 8, 127, 14);
+			panel.add(lblcampos);
 		}
 		{
 			JPanel buttonPane = new JPanel();
