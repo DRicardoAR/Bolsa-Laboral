@@ -194,17 +194,19 @@ public class BolsaLaboral implements Serializable {
 	// Validacion Obrero con solicitud
 	private boolean ValidarObrero(Solicitante solicitante, Solicitud solicitud) {
 		boolean validar = false;
-		int cant = 0;
+		
 		ArrayList<String> listaSolicitud = ((SolicitudObrero) solicitud).getHabilidades();
 		ArrayList<String> listaObrero = ((Obrero) solicitante).getHabilidades();
 		
 		if (listaSolicitud.size() == listaSolicitud.size()) {
-			for (String habilidadObrero : listaObrero) {
-				
+			for (String habilidadObrero : listaSolicitud) {
+				if(listaObrero.contains(habilidadObrero)){					
+					validar = true;				
+			}else{
+				validar = false;
 			}
-			if (cant == listaSolicitud.size()) {
-				validar = true;
 			}
+			
 		}
 		return validar;
 	}

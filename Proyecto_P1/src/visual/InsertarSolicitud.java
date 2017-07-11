@@ -33,12 +33,12 @@ import javax.swing.SpinnerNumberModel;
 public class InsertarSolicitud extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
+	private JTextField txtNombre;
 	private JRadioButton rbtnObrero;
 	private JRadioButton rbtnTecnico;
 	private JRadioButton rbtnUniversitario;
-	private JRadioButton rbtnSi;
-	private JRadioButton rbtnNo;
+	private JRadioButton rbtnPostGradoSi;
+	private JRadioButton rbtnPostGradoNo;
 	private JRadioButton rbtnReubicacionNo;
 	private JRadioButton rbtnReubicacionSi;
 	private JRadioButton rbtnVehiculoSi;
@@ -47,6 +47,20 @@ public class InsertarSolicitud extends JDialog {
 	private JPanel panelObrero;
 	private JPanel panelUniversitario;
 	private JFormattedTextField ftxtRNC;
+	private JComboBox cbxLicencia;
+	private JComboBox cbxContrato;
+	private JComboBox cbxLocalidad;
+	private JSpinner spnVacantes; 
+	private JSpinner spnEdadMinima;
+	private JSpinner spnEdadMaxima;
+	private JComboBox cbxIdioma;
+	private JList listIdioma;
+	private JSpinner spnUniversitarioExperiencia;
+	private JSpinner spnTecnicoExperiencia;
+	private JComboBox cbxCarrera;
+	private JComboBox cbxArea;
+	private JComboBox cbxHabilidades;
+	private JSpinner spnObreroExperiencia;
 
 	/**
 	 * Launch the application.
@@ -75,7 +89,7 @@ public class InsertarSolicitud extends JDialog {
 		});
 		setResizable(false);
 		setTitle("Solicitud");
-		setBounds(100, 100, 543, 585);
+		setBounds(100, 100, 543, 580);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -89,7 +103,7 @@ public class InsertarSolicitud extends JDialog {
 			
 			JPanel panelEmpresa = new JPanel();
 			panelEmpresa.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Empresa", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelEmpresa.setBounds(10, 22, 507, 72);
+			panelEmpresa.setBounds(10, 35, 507, 72);
 			panel.add(panelEmpresa);
 			panelEmpresa.setLayout(null);
 			
@@ -116,15 +130,15 @@ public class InsertarSolicitud extends JDialog {
 			lblNombre.setBounds(263, 31, 56, 14);
 			panelEmpresa.add(lblNombre);
 			
-			textField = new JTextField();
-			textField.setEnabled(false);
-			textField.setBounds(338, 28, 160, 20);
-			panelEmpresa.add(textField);
-			textField.setColumns(10);
+			txtNombre = new JTextField();
+			txtNombre.setEnabled(false);
+			txtNombre.setBounds(338, 28, 160, 20);
+			panelEmpresa.add(txtNombre);
+			txtNombre.setColumns(10);
 			
 			JPanel PanelGeneral = new JPanel();
 			PanelGeneral.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "General", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			PanelGeneral.setBounds(10, 94, 507, 150);
+			PanelGeneral.setBounds(10, 107, 507, 150);
 			panel.add(PanelGeneral);
 			PanelGeneral.setLayout(null);
 			
@@ -132,10 +146,10 @@ public class InsertarSolicitud extends JDialog {
 			lblNewLabel_1.setBounds(15, 27, 83, 14);
 			PanelGeneral.add(lblNewLabel_1);
 			
-			JComboBox comboBox = new JComboBox();
-			comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Seleccionar>", "Largo Plazo", "Corto Plazo", "Temporal"}));
-			comboBox.setBounds(81, 24, 149, 21);
-			PanelGeneral.add(comboBox);
+			cbxContrato = new JComboBox();
+			cbxContrato.setModel(new DefaultComboBoxModel(new String[] {"<Seleccionar>", "Largo Plazo", "Corto Plazo", "Temporal"}));
+			cbxContrato.setBounds(81, 24, 149, 21);
+			PanelGeneral.add(cbxContrato);
 			
 			JLabel lblReubicacin = new JLabel("Reubicaci\u00F3n:");
 			lblReubicacin.setBounds(15, 68, 83, 14);
@@ -148,7 +162,7 @@ public class InsertarSolicitud extends JDialog {
 					
 				}
 			});
-			rbtnReubicacionSi.setBounds(113, 64, 45, 23);
+			rbtnReubicacionSi.setBounds(124, 64, 45, 23);
 			PanelGeneral.add(rbtnReubicacionSi);
 			
 			rbtnReubicacionNo = new JRadioButton("No");
@@ -157,39 +171,41 @@ public class InsertarSolicitud extends JDialog {
 					rbtnReubicacionSi.setSelected(false);
 				}
 			});
-			rbtnReubicacionNo.setBounds(169, 64, 45, 23);
+			rbtnReubicacionNo.setBounds(179, 64, 45, 23);
 			PanelGeneral.add(rbtnReubicacionNo);
 			
-			JLabel lblVehiculo = new JLabel("veh\u00EDculo:");
-			lblVehiculo.setBounds(15, 109, 71, 14);
+			JLabel lblVehiculo = new JLabel("Requiere veh\u00EDculo:");
+			lblVehiculo.setBounds(15, 109, 114, 14);
 			PanelGeneral.add(lblVehiculo);
 			
 			rbtnVehiculoSi = new JRadioButton("Si");
 			rbtnVehiculoSi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnVehiculoNo.setSelected(false);
+					cbxLicencia.setEnabled(true);
 				}
 			});
-			rbtnVehiculoSi.setBounds(113, 105, 45, 23);
+			rbtnVehiculoSi.setBounds(124, 105, 45, 23);
 			PanelGeneral.add(rbtnVehiculoSi);
 			
 			 rbtnVehiculoNo = new JRadioButton("No");
 			 rbtnVehiculoNo.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent e) {
 			 		rbtnVehiculoSi.setSelected(false);
+			 		cbxLicencia.setEnabled(false);
 			 	}
 			 });
-			rbtnVehiculoNo.setBounds(169, 105, 45, 23);
+			rbtnVehiculoNo.setBounds(179, 105, 45, 23);
 			PanelGeneral.add(rbtnVehiculoNo);
 			
 			JLabel lblVacantes = new JLabel("Vacantes:");
 			lblVacantes.setBounds(263, 27, 83, 14);
 			PanelGeneral.add(lblVacantes);
 			
-			JSpinner spinner_2 = new JSpinner();
-			spinner_2.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-			spinner_2.setBounds(338, 24, 160, 21);
-			PanelGeneral.add(spinner_2);
+			spnVacantes = new JSpinner();
+			spnVacantes.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+			spnVacantes.setBounds(338, 24, 160, 21);
+			PanelGeneral.add(spnVacantes);
 			
 			JLabel lblLocalidad = new JLabel("Localidad:");
 			lblLocalidad.setBounds(263, 68, 83, 14);
@@ -199,11 +215,7 @@ public class InsertarSolicitud extends JDialog {
 			lblCategoriaLic.setBounds(263, 109, 83, 14);
 			PanelGeneral.add(lblCategoriaLic);
 			
-			JSpinner spinner_3 = new JSpinner();
-			spinner_3.setBounds(338, 106, 160, 21);
-			PanelGeneral.add(spinner_3);
-			
-			JComboBox cbxLocalidad = new JComboBox();
+			cbxLocalidad = new JComboBox();
 			cbxLocalidad.setModel(new DefaultComboBoxModel(new String[] {"<Seleccionar>", "Azua ", "Bahoruco ", "Barahona ", "Dajab\u00F3n ", "Distrito Nacional ", "Duarte ", "El\u00EDas Pi\u00F1a ", "El Seibo ", "Espaillat ", "Hato Mayor ", "Independencia ", "La Altagracia ", "La Romana ", "La Vega ", "Mar\u00EDa Trinidad S\u00E1nchez ", "Monse\u00F1or Nouel ", "Montecristi ", "Monte Plata ", "Pedernales ", "Peravia ", "Puerto Plata ", "Hermanas Mirabal ", "Saman\u00E1 ", "S\u00E1nchez Ram\u00EDrez ", "San Crist\u00F3bal ", "San Jos\u00E9 de Ocoa ", "San Juan ", "San Pedro de Macor\u00EDs ", "Santiago ", "Santiago Rodr\u00EDguez ", "Santo Domingo ", "Valverde "}));
 			cbxLocalidad.setBounds(338, 65, 160, 21);
 			PanelGeneral.add(cbxLocalidad);
@@ -223,10 +235,16 @@ public class InsertarSolicitud extends JDialog {
 			label_4.setBounds(255, 68, 46, 14);
 			PanelGeneral.add(label_4);
 			
+			cbxLicencia = new JComboBox();
+			cbxLicencia.setEnabled(false);
+			cbxLicencia.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Categor\u00EDa 1", "Categor\u00EDa 2", "Categor\u00EDa 3", "Categor\u00EDa 4"}));
+			cbxLicencia.setBounds(338, 106, 160, 21);
+			PanelGeneral.add(cbxLicencia);
+			
 			JPanel panelEdad = new JPanel();
 			panelEdad.setLayout(null);
 			panelEdad.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Rango De Edad", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelEdad.setBounds(10, 247, 245, 59);
+			panelEdad.setBounds(10, 260, 245, 59);
 			panel.add(panelEdad);
 			
 			JLabel lblNewLabel = new JLabel("Minima:");
@@ -237,15 +255,15 @@ public class InsertarSolicitud extends JDialog {
 			lblMxima.setBounds(129, 28, 60, 14);
 			panelEdad.add(lblMxima);
 			
-			JSpinner spinner = new JSpinner();
-			spinner.setModel(new SpinnerNumberModel(18, 17, 65, 1));
-			spinner.setBounds(60, 25, 51, 21);
-			panelEdad.add(spinner);
+			spnEdadMinima = new JSpinner();
+			spnEdadMinima.setModel(new SpinnerNumberModel(18, 17, 65, 1));
+			spnEdadMinima.setBounds(60, 25, 51, 21);
+			panelEdad.add(spnEdadMinima);
 			
-			JSpinner spinner_1 = new JSpinner();
-			spinner_1.setModel(new SpinnerNumberModel(19, 18, 19, 1));
-			spinner_1.setBounds(180, 25, 51, 21);
-			panelEdad.add(spinner_1);
+			spnEdadMaxima = new JSpinner();
+			spnEdadMaxima.setModel(new SpinnerNumberModel(19, 18, 19, 1));
+			spnEdadMaxima.setBounds(180, 25, 51, 21);
+			panelEdad.add(spnEdadMaxima);
 			
 			JLabel label_5 = new JLabel("*");
 			label_5.setForeground(Color.RED);
@@ -255,30 +273,30 @@ public class InsertarSolicitud extends JDialog {
 			JPanel panelIdioma = new JPanel();
 			panelIdioma.setLayout(null);
 			panelIdioma.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Idiomas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelIdioma.setBounds(10, 309, 245, 164);
+			panelIdioma.setBounds(10, 322, 245, 164);
 			panel.add(panelIdioma);
 			
 			JLabel lblIdioma = new JLabel("Idioma:");
 			lblIdioma.setBounds(15, 31, 46, 14);
 			panelIdioma.add(lblIdioma);
 			
-			JComboBox comboBox_1 = new JComboBox();
-			comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"<Seleccionar>", "Espa\u00F1ol", "Ingles", "Frances", "Madarin"}));
-			comboBox_1.setBounds(71, 28, 159, 21);
-			panelIdioma.add(comboBox_1);
+			cbxIdioma = new JComboBox();
+			cbxIdioma.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Ninguno", "Afrikaans", "Alban\u00E9s", "Alem\u00E1n", "Amharico", "Arabe", "Armenio", "Bengali", "Bieloruso", "Birman\u00E9s", "Bulgaro", "Catalan", "Checo", "Chino", "Coreano", "Croata", "Dan\u00E9s", "Dari", "Dzongkha", "Escoc\u00E9s", "Eslovaco", "Esloveniano", "Espa\u00F1ol", "Esperanto", "Estoniano", "Faroese", "Farsi", "Finland\u00E9s", "Franc\u00E9s", "Gaelico", "Galese", "Gallego", "Griego", "Hebreo", "Hindi", "Holand\u00E9s", "Hungaro", "Ingl\u00E9s", "Indonesio", "Inuktitut (Eskimo)", "Islandico", "Italiano", "Japon\u00E9s", "Khmer", "Kurdo", "Lao", "Laponico", "Latviano", "Lituano", "Macedonio", "Malay\u00E9s", "Malt\u00E9s", "Nepali", "Noruego", "Pashto", "Polaco", "Portugu\u00E9s", "Rumano", "Ruso", "Serbio", "Somali", "Suahili", "Sueco", "Tagalog-Filipino", "Tajik", "Tamil", "Tailand\u00E9s", "Tibetano", "Tigrinia", "Tongan\u00E9s", "Turco", "Turkmenistano", "Ucraniano", "Urdu", "Uzbekistano", "Vasco", "Vietnam\u00E9s"}));
+			cbxIdioma.setBounds(71, 28, 159, 21);
+			panelIdioma.add(cbxIdioma);
 			
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			scrollPane.setBounds(15, 67, 215, 86);
 			panelIdioma.add(scrollPane);
 			
-			JList list = new JList();
-			scrollPane.setViewportView(list);
+			listIdioma = new JList();
+			scrollPane.setViewportView(listIdioma);
 			
 			JPanel PanelVacante = new JPanel();
 			PanelVacante.setLayout(null);
 			PanelVacante.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Tipo Vacante", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			PanelVacante.setBounds(255, 247, 265, 59);
+			PanelVacante.setBounds(255, 260, 265, 59);
 			panel.add(PanelVacante);
 			
 			rbtnTecnico = new JRadioButton("T\u00E9cnico ");
@@ -330,14 +348,14 @@ public class InsertarSolicitud extends JDialog {
 			panelUniversitario = new JPanel();
 			panelUniversitario.setLayout(null);
 			panelUniversitario.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Universitario", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelUniversitario.setBounds(255, 309, 265, 164);
+			panelUniversitario.setBounds(255, 322, 265, 164);
 			panel.add(panelUniversitario);
 			
 			JLabel lblExperiencia = new JLabel("Experiencia:");
 			lblExperiencia.setBounds(18, 29, 72, 14);
 			panelUniversitario.add(lblExperiencia);
 			
-			JSpinner spnUniversitarioExperiencia = new JSpinner();
+			spnUniversitarioExperiencia = new JSpinner();
 			spnUniversitarioExperiencia.setBounds(93, 26, 160, 21);
 			panelUniversitario.add(spnUniversitarioExperiencia);
 			
@@ -345,23 +363,23 @@ public class InsertarSolicitud extends JDialog {
 			lblPostgrado.setBounds(18, 100, 72, 14);
 			panelUniversitario.add(lblPostgrado);
 			
-			rbtnSi = new JRadioButton("Si");
-			rbtnSi.addActionListener(new ActionListener() {
+			rbtnPostGradoSi = new JRadioButton("Si");
+			rbtnPostGradoSi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					rbtnNo.setSelected(false);
+					rbtnPostGradoNo.setSelected(false);
 				}
 			});
-			rbtnSi.setBounds(114, 96, 40, 23);
-			panelUniversitario.add(rbtnSi);
+			rbtnPostGradoSi.setBounds(114, 96, 40, 23);
+			panelUniversitario.add(rbtnPostGradoSi);
 			
-			rbtnNo = new JRadioButton("No");
-			rbtnNo.addActionListener(new ActionListener() {
+			rbtnPostGradoNo = new JRadioButton("No");
+			rbtnPostGradoNo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					rbtnSi.setSelected(false);
+					rbtnPostGradoSi.setSelected(false);
 				}
 			});
-			rbtnNo.setBounds(180, 96, 40, 23);
-			panelUniversitario.add(rbtnNo);
+			rbtnPostGradoNo.setBounds(180, 96, 40, 23);
+			panelUniversitario.add(rbtnPostGradoNo);
 			
 			JLabel lblCarrera = new JLabel("Carrera:");
 			lblCarrera.setBounds(18, 65, 72, 14);
@@ -369,7 +387,7 @@ public class InsertarSolicitud extends JDialog {
 			
 			JComboBox cbxCarrera = new JComboBox();
 			cbxCarrera.setModel(new DefaultComboBoxModel(new String[] {"<Seleccionar>", "Adm. de Empresas", "Adm. Hotelera", "Derecho", "Econom\u00EDa", "Contabilidad", "Mercadotecnia", "Arquitectura", "Comunicacion Social", "Dise\u00F1o e Interiorismo", "Ecologia", "Educaci\u00F3n", "Filosof\u00EDa", "Psicolog\u00EDa", "Ing. Civil", "Ing. Electr\u00F3nica", "Ing. Industrial", "Ing. Mecatr\u00F3nica", "Ing. Sistema", "Ing. Telem\u00E1tica", "Enfermeria", "Estomatolog\u00EDa", "Medicina", "Nutricion y Dietetica", "Terapia F\u00EDsica"}));
-			cbxCarrera.setBounds(93, 62, 160, 20);
+			cbxCarrera.setBounds(93, 62, 160, 21);
 			panelUniversitario.add(cbxCarrera);
 			
 			JLabel label_7 = new JLabel("*");
@@ -380,14 +398,14 @@ public class InsertarSolicitud extends JDialog {
 			panelTecnico = new JPanel();
 			panelTecnico.setLayout(null);
 			panelTecnico.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "T\u00E9cnico", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelTecnico.setBounds(255, 309, 265, 164);
+			panelTecnico.setBounds(255, 322, 265, 164);
 			panel.add(panelTecnico);
 			
 			JLabel label = new JLabel("Experiencia:");
 			label.setBounds(18, 29, 72, 14);
 			panelTecnico.add(label);
 			
-			JSpinner spnTecnicoExperiencia = new JSpinner();
+			spnTecnicoExperiencia = new JSpinner();
 			spnTecnicoExperiencia.setBounds(93, 26, 160, 21);
 			panelTecnico.add(spnTecnicoExperiencia);
 			
@@ -400,7 +418,7 @@ public class InsertarSolicitud extends JDialog {
 			lblArea.setBounds(18, 65, 72, 14);
 			panelTecnico.add(lblArea);
 			
-			JComboBox cbxArea = new JComboBox();
+			cbxArea = new JComboBox();
 			cbxArea.setModel(new DefaultComboBoxModel(new String[] {"<Seleccionar>", "Emprendimiento", "Mecanograf\u00EDa", "Dise\u00F1o Gr\u00E1fico", "Programaci\u00F3n", "Contabilidad", "Programaci\u00F3n Web"}));
 			cbxArea.setBounds(93, 62, 160, 20);
 			panelTecnico.add(cbxArea);
@@ -408,14 +426,14 @@ public class InsertarSolicitud extends JDialog {
 			panelObrero = new JPanel();
 			panelObrero.setLayout(null);
 			panelObrero.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelObrero.setBounds(255, 309, 265, 164);
+			panelObrero.setBounds(255, 322, 265, 164);
 			panel.add(panelObrero);
 			
 			JLabel label_1 = new JLabel("Experiencia:");
 			label_1.setBounds(18, 29, 72, 14);
 			panelObrero.add(label_1);
 			
-			JSpinner spnObreroExperiencia = new JSpinner();
+			spnObreroExperiencia = new JSpinner();
 			spnObreroExperiencia.setBounds(93, 26, 160, 21);
 			panelObrero.add(spnObreroExperiencia);
 			
@@ -428,7 +446,7 @@ public class InsertarSolicitud extends JDialog {
 			label_9.setBounds(10, 65, 46, 14);
 			panelObrero.add(label_9);
 			
-			JComboBox cbxHabilidades = new JComboBox();
+			cbxHabilidades = new JComboBox();
 			cbxHabilidades.setBounds(93, 62, 160, 20);
 			panelObrero.add(cbxHabilidades);
 			
@@ -441,7 +459,7 @@ public class InsertarSolicitud extends JDialog {
 			
 			JLabel lblcampos = new JLabel("* Campos Obligatorios");
 			lblcampos.setForeground(Color.RED);
-			lblcampos.setBounds(390, 8, 127, 14);
+			lblcampos.setBounds(386, 16, 127, 14);
 			panel.add(lblcampos);
 		}
 		{
@@ -451,6 +469,31 @@ public class InsertarSolicitud extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Insertar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						String RNC = ftxtRNC.getText();
+						String Contrato = (String) cbxContrato.getSelectedItem();
+						Boolean reubicacion = false; 
+						if(rbtnReubicacionSi.isSelected()){
+							reubicacion = true;
+						}else if(rbtnReubicacionNo.isSelected()){
+							reubicacion = false;
+						}
+						boolean vehiculo = false;
+						if(rbtnVehiculoSi.isSelected()){
+							vehiculo = true;
+						}else if(rbtnVehiculoNo.isSelected()){
+							vehiculo = false;
+						}
+						
+						
+					
+						
+						
+						
+					
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
