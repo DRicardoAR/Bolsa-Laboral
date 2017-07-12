@@ -390,6 +390,7 @@ public class InsertarSolicitate extends JDialog {
 	    rdbNoVehiculo = new JRadioButton("No");
 	    rdbNoVehiculo.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
+	    		
 	    		rdbSiVehiculo.setSelected(false);
 				rdbNoVehiculo.setSelected(true);
 	    	}
@@ -599,7 +600,7 @@ public class InsertarSolicitate extends JDialog {
 		panel_Tecnico.add(label_9);
 		
 		cbxAreaTecnico = new JComboBox();
-		cbxAreaTecnico.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >"}));
+		cbxAreaTecnico.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Adm. de Empresas", "Adm. Hotelera", "Derecho", "Econom\u00EDa", "Contabilidad", "Mercadotecnia", "Arquitectura", "Comunicacion Social", "Dise\u00F1o e Interiorismo", "Ecologia", "Educaci\u00F3n", "Filosof\u00EDa", "Psicolog\u00EDa", "Ing. Civil", "Ing. Electr\u00F3nica", "Ing. Industrial", "Ing. Mecatr\u00F3nica", "Ing. Sistema", "Ing. Telem\u00E1tica", "Enfermeria", "Estomatolog\u00EDa", "Medicina", "Nutricion y Dietetica", "Terapia F\u00EDsica"}));
 		cbxAreaTecnico.setBounds(396, 41, 123, 20);
 		panel_Tecnico.add(cbxAreaTecnico);
 		
