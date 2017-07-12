@@ -171,8 +171,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblNewLabel_1);
 
 			cbxContrato = new JComboBox();
-			cbxContrato.setModel(new DefaultComboBoxModel(
-					new String[] { "<Seleccionar>", "Largo Plazo", "Corto Plazo", "Temporal" }));
+			cbxContrato.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Largo Plazo", "Corto Plazo", "Temporal"}));
 			cbxContrato.setBounds(81, 24, 149, 21);
 			PanelGeneral.add(cbxContrato);
 
@@ -241,14 +240,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblCategoriaLic);
 
 			cbxLocalidad = new JComboBox();
-			cbxLocalidad.setModel(new DefaultComboBoxModel(new String[] { "<Seleccionar>", "Azua ", "Bahoruco ",
-					"Barahona ", "Dajab\u00F3n ", "Distrito Nacional ", "Duarte ", "El\u00EDas Pi\u00F1a ", "El Seibo ",
-					"Espaillat ", "Hato Mayor ", "Independencia ", "La Altagracia ", "La Romana ", "La Vega ",
-					"Mar\u00EDa Trinidad S\u00E1nchez ", "Monse\u00F1or Nouel ", "Montecristi ", "Monte Plata ",
-					"Pedernales ", "Peravia ", "Puerto Plata ", "Hermanas Mirabal ", "Saman\u00E1 ",
-					"S\u00E1nchez Ram\u00EDrez ", "San Crist\u00F3bal ", "San Jos\u00E9 de Ocoa ", "San Juan ",
-					"San Pedro de Macor\u00EDs ", "Santiago ", "Santiago Rodr\u00EDguez ", "Santo Domingo ",
-					"Valverde " }));
+			cbxLocalidad.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Azua ", "Bahoruco ", "Barahona ", "Dajab\u00F3n ", "Distrito Nacional ", "Duarte ", "El\u00EDas Pi\u00F1a ", "El Seibo ", "Espaillat ", "Hato Mayor ", "Independencia ", "La Altagracia ", "La Romana ", "La Vega ", "Mar\u00EDa Trinidad S\u00E1nchez ", "Monse\u00F1or Nouel ", "Montecristi ", "Monte Plata ", "Pedernales ", "Peravia ", "Puerto Plata ", "Hermanas Mirabal ", "Saman\u00E1 ", "S\u00E1nchez Ram\u00EDrez ", "San Crist\u00F3bal ", "San Jos\u00E9 de Ocoa ", "San Juan ", "San Pedro de Macor\u00EDs ", "Santiago ", "Santiago Rodr\u00EDguez ", "Santo Domingo ", "Valverde "}));
 			cbxLocalidad.setBounds(338, 65, 160, 21);
 			PanelGeneral.add(cbxLocalidad);
 
@@ -320,11 +312,11 @@ public class InsertarSolicitud extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 
 					if (!misIdiomas.contains((String) cbxIdioma.getSelectedItem())
-							&& cbxIdioma.getSelectedIndex() > 1) {
+							&& cbxIdioma.getSelectedIndex() > 0) {
 
 						misIdiomas.add((String) cbxIdioma.getSelectedItem());
 					} else if (misIdiomas.contains((String) cbxIdioma.getSelectedItem())) {
-						JOptionPane.showMessageDialog(null, "Ese idioma ha sido seleccionado", "Biblioteca",
+						JOptionPane.showMessageDialog(null, "Ese idioma ha sido seleccionado", "ATENCIÓN",
 								JOptionPane.ERROR_MESSAGE, null);
 					}
 					cbxIdioma.setSelectedIndex(0);
