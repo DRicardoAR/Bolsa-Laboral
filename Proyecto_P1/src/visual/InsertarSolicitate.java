@@ -224,7 +224,7 @@ public class InsertarSolicitate extends JDialog {
 			
 			cbxEstadoCilvil = new JComboBox();
 			cbxEstadoCilvil.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Casado / Unido", "Divorceado / Viudo", "Soltero"}));
-			cbxEstadoCilvil.setBounds(389, 62, 134, 20);
+			cbxEstadoCilvil.setBounds(399, 128, 134, 20);
 			panel_infoPersonal.add(cbxEstadoCilvil);
 			
 			JLabel lblNacionalidad = new JLabel("Nacionalidad:");
