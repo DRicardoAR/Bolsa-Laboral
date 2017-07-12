@@ -17,21 +17,26 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import java.awt.CardLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.JSeparator;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 public class InsertarSolicitate extends JDialog {
 
@@ -80,6 +85,8 @@ public class InsertarSolicitate extends JDialog {
 	private JSpinner spnAnosExpTecnico;
 	private JList listIdiomas;
 	private JList listHabilidades;
+	private ArrayList<String>misIdiomas = new ArrayList<>();
+	private ArrayList<String>misHabilidades = new ArrayList<>();
 	private MaskFormatter telefono;
 	private MaskFormatter cedula;
 	
@@ -132,7 +139,7 @@ public class InsertarSolicitate extends JDialog {
 			
 			panel_infoPersonal = new JPanel();
 			panel_infoPersonal.setBorder(new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_infoPersonal.setBounds(10, 22, 590, 159);
+			panel_infoPersonal.setBounds(10, 29, 590, 159);
 			panel1.add(panel_infoPersonal);
 			panel_infoPersonal.setLayout(null);
 			
@@ -445,6 +452,17 @@ public class InsertarSolicitate extends JDialog {
 		panel_InformacionG.add(lblIdiomas);
 		
 		cbxIdiomas = new JComboBox();
+		cbxIdiomas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!misIdiomas.contains(cbxIdiomas.getSelectedItem().toString()) && cbxIdiomas.getSelectedIndex()>0){
+					misIdiomas.add(cbxIdiomas.getSelectedItem().toString());
+				}else if (misIdiomas.contains(cbxIdiomas.getSelectedItem().toString())) {
+						panel2.setVisible(true);
+				}
+				cbxIdiomas.setSelectedIndex(0);
+				loadIdioma();
+			}
+		});
 		cbxIdiomas.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Ninguno", "Afrikaans", "Alban\u00E9s", "Alem\u00E1n", "Amharico", "Arabe", "Armenio", "Bengali", "Bieloruso", "Birman\u00E9s", "Bulgaro", "Catalan", "Checo", "Chino", "Coreano", "Croata", "Dan\u00E9s", "Dari", "Dzongkha", "Escoc\u00E9s", "Eslovaco", "Esloveniano", "Espa\u00F1ol", "Esperanto", "Estoniano", "Faroese", "Farsi", "Finland\u00E9s", "Franc\u00E9s", "Gaelico", "Galese", "Gallego", "Griego", "Hebreo", "Hindi", "Holand\u00E9s", "Hungaro", "Ingl\u00E9s", "Indonesio", "Inuktitut (Eskimo)", "Islandico", "Italiano", "Japon\u00E9s", "Khmer", "Kurdo", "Lao", "Laponico", "Latviano", "Lituano", "Macedonio", "Malay\u00E9s", "Malt\u00E9s", "Nepali", "Noruego", "Pashto", "Polaco", "Portugu\u00E9s", "Rumano", "Ruso", "Serbio", "Somali", "Suahili", "Sueco", "Tagalog-Filipino", "Tajik", "Tamil", "Tailand\u00E9s", "Tibetano", "Tigrinia", "Tongan\u00E9s", "Turco", "Turkmenistano", "Ucraniano", "Urdu", "Uzbekistano", "Vasco", "Vietnam\u00E9s"}));
 		cbxIdiomas.setBounds(305, 45, 123, 20);
 		panel_InformacionG.add(cbxIdiomas);
@@ -547,6 +565,18 @@ public class InsertarSolicitate extends JDialog {
 		panel_Obreo.add(separator_1);
 		
 	    cbxHabilidades = new JComboBox();
+	    cbxHabilidades.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		if(!misHabilidades.contains(cbxHabilidades.getSelectedItem().toString())&& cbxHabilidades.getSelectedIndex()>0){
+	    			misHabilidades.add(cbxHabilidades.getSelectedItem().toString());
+	    		}else if(misHabilidades.contains(cbxHabilidades.getSelectedItem().toString())){
+	    			panel2.setVisible(true);
+	    		}
+	    		panel1.setVisible(false);
+	    		panel2.setVisible(true);
+	    		loadHabilidades();
+	    	}
+	    });
 		cbxHabilidades.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Arsano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
 		cbxHabilidades.setBounds(305, 28, 123, 20);
 		panel_Obreo.add(cbxHabilidades);
@@ -689,16 +719,12 @@ public class InsertarSolicitate extends JDialog {
 			    btnMover = new JButton("Continuar >>");
 				btnMover.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
-
 						if(panel2.isVisible()){
-							
-							
 							panel2.setVisible(false);
 							panel1.setVisible(true);
 							btnMover.setText("Continuar >>");
 							
-						}else{
+						}else if(panel1.isVisible()){
 							rdbObrero.setSelected(true);
 							rdbTecnico.setSelected(false);
 							rdbUniversitario.setSelected(false);
@@ -727,5 +753,20 @@ public class InsertarSolicitate extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	public void loadIdioma(){
+		DefaultListModel<String>modelo = new DefaultListModel<>();
+		for (String idioma : misIdiomas) {
+			modelo.addElement(idioma);
+		}
+		listIdiomas.setModel(modelo);
+	}
+	
+	public void loadHabilidades(){
+		DefaultListModel<String>modelo = new DefaultListModel<>();
+		for (String habilidad : misHabilidades) {
+			modelo.addElement(habilidad);
+		}
+		listHabilidades.setModel(modelo);
 	}
 }

@@ -9,6 +9,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BolsaLaboral implements Serializable {
 	/**
@@ -340,4 +342,15 @@ public class BolsaLaboral implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	//validacion de Email
+		public boolean validarEmail(String email){
+		       Pattern patt = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		       Matcher match = patt.matcher(email);
+		       if(!match.find()){
+		    	   return true;
+		       }else {
+		    	   return false;
+		       }
+		}
+	
 }
