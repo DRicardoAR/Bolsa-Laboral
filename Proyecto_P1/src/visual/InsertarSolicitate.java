@@ -21,6 +21,9 @@ import javax.swing.SwingConstants;
 import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 import com.toedter.calendar.JDateChooser;
 
+import logica.BolsaLaboral;
+import logica.Solicitante;
+import logica.Tecnico;
 import sun.util.locale.provider.AuxLocaleProviderAdapter;
 
 import javax.swing.JFormattedTextField;
@@ -33,7 +36,10 @@ import java.awt.CardLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JSeparator;
 import javax.swing.JScrollPane;
@@ -737,9 +743,10 @@ public class InsertarSolicitate extends JDialog {
 			    		String provincia =cbxProvincia.getSelectedItem().toString();
 			    		String direccion = "Ciudad: "+txtCiudad.getText()+" Secotr: "+txtSector+" Calle: "+txtCalle+" Número: "+" "+spnNumeroCasa.getValue().toString()+" Referencia: "+txtReferencia;
 			    		String email = txtEmail.getText();
+			    		Date fechaN = FechaNacimiento.getDate();
+			    		LocalDate fechaNacimiento = fechaN.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			    		boolean vehiculoP=false;
 			    		boolean mudarse=false;
-			    		//j list idiomas
 			    		if(rdbSiReelocalizacion.isSelected()){
 			    			mudarse = true;
 			    		}else if(rdbNoReelocalizacion.isSelected()){
@@ -787,9 +794,17 @@ public class InsertarSolicitate extends JDialog {
 			    			if(cbxCarrera.getSelectedIndex()==0){
 			    				JOptionPane.showMessageDialog(null, "Favor insetar carrera de Universitario.", "ATENCIÓN",
 										JOptionPane.WARNING_MESSAGE, null);
-			    			}
+			    			}//falta validar el mail
 			    		}
-			    		//Funciones para insertar<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+			    		if(rdbObrero.isSelected()){
+			    			Solicitante solicitante;
+			    		}
+			    		if(rdbUniversitario.isSelected()){
+			    			Solicitante solicitante;
+			    		
+			    		}if(rdbTecnico.isSelected()){
+			    			Solicitante solicitante;
+			    		}
 			    	}
 			    });
 				buttonPane.add(btnRegistrar);

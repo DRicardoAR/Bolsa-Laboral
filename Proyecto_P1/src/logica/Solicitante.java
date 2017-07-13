@@ -25,7 +25,6 @@ public abstract class Solicitante implements Serializable {
 	protected String provincia;
 	protected String email;
 	protected boolean vehiculoPropio;
-	protected boolean licencia;
 	protected int categoriaLicencia;
 	protected int annosExperiencia;
 	protected ArrayList<String> idiomas;
@@ -35,7 +34,7 @@ public abstract class Solicitante implements Serializable {
 
 	public Solicitante(String cedula, String nombres, String apellidos, String telefono, LocalDate fechaNacimiento,
 			String nacionalidad, String sexo, String estadoCivil, String direccion, String provincia, String email,
-			boolean vehiculoPropio, boolean licencia, int categoriaLicencia, int annosExperiencia,
+			boolean vehiculoPropio, int categoriaLicencia, int annosExperiencia,
 			ArrayList<String> idiomas, boolean mudarse) {
 		super();
 		this.cedula = cedula;
@@ -50,7 +49,6 @@ public abstract class Solicitante implements Serializable {
 		this.provincia = provincia;
 		this.email = email;
 		this.vehiculoPropio = vehiculoPropio;
-		this.licencia = licencia;
 		this.categoriaLicencia = categoriaLicencia;
 		this.annosExperiencia = annosExperiencia;
 		this.idiomas = idiomas;
@@ -168,14 +166,6 @@ public abstract class Solicitante implements Serializable {
 
 	public void setVehiculoPropio(boolean vehiculoPropio) {
 		this.vehiculoPropio = vehiculoPropio;
-	}
-
-	public boolean isLicencia() {
-		return licencia;
-	}
-
-	public void setLicencia(boolean licencia) {
-		this.licencia = licencia;
 	}
 
 	public int getCategoriaLicencia() {

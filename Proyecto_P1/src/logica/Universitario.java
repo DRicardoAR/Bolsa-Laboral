@@ -14,11 +14,11 @@ public class Universitario extends Solicitante {
 			String apellidos, String telefono, LocalDate fechaNacimiento,
 			String nacionalidad, String sexo, String estadoCivil,
 			String direccion, String provincia, String email,
-			boolean vehiculoPropio, boolean licencia, int categoriaLicencia,
+			boolean vehiculoPropio, int categoriaLicencia,
 			int annosExperiencia,ArrayList<String> idiomas, boolean mudarse,boolean PostGrado, String Carrera) {
 		super(cedula, nombres, apellidos, telefono, fechaNacimiento, nacionalidad,
 				sexo, estadoCivil, direccion, provincia, email, vehiculoPropio,
-				licencia, categoriaLicencia, annosExperiencia, idiomas, mudarse);
+				 categoriaLicencia, annosExperiencia, idiomas, mudarse);
 		this.PostGrado=PostGrado;
 		this.Carrera=Carrera;
 	}

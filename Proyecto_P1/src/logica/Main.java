@@ -13,9 +13,9 @@ public class Main {
 		ArrayList<String>miIdiomas = new ArrayList<>();
 		miIdiomas.add("Frances");
 		miIdiomas.add("Ingles");
-	Empresa e1 = new Empresa("789", "La empresa", "859-896-8585", "EL email.com", "Telematica", "Un lugar");
-	Solicitante s1 = new Universitario("1", "Yo mismo", "apen", "859-965-9521",fecha , "Domincano", "masculino", "soltero", "santiago", "santiago", "mi email", true, true, 4, 2, idiomas,true, false, "telematica");
-	Solicitante s2 = new Universitario("1", "Yo mismo", "apen", "859-965-9521",fecha , "Domincano", "masculino", "soltero", "santiago", "santiago", "mi email", true, true, 4, 2, idiomas,true, false, "Matematica");
+	/*Empresa e1 = new Empresa("789", "La empresa", "859-896-8585", "EL email.com", "Telematica", "Un lugar");
+	//Solicitante s1 = new Universitario("1", "Yo mismo", "apen", "859-965-9521",fecha , "Domincano", "masculino", "soltero", "santiago", "santiago", "mi email", true, true, 4, 2, idiomas,true, false, "telematica");
+	//Solicitante s2 = new Universitario("1", "Yo mismo", "apen", "859-965-9521",fecha , "Domincano", "masculino", "soltero", "santiago", "santiago", "mi email", true, true, 4, 2, idiomas,true, false, "Matematica");
 	BolsaLaboral.getInstance().insertSolicitante(s1);
 	BolsaLaboral.getInstance().insertSolicitante(s2);
 	System.out.println(BolsaLaboral.getInstance().getMisPersonas().get(0).getIdiomas().get(0));
@@ -31,7 +31,7 @@ public class Main {
 	System.out.println(contratado.get(0).getNombres());
 	contratado= BolsaLaboral.getInstance().matcheo(soli);
 	System.out.println(contratado.size());
-	System.out.println(BolsaLaboral.getInstance().getMisEmpresas().get(0).getMisContratados().get(0).getNombres());
+	System.out.println(BolsaLaboral.getInstance().getMisEmpresas().get(0).getMisContratados().get(0).getNombres());*/
 
 	}
 
