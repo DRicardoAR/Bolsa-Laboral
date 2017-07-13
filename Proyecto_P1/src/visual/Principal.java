@@ -70,10 +70,17 @@ public class Principal extends JFrame {
 		JMenuItem mntmRegistrarEmpresa = new JMenuItem("Registrar Empresa");
 		mntmRegistrarEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InsertarEmpresa empre = new InsertarEmpresa();
-				empre.setModal(true);
-				empre.setLocationRelativeTo(null);
-				empre.setVisible(true);
+				InsertarEmpresa empre;
+				try {
+					empre = new InsertarEmpresa();
+					empre.setModal(true);
+					empre.setLocationRelativeTo(null);
+					empre.setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		mnEmpresa.add(mntmRegistrarEmpresa);
