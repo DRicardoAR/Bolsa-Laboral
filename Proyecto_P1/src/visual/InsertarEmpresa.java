@@ -108,12 +108,12 @@ public class InsertarEmpresa extends JDialog {
 		
 		JLabel label_1 = new JLabel("*");
 		label_1.setForeground(Color.RED);
-		label_1.setBounds(61, 35, 11, 14);
+		label_1.setBounds(70, 35, 11, 14);
 		panel.add(label_1);
 		
 		JLabel label_2 = new JLabel("*");
 		label_2.setForeground(Color.RED);
-		label_2.setBounds(61, 84, 11, 14);
+		label_2.setBounds(70, 84, 11, 14);
 		panel.add(label_2);
 		
 		JLabel label_3 = new JLabel("*");
@@ -188,7 +188,7 @@ public class InsertarEmpresa extends JDialog {
 		
 		JLabel label_5 = new JLabel("*");
 		label_5.setForeground(Color.RED);
-		label_5.setBounds(61, 35, 11, 14);
+		label_5.setBounds(70, 35, 11, 14);
 		panel_1.add(label_5);
 		
 		JLabel label = new JLabel("Campos con * son obligatorios.");
