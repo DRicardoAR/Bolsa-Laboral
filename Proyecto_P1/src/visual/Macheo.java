@@ -115,7 +115,7 @@ public class Macheo extends JDialog {
 									miEmpresa = bolsa.RetornarEmpresa(ftxtRNC.getText());
 									
 								}else{
-									JOptionPane.showMessageDialog(null, "No se encontro una empresa con el RNC digitado", "Información", JOptionPane.WARNING_MESSAGE, null);
+									JOptionPane.showMessageDialog(null, "No se encontro una empresa con el RNC digitado.", "Información", JOptionPane.WARNING_MESSAGE, null);
 								}
 								
 								
