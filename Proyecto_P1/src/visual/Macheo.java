@@ -42,7 +42,7 @@ public class Macheo extends JDialog {
 	private JFormattedTextField ftxtRNC;
 	BolsaLaboral bolsa = BolsaLaboral.getInstance();
 	Empresa miEmpresa = null;
-	private JTextField textField;
+	private JTextField txtNombreEmpresa;
 	private JTable table;
 	/**
 	 * Launch the application.
@@ -96,11 +96,11 @@ public class Macheo extends JDialog {
 						panel_2.add(label);
 					}
 					{
-						textField = new JTextField();
-						textField.setEnabled(false);
-						textField.setColumns(10);
-						textField.setBounds(63, 63, 406, 21);
-						panel_2.add(textField);
+						txtNombreEmpresa = new JTextField();
+						txtNombreEmpresa.setEnabled(false);
+						txtNombreEmpresa.setColumns(10);
+						txtNombreEmpresa.setBounds(63, 63, 406, 21);
+						panel_2.add(txtNombreEmpresa);
 					}
 					{
 						JLabel label = new JLabel("C\u00F3digo Solicitud:");
@@ -113,7 +113,7 @@ public class Macheo extends JDialog {
 							public void actionPerformed(ActionEvent e) {
 								if(bolsa.RetornarEmpresa(ftxtRNC.getText()) != null ){
 									miEmpresa = bolsa.RetornarEmpresa(ftxtRNC.getText());
-									
+									txtNombreEmpresa.setText(miEmpresa.getNombre());
 								}else{
 									JOptionPane.showMessageDialog(null, "No se encontro una empresa con el RNC digitado.", "Información", JOptionPane.WARNING_MESSAGE, null);
 								}
@@ -155,10 +155,10 @@ public class Macheo extends JDialog {
 						panel_2.add(ftxtRNC);
 					}
 					{
-						JFormattedTextField formattedTextField = new JFormattedTextField();
-						formattedTextField.setEnabled(false);
-						formattedTextField.setBounds(335, 32, 134, 21);
-						panel_2.add(formattedTextField);
+						JFormattedTextField ftxtCodSolicitud = new JFormattedTextField();
+						ftxtCodSolicitud.setEnabled(false);
+						ftxtCodSolicitud.setBounds(335, 32, 134, 21);
+						panel_2.add(ftxtCodSolicitud);
 					}
 				}
 				{
@@ -202,6 +202,7 @@ public class Macheo extends JDialog {
 		modelo.setColumnIdentifiers(columnNames);	
 		modelo.setRowCount(0);
 		fila = new Object[modelo.getColumnCount()];
+		
 		TableColumnModel columnModel = table.getColumnModel();	
 		centrar.setHorizontalAlignment(SwingConstants.CENTER); 
 		
@@ -215,4 +216,5 @@ public class Macheo extends JDialog {
 		columnModel.getColumn(4).setPreferredWidth(80);
 		
 	}
+	
 }
