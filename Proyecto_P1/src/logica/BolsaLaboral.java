@@ -365,7 +365,7 @@ public class BolsaLaboral implements Serializable {
 		}
 		
 		//Retornar Solicotud dado su codigo
-		public Solicitud RetornarSolocitud(String codigo){
+		public Solicitud RetornarSolocitudCod(String codigo){
 			Solicitud miSolicitud = null;
 			for (Solicitud solicitud : misSolicitudes) {
 				if(solicitud.getCodigo().equalsIgnoreCase(codigo)){
@@ -388,4 +388,5 @@ public class BolsaLaboral implements Serializable {
 			}
 			return misSolicitudes;
 		}	
+		//Retorna solicid
 }
