@@ -82,7 +82,7 @@ public class InsertarSolicitud extends JDialog {
 	private String indexListaIdioma;
 	private String indexListaHabilidades;
 	private BolsaLaboral bolsa = BolsaLaboral.getInstance();
-	private Empresa empresa = null;
+	private Empresa empresa ;
 
 	/**
 	 * Launch the application.
@@ -161,9 +161,14 @@ public class InsertarSolicitud extends JDialog {
 			JButton btnNewButton = new JButton("");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					
 					String RNC = ftxtRNC.getText();
-					if(bolsa.RetornarEmpresa(RNC) != null){
-						empresa = bolsa.RetornarEmpresa(RNC);					
+					
+
+					empresa = bolsa.RetornarEmpresa(RNC);	
+					
+					if(empresa != null){										
 						txtNombre.setText(empresa.getNombre());
 					}else{
 						JOptionPane.showMessageDialog(null, "No se encontro ningun empresa", "ATENCIÓN",
