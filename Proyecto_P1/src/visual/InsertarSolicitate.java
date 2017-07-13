@@ -20,6 +20,9 @@ import javax.swing.SwingConstants;
 
 import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 import com.toedter.calendar.JDateChooser;
+
+import sun.util.locale.provider.AuxLocaleProviderAdapter;
+
 import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -37,6 +40,9 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class InsertarSolicitate extends JDialog {
 
@@ -89,6 +95,10 @@ public class InsertarSolicitate extends JDialog {
 	private ArrayList<String>misHabilidades = new ArrayList<>();
 	private MaskFormatter telefono;
 	private MaskFormatter cedula;
+	private JDateChooser FechaNacimiento;
+	private DefaultListModel<String>modeloIdiomas = new DefaultListModel<>();
+	private DefaultListModel<String>modeloHabilidad = new DefaultListModel<>();
+	private boolean error = false;
 	
 	
 	
@@ -187,7 +197,7 @@ public class InsertarSolicitate extends JDialog {
 			lblNatalicio.setBounds(19, 134, 57, 14);
 			panel_infoPersonal.add(lblNatalicio);
 			
-			JDateChooser FechaNacimiento = new JDateChooser();
+			FechaNacimiento = new JDateChooser();
 			FechaNacimiento.setBounds(100, 128, 134, 20);
 			panel_infoPersonal.add(FechaNacimiento);
 			
@@ -257,6 +267,12 @@ public class InsertarSolicitate extends JDialog {
 			cbxLicencia.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "No Poseo Licencia", "Categor\u00EDa 1", "Categor\u00EDa 2", "Categor\u00EDa 3", "Categor\u00EDa 4"}));
 			cbxLicencia.setBounds(389, 131, 134, 20);
 			panel_infoPersonal.add(cbxLicencia);
+			
+			JLabel label_5 = new JLabel("*");
+			label_5.setHorizontalAlignment(SwingConstants.LEFT);
+			label_5.setForeground(Color.RED);
+			label_5.setBounds(365, 134, 38, 14);
+			panel_infoPersonal.add(label_5);
 			
 			JLabel lblpriority = new JLabel("Campos con * son obligatorios.");
 			lblpriority.setForeground(Color.RED);
@@ -453,17 +469,19 @@ public class InsertarSolicitate extends JDialog {
 		
 		cbxIdiomas = new JComboBox();
 		cbxIdiomas.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				if(!misIdiomas.contains(cbxIdiomas.getSelectedItem().toString()) && cbxIdiomas.getSelectedIndex()>0){
 					misIdiomas.add(cbxIdiomas.getSelectedItem().toString());
-				}else if (misIdiomas.contains(cbxIdiomas.getSelectedItem().toString())) {
-						panel2.setVisible(true);
+					modeloIdiomas.removeAllElements();
+					loadIdioma();
+					cbxIdiomas.setSelectedIndex(0);
+				}else if(misIdiomas.contains(cbxIdiomas.getSelectedItem().toString())) {
+					panel2.setVisible(true);
 				}
-				cbxIdiomas.setSelectedIndex(0);
-				loadIdioma();
 			}
 		});
-		cbxIdiomas.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Ninguno", "Afrikaans", "Alban\u00E9s", "Alem\u00E1n", "Amharico", "Arabe", "Armenio", "Bengali", "Bieloruso", "Birman\u00E9s", "Bulgaro", "Catalan", "Checo", "Chino", "Coreano", "Croata", "Dan\u00E9s", "Dari", "Dzongkha", "Escoc\u00E9s", "Eslovaco", "Esloveniano", "Espa\u00F1ol", "Esperanto", "Estoniano", "Faroese", "Farsi", "Finland\u00E9s", "Franc\u00E9s", "Gaelico", "Galese", "Gallego", "Griego", "Hebreo", "Hindi", "Holand\u00E9s", "Hungaro", "Ingl\u00E9s", "Indonesio", "Inuktitut (Eskimo)", "Islandico", "Italiano", "Japon\u00E9s", "Khmer", "Kurdo", "Lao", "Laponico", "Latviano", "Lituano", "Macedonio", "Malay\u00E9s", "Malt\u00E9s", "Nepali", "Noruego", "Pashto", "Polaco", "Portugu\u00E9s", "Rumano", "Ruso", "Serbio", "Somali", "Suahili", "Sueco", "Tagalog-Filipino", "Tajik", "Tamil", "Tailand\u00E9s", "Tibetano", "Tigrinia", "Tongan\u00E9s", "Turco", "Turkmenistano", "Ucraniano", "Urdu", "Uzbekistano", "Vasco", "Vietnam\u00E9s"}));
+		cbxIdiomas.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Afrikaans", "Alban\u00E9s", "Alem\u00E1n", "Amharico", "Arabe", "Armenio", "Bengali", "Bieloruso", "Birman\u00E9s", "Bulgaro", "Catalan", "Checo", "Chino", "Coreano", "Croata", "Dan\u00E9s", "Dari", "Dzongkha", "Escoc\u00E9s", "Eslovaco", "Esloveniano", "Espa\u00F1ol", "Esperanto", "Estoniano", "Faroese", "Farsi", "Finland\u00E9s", "Franc\u00E9s", "Gaelico", "Galese", "Gallego", "Griego", "Hebreo", "Hindi", "Holand\u00E9s", "Hungaro", "Ingl\u00E9s", "Indonesio", "Inuktitut (Eskimo)", "Islandico", "Italiano", "Japon\u00E9s", "Khmer", "Kurdo", "Lao", "Laponico", "Latviano", "Lituano", "Macedonio", "Malay\u00E9s", "Malt\u00E9s", "Nepali", "Noruego", "Pashto", "Polaco", "Portugu\u00E9s", "Rumano", "Ruso", "Serbio", "Somali", "Suahili", "Sueco", "Tagalog-Filipino", "Tajik", "Tamil", "Tailand\u00E9s", "Tibetano", "Tigrinia", "Tongan\u00E9s", "Turco", "Turkmenistano", "Ucraniano", "Urdu", "Uzbekistano", "Vasco", "Vietnam\u00E9s"}));
 		cbxIdiomas.setBounds(305, 45, 123, 20);
 		panel_InformacionG.add(cbxIdiomas);
 		
@@ -473,18 +491,30 @@ public class InsertarSolicitate extends JDialog {
 		panel_InformacionG.add(scrollPaneIdiomas);
 		
 		listIdiomas = new JList();
+		listIdiomas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnEliminarIdioma.setEnabled(true);
+			}
+		});
+		listIdiomas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		scrollPaneIdiomas.setViewportView(listIdiomas);
 		
 		btnEliminarIdioma = new JButton("Remover");
+		btnEliminarIdioma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int index = listIdiomas.getSelectedIndex();
+				String idioma = listIdiomas.getSelectedValue().toString();
+				modeloIdiomas.remove(index);
+				eliminarIdioma(idioma);
+				btnEliminarIdioma.setEnabled(false);
+				
+			}
+		});
 		btnEliminarIdioma.setEnabled(false);
 		btnEliminarIdioma.setBounds(322, 70, 89, 23);
 		panel_InformacionG.add(btnEliminarIdioma);
-		
-		JLabel label_6 = new JLabel("*");
-		label_6.setHorizontalAlignment(SwingConstants.LEFT);
-		label_6.setForeground(Color.RED);
-		label_6.setBounds(395, 22, 38, 14);
-		panel_InformacionG.add(label_6);
 		
 		JPanel panel_TipoSolicitante = new JPanel();
 		panel_TipoSolicitante.setBorder(new TitledBorder(null, "Tipo de Solicitante", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -534,6 +564,12 @@ public class InsertarSolicitate extends JDialog {
 		rdbUniversitario.setBounds(413, 19, 109, 23);
 		panel_TipoSolicitante.add(rdbUniversitario);
 		
+		JLabel label_12 = new JLabel("*");
+		label_12.setHorizontalAlignment(SwingConstants.LEFT);
+		label_12.setForeground(Color.RED);
+		label_12.setBounds(10, 23, 38, 14);
+		panel_TipoSolicitante.add(label_12);
+		
 	    panel_Obreo = new JPanel();
 		panel_Obreo.setBorder(new TitledBorder(null, "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_Obreo.setBounds(10, 270, 590, 104);
@@ -569,12 +605,12 @@ public class InsertarSolicitate extends JDialog {
 	    	public void actionPerformed(ActionEvent e) {
 	    		if(!misHabilidades.contains(cbxHabilidades.getSelectedItem().toString())&& cbxHabilidades.getSelectedIndex()>0){
 	    			misHabilidades.add(cbxHabilidades.getSelectedItem().toString());
+	    			modeloHabilidad.removeAllElements();
+	    			loadHabilidades();
 	    		}else if(misHabilidades.contains(cbxHabilidades.getSelectedItem().toString())){
 	    			panel2.setVisible(true);
 	    		}
-	    		panel1.setVisible(false);
-	    		panel2.setVisible(true);
-	    		loadHabilidades();
+	    		
 	    	}
 	    });
 		cbxHabilidades.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Arsano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
@@ -582,6 +618,15 @@ public class InsertarSolicitate extends JDialog {
 		panel_Obreo.add(cbxHabilidades);
 		
 		btnRemoverHabilidad = new JButton("Remover");
+		btnRemoverHabilidad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int index = listHabilidades.getSelectedIndex();
+				String habilidad = listHabilidades.getSelectedValue().toString();
+				modeloHabilidad.remove(index);
+				eliminarHabilidad(habilidad);
+				btnRemoverHabilidad.setEnabled(false);
+			}
+		});
 		btnRemoverHabilidad.setEnabled(false);
 		btnRemoverHabilidad.setBounds(325, 58, 89, 23);
 		panel_Obreo.add(btnRemoverHabilidad);
@@ -591,6 +636,13 @@ public class InsertarSolicitate extends JDialog {
 		panel_Obreo.add(scrollPaneHabilidades);
 		
 		listHabilidades = new JList();
+		listHabilidades.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnRemoverHabilidad.setEnabled(true);
+			}
+		});
+		listHabilidades.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPaneHabilidades.setViewportView(listHabilidades);
 		
 		JLabel label_7 = new JLabel("*");
@@ -685,14 +737,18 @@ public class InsertarSolicitate extends JDialog {
 			    		String provincia =cbxProvincia.getSelectedItem().toString();
 			    		String direccion = "Ciudad: "+txtCiudad.getText()+" Secotr: "+txtSector+" Calle: "+txtCalle+" Número: "+" "+spnNumeroCasa.getValue().toString()+" Referencia: "+txtReferencia;
 			    		String email = txtEmail.getText();
-			    		boolean vehiculoP =false;
-			    		boolean mudarse = false;
+			    		boolean vehiculoP=false;
+			    		boolean mudarse=false;
 			    		//j list idiomas
 			    		if(rdbSiReelocalizacion.isSelected()){
 			    			mudarse = true;
+			    		}else if(rdbNoReelocalizacion.isSelected()){
+			    			mudarse=false;
 			    		}
 			    		if(rdbSiVehiculo.isSelected()){
 			    			vehiculoP = true;
+			    		}else if(rdbNoVehiculo.isSelected()){
+			    			vehiculoP = false;
 			    		}
 			    		int licencia = 0;
 			    		if(cbxLicencia.getSelectedIndex()==1){
@@ -711,6 +767,29 @@ public class InsertarSolicitate extends JDialog {
 			    		}if(rdbMasculino.isSelected()){
 			    			sexo = "Masculino";
 			    		}
+			    		if(txtTelefono.getText().isEmpty() || txtEmail.getText().isEmpty()){
+			    			JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
+									JOptionPane.WARNING_MESSAGE, null);
+			    		}else if((!rdbNoReelocalizacion.isSelected() && !rdbSiReelocalizacion.isSelected())|| (!rdbSiVehiculo.isSelected() && !rdbNoVehiculo.isSelected() )){
+			    			JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
+									JOptionPane.WARNING_MESSAGE, null);
+			    		}else if(rdbObrero.isSelected()){
+			    			if(misHabilidades.size()==0){
+			    				JOptionPane.showMessageDialog(null, "Favor insertar habilidades de Oberro.", "ATENCIÓN",
+										JOptionPane.WARNING_MESSAGE, null);
+			    			}
+			    		}else if (rdbTecnico.isSelected()){
+			    			if(cbxAreaTecnico.getSelectedIndex()==0){
+			    				JOptionPane.showMessageDialog(null, "Favor insetar area de Ténico.", "ATENCIÓN",
+										JOptionPane.WARNING_MESSAGE, null);
+			    			}
+			    		}else if(rdbUniversitario.isSelected()){
+			    			if(cbxCarrera.getSelectedIndex()==0){
+			    				JOptionPane.showMessageDialog(null, "Favor insetar carrera de Universitario.", "ATENCIÓN",
+										JOptionPane.WARNING_MESSAGE, null);
+			    			}
+			    		}
+			    		//Funciones para insertar<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 			    	}
 			    });
 				buttonPane.add(btnRegistrar);
@@ -719,22 +798,37 @@ public class InsertarSolicitate extends JDialog {
 			    btnMover = new JButton("Continuar >>");
 				btnMover.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						String fecha = ((JTextField)FechaNacimiento.getDateEditor().getUiComponent()).getText();
+						String sexo ="";
+						if(rdbFemenino.isSelected()){
+							sexo = "Femenino";
+						}else if(rdbMasculino.isSelected()){
+							sexo = "Masculino";
+						}
 						if(panel2.isVisible()){
 							panel2.setVisible(false);
 							panel1.setVisible(true);
 							btnMover.setText("Continuar >>");
 							
-						}else if(panel1.isVisible()){
-							rdbObrero.setSelected(true);
-							rdbTecnico.setSelected(false);
-							rdbUniversitario.setSelected(false);
-							panel_Obreo.setVisible(true);
-							panel_Tecnico.setVisible(false);
-							panel_Universitario.setVisible(false);
 							
-							panel1.setVisible(false);
-							panel2.setVisible(true);
-							btnMover.setText("<< Retroceder");
+						}else if(panel1.isVisible()){
+							if(txtApellidos.getText().isEmpty()|| txtNombre.getText().isEmpty() || textCedula.getText().isEmpty() || fecha.equalsIgnoreCase("") || cbxLicencia.getSelectedIndex()==0 ||sexo.equalsIgnoreCase("")
+									|| cbxProvincia.getSelectedIndex()==0){
+								JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
+										JOptionPane.WARNING_MESSAGE, null);
+							}
+							else{
+								rdbObrero.setSelected(true);
+								rdbTecnico.setSelected(false);
+								rdbUniversitario.setSelected(false);
+								panel_Obreo.setVisible(true);
+								panel_Tecnico.setVisible(false);
+								panel_Universitario.setVisible(false);
+								panel1.setVisible(false);
+								panel2.setVisible(true);
+								btnMover.setText("<< Retroceder");
+								
+							}
 						}
 					}
 				});
@@ -755,18 +849,47 @@ public class InsertarSolicitate extends JDialog {
 		}
 	}
 	public void loadIdioma(){
-		DefaultListModel<String>modelo = new DefaultListModel<>();
 		for (String idioma : misIdiomas) {
-			modelo.addElement(idioma);
+			modeloIdiomas.addElement(idioma);
 		}
-		listIdiomas.setModel(modelo);
+		listIdiomas.setModel(modeloIdiomas);
 	}
 	
 	public void loadHabilidades(){
-		DefaultListModel<String>modelo = new DefaultListModel<>();
 		for (String habilidad : misHabilidades) {
-			modelo.addElement(habilidad);
+			modeloHabilidad.addElement(habilidad);
 		}
-		listHabilidades.setModel(modelo);
+		listHabilidades.setModel(modeloHabilidad);
+	}
+	public void eliminarIdioma(String idioma){
+		int index = 0;
+		for (int i = 0; i < misIdiomas.size(); i++) {
+			if(misIdiomas.get(i).equalsIgnoreCase(idioma)){
+				index = i;
+			}
+		}
+		misIdiomas.remove(index);
+	}
+	public void eliminarHabilidad(String habilidad){
+		int index = 0;
+		for (int i = 0; i < misHabilidades.size(); i++) {
+			if(misHabilidades.get(i).equalsIgnoreCase(habilidad)){
+				index = i;
+			}	
+		}
+		misHabilidades.remove(index);
+	}
+	public void resetWindow(){
+		rdbObrero.setSelected(true);
+		rdbTecnico.setSelected(false);
+		rdbUniversitario.setSelected(false);
+		panel_Obreo.setVisible(true);
+		panel_Tecnico.setVisible(false);
+		panel_Universitario.setVisible(false);
+		panel1.setVisible(false);
+		panel2.setVisible(true);
+		btnMover.setText("<< Retroceder");
+		error = false;
+		
 	}
 }
