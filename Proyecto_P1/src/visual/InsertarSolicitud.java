@@ -11,6 +11,9 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
+import logica.BolsaLaboral;
+import logica.Empresa;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JFormattedTextField;
@@ -51,6 +54,7 @@ public class InsertarSolicitud extends JDialog {
 	private JPanel panelTecnico;
 	private JPanel panelObrero;
 	private JPanel panelUniversitario;
+	private JPanel PanelGeneral;
 	private JFormattedTextField ftxtRNC;
 	private JComboBox cbxLicencia;
 	private JComboBox cbxContrato;
@@ -67,10 +71,15 @@ public class InsertarSolicitud extends JDialog {
 	private JComboBox cbxArea;
 	private JComboBox cbxHabilidades;
 	private JSpinner spnObreroExperiencia;
+	
+	
+	
 	private ArrayList<String> misIdiomas = new ArrayList<>();
 	private ArrayList<String> misHabilidades = new ArrayList<>();
 	private String indexListaIdioma;
-	private String indexListaHabilidades;
+	private String indexListaHabilidades;	
+	private BolsaLaboral bolsa = BolsaLaboral.getInstance();
+	private Empresa empresa = null;
 
 	/**
 	 * Launch the application.
@@ -92,6 +101,7 @@ public class InsertarSolicitud extends JDialog {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
+				
 				if (rbtnUniversitario.isSelected()) {
 					rbtnUniversitario.setSelected(true);
 					panelTecnico.setVisible(false);
@@ -146,6 +156,21 @@ public class InsertarSolicitud extends JDialog {
 			}
 
 			JButton btnNewButton = new JButton("");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String RNC = ftxtRNC.getText();
+					if(bolsa.RetornarEmpresa(RNC) != null){
+						empresa = bolsa.RetornarEmpresa(RNC);					
+						txtNombre.setText(empresa.getNombre());
+					}else{
+						JOptionPane.showMessageDialog(null, "No se encontro ningun empresa", "ATENCIÓN",
+								JOptionPane.ERROR_MESSAGE, null);
+						
+					}
+					
+					
+				}
+			});
 			btnNewButton.setBounds(204, 28, 27, 21);
 			panelEmpresa.add(btnNewButton);
 
@@ -154,12 +179,11 @@ public class InsertarSolicitud extends JDialog {
 			panelEmpresa.add(lblNombre);
 
 			txtNombre = new JTextField();
-			txtNombre.setEnabled(false);
 			txtNombre.setBounds(338, 28, 160, 20);
 			panelEmpresa.add(txtNombre);
 			txtNombre.setColumns(10);
 
-			JPanel PanelGeneral = new JPanel();
+			PanelGeneral = new JPanel();
 			PanelGeneral.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "General",
 					TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			PanelGeneral.setBounds(10, 107, 507, 150);
@@ -287,7 +311,7 @@ public class InsertarSolicitud extends JDialog {
 			panelEdad.add(spnEdadMinima);
 
 			spnEdadMaxima = new JSpinner();
-			spnEdadMaxima.setModel(new SpinnerNumberModel(19, 18, 19, 1));
+			spnEdadMaxima.setModel(new SpinnerNumberModel(19, 18, 65, 1));
 			spnEdadMaxima.setBounds(180, 25, 51, 21);
 			panelEdad.add(spnEdadMaxima);
 
@@ -627,6 +651,31 @@ public class InsertarSolicitud extends JDialog {
 							posGrado = true;
 						}
 						String area = (String) cbxArea.getSelectedItem();
+						
+						
+						if(txtNombre.getText().isEmpty()){
+							JOptionPane.showMessageDialog(null, "Se debe ingresar la empresa que solicita", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+						}else if(cbxContrato.getSelectedIndex() == 0 || cbxLocalidad.getSelectedIndex() ==0){
+							JOptionPane.showMessageDialog(null, "No deje campos vacios", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+
+						}else if(rbtnVehiculoSi.isSelected() && cbxLicencia.getSelectedIndex() == 0){
+							JOptionPane.showMessageDialog(null, "Selecciona la categoria de la Licencia de conducir","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+	
+						}else if(!rbtnTecnico.isSelected() && !rbtnUniversitario.isSelected() && !rbtnObrero.isSelected()){
+							JOptionPane.showMessageDialog(null, "Selecciona el tipo de empleado que se necesita","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+							
+						}else if(panelUniversitario.isVisible() && cbxCarrera.getSelectedIndex() ==0){
+							JOptionPane.showMessageDialog(null, "Selecciona la carrera del universitario","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+							
+						}else if(panelTecnico.isVisible() && cbxArea.getSelectedIndex() ==0){
+							JOptionPane.showMessageDialog(null, "Selecciona el area del tecnico","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+						}else if(panelObrero.isVisible() && misHabilidades.size() == 0){
+							JOptionPane.showMessageDialog(null, "Selecciona las habilidades del obrero","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+							
+						}else if(panelUniversitario.isVisible() && !rbtnPostGradoSi.isSelected() && !rbtnPostGradoNo.isSelected()){
+							rbtnPostGradoNo.setSelected(true);
+						}
+						
 
 						
 
