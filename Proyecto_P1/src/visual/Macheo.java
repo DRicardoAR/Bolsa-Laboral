@@ -176,7 +176,6 @@ public class Macheo extends JDialog {
 							public void actionPerformed(ActionEvent arg0) {
 								solicitantes();
 								cargarSolicitante();
-								
 							}
 						});
 						btnCandidatos.setEnabled(false);
