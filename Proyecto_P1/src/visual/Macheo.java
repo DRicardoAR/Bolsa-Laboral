@@ -202,7 +202,23 @@ public class Macheo extends JDialog {
 		modelo.setColumnIdentifiers(columnNames);	
 		modelo.setRowCount(0);
 		fila = new Object[modelo.getColumnCount()];
-		
+for (Solicitud soli : bolsa.RetornaSolicitudEmp(miEmpresa)) {
+	
+			fila[0] =soli.getCodigo();
+			fila[1] = soli.getCantVacantes();
+			String min= Integer.toString(soli.getEdadMin());
+			String max= Integer.toString(soli.getEdadMax());
+			String rango= max + "-" +min;
+			fila[3] = rango;
+			fila[4] = soli.getLocalidad();
+			fila[5] = soli.getAnnosExperiencia();
+					
+			
+
+	modelo.addRow(fila);
+	
+	
+}
 		TableColumnModel columnModel = table.getColumnModel();	
 		centrar.setHorizontalAlignment(SwingConstants.CENTER); 
 		
