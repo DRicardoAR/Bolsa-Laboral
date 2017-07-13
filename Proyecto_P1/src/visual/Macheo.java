@@ -2,6 +2,7 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.List;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ import javax.swing.border.EtchedBorder;
 
 import java.awt.Color;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
@@ -52,6 +54,9 @@ public class Macheo extends JDialog {
 	private JTable table;
 	private String cod;
 	private JButton btnCandidatos;
+	private DefaultListModel<String> model;
+	private JList list;
+	private ArrayList<Solicitante> misSolicitantesC= new ArrayList<Solicitante>();
 	/**
 	 * Launch the application.
 	 */
@@ -167,6 +172,13 @@ public class Macheo extends JDialog {
 					}
 					{
 						btnCandidatos = new JButton("Candidatos");
+						btnCandidatos.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								solicitantes();
+								cargarSolicitante();
+								
+							}
+						});
 						btnCandidatos.setEnabled(false);
 						btnCandidatos.setBounds(377, 361, 102, 23);
 						panel_2.add(btnCandidatos);
@@ -195,7 +207,7 @@ public class Macheo extends JDialog {
 						scrollPane.setBounds(10, 32, 291, 357);
 						panel_2.add(scrollPane);
 						{
-							JList list = new JList();
+							list = new JList();
 							scrollPane.setViewportView(list);
 						}
 					}
@@ -256,10 +268,16 @@ for (Solicitud soli : bolsa.RetornaSolicitudEmp(miEmpresa)) {
 		
 	}
 	
-	public void CargarSolicitantes(){
+	public void solicitantes(){
 		Solicitud miSolicitudc = bolsa.RetornarSolocitudCod(cod);
-		ArrayList<Solicitante> MisSolicitantesC= new ArrayList<Solicitante>();
-		MisSolicitantesC.addAll(bolsa.matcheo(miSolicitudc));
+		misSolicitantesC.addAll(bolsa.matcheo(miSolicitudc));
+	}
+	public void cargarSolicitante(){
+		for (Solicitante soli : misSolicitantesC) {
+			String nombre= soli.getCedula()+" "+soli.getNombres()+" "+soli.getApellidos();
+			model.addElement(nombre);
+		}
+		list.setModel(model);
 	}
 	
 }
