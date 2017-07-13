@@ -249,6 +249,7 @@ public class InsertarEmpresa extends JDialog {
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
+						String loco = null;
 					}
 				});
 				cancelButton.setActionCommand("Cancel");
