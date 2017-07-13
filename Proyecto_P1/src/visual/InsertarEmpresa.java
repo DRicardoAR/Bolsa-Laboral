@@ -234,7 +234,7 @@ public class InsertarEmpresa extends JDialog {
 							JOptionPane.showMessageDialog(null, "El Email Digitado no es valido, por favor digitelo otra ves");
 							txtEmail.setText(null);
 						}else {
-							String loco = null;
+							
 							JOptionPane.showMessageDialog(null, "Por favor completar todos los campos");
 						}
 						
