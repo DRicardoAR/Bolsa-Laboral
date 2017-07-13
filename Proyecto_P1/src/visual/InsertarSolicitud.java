@@ -13,6 +13,11 @@ import javax.swing.text.MaskFormatter;
 
 import logica.BolsaLaboral;
 import logica.Empresa;
+import logica.Solicitud;
+import logica.SolicitudObrero;
+import logica.SolicitudTecnico;
+import logica.SolicitudUniversitario;
+import logica.Universitario;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -71,13 +76,11 @@ public class InsertarSolicitud extends JDialog {
 	private JComboBox cbxArea;
 	private JComboBox cbxHabilidades;
 	private JSpinner spnObreroExperiencia;
-	
-	
-	
+
 	private ArrayList<String> misIdiomas = new ArrayList<>();
 	private ArrayList<String> misHabilidades = new ArrayList<>();
 	private String indexListaIdioma;
-	private String indexListaHabilidades;	
+	private String indexListaHabilidades;
 	private BolsaLaboral bolsa = BolsaLaboral.getInstance();
 	private Empresa empresa = null;
 
@@ -640,7 +643,7 @@ public class InsertarSolicitud extends JDialog {
 						if (rbtnPostGradoSi.isSelected()) {
 							posGrado = true;
 						}
-						String area = (String) cbxArea.getSelectedItem();
+						String area = (String) cbxArea.getSelectedItem();		
 						
 						
 						if(txtNombre.getText().isEmpty()){
@@ -666,7 +669,21 @@ public class InsertarSolicitud extends JDialog {
 							rbtnPostGradoNo.setSelected(true);
 						}
 						
-
+						
+						if(rbtnUniversitario.isSelected()){
+							SolicitudUniversitario nuevaSoli = new SolicitudUniversitario(vacantes, experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo, localidad, empresa, reubicacion, misIdiomas, categoriaLicencia, posGrado, carrera);
+							bolsa.insertSolicitud(nuevaSoli);
+						}
+						if(rbtnTecnico.isSelected()){
+							SolicitudTecnico nuevaSoli = new SolicitudTecnico(vacantes, experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo, localidad, empresa, reubicacion, misIdiomas, categoriaLicencia,area);
+							bolsa.insertSolicitud(nuevaSoli);
+						}
+						if(rbtnObrero.isSelected()){
+							SolicitudObrero nuevaSoli = new SolicitudObrero(vacantes, experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo, localidad, empresa, reubicacion, misIdiomas, categoriaLicencia,misHabilidades);
+							bolsa.insertSolicitud(nuevaSoli);
+						}
+						
+						
 						
 
 					}
