@@ -9,14 +9,23 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.UIManager;
+
 import java.awt.Color;
+
 import javax.swing.JFormattedTextField;
+
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import logica.BolsaLaboral;
+import logica.Empresa;
 
 public class InsertarEmpresa extends JDialog {
 
@@ -99,12 +108,12 @@ public class InsertarEmpresa extends JDialog {
 		
 		JLabel label_1 = new JLabel("*");
 		label_1.setForeground(Color.RED);
-		label_1.setBounds(61, 35, 11, 14);
+		label_1.setBounds(70, 35, 11, 14);
 		panel.add(label_1);
 		
 		JLabel label_2 = new JLabel("*");
 		label_2.setForeground(Color.RED);
-		label_2.setBounds(61, 84, 11, 14);
+		label_2.setBounds(70, 84, 11, 14);
 		panel.add(label_2);
 		
 		JLabel label_3 = new JLabel("*");
@@ -179,7 +188,7 @@ public class InsertarEmpresa extends JDialog {
 		
 		JLabel label_5 = new JLabel("*");
 		label_5.setForeground(Color.RED);
-		label_5.setBounds(61, 35, 11, 14);
+		label_5.setBounds(70, 35, 11, 14);
 		panel_1.add(label_5);
 		
 		JLabel label = new JLabel("Campos con * son obligatorios.");
@@ -193,12 +202,57 @@ public class InsertarEmpresa extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Registrar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						String rnc = ftxtRnc.getText();
+						String nombre = txtNombre.getText();
+						String tele = txtTel.getText();
+						String email = txtEmail.getText();
+						String provincia = cbxProvincia.getSelectedItem().toString();
+						/*String sector = txtSector.getText();
+						String noLocalidad =txtLocalidad.getText();
+						String cuidad = txtCuidad.getText();
+						String referencia = txtReferencia.getText();
+						String calle = txtCalle.getText();*/
+						String direcion = txtSector.getText()+" "+txtLocalidad.getText()+" "+txtCuidad.getText()+" "+txtReferencia.getText()+" "+txtCalle.getText();
+						Empresa miEmpresa = new Empresa(rnc, nombre, tele, email, provincia, direcion);
+						
+						if (BolsaLaboral.getInstance().validarEmail(email) && validarCamposObligatorios()){
+							//BolsaLaboral.getInstance().insertEmpresa(miEmpresa);
+							ftxtRnc.setText(null);
+							txtNombre.setText(null);
+							txtTel.setText(null);
+							txtEmail.setText(null);
+							cbxProvincia.setSelectedIndex(0);
+							txtSector.setText(null);
+							txtLocalidad.setText(null);
+							txtCuidad.setText(null);
+							txtReferencia.setText(null);
+							txtCalle.setText(null);
+							JOptionPane.showMessageDialog(null, "Empresa Agregada Satisfactoriamente");
+						}else if (!(BolsaLaboral.getInstance().validarEmail(email))){
+							JOptionPane.showMessageDialog(null, "El Email Digitado no es valido, por favor digitelo otra ves");
+							txtEmail.setText(null);
+						}else {
+							
+							JOptionPane.showMessageDialog(null, "Por favor completar todos los campos");
+						}
+						
+						
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+						
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
