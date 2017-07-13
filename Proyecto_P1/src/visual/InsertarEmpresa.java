@@ -234,6 +234,7 @@ public class InsertarEmpresa extends JDialog {
 							JOptionPane.showMessageDialog(null, "El Email Digitado no es valido, por favor digitelo otra ves");
 							txtEmail.setText(null);
 						}else {
+							
 							JOptionPane.showMessageDialog(null, "Por favor completar todos los campos");
 						}
 						
@@ -249,7 +250,7 @@ public class InsertarEmpresa extends JDialog {
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
-						String loco = null;
+						
 					}
 				});
 				cancelButton.setActionCommand("Cancel");
