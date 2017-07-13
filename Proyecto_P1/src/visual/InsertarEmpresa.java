@@ -29,6 +29,8 @@ public class InsertarEmpresa extends JDialog {
 	private JTextField txtCalle;
 	private JTextField txtReferencia;
 	private JTextField txtTel;
+	private JFormattedTextField ftxtRnc;
+	private JComboBox cbxProvincia;
 
 	/**
 	 * Launch the application.
@@ -86,7 +88,7 @@ public class InsertarEmpresa extends JDialog {
 		panel.add(txtEmail);
 		txtEmail.setColumns(10);
 		
-		JFormattedTextField ftxtRnc = new JFormattedTextField();
+		ftxtRnc = new JFormattedTextField();
 		ftxtRnc.setBounds(93, 32, 134, 20);
 		panel.add(ftxtRnc);
 		
@@ -125,7 +127,7 @@ public class InsertarEmpresa extends JDialog {
 		lblProvincia.setBounds(10, 35, 73, 14);
 		panel_1.add(lblProvincia);
 		
-		JComboBox cbxProvincia = new JComboBox();
+		cbxProvincia = new JComboBox();
 		cbxProvincia.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Azua ", "Bahoruco ", "Barahona ", "Dajab\u00F3n ", "Distrito Nacional ", "Duarte ", "El\u00EDas Pi\u00F1a ", "El Seibo ", "Espaillat ", "Hato Mayor ", "Independencia ", "La Altagracia ", "La Romana ", "La Vega ", "Mar\u00EDa Trinidad S\u00E1nchez ", "Monse\u00F1or Nouel ", "Montecristi ", "Monte Plata ", "Pedernales ", "Peravia ", "Puerto Plata ", "Hermanas Mirabal ", "Saman\u00E1 ", "S\u00E1nchez Ram\u00EDrez ", "San Crist\u00F3bal ", "San Jos\u00E9 de Ocoa ", "San Juan ", "San Pedro de Macor\u00EDs ", "Santiago ", "Santiago Rodr\u00EDguez ", "Santo Domingo ", "Valverde "}));
 		cbxProvincia.setBounds(93, 35, 134, 20);
 		panel_1.add(cbxProvincia);
@@ -202,4 +204,21 @@ public class InsertarEmpresa extends JDialog {
 			}
 		}
 	}
+	
+	public boolean validarCamposObligatorios(){
+		boolean aux = false;
+		if(txtNombre.getText().isEmpty()){
+			if(txtTel.getText().toString().isEmpty()){
+				if(ftxtRnc.getText().isEmpty())
+				{
+					if(cbxProvincia.getSelectedIndex()==-1){
+						if (txtEmail.getText().isEmpty()){
+							aux=true;
+						                                 }
+					                                        }
+				}
+			                                            }
+		                                   }
+		return aux;
+	                                                }
 }
