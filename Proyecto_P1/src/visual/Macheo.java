@@ -35,19 +35,15 @@ import java.awt.event.ActionEvent;
 public class Macheo extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtNombre;
-	private JTable table;
 	private static Object[] fila;
 	private static String[] columnNames = {"Código","Vacantes","Rango Edad","Localidad","Experiencia"};
 	private static DefaultTableModel modelo;
 	private static DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
 	private JFormattedTextField ftxtRNC;
-	private JFormattedTextField ftxtCodigoSolicitud;
-	
 	BolsaLaboral bolsa = BolsaLaboral.getInstance();
 	Empresa miEmpresa = null;
-	Solicitud miSolicitud = null;
-
+	private JTextField textField;
+	private JTable table;
 	/**
 	 * Launch the application.
 	 */
@@ -67,7 +63,7 @@ public class Macheo extends JDialog {
 	 */
 	public Macheo() throws ParseException {
 		setTitle("Macheo");
-		setBounds(100, 100, 868, 520);
+		setBounds(100, 100, 903, 535);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -79,123 +75,106 @@ public class Macheo extends JDialog {
 			panel.setLayout(null);
 			{
 				JPanel panel_1 = new JPanel();
-				panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Empresa", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-				panel_1.setBounds(10, 11, 505, 400);
+				panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+				panel_1.setBounds(10, 11, 846, 430);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
-					JLabel lblRnc = new JLabel("RNC:");
-					lblRnc.setBounds(10, 35, 46, 14);
-					panel_1.add(lblRnc);
-				}
-				{
-					JLabel lblNombre = new JLabel("Nombre:");
-					lblNombre.setBounds(10, 66, 59, 14);
-					panel_1.add(lblNombre);
-				}
-				{
-					MaskFormatter mascara = new MaskFormatter("##########");
-					ftxtRNC = new JFormattedTextField(mascara);
-					ftxtRNC.setBounds(63, 32, 140, 21);
-					panel_1.add(ftxtRNC);
-				}
-				{
-					txtNombre = new JTextField();
-					txtNombre.setEnabled(false);
-					txtNombre.setBounds(63, 63, 406, 21);
-					panel_1.add(txtNombre);
-					txtNombre.setColumns(10);
-				}
-				{
-					JLabel lblCodigo = new JLabel("C\u00F3digo Solicitud:");
-					lblCodigo.setBounds(238, 35, 102, 14);
-					panel_1.add(lblCodigo);
-				}
-				{
-					MaskFormatter mascara = new MaskFormatter("#####");
-					ftxtCodigoSolicitud = new JFormattedTextField(mascara);
-					ftxtCodigoSolicitud.setBounds(334, 32, 109, 21);
-					panel_1.add(ftxtCodigoSolicitud);
-				}
-				{
-					JButton btnNewButton = new JButton("");
-					btnNewButton.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							String RNC = ftxtRNC.getText();
-							if(bolsa.RetornarEmpresa(RNC) != null){
-								miEmpresa = bolsa.RetornarEmpresa(RNC);	
-								txtNombre.setText(miEmpresa.getNombre());	
-							}else{
-								JOptionPane.showMessageDialog(null, "No se encontro ninguna empresa","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-							}
-												
-												
-							
-						}
-					});
-					btnNewButton.setBounds(205, 32, 24, 21);
-					panel_1.add(btnNewButton);
-				}
-				{
-					JButton button = new JButton("");
-					button.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							String codigo = ftxtCodigoSolicitud.getText();
-							if(ftxtRNC.getText().isEmpty()){
-								JOptionPane.showMessageDialog(null, "Digite un RNC","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-							}else{
-								if(bolsa.RetornarSolocitud(codigo) != null){
-									miSolicitud = bolsa.RetornarSolocitud(codigo);
-									txtNombre.setText(miSolicitud.getEmpresa().getNombre());
-									loadTable(2);								
+					JPanel panel_2 = new JPanel();
+					panel_2.setLayout(null);
+					panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Empresa", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+					panel_2.setBounds(10, 11, 505, 400);
+					panel_1.add(panel_2);
+					{
+						JLabel label = new JLabel("RNC:");
+						label.setBounds(10, 35, 46, 14);
+						panel_2.add(label);
+					}
+					{
+						JLabel label = new JLabel("Nombre:");
+						label.setBounds(10, 66, 59, 14);
+						panel_2.add(label);
+					}
+					{
+						textField = new JTextField();
+						textField.setEnabled(false);
+						textField.setColumns(10);
+						textField.setBounds(63, 63, 406, 21);
+						panel_2.add(textField);
+					}
+					{
+						JLabel label = new JLabel("C\u00F3digo Solicitud:");
+						label.setBounds(238, 35, 102, 14);
+						panel_2.add(label);
+					}
+					{
+						JButton button = new JButton("");
+						button.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								if(bolsa.RetornarEmpresa(ftxtRNC.getText()) != null ){
+									miEmpresa = bolsa.RetornarEmpresa(ftxtRNC.getText());
+									
 								}else{
-									JOptionPane.showMessageDialog(null, "No se encontro ninguna solicitud","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+									JOptionPane.showMessageDialog(null, "No se encontro una empresa con el RNC digitado", "Información", JOptionPane.WARNING_MESSAGE, null);
 								}
 								
+								
 							}
-							
-							
-						}
-					});
-					button.setBounds(445, 32, 24, 21);
-					panel_1.add(button);
-				}
-				{
-					JScrollPane scrollPane = new JScrollPane();
-					scrollPane.setBounds(10, 118, 469, 230);
-					panel_1.add(scrollPane);
-					
-					table = new JTable();
-					modelo = new DefaultTableModel();							
-					loadTable(1);								
-					table.setModel(modelo);
-					scrollPane.setViewportView(table);
-					
-				}
-				{
-					JLabel lblSolicitudes = new JLabel("Solicitudes");
-					lblSolicitudes.setBounds(202, 93, 88, 14);
-					panel_1.add(lblSolicitudes);
-				}
-				{
-					JButton btnNewButton_1 = new JButton("Ver Solicitantes");
-					btnNewButton_1.setBounds(345, 361, 134, 23);
-					panel_1.add(btnNewButton_1);
-				}
-			}
-			{
-				JPanel panel_1 = new JPanel();
-				panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Solicitantes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panel_1.setBounds(523, 11, 311, 400);
-				panel.add(panel_1);
-				panel_1.setLayout(null);
-				{
-					JScrollPane scrollPane = new JScrollPane();
-					scrollPane.setBounds(10, 32, 291, 357);
-					panel_1.add(scrollPane);
+						});
+						button.setBounds(205, 32, 24, 21);
+						panel_2.add(button);
+					}
 					{
-						JList list = new JList();
-						scrollPane.setViewportView(list);
+						JScrollPane scrollPane = new JScrollPane();
+						scrollPane.setBounds(10, 118, 469, 230);
+						panel_2.add(scrollPane);
+						{
+							table = new JTable();
+							modelo = new DefaultTableModel();
+													
+							
+							table.setModel(modelo);
+							loadTable();		
+							scrollPane.setViewportView(table);
+						}
+					}
+					{
+						JLabel label = new JLabel("Solicitudes");
+						label.setBounds(202, 93, 88, 14);
+						panel_2.add(label);
+					}
+					{
+						JButton button = new JButton("Candidatos");
+						button.setBounds(377, 361, 102, 23);
+						panel_2.add(button);
+					}
+					{
+						MaskFormatter mascara = new MaskFormatter("##########");
+						 ftxtRNC = new JFormattedTextField(mascara);
+						ftxtRNC.setBounds(63, 32, 140, 21);
+						panel_2.add(ftxtRNC);
+					}
+					{
+						JFormattedTextField formattedTextField = new JFormattedTextField();
+						formattedTextField.setEnabled(false);
+						formattedTextField.setBounds(335, 32, 134, 21);
+						panel_2.add(formattedTextField);
+					}
+				}
+				{
+					JPanel panel_2 = new JPanel();
+					panel_2.setLayout(null);
+					panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Solicitantes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+					panel_2.setBounds(525, 11, 311, 400);
+					panel_1.add(panel_2);
+					{
+						JScrollPane scrollPane = new JScrollPane();
+						scrollPane.setBounds(10, 32, 291, 357);
+						panel_2.add(scrollPane);
+						{
+							JList list = new JList();
+							scrollPane.setViewportView(list);
+						}
 					}
 				}
 			}
@@ -219,38 +198,10 @@ public class Macheo extends JDialog {
 		}
 	}
 
-	private void loadTable(int option) {
+	private void loadTable() {
 		modelo.setColumnIdentifiers(columnNames);	
 		modelo.setRowCount(0);
-		fila = new Object[modelo.getColumnCount()];	
-		
-		if(option == 1){
-			
-			/*
-			 * 
-			 ///PROGRAR TABLA DADO EL RNC DE LA EMPRSA
-			  * 
-			 */
-			  
-			
-		}
-		
-		
-		if(option == 2){
-			fila[0] = miSolicitud.getCodigo();
-			fila[1] = miSolicitud.getCantVacantes();
-			String edadmin = Integer.toString(miSolicitud.getEdadMin());
-			String edadMax = Integer.toString(miSolicitud.getEdadMax());
-			fila[2] = edadmin+" - "+edadMax;
-			fila[3] = miSolicitud.getLocalidad();
-			fila[4] = miSolicitud.getAnnosExperiencia();
-			modelo.addRow(fila);
-			
-		}
-		
-		table.setModel(modelo);		
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getTableHeader().setReorderingAllowed(false);
+		fila = new Object[modelo.getColumnCount()];
 		TableColumnModel columnModel = table.getColumnModel();	
 		centrar.setHorizontalAlignment(SwingConstants.CENTER); 
 		
