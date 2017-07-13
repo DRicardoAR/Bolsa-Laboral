@@ -3,6 +3,7 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,10 +17,13 @@ import javax.swing.text.MaskFormatter;
 
 import logica.BolsaLaboral;
 import logica.Empresa;
+import logica.Solicitante;
 import logica.Solicitud;
 
 import javax.swing.border.EtchedBorder;
+
 import java.awt.Color;
+
 import javax.swing.JLabel;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
@@ -31,6 +35,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Macheo extends JDialog {
 
@@ -44,6 +50,8 @@ public class Macheo extends JDialog {
 	Empresa miEmpresa = null;
 	private JTextField txtNombreEmpresa;
 	private JTable table;
+	private String cod;
+	private JButton btnCandidatos;
 	/**
 	 * Launch the application.
 	 */
@@ -126,6 +134,20 @@ public class Macheo extends JDialog {
 					}
 					{
 						JScrollPane scrollPane = new JScrollPane();
+						scrollPane.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent arg0) {
+								int aux = table.getSelectedRow();
+								if(aux > -1){
+									btnCandidatos.setEnabled(true);
+									cod= (String) table.getModel().getValueAt(aux, 0);
+								}else{
+									 String cod="";
+									btnCandidatos.setEnabled(false);
+								}
+								
+							}
+						});
 						scrollPane.setBounds(10, 118, 469, 230);
 						panel_2.add(scrollPane);
 						{
@@ -144,9 +166,10 @@ public class Macheo extends JDialog {
 						panel_2.add(label);
 					}
 					{
-						JButton button = new JButton("Candidatos");
-						button.setBounds(377, 361, 102, 23);
-						panel_2.add(button);
+						btnCandidatos = new JButton("Candidatos");
+						btnCandidatos.setEnabled(false);
+						btnCandidatos.setBounds(377, 361, 102, 23);
+						panel_2.add(btnCandidatos);
 					}
 					{
 						MaskFormatter mascara = new MaskFormatter("##########");
@@ -231,6 +254,12 @@ for (Solicitud soli : bolsa.RetornaSolicitudEmp(miEmpresa)) {
 		columnModel.getColumn(3).setPreferredWidth(120);
 		columnModel.getColumn(4).setPreferredWidth(80);
 		
+	}
+	
+	public void CargarSolicitantes(){
+		Solicitud miSolicitudc = bolsa.RetornarSolocitudCod(cod);
+		ArrayList<Solicitante> MisSolicitantesC= new ArrayList<Solicitante>();
+		MisSolicitantesC.addAll(bolsa.matcheo(miSolicitudc));
 	}
 	
 }
