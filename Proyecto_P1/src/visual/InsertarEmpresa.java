@@ -40,7 +40,6 @@ public class InsertarEmpresa extends JDialog {
 	private JTextField txtTel;
 	private JFormattedTextField ftxtRnc;
 	private JComboBox cbxProvincia;
-
 	/**
 	 * Launch the application.
 	 */
