@@ -352,5 +352,28 @@ public class BolsaLaboral implements Serializable {
 		    	   return false;
 		       }
 		}
+		//Retornar una empresa dado un RNC
+		public Empresa RetornarEmpresa(String RNC){
+			Empresa miEmpresa = null;
+			for (Empresa empresa : misEmpresas) {
+				if(empresa.getRNC().equalsIgnoreCase(RNC)){
+					miEmpresa = empresa;
+				}				
+			}
+			
+			return miEmpresa;
+		}
+		
+		//Retornar Solicotud dado su codigo
+		public Solicitud RetornarSolocitud(String codigo){
+			Solicitud miSolicitud = null;
+			for (Solicitud solicitud : misSolicitudes) {
+				if(solicitud.getCodigo().equalsIgnoreCase(codigo)){
+					miSolicitud = solicitud;
+				}
+				
+			}
+			return miSolicitud;
+		}
 	
 }

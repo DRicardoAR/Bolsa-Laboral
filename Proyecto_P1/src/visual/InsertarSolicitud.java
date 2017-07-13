@@ -11,6 +11,9 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
+import logica.BolsaLaboral;
+import logica.Empresa;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JFormattedTextField;
@@ -68,10 +71,15 @@ public class InsertarSolicitud extends JDialog {
 	private JComboBox cbxArea;
 	private JComboBox cbxHabilidades;
 	private JSpinner spnObreroExperiencia;
+	
+	
+	
 	private ArrayList<String> misIdiomas = new ArrayList<>();
 	private ArrayList<String> misHabilidades = new ArrayList<>();
 	private String indexListaIdioma;
-	private String indexListaHabilidades;
+	private String indexListaHabilidades;	
+	private BolsaLaboral bolsa = BolsaLaboral.getInstance();
+	private Empresa empresa = null;
 
 	/**
 	 * Launch the application.
@@ -148,6 +156,21 @@ public class InsertarSolicitud extends JDialog {
 			}
 
 			JButton btnNewButton = new JButton("");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String RNC = ftxtRNC.getText();
+					if(bolsa.RetornarEmpresa(RNC) != null){
+						empresa = bolsa.RetornarEmpresa(RNC);					
+						txtNombre.setText(empresa.getNombre());
+					}else{
+						JOptionPane.showMessageDialog(null, "No se encontro ningun empresa", "ATENCIÓN",
+								JOptionPane.ERROR_MESSAGE, null);
+						
+					}
+					
+					
+				}
+			});
 			btnNewButton.setBounds(204, 28, 27, 21);
 			panelEmpresa.add(btnNewButton);
 

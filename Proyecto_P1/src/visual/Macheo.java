@@ -2,6 +2,7 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -11,6 +12,12 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.text.MaskFormatter;
+
+import logica.BolsaLaboral;
+import logica.Empresa;
+import logica.Solicitud;
+
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -20,16 +27,26 @@ import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Macheo extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
+	private JTextField txtNombre;
 	private JTable table;
 	private static Object[] fila;
 	private static String[] columnNames = {"Código","Vacantes","Rango Edad","Localidad","Experiencia"};
 	private static DefaultTableModel modelo;
 	private static DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
+	private JFormattedTextField ftxtRNC;
+	private JFormattedTextField ftxtCodigoSolicitud;
+	
+	BolsaLaboral bolsa = BolsaLaboral.getInstance();
+	Empresa miEmpresa = null;
+	Solicitud miSolicitud = null;
 
 	/**
 	 * Launch the application.
@@ -46,8 +63,9 @@ public class Macheo extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @throws ParseException 
 	 */
-	public Macheo() {
+	public Macheo() throws ParseException {
 		setTitle("Macheo");
 		setBounds(100, 100, 868, 520);
 		setLocationRelativeTo(null);
@@ -76,16 +94,17 @@ public class Macheo extends JDialog {
 					panel_1.add(lblNombre);
 				}
 				{
-					JFormattedTextField formattedTextField = new JFormattedTextField();
-					formattedTextField.setBounds(63, 32, 140, 21);
-					panel_1.add(formattedTextField);
+					MaskFormatter mascara = new MaskFormatter("##########");
+					ftxtRNC = new JFormattedTextField(mascara);
+					ftxtRNC.setBounds(63, 32, 140, 21);
+					panel_1.add(ftxtRNC);
 				}
 				{
-					textField = new JTextField();
-					textField.setEnabled(false);
-					textField.setBounds(63, 63, 406, 21);
-					panel_1.add(textField);
-					textField.setColumns(10);
+					txtNombre = new JTextField();
+					txtNombre.setEnabled(false);
+					txtNombre.setBounds(63, 63, 406, 21);
+					panel_1.add(txtNombre);
+					txtNombre.setColumns(10);
 				}
 				{
 					JLabel lblCodigo = new JLabel("C\u00F3digo Solicitud:");
@@ -93,17 +112,51 @@ public class Macheo extends JDialog {
 					panel_1.add(lblCodigo);
 				}
 				{
-					JFormattedTextField formattedTextField = new JFormattedTextField();
-					formattedTextField.setBounds(334, 32, 109, 21);
-					panel_1.add(formattedTextField);
+					MaskFormatter mascara = new MaskFormatter("#####");
+					ftxtCodigoSolicitud = new JFormattedTextField(mascara);
+					ftxtCodigoSolicitud.setBounds(334, 32, 109, 21);
+					panel_1.add(ftxtCodigoSolicitud);
 				}
 				{
 					JButton btnNewButton = new JButton("");
+					btnNewButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String RNC = ftxtRNC.getText();
+							if(bolsa.RetornarEmpresa(RNC) != null){
+								miEmpresa = bolsa.RetornarEmpresa(RNC);	
+								txtNombre.setText(miEmpresa.getNombre());	
+							}else{
+								JOptionPane.showMessageDialog(null, "No se encontro ninguna empresa","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+							}
+												
+												
+							
+						}
+					});
 					btnNewButton.setBounds(205, 32, 24, 21);
 					panel_1.add(btnNewButton);
 				}
 				{
 					JButton button = new JButton("");
+					button.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String codigo = ftxtCodigoSolicitud.getText();
+							if(ftxtRNC.getText().isEmpty()){
+								JOptionPane.showMessageDialog(null, "Digite un RNC","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+							}else{
+								if(bolsa.RetornarSolocitud(codigo) != null){
+									miSolicitud = bolsa.RetornarSolocitud(codigo);
+									txtNombre.setText(miSolicitud.getEmpresa().getNombre());
+									loadTable(2);								
+								}else{
+									JOptionPane.showMessageDialog(null, "No se encontro ninguna solicitud","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+								}
+								
+							}
+							
+							
+						}
+					});
 					button.setBounds(445, 32, 24, 21);
 					panel_1.add(button);
 				}
@@ -114,7 +167,7 @@ public class Macheo extends JDialog {
 					
 					table = new JTable();
 					modelo = new DefaultTableModel();							
-					loadTable();								
+					loadTable(1);								
 					table.setModel(modelo);
 					scrollPane.setViewportView(table);
 					
@@ -166,15 +219,34 @@ public class Macheo extends JDialog {
 		}
 	}
 
-	private void loadTable() {
+	private void loadTable(int option) {
 		modelo.setColumnIdentifiers(columnNames);	
 		modelo.setRowCount(0);
 		fila = new Object[modelo.getColumnCount()];	
 		
-		/*
-		 * 
-		 * 
-		 * */
+		if(option == 1){
+			
+			/*
+			 * 
+			 ///PROGRAR TABLA DADO EL RNC DE LA EMPRSA
+			  * 
+			 */
+			  
+			
+		}
+		
+		
+		if(option == 2){
+			fila[0] = miSolicitud.getCodigo();
+			fila[1] = miSolicitud.getCantVacantes();
+			String edadmin = Integer.toString(miSolicitud.getEdadMin());
+			String edadMax = Integer.toString(miSolicitud.getEdadMax());
+			fila[2] = edadmin+" - "+edadMax;
+			fila[3] = miSolicitud.getLocalidad();
+			fila[4] = miSolicitud.getAnnosExperiencia();
+			modelo.addRow(fila);
+			
+		}
 		
 		table.setModel(modelo);		
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
