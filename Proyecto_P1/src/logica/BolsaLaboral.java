@@ -375,5 +375,17 @@ public class BolsaLaboral implements Serializable {
 			}
 			return miSolicitud;
 		}
-	
+		
+		//Retorna todas las solicitudes de una empresa
+		
+		public ArrayList<Solicitud> RetornaSolicitud(Empresa emp){
+			ArrayList<Solicitud> misSolicitudes = new ArrayList<Solicitud>();
+			for (Solicitud solicitud : misSolicitudes) {
+				if(solicitud.getEmpresa().getNombre().equalsIgnoreCase(emp.getNombre())){
+					misSolicitudes.add(solicitud);
+				}
+				
+			}
+			return misSolicitudes;
+		}	
 }

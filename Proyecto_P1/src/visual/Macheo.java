@@ -202,7 +202,9 @@ public class Macheo extends JDialog {
 		modelo.setColumnIdentifiers(columnNames);	
 		modelo.setRowCount(0);
 		fila = new Object[modelo.getColumnCount()];
-		
+		for (Empresa miEmpresa : BolsaLaboral.getInstance().getMisEmpresas()) {
+			
+		}
 		TableColumnModel columnModel = table.getColumnModel();	
 		centrar.setHorizontalAlignment(SwingConstants.CENTER); 
 		
