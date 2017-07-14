@@ -381,7 +381,7 @@ public class BolsaLaboral implements Serializable {
 		public ArrayList<Solicitud> RetornaSolicitudEmp(Empresa emp){
 			ArrayList<Solicitud> misSolicitudes = new ArrayList<Solicitud>();
 			for (Solicitud solicitud : misSolicitudes) {
-				if(solicitud.getEmpresa().getNombre().equalsIgnoreCase(emp.getNombre())){
+				if(solicitud.getEmpresa().getRNC().equalsIgnoreCase(emp.getRNC())){
 					misSolicitudes.add(solicitud);
 				}
 				
