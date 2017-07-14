@@ -3,6 +3,7 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -20,6 +21,8 @@ import javax.swing.text.MaskFormatter;
 
 import logica.BolsaLaboral;
 import logica.Empresa;
+import logica.Solicitud;
+import logica.SolicitudUniversitario;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JScrollPane;
@@ -124,10 +127,17 @@ public class ListarSolicitud extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						Empresa miEmpresa = bolsa.RetornarEmpresa(ftxtRNCEmpresa.getText());
 						if (miEmpresa != null) {
+							ArrayList<Solicitud> solicitudes = bolsa.RetornaSolicitudEmp(miEmpresa);
+							 loadTable(4, solicitudes);
+							
+							}
+						
+							
 							
 							
 
-						}
+					
+					
 					}
 				});
 				button.setBounds(430, 8, 27, 21);
@@ -193,25 +203,28 @@ public class ListarSolicitud extends JDialog {
 		}
 	}
 
-	private static void loadTable(int indexSeleccion) {
+	private static void loadTable(int indexSeleccion,ArrayList<Solicitud> solicitudes) {
 		if (indexSeleccion == 0) {
-			loadTableAll(indexSeleccion);
+			loadTableAll(indexSeleccion,null);
 		}
 		if (indexSeleccion == 1) {
-			loadTableAll(indexSeleccion);
+			loadTableAll(indexSeleccion,null);
 		}
 		if (indexSeleccion == 2) {
-			loadTableAll(indexSeleccion);
+			loadTableAll(indexSeleccion,null);
 			// loadTecnico();
 		}
 		if (indexSeleccion == 3) {
-			loadTableAll(indexSeleccion);
+			loadTableAll(indexSeleccion,null);
 			// loadObrero();
+		}
+		if(indexSeleccion ==4){
+			loadTableAll(indexSeleccion, solicitudes);
 		}
 
 	}
 
-	private static void loadTableAll(int indexSelection) {
+	private static void loadTableAll(int indexSelection,ArrayList<Solicitud> solicitudes) {
 		String[] columnNames = title(indexSelection);
 		modelo.setColumnIdentifiers(columnNames);
 		modelo.setRowCount(0);
@@ -234,6 +247,11 @@ public class ListarSolicitud extends JDialog {
 			 */
 		}
 		if (indexSelection == 3) {
+			/*
+			 * Codigo aqui
+			 */
+		}
+		if (indexSelection == 4) {
 			/*
 			 * Codigo aqui
 			 */
