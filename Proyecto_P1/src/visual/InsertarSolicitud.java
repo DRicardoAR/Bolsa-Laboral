@@ -82,7 +82,7 @@ public class InsertarSolicitud extends JDialog {
 	private String indexListaIdioma;
 	private String indexListaHabilidades;
 	private BolsaLaboral bolsa = BolsaLaboral.getInstance();
-	private Empresa empresa ;
+	private Empresa empresa;
 
 	/**
 	 * Launch the application.
@@ -104,7 +104,7 @@ public class InsertarSolicitud extends JDialog {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
-				
+
 				if (rbtnUniversitario.isSelected()) {
 					rbtnUniversitario.setSelected(true);
 					panelTecnico.setVisible(false);
@@ -161,22 +161,19 @@ public class InsertarSolicitud extends JDialog {
 			JButton btnNewButton = new JButton("");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
-					
-					String RNC = ftxtRNC.getText();
-					
 
-					empresa = bolsa.RetornarEmpresa(RNC);	
-					
-					if(empresa != null){										
+					String RNC = ftxtRNC.getText();
+
+					empresa = bolsa.RetornarEmpresa(RNC);
+
+					if (empresa != null) {
 						txtNombre.setText(empresa.getNombre());
-					}else{
+					} else {
 						JOptionPane.showMessageDialog(null, "No se encontro ningun empresa", "ATENCIÓN",
 								JOptionPane.ERROR_MESSAGE, null);
-						
+
 					}
-					
-					
+
 				}
 			});
 			btnNewButton.setBounds(204, 28, 27, 21);
@@ -204,7 +201,8 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblNewLabel_1);
 
 			cbxContrato = new JComboBox();
-			cbxContrato.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Largo Plazo", "Corto Plazo", "Temporal"}));
+			cbxContrato.setModel(new DefaultComboBoxModel(
+					new String[] { "< Seleccione >", "Largo Plazo", "Corto Plazo", "Temporal" }));
 			cbxContrato.setBounds(81, 24, 149, 21);
 			PanelGeneral.add(cbxContrato);
 
@@ -273,7 +271,14 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblCategoriaLic);
 
 			cbxLocalidad = new JComboBox();
-			cbxLocalidad.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Azua ", "Bahoruco ", "Barahona ", "Dajab\u00F3n ", "Distrito Nacional ", "Duarte ", "El\u00EDas Pi\u00F1a ", "El Seibo ", "Espaillat ", "Hato Mayor ", "Independencia ", "La Altagracia ", "La Romana ", "La Vega ", "Mar\u00EDa Trinidad S\u00E1nchez ", "Monse\u00F1or Nouel ", "Montecristi ", "Monte Plata ", "Pedernales ", "Peravia ", "Puerto Plata ", "Hermanas Mirabal ", "Saman\u00E1 ", "S\u00E1nchez Ram\u00EDrez ", "San Crist\u00F3bal ", "San Jos\u00E9 de Ocoa ", "San Juan ", "San Pedro de Macor\u00EDs ", "Santiago ", "Santiago Rodr\u00EDguez ", "Santo Domingo ", "Valverde "}));
+			cbxLocalidad.setModel(new DefaultComboBoxModel(new String[] { "< Seleccione >", "Azua ", "Bahoruco ",
+					"Barahona ", "Dajab\u00F3n ", "Distrito Nacional ", "Duarte ", "El\u00EDas Pi\u00F1a ", "El Seibo ",
+					"Espaillat ", "Hato Mayor ", "Independencia ", "La Altagracia ", "La Romana ", "La Vega ",
+					"Mar\u00EDa Trinidad S\u00E1nchez ", "Monse\u00F1or Nouel ", "Montecristi ", "Monte Plata ",
+					"Pedernales ", "Peravia ", "Puerto Plata ", "Hermanas Mirabal ", "Saman\u00E1 ",
+					"S\u00E1nchez Ram\u00EDrez ", "San Crist\u00F3bal ", "San Jos\u00E9 de Ocoa ", "San Juan ",
+					"San Pedro de Macor\u00EDs ", "Santiago ", "Santiago Rodr\u00EDguez ", "Santo Domingo ",
+					"Valverde " }));
 			cbxLocalidad.setBounds(338, 65, 160, 21);
 			PanelGeneral.add(cbxLocalidad);
 
@@ -356,7 +361,17 @@ public class InsertarSolicitud extends JDialog {
 					cargarIdioma();
 				}
 			});
-			cbxIdioma.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Afrikaans", "Alban\u00E9s", "Alem\u00E1n", "Amharico", "Arabe", "Armenio", "Bengali", "Bieloruso", "Birman\u00E9s", "Bulgaro", "Catalan", "Checo", "Chino", "Coreano", "Croata", "Dan\u00E9s", "Dari", "Dzongkha", "Escoc\u00E9s", "Eslovaco", "Esloveniano", "Espa\u00F1ol", "Esperanto", "Estoniano", "Faroese", "Farsi", "Finland\u00E9s", "Franc\u00E9s", "Gaelico", "Galese", "Gallego", "Griego", "Hebreo", "Hindi", "Holand\u00E9s", "Hungaro", "Ingl\u00E9s", "Indonesio", "Inuktitut (Eskimo)", "Islandico", "Italiano", "Japon\u00E9s", "Khmer", "Kurdo", "Lao", "Laponico", "Latviano", "Lituano", "Macedonio", "Malay\u00E9s", "Malt\u00E9s", "Nepali", "Noruego", "Pashto", "Polaco", "Portugu\u00E9s", "Rumano", "Ruso", "Serbio", "Somali", "Suahili", "Sueco", "Tagalog-Filipino", "Tajik", "Tamil", "Tailand\u00E9s", "Tibetano", "Tigrinia", "Tongan\u00E9s", "Turco", "Turkmenistano", "Ucraniano", "Urdu", "Uzbekistano", "Vasco", "Vietnam\u00E9s"}));
+			cbxIdioma.setModel(new DefaultComboBoxModel(new String[] { "< Seleccione >", "Afrikaans", "Alban\u00E9s",
+					"Alem\u00E1n", "Amharico", "Arabe", "Armenio", "Bengali", "Bieloruso", "Birman\u00E9s", "Bulgaro",
+					"Catalan", "Checo", "Chino", "Coreano", "Croata", "Dan\u00E9s", "Dari", "Dzongkha", "Escoc\u00E9s",
+					"Eslovaco", "Esloveniano", "Espa\u00F1ol", "Esperanto", "Estoniano", "Faroese", "Farsi",
+					"Finland\u00E9s", "Franc\u00E9s", "Gaelico", "Galese", "Gallego", "Griego", "Hebreo", "Hindi",
+					"Holand\u00E9s", "Hungaro", "Ingl\u00E9s", "Indonesio", "Inuktitut (Eskimo)", "Islandico",
+					"Italiano", "Japon\u00E9s", "Khmer", "Kurdo", "Lao", "Laponico", "Latviano", "Lituano", "Macedonio",
+					"Malay\u00E9s", "Malt\u00E9s", "Nepali", "Noruego", "Pashto", "Polaco", "Portugu\u00E9s", "Rumano",
+					"Ruso", "Serbio", "Somali", "Suahili", "Sueco", "Tagalog-Filipino", "Tajik", "Tamil",
+					"Tailand\u00E9s", "Tibetano", "Tigrinia", "Tongan\u00E9s", "Turco", "Turkmenistano", "Ucraniano",
+					"Urdu", "Uzbekistano", "Vasco", "Vietnam\u00E9s" }));
 			cbxIdioma.setBounds(68, 28, 132, 21);
 			panelIdioma.add(cbxIdioma);
 
@@ -649,60 +664,68 @@ public class InsertarSolicitud extends JDialog {
 						if (rbtnPostGradoSi.isSelected()) {
 							posGrado = true;
 						}
-						String area = (String) cbxArea.getSelectedItem();		
-						
-						
-						if(txtNombre.getText().isEmpty()){
-							JOptionPane.showMessageDialog(null, "Se debe ingresar la empresa que solicita", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-						}else if(cbxContrato.getSelectedIndex() == 0 || cbxLocalidad.getSelectedIndex() ==0){
-							JOptionPane.showMessageDialog(null, "No deje campos vacios", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+						String area = (String) cbxArea.getSelectedItem();
 
-						}else if(rbtnVehiculoSi.isSelected() && cbxLicencia.getSelectedIndex() == 0){
-							JOptionPane.showMessageDialog(null, "Selecciona la categoria de la Licencia de conducir","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-	
-						}else if(!rbtnTecnico.isSelected() && !rbtnUniversitario.isSelected() && !rbtnObrero.isSelected()){
-							JOptionPane.showMessageDialog(null, "Selecciona el tipo de empleado que se necesita","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-							
-						}else if(panelUniversitario.isVisible() && cbxCarrera.getSelectedIndex() ==0){
-							JOptionPane.showMessageDialog(null, "Selecciona la carrera del universitario","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-							
-						}else if(panelTecnico.isVisible() && cbxArea.getSelectedIndex() ==0){
-							JOptionPane.showMessageDialog(null, "Selecciona el area del tecnico","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-						}else if(panelObrero.isVisible() && misHabilidades.size() == 0){
-							JOptionPane.showMessageDialog(null, "Selecciona las habilidades del obrero","ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-							
-						}else if(panelUniversitario.isVisible() && !rbtnPostGradoSi.isSelected() && !rbtnPostGradoNo.isSelected()){
+						if (txtNombre.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Se debe ingresar la empresa que solicita", "ATENCIÓN",
+									JOptionPane.WARNING_MESSAGE, null);
+						} else if (cbxContrato.getSelectedIndex() == 0 || cbxLocalidad.getSelectedIndex() == 0) {
+							JOptionPane.showMessageDialog(null, "No deje campos vacios", "ATENCIÓN",
+									JOptionPane.WARNING_MESSAGE, null);
+
+						} else if (rbtnVehiculoSi.isSelected() && cbxLicencia.getSelectedIndex() == 0) {
+							JOptionPane.showMessageDialog(null, "Selecciona la categoria de la Licencia de conducir",
+									"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
+
+						} else if (!rbtnTecnico.isSelected() && !rbtnUniversitario.isSelected()
+								&& !rbtnObrero.isSelected()) {
+							JOptionPane.showMessageDialog(null, "Selecciona el tipo de empleado que se necesita",
+									"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
+
+						} else if (panelUniversitario.isVisible() && cbxCarrera.getSelectedIndex() == 0) {
+							JOptionPane.showMessageDialog(null, "Selecciona la carrera del universitario", "ATENCIÓN",
+									JOptionPane.WARNING_MESSAGE, null);
+
+						} else if (panelTecnico.isVisible() && cbxArea.getSelectedIndex() == 0) {
+							JOptionPane.showMessageDialog(null, "Selecciona el area del tecnico", "ATENCIÓN",
+									JOptionPane.WARNING_MESSAGE, null);
+						} else if (panelObrero.isVisible() && misHabilidades.size() == 0) {
+							JOptionPane.showMessageDialog(null, "Selecciona las habilidades del obrero", "ATENCIÓN",
+									JOptionPane.WARNING_MESSAGE, null);
+
+						} else if (panelUniversitario.isVisible() && !rbtnPostGradoSi.isSelected()
+								&& !rbtnPostGradoNo.isSelected()) {
 							rbtnPostGradoNo.setSelected(true);
-						}else{
-							if(rbtnUniversitario.isSelected()){
-								SolicitudUniversitario nuevaSoli = new SolicitudUniversitario(vacantes, experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo, localidad, empresa, reubicacion, misIdiomas, categoriaLicencia, posGrado, carrera);
+						} else {
+							if (rbtnUniversitario.isSelected()) {
+								SolicitudUniversitario nuevaSoli = new SolicitudUniversitario(vacantes,
+										experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo, localidad,
+										empresa, reubicacion, misIdiomas, categoriaLicencia, posGrado, carrera);
 								bolsa.insertSolicitud(nuevaSoli);
-								JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente", "Información", JOptionPane.INFORMATION_MESSAGE, null);
+								JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
+										"Información", JOptionPane.INFORMATION_MESSAGE, null);
 								clean(1);
 							}
-							if(rbtnTecnico.isSelected()){
-								SolicitudTecnico nuevaSoli = new SolicitudTecnico(vacantes, experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo, localidad, empresa, reubicacion, misIdiomas, categoriaLicencia,area);
+							if (rbtnTecnico.isSelected()) {
+								SolicitudTecnico nuevaSoli = new SolicitudTecnico(vacantes, experienciaUniversitario,
+										edadMaxima, edadMinima, Contrato, vehiculo, localidad, empresa, reubicacion,
+										misIdiomas, categoriaLicencia, area);
 								bolsa.insertSolicitud(nuevaSoli);
-								JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente", "Información", JOptionPane.INFORMATION_MESSAGE, null);
+								JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
+										"Información", JOptionPane.INFORMATION_MESSAGE, null);
 								clean(2);
 							}
-							if(rbtnObrero.isSelected()){
-								SolicitudObrero nuevaSoli = new SolicitudObrero(vacantes, experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo, localidad, empresa, reubicacion, misIdiomas, categoriaLicencia,misHabilidades);
+							if (rbtnObrero.isSelected()) {
+								SolicitudObrero nuevaSoli = new SolicitudObrero(vacantes, experienciaUniversitario,
+										edadMaxima, edadMinima, Contrato, vehiculo, localidad, empresa, reubicacion,
+										misIdiomas, categoriaLicencia, misHabilidades);
 								bolsa.insertSolicitud(nuevaSoli);
-								JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente", "Información", JOptionPane.INFORMATION_MESSAGE, null);
+								JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
+										"Información", JOptionPane.INFORMATION_MESSAGE, null);
 								clean(3);
 							}
-	
+
 						}
-						
-						
-						
-						
-					
-					
-						
-						
-						
 
 					}
 
@@ -719,26 +742,24 @@ public class InsertarSolicitud extends JDialog {
 						spnEdadMaxima.setValue(19);
 						misIdiomas.removeAll(misIdiomas);
 						cargarIdioma();
-						if(i==1){
+						if (i == 1) {
 							rbtnUniversitario.setSelected(false);
 							spnUniversitarioExperiencia.setValue(0);
 							cbxCarrera.setSelectedIndex(0);
 							rbtnPostGradoNo.setSelected(false);
-							rbtnPostGradoSi.setSelected(false);	
+							rbtnPostGradoSi.setSelected(false);
 						}
-						if(i==2){
+						if (i == 2) {
 							rbtnTecnico.setSelected(false);
 							spnTecnicoExperiencia.setValue(0);
 							cbxArea.setSelectedItem(0);
 						}
-						if(i==3){
+						if (i == 3) {
 							rbtnObrero.setSelected(false);
 							misHabilidades.removeAll(misHabilidades);
 							cargarHabilidades();
 						}
-						
-						
-						
+
 					}
 				});
 				okButton.setActionCommand("OK");
