@@ -114,6 +114,14 @@ public class Principal extends JFrame {
 		});
 		mnEmpresa.add(mntmListarEmpresas);
 		
+		JMenuItem mntmListarSolicitudes = new JMenuItem("Listar Solicitudes");
+		mntmListarSolicitudes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		mnEmpresa.add(mntmListarSolicitudes);
+		
 		JMenu mnMacheo = new JMenu("Macheo");
 		menuBar.add(mnMacheo);
 		
