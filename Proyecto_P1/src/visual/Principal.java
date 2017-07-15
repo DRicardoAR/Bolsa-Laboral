@@ -139,7 +139,6 @@ public class Principal extends JFrame {
 					macheo.setLocationRelativeTo(null);
 					macheo.setVisible(true);
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				

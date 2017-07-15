@@ -120,8 +120,6 @@ public class ListarSolicitante extends JDialog {
 						btnModificar.setEnabled(true);
 						btnEliminar.setEnabled(true);
 						 cedulaCliente =(String)table.getModel().getValueAt(aux, 0);
-						 
-
 					} else {
 						btnModificar.setEnabled(false);
 						btnEliminar.setEnabled(false);
@@ -215,11 +213,11 @@ public static void loadTabla(String seleccion){
 					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 					table.getTableHeader().setReorderingAllowed(false);
 					TableColumnModel modeloColumna = table.getColumnModel();
-					modeloColumna.getColumn(0).setPreferredWidth(100);
-					modeloColumna.getColumn(1).setPreferredWidth(240);
+					modeloColumna.getColumn(0).setPreferredWidth(110);
+					modeloColumna.getColumn(1).setPreferredWidth(250);
 					modeloColumna.getColumn(2).setPreferredWidth(120);
 					modeloColumna.getColumn(3).setPreferredWidth(160);
-					modeloColumna.getColumn(4).setPreferredWidth(134);
+					modeloColumna.getColumn(4).setPreferredWidth(140);
 				}
 			
 			
@@ -248,8 +246,8 @@ public static void loadTabla(String seleccion){
 				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 				table.getTableHeader().setReorderingAllowed(false);
 				TableColumnModel modeloColumna = table.getColumnModel();
-				modeloColumna.getColumn(0).setPreferredWidth(90);
-				modeloColumna.getColumn(1).setPreferredWidth(120);
+				modeloColumna.getColumn(0).setPreferredWidth(100);
+				modeloColumna.getColumn(1).setPreferredWidth(130);
 				modeloColumna.getColumn(2).setPreferredWidth(120);
 				modeloColumna.getColumn(3).setPreferredWidth(100);
 				modeloColumna.getColumn(4).setPreferredWidth(160);
