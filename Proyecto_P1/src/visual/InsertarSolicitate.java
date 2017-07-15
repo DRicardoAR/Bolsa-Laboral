@@ -773,6 +773,7 @@ public class InsertarSolicitate extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnRegistrar = new JButton("Registrar");
+				btnRegistrar.setEnabled(false);
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						String cedula = textCedula.getText();
@@ -871,49 +872,49 @@ public class InsertarSolicitate extends JDialog {
 						}
 					}
 				});
-				buttonPane.add(btnRegistrar);
-			}
-			{
-				btnMover = new JButton("Continuar >>");
-				btnMover.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						String fecha = ((JTextField) FechaNacimiento.getDateEditor().getUiComponent()).getText();
-						String sexo = "";
-						if (rdbFemenino.isSelected()) {
-							sexo = "Femenino";
-						} else if (rdbMasculino.isSelected()) {
-							sexo = "Masculino";
-						}
-						if (panel2.isVisible()) {
-							panel2.setVisible(false);
-							panel1.setVisible(true);
-							btnMover.setText("Continuar >>");
+				{
+					btnMover = new JButton("Continuar >>");
+					btnMover.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String fecha = ((JTextField) FechaNacimiento.getDateEditor().getUiComponent()).getText();
+							String sexo = "";
+							if (rdbFemenino.isSelected()) {
+								sexo = "Femenino";
+							} else if (rdbMasculino.isSelected()) {
+								sexo = "Masculino";
+							}
+							if (panel2.isVisible()) {
+								panel2.setVisible(false);
+								panel1.setVisible(true);
+								btnMover.setText("Continuar >>");
 
-						} else if (panel1.isVisible()) {
-							if (txtApellidos.getText().isEmpty() || txtNombre.getText().isEmpty()
-									|| textCedula.getText().isEmpty() || fecha.equalsIgnoreCase("")
-									|| cbxLicencia.getSelectedIndex() == 0 || sexo.equalsIgnoreCase("")
-									|| cbxProvincia.getSelectedIndex() == 0) {
-								JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
-										JOptionPane.WARNING_MESSAGE, null);
-							} else {
-								rdbObrero.setSelected(true);
-								rdbTecnico.setSelected(false);
-								rdbUniversitario.setSelected(false);
-								panel_Obreo.setVisible(true);
-								panel_Tecnico.setVisible(false);
-								panel_Universitario.setVisible(false);
-								panel1.setVisible(false);
-								panel2.setVisible(true);
-								btnMover.setText("<< Retroceder");
+							} else if (panel1.isVisible()) {
+								if (txtApellidos.getText().isEmpty() || txtNombre.getText().isEmpty()
+										|| textCedula.getText().isEmpty() || fecha.equalsIgnoreCase("")
+										|| cbxLicencia.getSelectedIndex() == 0 || sexo.equalsIgnoreCase("")
+										|| cbxProvincia.getSelectedIndex() == 0) {
+									JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
+											JOptionPane.WARNING_MESSAGE, null);
+								} else {
+									rdbObrero.setSelected(true);
+									rdbTecnico.setSelected(false);
+									rdbUniversitario.setSelected(false);
+									panel_Obreo.setVisible(true);
+									panel_Tecnico.setVisible(false);
+									panel_Universitario.setVisible(false);
+									panel1.setVisible(false);
+									panel2.setVisible(true);
+									btnMover.setText("<< Retroceder");
 
+								}
 							}
 						}
-					}
-				});
-				btnMover.setActionCommand("OK");
-				buttonPane.add(btnMover);
-				getRootPane().setDefaultButton(btnMover);
+					});
+					btnMover.setActionCommand("OK");
+					buttonPane.add(btnMover);
+					getRootPane().setDefaultButton(btnMover);
+				}
+				buttonPane.add(btnRegistrar);
 			}
 			{
 				cancelButton = new JButton("Cancelar");
