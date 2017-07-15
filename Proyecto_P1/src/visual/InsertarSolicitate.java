@@ -556,6 +556,7 @@ public class InsertarSolicitate extends JDialog {
 		rdbObrero = new JRadioButton("Obrero");
 		rdbObrero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnRegistrar.setEnabled(true);
 				rdbObrero.setSelected(true);
 				rdbTecnico.setSelected(false);
 				rdbUniversitario.setSelected(false);
@@ -570,6 +571,7 @@ public class InsertarSolicitate extends JDialog {
 		rdbTecnico = new JRadioButton("T\u00E9cnico");
 		rdbTecnico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnRegistrar.setEnabled(true);
 				rdbObrero.setSelected(false);
 				rdbTecnico.setSelected(true);
 				rdbUniversitario.setSelected(false);
@@ -584,6 +586,7 @@ public class InsertarSolicitate extends JDialog {
 		rdbUniversitario = new JRadioButton("Universitario");
 		rdbUniversitario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnRegistrar.setEnabled(true);
 				rdbObrero.setSelected(false);
 				rdbTecnico.setSelected(false);
 				rdbUniversitario.setSelected(true);
@@ -827,11 +830,16 @@ public class InsertarSolicitate extends JDialog {
 						if (txtTelefono.getText().isEmpty() || txtEmail.getText().isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
 									JOptionPane.WARNING_MESSAGE, null);
+							if (panel2.isVisible()) {
+								panel1.setVisible(false);
+								panel2.setVisible(true);
+							}
 						} else if ((!rdbNoReelocalizacion.isSelected() && !rdbSiReelocalizacion.isSelected())
 								|| (!rdbSiVehiculo.isSelected() && !rdbNoVehiculo.isSelected())) {
 							JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
 									JOptionPane.WARNING_MESSAGE, null);
 						} else if (rdbObrero.isSelected()) {
+
 							if (misHabilidades.size() == 0) {
 								JOptionPane.showMessageDialog(null, "Favor insertar habilidades de Oberro.", "ATENCIÓN",
 										JOptionPane.WARNING_MESSAGE, null);
@@ -840,12 +848,16 @@ public class InsertarSolicitate extends JDialog {
 							if (cbxAreaTecnico.getSelectedIndex() == 0) {
 								JOptionPane.showMessageDialog(null, "Favor insetar area de Ténico.", "ATENCIÓN",
 										JOptionPane.WARNING_MESSAGE, null);
+
 							}
 						} else if (rdbUniversitario.isSelected()) {
 							if (cbxCarrera.getSelectedIndex() == 0) {
 								JOptionPane.showMessageDialog(null, "Favor insetar carrera de Universitario.",
 										"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
-							} // falta validar el mail
+							} else if (BolsaLaboral.getInstance().validarEmail(email)) {
+								JOptionPane.showMessageDialog(null, "Correo Electrónico no válido", "Error!",
+										JOptionPane.ERROR_MESSAGE, null);
+							}
 						}
 						if (rdbObrero.isSelected()) {
 							int annos = new Integer((int) spnAnnosExpObrero.getValue());
@@ -853,22 +865,27 @@ public class InsertarSolicitate extends JDialog {
 									nacionalidad, sexo, estadoCivil, direccion, provincia, email, vehiculoP, licencia,
 									annos, misIdiomas, mudarse, misHabilidades);
 							BolsaLaboral.getInstance().insertSolicitante(solicitante);
+							clean();
 						}
 						if (rdbUniversitario.isSelected()) {
+
 							int annos = new Integer((int) spnAnosExpUniversitario.getValue());
 							Solicitante solicitante = new Universitario(cedula, nombre, apellido, telefono,
 									fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia, email,
 									vehiculoP, licencia, annos, misIdiomas, mudarse, false,
 									cbxCarrera.getSelectedItem().toString());
 							BolsaLaboral.getInstance().insertSolicitante(solicitante);
+							clean();
 
 						}
 						if (rdbTecnico.isSelected()) {
+
 							int annos = new Integer((int) spnAnosExpTecnico.getValue());
 							Solicitante solicitante = new Tecnico(cedula, nombre, apellido, apellido, fechaNacimiento,
 									nacionalidad, sexo, estadoCivil, direccion, provincia, email, vehiculoP, licencia,
 									annos, misIdiomas, mudarse, cbxAreaTecnico.getSelectedItem().toString());
 							BolsaLaboral.getInstance().insertSolicitante(solicitante);
+							clean();
 						}
 					}
 				});
@@ -896,6 +913,7 @@ public class InsertarSolicitate extends JDialog {
 									JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
 											JOptionPane.WARNING_MESSAGE, null);
 								} else {
+									btnRegistrar.setEnabled(true);
 									rdbObrero.setSelected(true);
 									rdbTecnico.setSelected(false);
 									rdbUniversitario.setSelected(false);
@@ -975,5 +993,41 @@ public class InsertarSolicitate extends JDialog {
 		btnMover.setText("<< Retroceder");
 		error = false;
 
+	}
+	public void clean(){
+		txtNombre.setText("");
+		txtApellidos.setText("");
+		txtCalle.setText("");
+		txtCiudad.setText("");
+		txtEmail.setText("");
+		textCedula.setText("");
+		txtReferencia.setText("");
+		txtSector.setText("");
+		txtTelefono.setText("");
+		textCedula.setText("");
+		cbxAreaTecnico.setSelectedIndex(0);
+		cbxCarrera.setSelectedIndex(0);
+		cbxEstadoCilvil.setSelectedIndex(0);
+		cbxHabilidades.setSelectedIndex(0);
+		cbxIdiomas.setSelectedIndex(0);
+		cbxLicencia.setSelectedIndex(0);
+		cbxNacionalidad.setSelectedIndex(0);
+		cbxProvincia.setSelectedIndex(0);
+		rdbObrero.setSelected(true);
+		rdbFemenino.setSelected(false);
+		rdbMasculino.setSelected(false);
+		rdbNoReelocalizacion.setSelected(false);
+		rdbSiReelocalizacion.setSelected(false);
+		rdbSiVehiculo.setSelected(false);
+		rdbNoVehiculo.setSelected(false);
+		panel1.setVisible(true);
+		panel2.setVisible(false);
+		spnAnnosExpObrero.setValue(0);
+		spnAnosExpTecnico.setValue(0);
+		spnAnosExpUniversitario.setValue(0);
+		spnNumeroCasa.setValue(0);
+		btnMover.setText("Continuar >>");
+		btnRegistrar.setEnabled(false);
+		
 	}
 }
