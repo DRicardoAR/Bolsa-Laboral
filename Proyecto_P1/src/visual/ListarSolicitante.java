@@ -183,7 +183,6 @@ public static void loadTabla(String seleccion){
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitante soli : BolsaLaboral.getInstance().getMisPersonas()) {
-			if (soli instanceof Universitario) {
 				if (!soli.isContratado()) {
 					tipo = "Universitario";
 					if (soli instanceof Obrero) {
@@ -194,23 +193,25 @@ public static void loadTabla(String seleccion){
 					}
 					fila[0] = soli.getCedula();
 					fila[1] = soli.getNombres() + " " + soli.getApellidos();
-					fila[2] = soli.getEdad();
-					fila[3] = soli.getAnnosExperiencia();
+					fila[2] = soli.getEdad()+" años";
+					fila[3] = soli.getAnnosExperiencia()+" años";
 					fila[4] = tipo;
 					modeloTabla.addRow(fila);
+					
+					table.setModel(modeloTabla);
+					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+					table.getTableHeader().setReorderingAllowed(false);
+					TableColumnModel modeloColumna = table.getColumnModel();
+					modeloColumna.getColumn(0).setPreferredWidth(100);
+					modeloColumna.getColumn(1).setPreferredWidth(240);
+					modeloColumna.getColumn(2).setPreferredWidth(120);
+					modeloColumna.getColumn(3).setPreferredWidth(160);
+					modeloColumna.getColumn(4).setPreferredWidth(134);
 				}
-			}
+			
 			
 		}
-		table.setModel(modeloTabla);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getTableHeader().setReorderingAllowed(false);
-		TableColumnModel modeloColumna = table.getColumnModel();
-		modeloColumna.getColumn(0).setPreferredWidth(100);
-		modeloColumna.getColumn(1).setPreferredWidth(240);
-		modeloColumna.getColumn(2).setPreferredWidth(120);
-		modeloColumna.getColumn(3).setPreferredWidth(160);
-		modeloColumna.getColumn(4).setPreferredWidth(134);
+		
 		
 	}
 }

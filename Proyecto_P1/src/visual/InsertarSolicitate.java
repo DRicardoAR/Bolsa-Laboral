@@ -1028,6 +1028,9 @@ public class InsertarSolicitate extends JDialog {
 		spnNumeroCasa.setValue(0);
 		btnMover.setText("Continuar >>");
 		btnRegistrar.setEnabled(false);
-		
+		misHabilidades.removeAll(misHabilidades);
+		misIdiomas.removeAll(misIdiomas);
+		modeloHabilidad.clear();
+		modeloIdiomas.clear();
 	}
 }
