@@ -104,6 +104,14 @@ public class Principal extends JFrame {
 		mnEmpresa.add(mntmRealizarSolicitud);
 		
 		JMenuItem mntmListarEmpresas = new JMenuItem("Listar Empresas");
+		mntmListarEmpresas.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) {
+				ListarEmpresa lista = new ListarEmpresa();
+				lista.setModal(true);
+				lista.setVisible(true);
+			}
+		});
 		mnEmpresa.add(mntmListarEmpresas);
 		
 		JMenu mnMacheo = new JMenu("Macheo");

@@ -238,9 +238,9 @@ public class InsertarEmpresa extends JDialog {
 						    	JOptionPane.showMessageDialog(null, "Se debe ingresar el email la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
 						    }else if(cbxProvincia.getSelectedIndex()==0){
 						    	JOptionPane.showMessageDialog(null, "Se debe seleccionar la Provincia de la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-						    }else if (!(BolsaLaboral.getInstance().validarEmail(email))){
+						   /* }/*else if (!(BolsaLaboral.getInstance().validarEmail(email))){
 						    	JOptionPane.showMessageDialog(null, "Favor registar un Email valido", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-						    	txtEmail.setText(null);
+						    	txtEmail.setText(null);*/
 						    }else{
 						    
 							BolsaLaboral.getInstance().insertEmpresa(miEmpresa);
