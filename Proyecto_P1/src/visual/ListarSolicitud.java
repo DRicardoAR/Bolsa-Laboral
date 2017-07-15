@@ -187,13 +187,14 @@ public class ListarSolicitud extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				 btnEliminar = new JButton("Eliminar");
+				 btnEliminar.setEnabled(false);
 				 btnEliminar.addActionListener(new ActionListener() {
 				 	public void actionPerformed(ActionEvent e) {
 				 		if(!codigo.equalsIgnoreCase("")){
 				 			if(BolsaLaboral.getInstance().EliminarSolicitud(codigo)){
+				 				loadtabla(cbxfiltro.getSelectedIndex());	
 				 				JOptionPane.showMessageDialog(null, "Se ha eliminada la solicitud", "Información", JOptionPane.INFORMATION_MESSAGE, null);
-								loadtabla(cbxfiltro.getSelectedIndex());
-				 				
+											 				
 								btnEliminar.setEnabled(false);
 				 			}
 				 		}
@@ -203,6 +204,14 @@ public class ListarSolicitud extends JDialog {
 			}
 			{
 				btnModificar = new JButton("Modificar");
+				btnModificar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						InsertarSolicitud modificarSOli = new InsertarSolicitud(BolsaLaboral.getInstance().RetornarSolocitudCod(codigo));
+						modificarSOli.setModal(true);
+						modificarSOli.setVisible(true);
+					}
+				});
+				btnModificar.setEnabled(false);
 				btnModificar.setActionCommand("OK");
 				buttonPane.add(btnModificar);
 				getRootPane().setDefaultButton(btnModificar);

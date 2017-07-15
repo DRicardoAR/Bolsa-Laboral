@@ -96,7 +96,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmRealizarSolicitud = new JMenuItem("Realizar Solicitud");
 		mntmRealizarSolicitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InsertarSolicitud solicitud = new InsertarSolicitud();
+				InsertarSolicitud solicitud = new InsertarSolicitud(null);
 				solicitud.setModal(true);
 				solicitud.setVisible(true);
 			}

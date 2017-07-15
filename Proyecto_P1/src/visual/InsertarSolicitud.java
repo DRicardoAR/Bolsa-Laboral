@@ -77,54 +77,131 @@ public class InsertarSolicitud extends JDialog {
 	private JComboBox cbxHabilidades;
 	private JSpinner spnObreroExperiencia;
 
-	private ArrayList<String> misIdiomas = new ArrayList<>();
-	private ArrayList<String> misHabilidades = new ArrayList<>();
+	private ArrayList<String> misIdiomas;
+	private ArrayList<String> misHabilidades;
 	private String indexListaIdioma;
 	private String indexListaHabilidades;
 	private BolsaLaboral bolsa = BolsaLaboral.getInstance();
 	private Empresa empresa;
+	private Solicitud modificarSoli = null;
+	
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			InsertarSolicitud dialog = new InsertarSolicitud();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
-	public InsertarSolicitud() {
+	public InsertarSolicitud(Solicitud modi) {
+		modificarSoli = modi;
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
+				if (modificarSoli == null) {
+					
+					
+					if (rbtnUniversitario.isSelected()) {
+						rbtnUniversitario.setSelected(true);
+						panelTecnico.setVisible(false);
+						panelObrero.setVisible(false);
+					}
+					if (rbtnTecnico.isSelected()) {
+						rbtnUniversitario.setSelected(false);
+						panelTecnico.setVisible(true);
+						panelObrero.setVisible(false);
+					}
+					if (rbtnObrero.isSelected()) {
+						rbtnUniversitario.setSelected(false);
+						panelTecnico.setVisible(false);
+						panelObrero.setVisible(true);
+					}
 
-				if (rbtnUniversitario.isSelected()) {
-					rbtnUniversitario.setSelected(true);
-					panelTecnico.setVisible(false);
-					panelObrero.setVisible(false);
-				}
-				if (rbtnTecnico.isSelected()) {
-					rbtnUniversitario.setSelected(false);
-					panelTecnico.setVisible(true);
-					panelObrero.setVisible(false);
-				}
-				if (rbtnObrero.isSelected()) {
-					rbtnUniversitario.setSelected(false);
-					panelTecnico.setVisible(false);
-					panelObrero.setVisible(true);
+				} else {
+					ftxtRNC.setValue(modi.getEmpresa().getRNC());
+					ftxtRNC.setEnabled(false);
+					txtNombre.setText(modi.getEmpresa().getNombre());
+					cbxContrato.setSelectedItem(modi.getTipoContrato());
+					if (modi.isMudarse()) {
+						rbtnReubicacionSi.setSelected(true);
+					} else {
+						rbtnReubicacionNo.setSelected(true);
+					}
+					if (modi.isVehiculoPropio()) {
+						rbtnVehiculoSi.setSelected(true);
+						cbxLicencia.setSelectedItem(modi.getCategoriaLicencia());
+					} else {
+						rbtnVehiculoNo.setSelected(true);
+					}
+					cbxLocalidad.setSelectedItem(modi.getLocalidad());
+					spnVacantes.setValue(modi.getCantVacantes());
+					spnEdadMinima.setValue(modi.getEdadMin());
+					spnEdadMaxima.setValue(modi.getEdadMax());
+					cargarIdiomaModi();
+					
+					for (String string : modi.getIdiomas()) {
+						System.out.println(string);
+						
+					}
+
+					if (modificarSoli instanceof SolicitudUniversitario) {
+						rbtnUniversitario.setSelected(true);
+						panelUniversitario.setVisible(true);
+						panelTecnico.setVisible(false);
+						panelObrero.setVisible(false);
+						rbtnUniversitario.setEnabled(false);
+						rbtnTecnico.setEnabled(false);
+						rbtnObrero.setEnabled(false);
+						spnUniversitarioExperiencia.setValue(((SolicitudUniversitario) modi).getAnnosExperiencia());
+						cbxCarrera.setSelectedItem(((SolicitudUniversitario) modi).getCarrera());
+						if (((SolicitudUniversitario) modi).isPostGrado()) {
+							rbtnPostGradoSi.setSelected(true);
+						} else {
+							rbtnPostGradoNo.setSelected(true);
+						}
+
+					}
+					if (modificarSoli instanceof SolicitudTecnico) {
+						rbtnTecnico.setSelected(true);
+						panelTecnico.setVisible(true);
+						panelUniversitario.setVisible(false);
+						panelObrero.setVisible(false);
+						rbtnUniversitario.setEnabled(false);
+						rbtnTecnico.setEnabled(false);
+						rbtnObrero.setEnabled(false);
+						spnTecnicoExperiencia.setValue(((SolicitudTecnico) modi).getAnnosExperiencia());
+						cbxArea.setSelectedItem(((SolicitudTecnico) modi).getArea());
+
+					}
+					if (modificarSoli instanceof SolicitudObrero) {
+						rbtnObrero.setSelected(true);
+						panelObrero.setVisible(true);
+						panelUniversitario.setVisible(false);
+						panelTecnico.setVisible(false);
+						rbtnUniversitario.setEnabled(false);
+						rbtnTecnico.setEnabled(false);
+						rbtnObrero.setEnabled(false);
+						spnObreroExperiencia.setValue(((SolicitudObrero) modi).getAnnosExperiencia());
+						cargarHabilidadModi();
+
+					}
+
 				}
 
 			}
+
 		});
 		setResizable(false);
-		setTitle("Solicitud");
+		if (modificarSoli == null) {
+			setTitle("Insertar Solicitud - Bolsa Laboral");
+			misIdiomas = new ArrayList<>();
+			misHabilidades = new ArrayList<>();
+		} else {
+			setTitle("Modificar Solicitud - Bolsa Laboral");
+			misIdiomas = new ArrayList<>();
+			misHabilidades = new ArrayList<>();
+			misIdiomas = modificarSoli.getIdiomas();
+			if(modificarSoli instanceof SolicitudObrero){
+				misHabilidades = ((SolicitudObrero)modificarSoli).getHabilidades();
+				
+			}
+			
+
+		}
+
 		setBounds(100, 100, 547, 580);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
@@ -622,7 +699,12 @@ public class InsertarSolicitud extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Insertar");
+				JButton okButton = new JButton("");
+				if (modificarSoli != null) {
+					okButton.setText("Modificar");
+				} else {
+					okButton.setText("Insertar");
+				}
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						String RNC = ftxtRNC.getText();
@@ -665,66 +747,72 @@ public class InsertarSolicitud extends JDialog {
 							posGrado = true;
 						}
 						String area = (String) cbxArea.getSelectedItem();
+						if (modificarSoli == null) {
 
-						if (txtNombre.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "Se debe ingresar la empresa que solicita", "ATENCIÓN",
-									JOptionPane.WARNING_MESSAGE, null);
-						} else if (cbxContrato.getSelectedIndex() == 0 || cbxLocalidad.getSelectedIndex() == 0) {
-							JOptionPane.showMessageDialog(null, "No deje campos vacios", "ATENCIÓN",
-									JOptionPane.WARNING_MESSAGE, null);
+							if (txtNombre.getText().isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Se debe ingresar la empresa que solicita",
+										"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
+							} else if (cbxContrato.getSelectedIndex() == 0 || cbxLocalidad.getSelectedIndex() == 0) {
+								JOptionPane.showMessageDialog(null, "No deje campos vacios", "ATENCIÓN",
+										JOptionPane.WARNING_MESSAGE, null);
 
-						} else if (rbtnVehiculoSi.isSelected() && cbxLicencia.getSelectedIndex() == 0) {
-							JOptionPane.showMessageDialog(null, "Selecciona la categoria de la Licencia de conducir",
-									"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
+							} else if (rbtnVehiculoSi.isSelected() && cbxLicencia.getSelectedIndex() == 0) {
+								JOptionPane.showMessageDialog(null,
+										"Selecciona la categoria de la Licencia de conducir", "ATENCIÓN",
+										JOptionPane.WARNING_MESSAGE, null);
 
-						} else if (!rbtnTecnico.isSelected() && !rbtnUniversitario.isSelected()
-								&& !rbtnObrero.isSelected()) {
-							JOptionPane.showMessageDialog(null, "Selecciona el tipo de empleado que se necesita",
-									"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
+							} else if (!rbtnTecnico.isSelected() && !rbtnUniversitario.isSelected()
+									&& !rbtnObrero.isSelected()) {
+								JOptionPane.showMessageDialog(null, "Selecciona el tipo de empleado que se necesita",
+										"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
 
-						} else if (panelUniversitario.isVisible() && cbxCarrera.getSelectedIndex() == 0) {
-							JOptionPane.showMessageDialog(null, "Selecciona la carrera del universitario", "ATENCIÓN",
-									JOptionPane.WARNING_MESSAGE, null);
+							} else if (panelUniversitario.isVisible() && cbxCarrera.getSelectedIndex() == 0) {
+								JOptionPane.showMessageDialog(null, "Selecciona la carrera del universitario",
+										"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
 
-						} else if (panelTecnico.isVisible() && cbxArea.getSelectedIndex() == 0) {
-							JOptionPane.showMessageDialog(null, "Selecciona el area del tecnico", "ATENCIÓN",
-									JOptionPane.WARNING_MESSAGE, null);
-						} else if (panelObrero.isVisible() && misHabilidades.size() == 0) {
-							JOptionPane.showMessageDialog(null, "Selecciona las habilidades del obrero", "ATENCIÓN",
-									JOptionPane.WARNING_MESSAGE, null);
+							} else if (panelTecnico.isVisible() && cbxArea.getSelectedIndex() == 0) {
+								JOptionPane.showMessageDialog(null, "Selecciona el area del tecnico", "ATENCIÓN",
+										JOptionPane.WARNING_MESSAGE, null);
+							} else if (panelObrero.isVisible() && misHabilidades.size() == 0) {
+								JOptionPane.showMessageDialog(null, "Selecciona las habilidades del obrero", "ATENCIÓN",
+										JOptionPane.WARNING_MESSAGE, null);
 
-						} else if (panelUniversitario.isVisible() && !rbtnPostGradoSi.isSelected()
-								&& !rbtnPostGradoNo.isSelected()) {
-							rbtnPostGradoNo.setSelected(true);
+							} else if (panelUniversitario.isVisible() && !rbtnPostGradoSi.isSelected()
+									&& !rbtnPostGradoNo.isSelected()) {
+								rbtnPostGradoNo.setSelected(true);
+							} else {
+								if (rbtnUniversitario.isSelected()) {
+									SolicitudUniversitario nuevaSoli = new SolicitudUniversitario(vacantes,
+											experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo,
+											localidad, empresa, reubicacion, misIdiomas, categoriaLicencia, posGrado,
+											carrera);
+									bolsa.insertSolicitud(nuevaSoli);
+									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
+											"Información", JOptionPane.INFORMATION_MESSAGE, null);
+									clean(1);
+								}
+								if (rbtnTecnico.isSelected()) {
+									SolicitudTecnico nuevaSoli = new SolicitudTecnico(vacantes,
+											experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo,
+											localidad, empresa, reubicacion, misIdiomas, categoriaLicencia, area);
+									bolsa.insertSolicitud(nuevaSoli);
+									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
+											"Información", JOptionPane.INFORMATION_MESSAGE, null);
+									clean(2);
+								}
+								if (rbtnObrero.isSelected()) {
+									SolicitudObrero nuevaSoli = new SolicitudObrero(vacantes, experienciaUniversitario,
+											edadMaxima, edadMinima, Contrato, vehiculo, localidad, empresa, reubicacion,
+											misIdiomas, categoriaLicencia, misHabilidades);
+									bolsa.insertSolicitud(nuevaSoli);
+									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
+											"Información", JOptionPane.INFORMATION_MESSAGE, null);
+									clean(3);
+								}
+
+							}
 						} else {
-							if (rbtnUniversitario.isSelected()) {
-								SolicitudUniversitario nuevaSoli = new SolicitudUniversitario(vacantes,
-										experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo, localidad,
-										empresa, reubicacion, misIdiomas, categoriaLicencia, posGrado, carrera);
-								bolsa.insertSolicitud(nuevaSoli);
-								JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
-										"Información", JOptionPane.INFORMATION_MESSAGE, null);
-								clean(1);
-							}
-							if (rbtnTecnico.isSelected()) {
-								SolicitudTecnico nuevaSoli = new SolicitudTecnico(vacantes, experienciaUniversitario,
-										edadMaxima, edadMinima, Contrato, vehiculo, localidad, empresa, reubicacion,
-										misIdiomas, categoriaLicencia, area);
-								bolsa.insertSolicitud(nuevaSoli);
-								JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
-										"Información", JOptionPane.INFORMATION_MESSAGE, null);
-								clean(2);
-							}
-							if (rbtnObrero.isSelected()) {
-								SolicitudObrero nuevaSoli = new SolicitudObrero(vacantes, experienciaUniversitario,
-										edadMaxima, edadMinima, Contrato, vehiculo, localidad, empresa, reubicacion,
-										misIdiomas, categoriaLicencia, misHabilidades);
-								bolsa.insertSolicitud(nuevaSoli);
-								JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
-										"Información", JOptionPane.INFORMATION_MESSAGE, null);
-								clean(3);
-							}
-
+							System.out.println("Vamos a modificar entonces");
 						}
 
 					}
@@ -789,6 +877,17 @@ public class InsertarSolicitud extends JDialog {
 		listIdioma.setModel(idioma);
 	}
 
+	private void cargarIdiomaModi() {
+		DefaultListModel idioma = new DefaultListModel();
+		System.out.println("tamoano"+modificarSoli.getIdiomas().size());
+		for (String idio : modificarSoli.getIdiomas()) {
+			idioma.addElement(idio);
+
+		}
+		listIdioma.setModel(idioma);
+
+	}
+
 	private void cargarHabilidades() {
 		DefaultListModel habilidades = new DefaultListModel();
 
@@ -798,4 +897,15 @@ public class InsertarSolicitud extends JDialog {
 		ListHabilidad.setModel(habilidades);
 
 	}
+
+	private void cargarHabilidadModi() {
+		DefaultListModel habilidades = new DefaultListModel();
+		for (String habili : ((SolicitudObrero) modificarSoli).getHabilidades()) {
+			habilidades.addElement(habili);
+
+		}
+		ListHabilidad.setModel(habilidades);
+
+	}
+
 }
