@@ -31,6 +31,9 @@ import javax.swing.ListSelectionModel;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class ListarSolicitante extends JDialog {
 
@@ -43,6 +46,7 @@ public class ListarSolicitante extends JDialog {
 	private JComboBox cbxFiltro;
 	private JButton cancelButton;
 	private String cedulaCliente = "";
+	
 
 	/**
 	 * Launch the application.
@@ -70,34 +74,40 @@ public class ListarSolicitante extends JDialog {
 		});
 		setTitle("Listar Solicitantes\r\n");
 		setResizable(false);
-		setBounds(100, 100, 792, 494);
+		setBounds(100, 100, 884, 494);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(null, "Listado de Solicitantes", TitledBorder.CENTER, TitledBorder.TOP,
-					null, null));
+			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Listado de Solicitudes de  Solicitantes", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
  
 			cbxFiltro = new JComboBox();
 			cbxFiltro.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(cbxFiltro.getSelectedItem().toString().equalsIgnoreCase("General")){
+					String seleccion = cbxFiltro.getSelectedItem().toString();
+					if(seleccion.equalsIgnoreCase("General")){
 						loadTablaG();
+					}if(seleccion.equalsIgnoreCase("Universitarios")){
+						loadTablaU();
+					}if(seleccion.equalsIgnoreCase("Obreros")){
+						//loadTablaO();
+					}if(seleccion.equalsIgnoreCase("Técnicos")){
+						//loadTablaT();
 					}
 				}
 			});
 			cbxFiltro.setModel(
 					new DefaultComboBoxModel(new String[] {"General", "Obreros", "T\u00E9cnicos", "Universitarios"}));
-			cbxFiltro.setBounds(647, 37, 119, 20);
+			cbxFiltro.setBounds(739, 37, 119, 20);
 			panel.add(cbxFiltro);
 			
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			scrollPane.setBounds(10, 68, 756, 343);
+			scrollPane.setBounds(10, 68, 822, 343);
 			panel.add(scrollPane);
 			{
 			table = new JTable();
@@ -110,6 +120,7 @@ public class ListarSolicitante extends JDialog {
 						btnModificar.setEnabled(true);
 						btnEliminar.setEnabled(true);
 						 cedulaCliente =(String)table.getModel().getValueAt(aux, 0);
+						 
 
 					} else {
 						btnModificar.setEnabled(false);
@@ -121,9 +132,10 @@ public class ListarSolicitante extends JDialog {
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 			modeloTabla = new DefaultTableModel() {
+				
 				@Override
 				public boolean isCellEditable(int row, int coumn) {
-					return false;
+					return false ;
 				}
 			};
 			String tipo = cbxFiltro.getSelectedItem().toString();
@@ -134,7 +146,7 @@ public class ListarSolicitante extends JDialog {
 		
 
 			JLabel lblFiltrarPor = new JLabel("Filtrar por :");
-			lblFiltrarPor.setBounds(564, 40, 63, 14);
+			lblFiltrarPor.setBounds(643, 40, 63, 14);
 			panel.add(lblFiltrarPor);
 		}
 		{
@@ -169,6 +181,7 @@ public static void loadTabla(String seleccion){
 	if(seleccion.equalsIgnoreCase("General")){
 		loadTablaG();
 	}if(seleccion.equalsIgnoreCase("Universitarios")){
+		loadTablaU();
 		
 	}if(seleccion.equalsIgnoreCase("Obreros")){
 		
@@ -213,5 +226,69 @@ public static void loadTabla(String seleccion){
 		}
 		
 		
+	}
+	public static void loadTablaU(){
+		
+		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Carrera", "Años de Experiencia","Teléfono","E-Mail"};
+		modeloTabla.setColumnIdentifiers(nombreColumna);
+		modeloTabla.setRowCount(0);
+		fila = new Object[modeloTabla.getColumnCount()];
+		for (Solicitante soli : BolsaLaboral.getInstance().getMisPersonas()) {
+			if(soli instanceof Universitario){
+				fila[0] = soli.getCedula();
+				fila[1] = soli.getNombres() + " " + soli.getApellidos();
+				fila[2] = soli.getEdad()+" años";
+				fila[3] = ((Universitario) soli).getCarrera();
+				fila[4] = soli.getAnnosExperiencia()+" años";
+				fila[5] = soli.getTelefono();
+				fila[6] = soli.getEmail();
+				modeloTabla.addRow(fila);
+				
+				table.setModel(modeloTabla);
+				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+				table.getTableHeader().setReorderingAllowed(false);
+				TableColumnModel modeloColumna = table.getColumnModel();
+				modeloColumna.getColumn(0).setPreferredWidth(90);
+				modeloColumna.getColumn(1).setPreferredWidth(120);
+				modeloColumna.getColumn(2).setPreferredWidth(120);
+				modeloColumna.getColumn(3).setPreferredWidth(100);
+				modeloColumna.getColumn(4).setPreferredWidth(160);
+				modeloColumna.getColumn(5).setPreferredWidth(100);
+				modeloColumna.getColumn(6).setPreferredWidth(120);
+			}
+			
+		}
+	}
+	
+	public void loadTablaO(){
+		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Carrera", "Años de Experiencia","Teléfono","E-Mail"};
+		modeloTabla.setColumnIdentifiers(nombreColumna);
+		modeloTabla.setRowCount(0);
+		fila = new Object[modeloTabla.getColumnCount()];
+		for (Solicitante soli : BolsaLaboral.getInstance().getMisPersonas()) {
+			if(soli instanceof Universitario){
+				fila[0] = soli.getCedula();
+				fila[1] = soli.getNombres() + " " + soli.getApellidos();
+				fila[2] = soli.getEdad()+" años";
+				fila[3] = ((Universitario) soli).getCarrera();
+				fila[4] = soli.getAnnosExperiencia()+" años";
+				fila[5] = soli.getTelefono();
+				fila[6] = soli.getEmail();
+				modeloTabla.addRow(fila);
+				
+				table.setModel(modeloTabla);
+				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+				table.getTableHeader().setReorderingAllowed(false);
+				TableColumnModel modeloColumna = table.getColumnModel();
+				modeloColumna.getColumn(0).setPreferredWidth(90);
+				modeloColumna.getColumn(1).setPreferredWidth(120);
+				modeloColumna.getColumn(2).setPreferredWidth(120);
+				modeloColumna.getColumn(3).setPreferredWidth(100);
+				modeloColumna.getColumn(4).setPreferredWidth(160);
+				modeloColumna.getColumn(5).setPreferredWidth(100);
+				modeloColumna.getColumn(6).setPreferredWidth(140);
+			}
+			
+		}
 	}
 }

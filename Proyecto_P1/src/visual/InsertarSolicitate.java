@@ -779,6 +779,7 @@ public class InsertarSolicitate extends JDialog {
 				btnRegistrar.setEnabled(false);
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						boolean error = false;
 						String cedula = textCedula.getText();
 						String nombre = txtNombre.getText();
 						String apellido = txtApellidos.getText();
@@ -830,6 +831,7 @@ public class InsertarSolicitate extends JDialog {
 						if (txtTelefono.getText().isEmpty() || txtEmail.getText().isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
 									JOptionPane.WARNING_MESSAGE, null);
+							error = true;
 							if (panel2.isVisible()) {
 								panel1.setVisible(false);
 								panel2.setVisible(true);
@@ -838,54 +840,65 @@ public class InsertarSolicitate extends JDialog {
 								|| (!rdbSiVehiculo.isSelected() && !rdbNoVehiculo.isSelected())) {
 							JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
 									JOptionPane.WARNING_MESSAGE, null);
+							error = true;
 						} else if (rdbObrero.isSelected()) {
 
 							if (misHabilidades.size() == 0) {
 								JOptionPane.showMessageDialog(null, "Favor insertar habilidades de Oberro.", "ATENCIÓN",
 										JOptionPane.WARNING_MESSAGE, null);
+								error = true;
 							}
 						} else if (rdbTecnico.isSelected()) {
 							if (cbxAreaTecnico.getSelectedIndex() == 0) {
 								JOptionPane.showMessageDialog(null, "Favor insetar area de Ténico.", "ATENCIÓN",
 										JOptionPane.WARNING_MESSAGE, null);
+								error = true;
 
 							}
 						} else if (rdbUniversitario.isSelected()) {
 							if (cbxCarrera.getSelectedIndex() == 0) {
 								JOptionPane.showMessageDialog(null, "Favor insetar carrera de Universitario.",
 										"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
+								error = true;
 							} else if (BolsaLaboral.getInstance().validarEmail(email)) {
-								JOptionPane.showMessageDialog(null, "Correo Electrónico no válido", "Error!",
+								JOptionPane.showMessageDialog(null, "Correo Electrónico no válido", "ATENCIÓN",
 										JOptionPane.ERROR_MESSAGE, null);
+								error = true;
+
 							}
 						}
 						if (rdbObrero.isSelected()) {
-							int annos = new Integer((int) spnAnnosExpObrero.getValue());
-							Solicitante solicitante = new Obrero(cedula, nombre, apellido, telefono, fechaNacimiento,
-									nacionalidad, sexo, estadoCivil, direccion, provincia, email, vehiculoP, licencia,
-									annos, misIdiomas, mudarse, misHabilidades);
-							BolsaLaboral.getInstance().insertSolicitante(solicitante);
-							clean();
+							if (!error) {
+								int annos = new Integer((int) spnAnnosExpObrero.getValue());
+								Solicitante solicitante = new Obrero(cedula, nombre, apellido, telefono,
+										fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia, email,
+										vehiculoP, licencia, annos, misIdiomas, mudarse, misHabilidades);
+								BolsaLaboral.getInstance().insertSolicitante(solicitante);
+								clean();
+							}
 						}
 						if (rdbUniversitario.isSelected()) {
+							if (!error) {
+								int annos = new Integer((int) spnAnosExpUniversitario.getValue());
+								Solicitante solicitante = new Universitario(cedula, nombre, apellido, telefono,
+										fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia, email,
+										vehiculoP, licencia, annos, misIdiomas, mudarse, false,
+										cbxCarrera.getSelectedItem().toString());
+								BolsaLaboral.getInstance().insertSolicitante(solicitante);
+								clean();
 
-							int annos = new Integer((int) spnAnosExpUniversitario.getValue());
-							Solicitante solicitante = new Universitario(cedula, nombre, apellido, telefono,
-									fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia, email,
-									vehiculoP, licencia, annos, misIdiomas, mudarse, false,
-									cbxCarrera.getSelectedItem().toString());
-							BolsaLaboral.getInstance().insertSolicitante(solicitante);
-							clean();
-
+							}
 						}
 						if (rdbTecnico.isSelected()) {
-
-							int annos = new Integer((int) spnAnosExpTecnico.getValue());
-							Solicitante solicitante = new Tecnico(cedula, nombre, apellido, apellido, fechaNacimiento,
-									nacionalidad, sexo, estadoCivil, direccion, provincia, email, vehiculoP, licencia,
-									annos, misIdiomas, mudarse, cbxAreaTecnico.getSelectedItem().toString());
-							BolsaLaboral.getInstance().insertSolicitante(solicitante);
-							clean();
+							if (!error) {
+								int annos = new Integer((int) spnAnosExpTecnico.getValue());
+								Solicitante solicitante = new Tecnico(cedula, nombre, apellido, apellido,
+										fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia, email,
+										vehiculoP, licencia, annos, misIdiomas, mudarse,
+										cbxAreaTecnico.getSelectedItem().toString());
+								BolsaLaboral.getInstance().insertSolicitante(solicitante);
+								clean();
+							}
 						}
 					}
 				});
@@ -994,7 +1007,8 @@ public class InsertarSolicitate extends JDialog {
 		error = false;
 
 	}
-	public void clean(){
+
+	public void clean() {
 		txtNombre.setText("");
 		txtApellidos.setText("");
 		txtCalle.setText("");
