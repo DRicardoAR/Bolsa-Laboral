@@ -33,6 +33,8 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ListarSolicitud extends JDialog {
 
@@ -44,6 +46,10 @@ public class ListarSolicitud extends JDialog {
 	private JComboBox cbxfiltro;
 	private Empresa empresaListar = null;
 	private JFormattedTextField ftxtRNCempresa;
+	private JButton btnModificar;
+	private JButton btnEliminar;
+	private String codigo ="";
+	
 
 	/**
 	 * Launch the application.
@@ -69,7 +75,8 @@ public class ListarSolicitud extends JDialog {
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(null, "Lista de Solicitudes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBorder(
+					new TitledBorder(null, "Lista de Solicitudes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
@@ -81,41 +88,26 @@ public class ListarSolicitud extends JDialog {
 				cbxfiltro = new JComboBox();
 				cbxfiltro.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(cbxfiltro.getSelectedIndex() == 0){
+						if (cbxfiltro.getSelectedIndex() == 0) {
+							ftxtRNCempresa.setText("");
 							loadtabla(0);
-						}
-						else if(cbxfiltro.getSelectedIndex() ==1){
+						} else if (cbxfiltro.getSelectedIndex() == 1) {
+							ftxtRNCempresa.setText("");
 							loadtabla(1);
-						}else if(cbxfiltro.getSelectedIndex()==2){
+						} else if (cbxfiltro.getSelectedIndex() == 2) {
+							ftxtRNCempresa.setText("");
 							loadtabla(2);
-						}else if(cbxfiltro.getSelectedIndex()==3){
+						} else if (cbxfiltro.getSelectedIndex() == 3) {
+							ftxtRNCempresa.setText("");
 							loadtabla(3);
 						}
-						
+
 					}
 
-					private void loadtabla(int i) {
-						if(i == 0){
-							loadAll();
-						}
-						if(i == 1){
-							loadUniversitario();
-						}
-						if(i==2){
-							loadTecnico();
-							
-						}
-						if(i == 3){
-							loadObrero();
-						}
-						
-					}
 
-				
-					
-					
 				});
-				cbxfiltro.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Universitatio", "T\u00E9cnico", "Obrero"}));
+				cbxfiltro.setModel(
+						new DefaultComboBoxModel(new String[] { "Todos", "Universitatio", "T\u00E9cnico", "Obrero" }));
 				cbxfiltro.setBounds(77, 22, 118, 21);
 				panel.add(cbxfiltro);
 			}
@@ -135,7 +127,7 @@ public class ListarSolicitud extends JDialog {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
 			{
 				JScrollPane scrollPane = new JScrollPane();
@@ -143,6 +135,26 @@ public class ListarSolicitud extends JDialog {
 				panel.add(scrollPane);
 				{
 					table = new JTable();
+					table.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							int aux = table.getSelectedRow();	
+							if(aux > -1){
+								btnModificar.setEnabled(true);	
+								btnEliminar.setEnabled(true);
+								codigo = (String) table.getModel().getValueAt(aux, 0);
+								
+							}else{
+								btnModificar.setEnabled(false);	
+								btnEliminar.setEnabled(false);
+								codigo = "";
+							}
+							
+							
+							
+							
+						}
+					});
 					modeloTabla = new DefaultTableModel();
 					loadAll();
 					scrollPane.setViewportView(table);
@@ -153,17 +165,17 @@ public class ListarSolicitud extends JDialog {
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						empresaListar = BolsaLaboral.getInstance().RetornarEmpresa(ftxtRNCempresa.getText());
-												
-						if(empresaListar != null){
-							loadTablaRNC();							
-						}else{
-							JOptionPane.showMessageDialog(null, "No se encontró ningún solicitud para el RNC dado.", "ATENCIÓN",JOptionPane.ERROR_MESSAGE, null);
+						cbxfiltro.setSelectedIndex(0);
+
+						if (empresaListar != null) {
+							loadTablaRNC();
+						} else {
+							JOptionPane.showMessageDialog(null, "No se encontró ningún solicitud para el RNC dado.",
+									"ATENCIÓN", JOptionPane.ERROR_MESSAGE, null);
 						}
-					 
-						
+
 					}
 
-					
 				});
 				button.setBounds(430, 22, 27, 21);
 				panel.add(button);
@@ -174,11 +186,23 @@ public class ListarSolicitud extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnEliminar = new JButton("Eliminar");
+				 btnEliminar = new JButton("Eliminar");
+				 btnEliminar.addActionListener(new ActionListener() {
+				 	public void actionPerformed(ActionEvent e) {
+				 		if(!codigo.equalsIgnoreCase("")){
+				 			if(BolsaLaboral.getInstance().EliminarSolicitud(codigo)){
+				 				JOptionPane.showMessageDialog(null, "Se ha eliminada la solicitud", "Información", JOptionPane.INFORMATION_MESSAGE, null);
+								loadtabla(cbxfiltro.getSelectedIndex());
+				 				
+								btnEliminar.setEnabled(false);
+				 			}
+				 		}
+				 	}
+				 });
 				buttonPane.add(btnEliminar);
 			}
 			{
-				JButton btnModificar = new JButton("Modificar");
+				btnModificar = new JButton("Modificar");
 				btnModificar.setActionCommand("OK");
 				buttonPane.add(btnModificar);
 				getRootPane().setDefaultButton(btnModificar);
@@ -195,51 +219,70 @@ public class ListarSolicitud extends JDialog {
 			}
 		}
 	}
+
+	public void loadtabla(int i) {
+		if (i == 0) {
+			loadAll();
+		}
+		if (i == 1) {
+			loadUniversitario();
+		}
+		if (i == 2) {
+			loadTecnico();
+
+		}
+		if (i == 3) {
+			loadObrero();
+		}
+
+	}
+
 	private void loadAll() {
-		String[] nombreColumna = { "Código", "Empresa","Solicitado" ,"Vacantes", "Experiencia", "Rango Edad", "Contrato","Vehiculo", "Provincia", "Reubicación" };
+		String[] nombreColumna = { "Código", "Empresa", "Solicitado", "Vacantes", "Experiencia", "Rango Edad",
+				"Contrato", "Vehiculo", "Provincia", "Reubicación" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitud soli : BolsaLaboral.getInstance().getMisSolicitudes()) {
 			fila[0] = soli.getCodigo();
 			fila[1] = soli.getEmpresa().getNombre();
-			if(soli instanceof SolicitudUniversitario){
+			if (soli instanceof SolicitudUniversitario) {
 				fila[2] = "Universitario";
 			}
-			if(soli instanceof SolicitudTecnico){
+			if (soli instanceof SolicitudTecnico) {
 				fila[2] = "Técnico";
 			}
-			if(soli instanceof SolicitudObrero){
+			if (soli instanceof SolicitudObrero) {
 				fila[2] = "Obrero";
 			}
 			fila[3] = soli.getCantVacantes();
-			fila[4]=soli.getAnnosExperiencia();
+			fila[4] = soli.getAnnosExperiencia();
 			String min = Integer.toString(soli.getEdadMin());
 			String max = Integer.toString(soli.getEdadMax());
-			fila[5] = min+" - "+max;
+			fila[5] = min + " - " + max;
 			fila[6] = soli.getTipoContrato();
-			if(soli.isVehiculoPropio()){
+			if (soli.isVehiculoPropio()) {
 				fila[7] = "Si";
-			}else{
+			} else {
 				fila[7] = "No";
 			}
 			fila[8] = soli.getLocalidad();
-			if(soli.isMudarse()){
+			if (soli.isMudarse()) {
 				fila[9] = "Si";
-			}else{
+			} else {
 				fila[9] = "No";
 			}
-			modeloTabla.addRow(fila);			
+			modeloTabla.addRow(fila);
 		}
 		table.setModel(modeloTabla);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getTableHeader().setReorderingAllowed(false);
 		TableColumnModel columnModel = table.getColumnModel();
-		centrar.setHorizontalAlignment(SwingConstants.CENTER); 		
+		centrar.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < nombreColumna.length; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
-		
+
 		columnModel.getColumn(0).setPreferredWidth(65);
 		columnModel.getColumn(1).setPreferredWidth(180);
 		columnModel.getColumn(2).setPreferredWidth(110);
@@ -251,54 +294,54 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(8).setPreferredWidth(110);
 		columnModel.getColumn(9).setPreferredWidth(84);
 	}
-	
+
 	private void loadUniversitario() {
-		String[] nombreColumna = { "Código", "Empresa", "Vacantes", "Experiencia", "Rango Edad", "Contrato","Vehiculo", "Provincia", "Reubicación", "Carrera", "PostGrado" };
+		String[] nombreColumna = { "Código", "Empresa", "Vacantes", "Experiencia", "Rango Edad", "Contrato", "Vehiculo",
+				"Provincia", "Reubicación", "Carrera", "PostGrado" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitud soli : BolsaLaboral.getInstance().getMisSolicitudes()) {
-			if(soli instanceof SolicitudUniversitario){
+			if (soli instanceof SolicitudUniversitario) {
 				fila[0] = soli.getCodigo();
 				fila[1] = soli.getEmpresa().getNombre();
 				fila[2] = soli.getCantVacantes();
-				fila[3]=soli.getAnnosExperiencia();
+				fila[3] = soli.getAnnosExperiencia();
 				String min = Integer.toString(soli.getEdadMin());
 				String max = Integer.toString(soli.getEdadMax());
-				fila[4] = min+" - "+max;
+				fila[4] = min + " - " + max;
 				fila[5] = soli.getTipoContrato();
-				if(soli.isVehiculoPropio()){
+				if (soli.isVehiculoPropio()) {
 					fila[6] = "Si";
-				}else{
+				} else {
 					fila[6] = "No";
 				}
 				fila[7] = soli.getLocalidad();
-				if(soli.isMudarse()){
+				if (soli.isMudarse()) {
 					fila[8] = "Si";
-				}else{
+				} else {
 					fila[8] = "No";
 				}
-				fila[9] = ((SolicitudUniversitario)soli).getCarrera();
-				if(((SolicitudUniversitario)soli).isPostGrado()){
+				fila[9] = ((SolicitudUniversitario) soli).getCarrera();
+				if (((SolicitudUniversitario) soli).isPostGrado()) {
 					fila[10] = "Si";
-				}else{
+				} else {
 					fila[10] = "No";
 				}
-				modeloTabla.addRow(fila);			
-				
+				modeloTabla.addRow(fila);
+
 			}
-			
+
 		}
 		table.setModel(modeloTabla);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getTableHeader().setReorderingAllowed(false);
 		TableColumnModel columnModel = table.getColumnModel();
-		centrar.setHorizontalAlignment(SwingConstants.CENTER); 		
+		centrar.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < nombreColumna.length; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
-		
-		
+
 		columnModel.getColumn(0).setPreferredWidth(65);
 		columnModel.getColumn(1).setPreferredWidth(149);
 		columnModel.getColumn(2).setPreferredWidth(80);
@@ -311,50 +354,50 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(9).setPreferredWidth(115);
 		columnModel.getColumn(10).setPreferredWidth(80);
 	}
-	
+
 	private void loadTecnico() {
-		String[] nombreColumna = { "Código", "Empresa", "Vacantes", "Experiencia", "Rango Edad", "Contrato","Vehiculo", "Provincia", "Reubicación", "Area" };
+		String[] nombreColumna = { "Código", "Empresa", "Vacantes", "Experiencia", "Rango Edad", "Contrato", "Vehiculo",
+				"Provincia", "Reubicación", "Area" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitud soli : BolsaLaboral.getInstance().getMisSolicitudes()) {
-			if(soli instanceof SolicitudTecnico){
+			if (soli instanceof SolicitudTecnico) {
 				fila[0] = soli.getCodigo();
-				fila[1] = soli.getEmpresa().getNombre();			
+				fila[1] = soli.getEmpresa().getNombre();
 				fila[2] = soli.getCantVacantes();
-				fila[3]=soli.getAnnosExperiencia();
+				fila[3] = soli.getAnnosExperiencia();
 				String min = Integer.toString(soli.getEdadMin());
 				String max = Integer.toString(soli.getEdadMax());
-				fila[4] = min+" - "+max;
+				fila[4] = min + " - " + max;
 				fila[5] = soli.getTipoContrato();
-				if(soli.isVehiculoPropio()){
+				if (soli.isVehiculoPropio()) {
 					fila[6] = "Si";
-				}else{
+				} else {
 					fila[6] = "No";
 				}
 				fila[7] = soli.getLocalidad();
-				if(soli.isMudarse()){
+				if (soli.isMudarse()) {
 					fila[8] = "Si";
-				}else{
+				} else {
 					fila[8] = "No";
 				}
-				fila[9] = ((SolicitudTecnico)soli).getArea();
-				
-				modeloTabla.addRow(fila);			
-				
+				fila[9] = ((SolicitudTecnico) soli).getArea();
+
+				modeloTabla.addRow(fila);
+
 			}
-			
+
 		}
 		table.setModel(modeloTabla);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getTableHeader().setReorderingAllowed(false);
 		TableColumnModel columnModel = table.getColumnModel();
-		centrar.setHorizontalAlignment(SwingConstants.CENTER); 		
+		centrar.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < nombreColumna.length; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
-		
-		
+
 		columnModel.getColumn(0).setPreferredWidth(65);
 		columnModel.getColumn(1).setPreferredWidth(149);
 		columnModel.getColumn(2).setPreferredWidth(80);
@@ -365,52 +408,52 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(7).setPreferredWidth(150);
 		columnModel.getColumn(8).setPreferredWidth(80);
 		columnModel.getColumn(9).setPreferredWidth(135);
-		
+
 	}
-	
+
 	private void loadObrero() {
-		String[] nombreColumna = { "Código", "Empresa", "Vacantes", "Experiencia", "Rango Edad", "Contrato","Vehiculo", "Provincia", "Reubicación", "Habilidades" };
+		String[] nombreColumna = { "Código", "Empresa", "Vacantes", "Experiencia", "Rango Edad", "Contrato", "Vehiculo",
+				"Provincia", "Reubicación", "Habilidades" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitud soli : BolsaLaboral.getInstance().getMisSolicitudes()) {
-			if(soli instanceof SolicitudObrero){
+			if (soli instanceof SolicitudObrero) {
 				fila[0] = soli.getCodigo();
-				fila[1] = soli.getEmpresa().getNombre();			
+				fila[1] = soli.getEmpresa().getNombre();
 				fila[2] = soli.getCantVacantes();
-				fila[3]=soli.getAnnosExperiencia();
+				fila[3] = soli.getAnnosExperiencia();
 				String min = Integer.toString(soli.getEdadMin());
 				String max = Integer.toString(soli.getEdadMax());
-				fila[4] = min+" - "+max;
+				fila[4] = min + " - " + max;
 				fila[5] = soli.getTipoContrato();
-				if(soli.isVehiculoPropio()){
+				if (soli.isVehiculoPropio()) {
 					fila[6] = "Si";
-				}else{
+				} else {
 					fila[6] = "No";
 				}
 				fila[7] = soli.getLocalidad();
-				if(soli.isMudarse()){
+				if (soli.isMudarse()) {
 					fila[8] = "Si";
-				}else{
+				} else {
 					fila[8] = "No";
 				}
-				fila[9] ="Habilidasdes";
-				
-				modeloTabla.addRow(fila);			
-				
+				fila[9] = "Habilidasdes";
+
+				modeloTabla.addRow(fila);
+
 			}
-			
+
 		}
 		table.setModel(modeloTabla);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getTableHeader().setReorderingAllowed(false);
 		TableColumnModel columnModel = table.getColumnModel();
-		centrar.setHorizontalAlignment(SwingConstants.CENTER); 		
+		centrar.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < nombreColumna.length; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
-		
-		
+
 		columnModel.getColumn(0).setPreferredWidth(65);
 		columnModel.getColumn(1).setPreferredWidth(149);
 		columnModel.getColumn(2).setPreferredWidth(80);
@@ -421,59 +464,60 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(7).setPreferredWidth(150);
 		columnModel.getColumn(8).setPreferredWidth(80);
 		columnModel.getColumn(9).setPreferredWidth(135);
-		
+
 	}
+
 	private void loadTablaRNC() {
 		ArrayList<Solicitud> lista = new ArrayList<>();
 		lista = BolsaLaboral.getInstance().RetornaSolicitudEmp(empresaListar);
 		System.out.println(lista.size());
-		
-		String[] nombreColumna = { "Código", "Empresa","Solicitado" ,"Vacantes", "Experiencia", "Rango Edad", "Contrato","Vehiculo", "Provincia", "Reubicación" };
+
+		String[] nombreColumna = { "Código", "Empresa", "Solicitado", "Vacantes", "Experiencia", "Rango Edad",
+				"Contrato", "Vehiculo", "Provincia", "Reubicación" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitud soli : lista) {
 			fila[0] = soli.getCodigo();
 			fila[1] = soli.getEmpresa().getNombre();
-			if(soli instanceof SolicitudUniversitario){
+			if (soli instanceof SolicitudUniversitario) {
 				fila[2] = "Universitario";
 			}
-			if(soli instanceof SolicitudTecnico){
+			if (soli instanceof SolicitudTecnico) {
 				fila[2] = "Técnico";
 			}
-			if(soli instanceof SolicitudObrero){
+			if (soli instanceof SolicitudObrero) {
 				fila[2] = "Obrero";
 			}
 			fila[3] = soli.getCantVacantes();
-			fila[4]=soli.getAnnosExperiencia();
+			fila[4] = soli.getAnnosExperiencia();
 			String min = Integer.toString(soli.getEdadMin());
 			String max = Integer.toString(soli.getEdadMax());
-			fila[5] = min+" - "+max;
+			fila[5] = min + " - " + max;
 			fila[6] = soli.getTipoContrato();
-			if(soli.isVehiculoPropio()){
+			if (soli.isVehiculoPropio()) {
 				fila[7] = "Si";
-			}else{
+			} else {
 				fila[7] = "No";
 			}
 			fila[8] = soli.getLocalidad();
-			if(soli.isMudarse()){
+			if (soli.isMudarse()) {
 				fila[9] = "Si";
-			}else{
+			} else {
 				fila[9] = "No";
 			}
-			modeloTabla.addRow(fila);		
-			
-			
+			modeloTabla.addRow(fila);
+
 		}
 		table.setModel(modeloTabla);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getTableHeader().setReorderingAllowed(false);
 		TableColumnModel columnModel = table.getColumnModel();
-		centrar.setHorizontalAlignment(SwingConstants.CENTER); 		
+		centrar.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < nombreColumna.length; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
-		
+
 		columnModel.getColumn(0).setPreferredWidth(65);
 		columnModel.getColumn(1).setPreferredWidth(180);
 		columnModel.getColumn(2).setPreferredWidth(110);
@@ -484,11 +528,7 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(7).setPreferredWidth(60);
 		columnModel.getColumn(8).setPreferredWidth(110);
 		columnModel.getColumn(9).setPreferredWidth(84);
-		
-		
+
 	}
-
-
-	
 
 }

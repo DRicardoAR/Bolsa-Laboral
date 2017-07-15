@@ -389,4 +389,18 @@ public class BolsaLaboral implements Serializable {
 			return solicitudes;
 		}	
 		//Retorna solicid
+
+		public boolean EliminarSolicitud(String codigo) {
+			boolean eliminar = false;
+			Solicitud SolicitudEliminar = null;
+			for (Solicitud soli : misSolicitudes) {
+				if(soli.getCodigo().equalsIgnoreCase(codigo)){
+					SolicitudEliminar = soli;
+					eliminar = true;
+				}
+				
+			}
+			misSolicitudes.remove(SolicitudEliminar);
+			return eliminar;
+		}
 }
