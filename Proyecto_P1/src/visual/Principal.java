@@ -62,6 +62,14 @@ public class Principal extends JFrame {
 		mnCandidatos.add(mntmRegistrarCandidato);
 		
 		JMenuItem mntmListarCandidatos = new JMenuItem("Listar Solicitante");
+		mntmListarCandidatos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarSolicitante soli = new ListarSolicitante();
+				soli.setModal(true);
+				soli.setLocationRelativeTo(null);
+				soli.setVisible(true);
+			}
+		});
 		mnCandidatos.add(mntmListarCandidatos);
 		
 		JMenu mnEmpresa = new JMenu("Empresa");
