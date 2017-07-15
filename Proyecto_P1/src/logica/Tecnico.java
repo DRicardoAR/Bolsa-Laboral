@@ -9,9 +9,10 @@ public class Tecnico extends Solicitante {
 	public Tecnico(String cedula, String nombres, String apellidos, String telefono, LocalDate fechaNacimiento,
 			String nacionalidad, String sexo, String estadoCivil, String direccion, String provincia, String email,
 			boolean vehiculoPropio, int categoriaLicencia, int annosExperiencia,
-			ArrayList<String> idiomas, boolean mudarse) {
+			ArrayList<String> idiomas, boolean mudarse, String area) {
 		super(cedula, nombres, apellidos, telefono, fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
 				email, vehiculoPropio, categoriaLicencia, annosExperiencia, idiomas, mudarse);
+		this.area = area;
 		
 	}
 
