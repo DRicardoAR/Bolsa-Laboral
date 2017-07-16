@@ -12,11 +12,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.Locale.Category;
 import java.awt.event.ActionEvent;
+import javax.swing.border.TitledBorder;
 
 public class Principal extends JFrame {
 
 	private JPanel contentPane;
+	private static JPanel panelBarras;
+	
 
 	/**
 	 * Launch the application.
@@ -152,6 +156,11 @@ public class Principal extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(null);
+		
+		JPanel panelBarras = new JPanel();
+		panelBarras.setBorder(new TitledBorder(null, "Solicitantes Desempleados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelBarras.setBounds(10, 89, 363, 196);
+		panel.add(panelBarras);
 	}
-
 }

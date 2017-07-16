@@ -417,11 +417,11 @@ public class BolsaLaboral implements Serializable {
 
 	}
 
-	// Retornar cant. Universitarios contratados
-	public int contratadosU() {
+	// Retornar cant. Universitarios desempleado
+	public int desempleadoU() {
 		int cant = 0;
 		for (Solicitante soli : misSolicitantes) {
-			if (soli.isContratado()) {
+			if (!soli.isContratado()) {
 				if (soli instanceof Universitario) {
 					cant++;
 				}
@@ -429,30 +429,95 @@ public class BolsaLaboral implements Serializable {
 		}
 		return cant;
 	}
-	
-	// Retornar cant. Tecnicos contratados
-	public int contratadosT(){
+
+	// Retornar cant. Tecnicos desempleado
+	public int desempleadoT() {
 		int cant = 0;
 		for (Solicitante soli : misSolicitantes) {
-			if(soli.isContratado()){
-				if(soli instanceof Tecnico){
+			if (!soli.isContratado()) {
+				if (soli instanceof Tecnico) {
 					cant++;
 				}
 			}
 		}
 		return cant;
 	}
-	
-	// Retornar cant. Obreros contratados
-		public int contratadosO(){
-			int cant = 0;
-			for (Solicitante soli : misSolicitantes) {
-				if(soli.isContratado()){
-					if(soli instanceof Obrero){
-						cant++;
-					}
+
+	// Retornar cant. Obreros desempleado
+	public int desempleadoO() {
+		int cant = 0;
+		for (Solicitante soli : misSolicitantes) {
+			if (!soli.isContratado()) {
+				if (soli instanceof Obrero) {
+					cant++;
 				}
 			}
-			return cant;
 		}
+		return cant;
+	}
+
+	// Retorna % de Obreros Contratados
+	public float porcientoO() {
+		float cant = 0;
+		float porciento = 0;
+		float total = totalContratado();
+		for (Solicitante soli : misSolicitantes) {
+			if (soli instanceof Obrero) {
+				if (soli.isContratado()) {
+					cant++;
+				}
+			}
+		}
+		if (total != 0) {
+			porciento = (cant / total) * 100;
+		}
+		return porciento;
+	}
+
+	// Retorna % de Universitarios Contratados
+	public float porcientoU() {
+		float cant = 0;
+		float porciento = 0;
+		float total = totalContratado();
+		for (Solicitante soli : misSolicitantes) {
+			if (soli instanceof Universitario) {
+				if (soli.isContratado()) {
+					cant++;
+				}
+			}
+		}
+		if (total != 0) {
+			porciento = (cant / total) * 100;
+		}
+		return porciento;
+	}
+
+	// Retorna % de Tecnicos Contratados
+	public float porcientoT() {
+		float cant = 0;
+		float porciento = 0;
+		float total = totalContratado();
+		for (Solicitante soli : misSolicitantes) {
+			if (soli instanceof Tecnico) {
+				if (soli.isContratado()) {
+					cant++;
+				}
+			}
+		}
+		if (total != 0) {
+			porciento = (cant / total) * 100;
+		}
+		return porciento;
+	}
+
+	// Retorna total de contratados
+	public int totalContratado() {
+		int cant = 0;
+		for (Solicitante soli : misSolicitantes) {
+			if (soli.isContratado()) {
+				cant++;
+			}
+		}
+		return cant;
+	}
 }
