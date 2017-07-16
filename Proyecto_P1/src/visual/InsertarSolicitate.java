@@ -108,10 +108,11 @@ public class InsertarSolicitate extends JDialog {
 	private DefaultListModel<String> modeloHabilidad = new DefaultListModel<>();
 	private boolean error = false;
 	private boolean estado = false;
+	private Solicitante modiS = null;
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		try {
 			InsertarSolicitate dialog = new InsertarSolicitate();
@@ -125,7 +126,7 @@ public class InsertarSolicitate extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public InsertarSolicitate() {
+	public InsertarSolicitate(String title, boolean modificar, Solicitante solicitante) {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
@@ -134,6 +135,7 @@ public class InsertarSolicitate extends JDialog {
 			}
 
 		});
+		modiS = solicitante;
 		try {
 			telefono = new MaskFormatter("(###)-###-####");
 			cedula = new MaskFormatter("###-#######-#");
@@ -141,7 +143,7 @@ public class InsertarSolicitate extends JDialog {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		setTitle("Registrar Solicitante");
+		setTitle(title);
 		setBounds(100, 100, 626, 460);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
