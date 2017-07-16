@@ -39,11 +39,11 @@ import java.awt.event.MouseEvent;
 public class ListarSolicitud extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
+	private static JTable table;
 	private static Object[] fila;
 	private static DefaultTableModel modeloTabla;
 	private static DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
-	private JComboBox cbxfiltro;
+	public static JComboBox cbxfiltro;
 	private Empresa empresaListar = null;
 	private JFormattedTextField ftxtRNCempresa;
 	private JButton btnModificar;
@@ -229,7 +229,7 @@ public class ListarSolicitud extends JDialog {
 		}
 	}
 
-	public void loadtabla(int i) {
+	public static void loadtabla(int i) {
 		if (i == 0) {
 			loadAll();
 		}
@@ -246,7 +246,7 @@ public class ListarSolicitud extends JDialog {
 
 	}
 
-	private void loadAll() {
+	private static void loadAll() {
 		String[] nombreColumna = { "Código", "Empresa", "Solicitado", "Vacantes", "Experiencia", "Rango Edad",
 				"Contrato", "Vehiculo", "Provincia", "Reubicación" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
@@ -304,7 +304,7 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(9).setPreferredWidth(84);
 	}
 
-	private void loadUniversitario() {
+	private static void loadUniversitario() {
 		String[] nombreColumna = { "Código", "Empresa", "Vacantes", "Experiencia", "Rango Edad", "Contrato", "Vehiculo",
 				"Provincia", "Reubicación", "Carrera", "PostGrado" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
@@ -364,7 +364,7 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(10).setPreferredWidth(80);
 	}
 
-	private void loadTecnico() {
+	private static void loadTecnico() {
 		String[] nombreColumna = { "Código", "Empresa", "Vacantes", "Experiencia", "Rango Edad", "Contrato", "Vehiculo",
 				"Provincia", "Reubicación", "Area" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
@@ -420,7 +420,7 @@ public class ListarSolicitud extends JDialog {
 
 	}
 
-	private void loadObrero() {
+	private static void loadObrero() {
 		String[] nombreColumna = { "Código", "Empresa", "Vacantes", "Experiencia", "Rango Edad", "Contrato", "Vehiculo",
 				"Provincia", "Reubicación", "Habilidades" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);

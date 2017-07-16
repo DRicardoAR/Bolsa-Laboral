@@ -84,7 +84,6 @@ public class InsertarSolicitud extends JDialog {
 	private BolsaLaboral bolsa = BolsaLaboral.getInstance();
 	private Empresa empresa;
 	private Solicitud modificarSoli = null;
-	
 
 	public InsertarSolicitud(Solicitud modi) {
 		modificarSoli = modi;
@@ -92,8 +91,7 @@ public class InsertarSolicitud extends JDialog {
 			@Override
 			public void windowActivated(WindowEvent e) {
 				if (modificarSoli == null) {
-					
-					
+
 					if (rbtnUniversitario.isSelected()) {
 						rbtnUniversitario.setSelected(true);
 						panelTecnico.setVisible(false);
@@ -131,10 +129,10 @@ public class InsertarSolicitud extends JDialog {
 					spnEdadMinima.setValue(modi.getEdadMin());
 					spnEdadMaxima.setValue(modi.getEdadMax());
 					cargarIdiomaModi();
-					
+
 					for (String string : modi.getIdiomas()) {
 						System.out.println(string);
-						
+
 					}
 
 					if (modificarSoli instanceof SolicitudUniversitario) {
@@ -194,11 +192,10 @@ public class InsertarSolicitud extends JDialog {
 			misIdiomas = new ArrayList<>();
 			misHabilidades = new ArrayList<>();
 			misIdiomas = modificarSoli.getIdiomas();
-			if(modificarSoli instanceof SolicitudObrero){
-				misHabilidades = ((SolicitudObrero)modificarSoli).getHabilidades();
-				
+			if (modificarSoli instanceof SolicitudObrero) {
+				misHabilidades = ((SolicitudObrero) modificarSoli).getHabilidades();
+
 			}
-			
 
 		}
 
@@ -811,49 +808,67 @@ public class InsertarSolicitud extends JDialog {
 								}
 
 							}
+							//////MODIFICAR
 						} else {
+							
 							modificarSoli.setTipoContrato((String) cbxContrato.getSelectedItem());
-							if(rbtnReubicacionSi.isSelected()){
+							
+							if (rbtnReubicacionSi.isSelected()) {
 								modificarSoli.setMudarse(true);
-							}else{
+							} else {
 								modificarSoli.setMudarse(false);
 							}
-							if(rbtnVehiculoSi.isSelected()){
+							if (rbtnVehiculoSi.isSelected()) {
 								modificarSoli.setVehiculoPropio(true);
 								modificarSoli.setCategoriaLicencia((int) cbxLicencia.getSelectedIndex());
-							}else{
-								modificarSoli.setVehiculoPropio(false);									
+							} else {
+								modificarSoli.setVehiculoPropio(false);
 							}
 							modificarSoli.setCantVacantes((int) spnVacantes.getValue());
 							modificarSoli.setLocalidad((String) cbxLocalidad.getSelectedItem());
-							modificarSoli.setEdadMin((int)spnEdadMinima.getValue());
-							modificarSoli.setEdadMax((int)spnEdadMaxima.getValue());
+							modificarSoli.setEdadMin((int) spnEdadMinima.getValue());
+							modificarSoli.setEdadMax((int) spnEdadMaxima.getValue());
 							modificarSoli.setIdiomas(misIdiomas);
-							if(modi instanceof SolicitudUniversitario){
+							if (modi instanceof SolicitudUniversitario) {
 								modificarSoli.setAnnosExperiencia((int) spnUniversitarioExperiencia.getValue());
-								((SolicitudUniversitario)modificarSoli).setCarrera((String) cbxCarrera.getSelectedItem());
-								if(rbtnPostGradoSi.isSelected()){
-									((SolicitudUniversitario)modificarSoli).setPostGrado(true);
-								}else{
-									((SolicitudUniversitario)modificarSoli).setPostGrado(false);									
+								((SolicitudUniversitario) modificarSoli)
+										.setCarrera((String) cbxCarrera.getSelectedItem());
+								if (rbtnPostGradoSi.isSelected()) {
+									((SolicitudUniversitario) modificarSoli).setPostGrado(true);
+								} else {
+									((SolicitudUniversitario) modificarSoli).setPostGrado(false);
 								}
-								
-							}else if(modi instanceof SolicitudTecnico){
+
+							} else if (modi instanceof SolicitudTecnico) {
 								modificarSoli.setAnnosExperiencia((int) spnTecnicoExperiencia.getValue());
-								((SolicitudTecnico)modificarSoli).setArea((String) cbxArea.getSelectedItem());
-								
-							}else if(modi instanceof SolicitudObrero){
+								((SolicitudTecnico) modificarSoli).setArea((String) cbxArea.getSelectedItem());
+
+							} else if (modi instanceof SolicitudObrero) {
 								modificarSoli.setAnnosExperiencia((int) spnObreroExperiencia.getValue());
-								((SolicitudObrero)modificarSoli).setHabilidades(misHabilidades);
-								
+								((SolicitudObrero) modificarSoli).setHabilidades(misHabilidades);
+
 							}
 							BolsaLaboral.getInstance().ActualizarSolicitud(modi, modificarSoli);
-							JOptionPane.showMessageDialog(null, "La Solicitud se modifico correctamente",
-									"Información", JOptionPane.INFORMATION_MESSAGE, null);
-							
+							JOptionPane.showMessageDialog(null, "La Solicitud se modifico correctamente", "Información",
+									JOptionPane.INFORMATION_MESSAGE, null);
+							if (ListarSolicitud.cbxfiltro.getSelectedIndex() == 0) {
+								ListarSolicitud.loadtabla(0);
+							}
+							if (ListarSolicitud.cbxfiltro.getSelectedIndex() == 1) {
+								ListarSolicitud.loadtabla(1);
+
+							}
+							if (ListarSolicitud.cbxfiltro.getSelectedIndex() == 2) {
+								ListarSolicitud.loadtabla(2);
+
+							}
+							if (ListarSolicitud.cbxfiltro.getSelectedIndex() == 3) {
+								ListarSolicitud.loadtabla(3);
+
+							}
+
 							dispose();
-							
-							
+
 						}
 
 					}
@@ -920,7 +935,6 @@ public class InsertarSolicitud extends JDialog {
 
 	private void cargarIdiomaModi() {
 		DefaultListModel idioma = new DefaultListModel();
-		System.out.println("tamoano"+modificarSoli.getIdiomas().size());
 		for (String idio : modificarSoli.getIdiomas()) {
 			idioma.addElement(idio);
 

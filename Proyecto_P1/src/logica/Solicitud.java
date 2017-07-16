@@ -100,7 +100,7 @@ public abstract class Solicitud implements Serializable{
 	}
 
 	public void setTipoContrato(String tipoContrato) {
-		tipoContrato = tipoContrato;
+		this.tipoContrato = tipoContrato;
 	}
 
 	public boolean isVehiculoPropio() {
