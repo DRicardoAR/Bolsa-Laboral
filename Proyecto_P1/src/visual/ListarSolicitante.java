@@ -107,7 +107,7 @@ public class ListarSolicitante extends JDialog {
 			
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			scrollPane.setBounds(10, 68, 822, 343);
+			scrollPane.setBounds(10, 68, 848, 343);
 			panel.add(scrollPane);
 			{
 			table = new JTable();
@@ -247,18 +247,50 @@ public static void loadTabla(String seleccion){
 				table.getTableHeader().setReorderingAllowed(false);
 				TableColumnModel modeloColumna = table.getColumnModel();
 				modeloColumna.getColumn(0).setPreferredWidth(100);
-				modeloColumna.getColumn(1).setPreferredWidth(130);
-				modeloColumna.getColumn(2).setPreferredWidth(120);
-				modeloColumna.getColumn(3).setPreferredWidth(100);
+				modeloColumna.getColumn(1).setPreferredWidth(150);
+				modeloColumna.getColumn(2).setPreferredWidth(110);
+				modeloColumna.getColumn(3).setPreferredWidth(110);
 				modeloColumna.getColumn(4).setPreferredWidth(160);
 				modeloColumna.getColumn(5).setPreferredWidth(100);
-				modeloColumna.getColumn(6).setPreferredWidth(120);
+				modeloColumna.getColumn(6).setPreferredWidth(140);
 			}
 			
 		}
 	}
 	
 	public void loadTablaO(){
+		//Falta informacion clave sobre los obreros<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Carrera", "Años de Experiencia","Teléfono","E-Mail"};
+		modeloTabla.setColumnIdentifiers(nombreColumna);
+		modeloTabla.setRowCount(0);
+		fila = new Object[modeloTabla.getColumnCount()];
+		for (Solicitante soli : BolsaLaboral.getInstance().getMisPersonas()) {
+			if(soli instanceof Obrero){
+				fila[0] = soli.getCedula();
+				fila[1] = soli.getNombres() + " " + soli.getApellidos();
+				fila[2] = soli.getEdad()+" años";
+				fila[3] = "";
+				fila[4] = soli.getAnnosExperiencia()+" años";
+				fila[5] = soli.getTelefono();
+				fila[6] = soli.getEmail();
+				modeloTabla.addRow(fila);
+				
+				table.setModel(modeloTabla);
+				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+				table.getTableHeader().setReorderingAllowed(false);
+				TableColumnModel modeloColumna = table.getColumnModel();
+				modeloColumna.getColumn(0).setPreferredWidth(90);
+				modeloColumna.getColumn(1).setPreferredWidth(140);
+				modeloColumna.getColumn(2).setPreferredWidth(110);
+				modeloColumna.getColumn(3).setPreferredWidth(100);
+				modeloColumna.getColumn(4).setPreferredWidth(160);
+				modeloColumna.getColumn(5).setPreferredWidth(100);
+				modeloColumna.getColumn(6).setPreferredWidth(140);
+			}
+			
+		}
+	}
+	public void loadTablaT(){
 		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Carrera", "Años de Experiencia","Teléfono","E-Mail"};
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
@@ -279,8 +311,8 @@ public static void loadTabla(String seleccion){
 				table.getTableHeader().setReorderingAllowed(false);
 				TableColumnModel modeloColumna = table.getColumnModel();
 				modeloColumna.getColumn(0).setPreferredWidth(90);
-				modeloColumna.getColumn(1).setPreferredWidth(120);
-				modeloColumna.getColumn(2).setPreferredWidth(120);
+				modeloColumna.getColumn(1).setPreferredWidth(140);
+				modeloColumna.getColumn(2).setPreferredWidth(110);
 				modeloColumna.getColumn(3).setPreferredWidth(100);
 				modeloColumna.getColumn(4).setPreferredWidth(160);
 				modeloColumna.getColumn(5).setPreferredWidth(100);

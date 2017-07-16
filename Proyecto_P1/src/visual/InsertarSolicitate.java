@@ -875,6 +875,7 @@ public class InsertarSolicitate extends JDialog {
 										fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia, email,
 										vehiculoP, licencia, annos, misIdiomas, mudarse, misHabilidades);
 								BolsaLaboral.getInstance().insertSolicitante(solicitante);
+								estado = false;
 								clean();
 							}
 						}
@@ -886,6 +887,7 @@ public class InsertarSolicitate extends JDialog {
 										vehiculoP, licencia, annos, misIdiomas, mudarse, false,
 										cbxCarrera.getSelectedItem().toString());
 								BolsaLaboral.getInstance().insertSolicitante(solicitante);
+								estado = false;
 								clean();
 
 							}
@@ -898,7 +900,9 @@ public class InsertarSolicitate extends JDialog {
 										vehiculoP, licencia, annos, misIdiomas, mudarse,
 										cbxAreaTecnico.getSelectedItem().toString());
 								BolsaLaboral.getInstance().insertSolicitante(solicitante);
+								estado = false;
 								clean();
+								
 							}
 						}
 					}
@@ -1060,12 +1064,6 @@ public class InsertarSolicitate extends JDialog {
 					for (;;) {
 
 						if (estado) {
-							rdbObrero.setSelected(true);
-							rdbTecnico.setSelected(false);
-							rdbUniversitario.setSelected(false);
-							panel_Obreo.setVisible(true);
-							panel_Tecnico.setVisible(false);
-							panel_Universitario.setVisible(false);
 							panel1.setVisible(false);
 							panel2.setVisible(true);
 							btnMover.setText("<< Retroceder");
