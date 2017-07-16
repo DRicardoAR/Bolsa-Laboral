@@ -403,4 +403,13 @@ public class BolsaLaboral implements Serializable {
 			misSolicitudes.remove(SolicitudEliminar);
 			return eliminar;
 		}
+		//Actualizar una solicitud cuando se modifica
+		public void ActualizarSolicitud(Solicitud modi, Solicitud modificarSoli) {
+			int index = 0;
+			if(misSolicitudes.contains(modi)){
+				index = misSolicitudes.indexOf(modi);
+			}
+			misSolicitudes.set(index, modificarSoli);
+			
+		}
 }

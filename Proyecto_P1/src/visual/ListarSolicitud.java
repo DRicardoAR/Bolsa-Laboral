@@ -165,7 +165,7 @@ public class ListarSolicitud extends JDialog {
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						empresaListar = BolsaLaboral.getInstance().RetornarEmpresa(ftxtRNCempresa.getText());
-						cbxfiltro.setSelectedIndex(0);
+						
 
 						if (empresaListar != null) {
 							loadTablaRNC();
@@ -479,8 +479,6 @@ public class ListarSolicitud extends JDialog {
 	private void loadTablaRNC() {
 		ArrayList<Solicitud> lista = new ArrayList<>();
 		lista = BolsaLaboral.getInstance().RetornaSolicitudEmp(empresaListar);
-		System.out.println(lista.size());
-
 		String[] nombreColumna = { "Código", "Empresa", "Solicitado", "Vacantes", "Experiencia", "Rango Edad",
 				"Contrato", "Vehiculo", "Provincia", "Reubicación" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);

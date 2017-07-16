@@ -812,7 +812,48 @@ public class InsertarSolicitud extends JDialog {
 
 							}
 						} else {
-							System.out.println("Vamos a modificar entonces");
+							modificarSoli.setTipoContrato((String) cbxContrato.getSelectedItem());
+							if(rbtnReubicacionSi.isSelected()){
+								modificarSoli.setMudarse(true);
+							}else{
+								modificarSoli.setMudarse(false);
+							}
+							if(rbtnVehiculoSi.isSelected()){
+								modificarSoli.setVehiculoPropio(true);
+								modificarSoli.setCategoriaLicencia((int) cbxLicencia.getSelectedIndex());
+							}else{
+								modificarSoli.setVehiculoPropio(false);									
+							}
+							modificarSoli.setCantVacantes((int) spnVacantes.getValue());
+							modificarSoli.setLocalidad((String) cbxLocalidad.getSelectedItem());
+							modificarSoli.setEdadMin((int)spnEdadMinima.getValue());
+							modificarSoli.setEdadMax((int)spnEdadMaxima.getValue());
+							modificarSoli.setIdiomas(misIdiomas);
+							if(modi instanceof SolicitudUniversitario){
+								modificarSoli.setAnnosExperiencia((int) spnUniversitarioExperiencia.getValue());
+								((SolicitudUniversitario)modificarSoli).setCarrera((String) cbxCarrera.getSelectedItem());
+								if(rbtnPostGradoSi.isSelected()){
+									((SolicitudUniversitario)modificarSoli).setPostGrado(true);
+								}else{
+									((SolicitudUniversitario)modificarSoli).setPostGrado(false);									
+								}
+								
+							}else if(modi instanceof SolicitudTecnico){
+								modificarSoli.setAnnosExperiencia((int) spnTecnicoExperiencia.getValue());
+								((SolicitudTecnico)modificarSoli).setArea((String) cbxArea.getSelectedItem());
+								
+							}else if(modi instanceof SolicitudObrero){
+								modificarSoli.setAnnosExperiencia((int) spnObreroExperiencia.getValue());
+								((SolicitudObrero)modificarSoli).setHabilidades(misHabilidades);
+								
+							}
+							BolsaLaboral.getInstance().ActualizarSolicitud(modi, modificarSoli);
+							JOptionPane.showMessageDialog(null, "La Solicitud se modifico correctamente",
+									"Información", JOptionPane.INFORMATION_MESSAGE, null);
+							
+							dispose();
+							
+							
 						}
 
 					}
