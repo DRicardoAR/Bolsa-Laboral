@@ -291,16 +291,16 @@ public static void loadTabla(String seleccion){
 		}
 	}
 	public void loadTablaT(){
-		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Carrera", "Años de Experiencia","Teléfono","E-Mail"};
+		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Área", "Años de Experiencia","Teléfono","E-Mail"};
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitante soli : BolsaLaboral.getInstance().getMisPersonas()) {
-			if(soli instanceof Universitario){
+			if(soli instanceof Tecnico){
 				fila[0] = soli.getCedula();
 				fila[1] = soli.getNombres() + " " + soli.getApellidos();
 				fila[2] = soli.getEdad()+" años";
-				fila[3] = ((Universitario) soli).getCarrera();
+				fila[3] = ((Tecnico) soli).getArea();
 				fila[4] = soli.getAnnosExperiencia()+" años";
 				fila[5] = soli.getTelefono();
 				fila[6] = soli.getEmail();
