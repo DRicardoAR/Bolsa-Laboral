@@ -43,20 +43,20 @@ import java.awt.event.MouseEvent;
 public class Macheo extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private JTable table;
 	private static Object[] fila;
-	private static String[] columnNames = {"Código","Vacantes","Rango Edad","Localidad","Experiencia"};
+	private static String[] columnNames = { "Código", "Vacantes", "Rango Edad", "Localidad", "Experiencia" };
 	private static DefaultTableModel modelo;
 	private static DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
 	private JFormattedTextField ftxtRNC;
-	BolsaLaboral bolsa = BolsaLaboral.getInstance();
 	Empresa miEmpresa = null;
 	private JTextField txtNombreEmpresa;
-	private JTable table;
-	private String cod;
 	private JButton btnCandidatos;
 	private DefaultListModel<String> model;
 	private JList list;
-	private ArrayList<Solicitante> misSolicitantesC= new ArrayList<Solicitante>();
+	private String codigo = "";
+	private ArrayList<Solicitante> misSolicitantesC = new ArrayList<Solicitante>();
+
 	/**
 	 * Launch the application.
 	 */
@@ -72,7 +72,8 @@ public class Macheo extends JDialog {
 
 	/**
 	 * Create the dialog.
-	 * @throws ParseException 
+	 * 
+	 * @throws ParseException
 	 */
 	public Macheo() throws ParseException {
 		setTitle("Macheo");
@@ -95,7 +96,8 @@ public class Macheo extends JDialog {
 				{
 					JPanel panel_2 = new JPanel();
 					panel_2.setLayout(null);
-					panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Empresa", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+					panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Empresa",
+							TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 					panel_2.setBounds(10, 11, 505, 400);
 					panel_1.add(panel_2);
 					{
@@ -124,14 +126,15 @@ public class Macheo extends JDialog {
 						JButton button = new JButton("");
 						button.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								if(bolsa.RetornarEmpresa(ftxtRNC.getText()) != null ){
-									miEmpresa = bolsa.RetornarEmpresa(ftxtRNC.getText());
+								if (BolsaLaboral.getInstance().RetornarEmpresa(ftxtRNC.getText()) != null) {
+									miEmpresa = BolsaLaboral.getInstance().RetornarEmpresa(ftxtRNC.getText());
 									txtNombreEmpresa.setText(miEmpresa.getNombre());
-								}else{
-									JOptionPane.showMessageDialog(null, "No se encontro una empresa con el RNC digitado.", "Información", JOptionPane.WARNING_MESSAGE, null);
+								} else {
+									JOptionPane.showMessageDialog(null,
+											"No se encontro una empresa con el RNC digitado.", "Información",
+											JOptionPane.WARNING_MESSAGE, null);
 								}
-								
-								
+
 							}
 						});
 						button.setBounds(205, 32, 24, 21);
@@ -142,26 +145,29 @@ public class Macheo extends JDialog {
 						scrollPane.addMouseListener(new MouseAdapter() {
 							@Override
 							public void mouseClicked(MouseEvent arg0) {
-								int aux = table.getSelectedRow();
-								if(aux > -1){
-									btnCandidatos.setEnabled(true);
-									cod= (String) table.getModel().getValueAt(aux, 0);
-								}else{
-									 String cod="";
-									btnCandidatos.setEnabled(false);
-								}
-								
+
 							}
 						});
 						scrollPane.setBounds(10, 118, 469, 230);
 						panel_2.add(scrollPane);
 						{
 							table = new JTable();
-							modelo = new DefaultTableModel();
-													
-							
+							table.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									int aux = table.getSelectedRow();
+									if (aux > -1) {
+										btnCandidatos.setEnabled(true);
+										codigo = (String) table.getModel().getValueAt(aux, 0);
+									} else {
+										codigo = "";
+										btnCandidatos.setEnabled(false);
+									}
+								}
+							});
+							modelo = new DefaultTableModel();							
 							table.setModel(modelo);
-							loadTable();		
+							loadTable();
 							scrollPane.setViewportView(table);
 						}
 					}
@@ -184,7 +190,7 @@ public class Macheo extends JDialog {
 					}
 					{
 						MaskFormatter mascara = new MaskFormatter("##########");
-						 ftxtRNC = new JFormattedTextField(mascara);
+						ftxtRNC = new JFormattedTextField(mascara);
 						ftxtRNC.setBounds(63, 32, 140, 21);
 						panel_2.add(ftxtRNC);
 					}
@@ -198,7 +204,8 @@ public class Macheo extends JDialog {
 				{
 					JPanel panel_2 = new JPanel();
 					panel_2.setLayout(null);
-					panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Solicitantes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+					panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
+							"Solicitantes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 					panel_2.setBounds(525, 11, 311, 400);
 					panel_1.add(panel_2);
 					{
@@ -233,50 +240,50 @@ public class Macheo extends JDialog {
 	}
 
 	private void loadTable() {
-		modelo.setColumnIdentifiers(columnNames);	
+		
+		modelo.setColumnIdentifiers(columnNames);
 		modelo.setRowCount(0);
 		fila = new Object[modelo.getColumnCount()];
-for (Solicitud soli : bolsa.RetornaSolicitudEmp(miEmpresa)) {
-	
-			fila[0] =soli.getCodigo();
-			fila[1] = soli.getCantVacantes();
-			String min= Integer.toString(soli.getEdadMin());
-			String max= Integer.toString(soli.getEdadMax());
-			String rango= max + "-" +min;
-			fila[3] = rango;
-			fila[4] = soli.getLocalidad();
-			fila[5] = soli.getAnnosExperiencia();
-					
-			
-
-	modelo.addRow(fila);
-	
-	
-}
-		TableColumnModel columnModel = table.getColumnModel();	
-		centrar.setHorizontalAlignment(SwingConstants.CENTER); 
 		
+		for (Solicitud soli : BolsaLaboral.getInstance().getMisSolicitudes()) {
+
+			fila[0] = soli.getCodigo();
+			fila[1] = soli.getCantVacantes();
+			String min = Integer.toString(soli.getEdadMin());
+			String max = Integer.toString(soli.getEdadMax());
+			String rango = max + "-" + min;
+			fila[2] = rango;
+			fila[3] = soli.getLocalidad();
+			fila[4] = soli.getAnnosExperiencia();
+
+			modelo.addRow(fila);
+
+		}
+		TableColumnModel columnModel = table.getColumnModel();
+		centrar.setHorizontalAlignment(SwingConstants.CENTER);
+
 		for (int i = 0; i < columnNames.length; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
-		}		
+		}
 		columnModel.getColumn(0).setPreferredWidth(80);
 		columnModel.getColumn(1).setPreferredWidth(80);
 		columnModel.getColumn(2).setPreferredWidth(106);
 		columnModel.getColumn(3).setPreferredWidth(120);
 		columnModel.getColumn(4).setPreferredWidth(80);
-		
+
 	}
-	
-	public void solicitantes(){
-		Solicitud miSolicitudc = bolsa.RetornarSolocitudCod(cod);
-		misSolicitantesC.addAll(bolsa.matcheo(miSolicitudc));
+
+	public void solicitantes() {
+		Solicitud miSolicitudc = BolsaLaboral.getInstance().RetornarSolocitudCod(codigo);
+		misSolicitantesC.addAll(BolsaLaboral.getInstance().matcheo(miSolicitudc));
 	}
-	public void cargarSolicitante(){
+
+	public void cargarSolicitante() {
 		for (Solicitante soli : misSolicitantesC) {
-			String nombre= soli.getCedula()+" "+soli.getNombres()+" "+soli.getApellidos();
+			String nombre = soli.getCedula() + " " + soli.getNombres() + " " + soli.getApellidos();
 			model.addElement(nombre);
 		}
 		list.setModel(model);
 	}
-	
+
 }
