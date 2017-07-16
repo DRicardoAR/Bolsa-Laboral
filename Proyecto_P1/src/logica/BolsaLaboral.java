@@ -29,7 +29,7 @@ public class BolsaLaboral implements Serializable {
 		this.misEmpresas = new ArrayList<>();
 		this.misSolicitantes = new ArrayList<>();
 		this.misSolicitudes = new ArrayList<>();
-		
+
 	}
 
 	public ArrayList<Empresa> getMisEmpresas() {
@@ -168,7 +168,7 @@ public class BolsaLaboral implements Serializable {
 	// Funciones de Matching
 	public boolean validarGeneral(Solicitante persona, Solicitud solicitud) {
 		boolean valido = false;
-		if (persona.contratado==false) {
+		if (persona.contratado == false) {
 			if (persona.isVehiculoPropio() == solicitud.isVehiculoPropio()) {
 				if (persona.isMudarse() == solicitud.isMudarse()) {
 					if (persona.getCategoriaLicencia() >= solicitud.getCategoriaLicencia()) {
@@ -196,19 +196,19 @@ public class BolsaLaboral implements Serializable {
 	// Validacion Obrero con solicitud
 	private boolean ValidarObrero(Solicitante solicitante, Solicitud solicitud) {
 		boolean validar = false;
-		
+
 		ArrayList<String> listaSolicitud = ((SolicitudObrero) solicitud).getHabilidades();
 		ArrayList<String> listaObrero = ((Obrero) solicitante).getHabilidades();
-		
+
 		if (listaSolicitud.size() == listaSolicitud.size()) {
 			for (String habilidadObrero : listaSolicitud) {
-				if(listaObrero.contains(habilidadObrero)){					
-					validar = true;				
-			}else{
-				validar = false;
+				if (listaObrero.contains(habilidadObrero)) {
+					validar = true;
+				} else {
+					validar = false;
+				}
 			}
-			}
-			
+
 		}
 		return validar;
 	}
@@ -227,7 +227,7 @@ public class BolsaLaboral implements Serializable {
 		boolean validar = false;
 		if (((Universitario) solicitante).getCarrera().equalsIgnoreCase(((SolicitudUniversitario) soli).getCarrera())) {
 			validar = true;
-			if(((Universitario) solicitante).isPostGrado() && !((SolicitudUniversitario) soli).isPostGrado()){
+			if (((Universitario) solicitante).isPostGrado() && !((SolicitudUniversitario) soli).isPostGrado()) {
 				validar = true;
 			}
 		}
@@ -238,13 +238,12 @@ public class BolsaLaboral implements Serializable {
 	public boolean validarIdiomas(Solicitante persona, Solicitud soli) {
 		boolean aux = false;
 		for (String idiomas : soli.getIdiomas()) {
-		if(persona.getIdiomas().contains(idiomas)){
-			aux = true;
-		}else {
-			aux = false;
-		}	
+			if (persona.getIdiomas().contains(idiomas)) {
+				aux = true;
+			} else {
+				aux = false;
+			}
 		}
-		
 
 		return aux;
 	}
@@ -297,11 +296,12 @@ public class BolsaLaboral implements Serializable {
 
 		return misContratados;
 	}
-// Escritura & Lectura Binarios
-	public void esribirBolsa(){
+
+	// Escritura & Lectura Binarios
+	public void esribirBolsa() {
 		FileOutputStream bolsaFile = null;
 		ObjectOutputStream bolsaOut = null;
-		
+
 		try {
 			bolsaFile = new FileOutputStream(archivo);
 		} catch (FileNotFoundException e) {
@@ -314,7 +314,7 @@ public class BolsaLaboral implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
 			bolsaOut.writeObject(bolsa);
 		} catch (IOException e) {
@@ -322,7 +322,8 @@ public class BolsaLaboral implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	public void leerBolsa(){
+
+	public void leerBolsa() {
 		FileInputStream bolsaFile = null;
 		ObjectInputStream bolsaIn = null;
 		try {
@@ -342,74 +343,116 @@ public class BolsaLaboral implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	//validacion de Email
-		public boolean validarEmail(String email){
-		       Pattern patt = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-		       Matcher match = patt.matcher(email);
-		       if(!match.find()){
-		    	   return true;
-		       }else {
-		    	   return false;
-		       }
-		}
-		//Retornar una empresa dado un RNC
-		public Empresa RetornarEmpresa(String RNC){
-			Empresa miEmpresa = null;
-			for (Empresa empresa : misEmpresas) {
-				if(empresa.getRNC().equalsIgnoreCase(RNC)){
-					miEmpresa = empresa;
-				}				
-			}
-			
-			return miEmpresa;
-		}
-		
-		//Retornar Solicotud dado su codigo
-		public Solicitud RetornarSolocitudCod(String codigo){
-			Solicitud miSolicitud = null;
-			for (Solicitud solicitud : misSolicitudes) {
-				if(solicitud.getCodigo().equalsIgnoreCase(codigo)){
-					miSolicitud = solicitud;
-				}
-				
-			}
-			return miSolicitud;
-		}
-		
-		//Retorna todas las solicitudes de una empresa
-		
-		public ArrayList<Solicitud> RetornaSolicitudEmp(Empresa emp){
-			ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>();
-			for (Solicitud solicitud : misSolicitudes) {
-				if(solicitud.getEmpresa().getRNC().equalsIgnoreCase(emp.getRNC())){
-					solicitudes.add(solicitud);
-				}
-				
-			}
-			return solicitudes;
-		}	
-		//Retorna solicid
 
-		public boolean EliminarSolicitud(String codigo) {
-			boolean eliminar = false;
-			Solicitud SolicitudEliminar = null;
-			for (Solicitud soli : misSolicitudes) {
-				if(soli.getCodigo().equalsIgnoreCase(codigo)){
-					SolicitudEliminar = soli;
-					eliminar = true;
-				}
-				
-			}
-			misSolicitudes.remove(SolicitudEliminar);
-			return eliminar;
+	// validacion de Email
+	public boolean validarEmail(String email) {
+		Pattern patt = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		Matcher match = patt.matcher(email);
+		if (!match.find()) {
+			return true;
+		} else {
+			return false;
 		}
-		//Actualizar una solicitud cuando se modifica
-		public void ActualizarSolicitud(Solicitud modi, Solicitud modificarSoli) {
-			int index = 0;
-			if(misSolicitudes.contains(modi)){
-				index = misSolicitudes.indexOf(modi);
+	}
+
+	// Retornar una empresa dado un RNC
+	public Empresa RetornarEmpresa(String RNC) {
+		Empresa miEmpresa = null;
+		for (Empresa empresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(RNC)) {
+				miEmpresa = empresa;
 			}
-			misSolicitudes.set(index, modificarSoli);
-			
+		}
+
+		return miEmpresa;
+	}
+
+	// Retornar Solicotud dado su codigo
+	public Solicitud RetornarSolocitudCod(String codigo) {
+		Solicitud miSolicitud = null;
+		for (Solicitud solicitud : misSolicitudes) {
+			if (solicitud.getCodigo().equalsIgnoreCase(codigo)) {
+				miSolicitud = solicitud;
+			}
+
+		}
+		return miSolicitud;
+	}
+
+	// Retorna todas las solicitudes de una empresa
+
+	public ArrayList<Solicitud> RetornaSolicitudEmp(Empresa emp) {
+		ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>();
+		for (Solicitud solicitud : misSolicitudes) {
+			if (solicitud.getEmpresa().getRNC().equalsIgnoreCase(emp.getRNC())) {
+				solicitudes.add(solicitud);
+			}
+
+		}
+		return solicitudes;
+	}
+	// Retorna solicid
+
+	public boolean EliminarSolicitud(String codigo) {
+		boolean eliminar = false;
+		Solicitud SolicitudEliminar = null;
+		for (Solicitud soli : misSolicitudes) {
+			if (soli.getCodigo().equalsIgnoreCase(codigo)) {
+				SolicitudEliminar = soli;
+				eliminar = true;
+			}
+
+		}
+		misSolicitudes.remove(SolicitudEliminar);
+		return eliminar;
+	}
+
+	// Actualizar una solicitud cuando se modifica
+	public void ActualizarSolicitud(Solicitud modi, Solicitud modificarSoli) {
+		int index = 0;
+		if (misSolicitudes.contains(modi)) {
+			index = misSolicitudes.indexOf(modi);
+		}
+		misSolicitudes.set(index, modificarSoli);
+
+	}
+
+	// Retornar cant. Universitarios contratados
+	public int contratadosU() {
+		int cant = 0;
+		for (Solicitante soli : misSolicitantes) {
+			if (soli.isContratado()) {
+				if (soli instanceof Universitario) {
+					cant++;
+				}
+			}
+		}
+		return cant;
+	}
+	
+	// Retornar cant. Tecnicos contratados
+	public int contratadosT(){
+		int cant = 0;
+		for (Solicitante soli : misSolicitantes) {
+			if(soli.isContratado()){
+				if(soli instanceof Tecnico){
+					cant++;
+				}
+			}
+		}
+		return cant;
+	}
+	
+	// Retornar cant. Obreros contratados
+		public int contratadosO(){
+			int cant = 0;
+			for (Solicitante soli : misSolicitantes) {
+				if(soli.isContratado()){
+					if(soli instanceof Obrero){
+						cant++;
+					}
+				}
+			}
+			return cant;
 		}
 }
