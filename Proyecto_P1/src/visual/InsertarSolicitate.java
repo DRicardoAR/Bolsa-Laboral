@@ -107,6 +107,7 @@ public class InsertarSolicitate extends JDialog {
 	private DefaultListModel<String> modeloIdiomas = new DefaultListModel<>();
 	private DefaultListModel<String> modeloHabilidad = new DefaultListModel<>();
 	private boolean error = false;
+	private boolean estado = false;
 
 	/**
 	 * Launch the application.
@@ -131,6 +132,7 @@ public class InsertarSolicitate extends JDialog {
 				panel1.setVisible(true);
 				panel2.setVisible(false);
 			}
+
 		});
 		try {
 			telefono = new MaskFormatter("(###)-###-####");
@@ -721,12 +723,9 @@ public class InsertarSolicitate extends JDialog {
 		panel_Tecnico.add(label_9);
 
 		cbxAreaTecnico = new JComboBox();
-		cbxAreaTecnico.setModel(new DefaultComboBoxModel(new String[] { "< Seleccione >", "Adm. de Empresas",
-				"Adm. Hotelera", "Derecho", "Econom\u00EDa", "Contabilidad", "Mercadotecnia", "Arquitectura",
-				"Comunicacion Social", "Dise\u00F1o e Interiorismo", "Ecologia", "Educaci\u00F3n", "Filosof\u00EDa",
-				"Psicolog\u00EDa", "Ing. Civil", "Ing. Electr\u00F3nica", "Ing. Industrial", "Ing. Mecatr\u00F3nica",
-				"Ing. Sistema", "Ing. Telem\u00E1tica", "Enfermeria", "Estomatolog\u00EDa", "Medicina",
-				"Nutricion y Dietetica", "Terapia F\u00EDsica" }));
+		cbxAreaTecnico
+				.setModel(new DefaultComboBoxModel(new String[] { "< Seleccione >Emprendimiento", "Mecanograf\u00EDa",
+						"Dise\u00F1o Gr\u00E1fico", "Programaci\u00F3n", "Contabilidad", "Programaci\u00F3n Web" }));
 		cbxAreaTecnico.setBounds(396, 41, 123, 20);
 		panel_Tecnico.add(cbxAreaTecnico);
 
@@ -828,42 +827,44 @@ public class InsertarSolicitate extends JDialog {
 						if (rdbMasculino.isSelected()) {
 							sexo = "Masculino";
 						}
-						if (txtTelefono.getText().isEmpty() || txtEmail.getText().isEmpty()) {
+						if (telefono.equalsIgnoreCase("") || email.equalsIgnoreCase("")) {
+							error = true;
 							JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
 									JOptionPane.WARNING_MESSAGE, null);
-							error = true;
 							if (panel2.isVisible()) {
 								panel1.setVisible(false);
 								panel2.setVisible(true);
 							}
 						} else if ((!rdbNoReelocalizacion.isSelected() && !rdbSiReelocalizacion.isSelected())
 								|| (!rdbSiVehiculo.isSelected() && !rdbNoVehiculo.isSelected())) {
+							error = true;
 							JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
 									JOptionPane.WARNING_MESSAGE, null);
-							error = true;
-						} else if (rdbObrero.isSelected()) {
 
+						} else if (rdbObrero.isSelected()) {
 							if (misHabilidades.size() == 0) {
+								error = true;
 								JOptionPane.showMessageDialog(null, "Favor insertar habilidades de Oberro.", "ATENCIÓN",
 										JOptionPane.WARNING_MESSAGE, null);
-								error = true;
+
 							}
 						} else if (rdbTecnico.isSelected()) {
 							if (cbxAreaTecnico.getSelectedIndex() == 0) {
+								error = true;
 								JOptionPane.showMessageDialog(null, "Favor insetar area de Ténico.", "ATENCIÓN",
 										JOptionPane.WARNING_MESSAGE, null);
-								error = true;
 
 							}
 						} else if (rdbUniversitario.isSelected()) {
 							if (cbxCarrera.getSelectedIndex() == 0) {
+								error = true;
 								JOptionPane.showMessageDialog(null, "Favor insetar carrera de Universitario.",
 										"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
-								error = true;
+
 							} else if (BolsaLaboral.getInstance().validarEmail(email)) {
+								error = true;
 								JOptionPane.showMessageDialog(null, "Correo Electrónico no válido", "ATENCIÓN",
 										JOptionPane.ERROR_MESSAGE, null);
-								error = true;
 
 							}
 						}
@@ -914,6 +915,7 @@ public class InsertarSolicitate extends JDialog {
 								sexo = "Masculino";
 							}
 							if (panel2.isVisible()) {
+								estado = false;
 								panel2.setVisible(false);
 								panel1.setVisible(true);
 								btnMover.setText("Continuar >>");
@@ -926,6 +928,7 @@ public class InsertarSolicitate extends JDialog {
 									JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
 											JOptionPane.WARNING_MESSAGE, null);
 								} else {
+									estado = true;
 									btnRegistrar.setEnabled(true);
 									rdbObrero.setSelected(true);
 									rdbTecnico.setSelected(false);
@@ -958,6 +961,7 @@ public class InsertarSolicitate extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		estado();
 	}
 
 	public void loadIdioma() {
@@ -1045,6 +1049,36 @@ public class InsertarSolicitate extends JDialog {
 		misHabilidades.removeAll(misHabilidades);
 		misIdiomas.removeAll(misIdiomas);
 		modeloHabilidad.clear();
+		error = false;
 		modeloIdiomas.clear();
+	}
+
+	public void estado() {
+		Thread ventana = new Thread() {
+			public void run() {
+				try {
+					for (;;) {
+
+						if (estado) {
+							rdbObrero.setSelected(true);
+							rdbTecnico.setSelected(false);
+							rdbUniversitario.setSelected(false);
+							panel_Obreo.setVisible(true);
+							panel_Tecnico.setVisible(false);
+							panel_Universitario.setVisible(false);
+							panel1.setVisible(false);
+							panel2.setVisible(true);
+							btnMover.setText("<< Retroceder");
+						}
+
+						sleep(10);
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		ventana.start();
+
 	}
 }

@@ -213,9 +213,9 @@ public static void loadTabla(String seleccion){
 					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 					table.getTableHeader().setReorderingAllowed(false);
 					TableColumnModel modeloColumna = table.getColumnModel();
-					modeloColumna.getColumn(0).setPreferredWidth(110);
+					modeloColumna.getColumn(0).setPreferredWidth(130);
 					modeloColumna.getColumn(1).setPreferredWidth(250);
-					modeloColumna.getColumn(2).setPreferredWidth(120);
+					modeloColumna.getColumn(2).setPreferredWidth(150);
 					modeloColumna.getColumn(3).setPreferredWidth(160);
 					modeloColumna.getColumn(4).setPreferredWidth(140);
 				}
