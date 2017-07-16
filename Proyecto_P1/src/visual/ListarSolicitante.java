@@ -158,6 +158,14 @@ public class ListarSolicitante extends JDialog {
 			}
 			{
 				btnModificar = new JButton("Modificar");
+				btnModificar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						InsertarSolicitate soli = new InsertarSolicitate("Modificar Solicitante",true,null);
+						soli.setModal(true);
+						soli.setLocationRelativeTo(null);
+						soli.setVisible(true);
+					}
+				});
 				btnModificar.setEnabled(false);
 				btnModificar.setActionCommand("OK");
 				buttonPane.add(btnModificar);
