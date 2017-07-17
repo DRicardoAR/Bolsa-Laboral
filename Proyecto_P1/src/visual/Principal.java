@@ -1,7 +1,10 @@
 package visual;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Paint;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,11 +19,24 @@ import java.util.Locale.Category;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.CategoryItemRenderer;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+
+import logica.BolsaLaboral;
+
 public class Principal extends JFrame {
 
 	private JPanel contentPane;
 	private static JPanel panelBarras;
-	
+	private static CategoryDataset datasetBarra;
+	private static JFreeChart chartBarra;
+	private Dimension dim;
 
 	/**
 	 * Launch the application.
@@ -39,32 +55,34 @@ public class Principal extends JFrame {
 	}
 
 	/**
-	  Create the frame.
+	 * Create the frame.
 	 */
 	public Principal() {
 		setResizable(false);
 		setTitle("Bolsa Laboral");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 881, 472);
+		dim = super.getToolkit().getScreenSize();
+		super.setSize(dim.width-60, dim.height-10);
 		setLocationRelativeTo(null);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
+
 		JMenu mnCandidatos = new JMenu("Solicitante");
 		menuBar.add(mnCandidatos);
-		
+
 		JMenuItem mntmRegistrarCandidato = new JMenuItem("Registrar Solicitante");
 		mntmRegistrarCandidato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InsertarSolicitate soli = new InsertarSolicitate("Insertar Solicitante",false,null);
+				InsertarSolicitate soli = new InsertarSolicitate("Insertar Solicitante", false, null);
 				soli.setModal(true);
 				soli.setLocationRelativeTo(null);
 				soli.setVisible(true);
 			}
 		});
 		mnCandidatos.add(mntmRegistrarCandidato);
-		
+
 		JMenuItem mntmListarCandidatos = new JMenuItem("Listar Solicitante");
 		mntmListarCandidatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -75,10 +93,10 @@ public class Principal extends JFrame {
 			}
 		});
 		mnCandidatos.add(mntmListarCandidatos);
-		
+
 		JMenu mnEmpresa = new JMenu("Empresa");
 		menuBar.add(mnEmpresa);
-		
+
 		JMenuItem mntmRegistrarEmpresa = new JMenuItem("Registrar Empresa");
 		mntmRegistrarEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -92,11 +110,11 @@ public class Principal extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		mnEmpresa.add(mntmRegistrarEmpresa);
-		
+
 		JMenuItem mntmRealizarSolicitud = new JMenuItem("Realizar Solicitud");
 		mntmRealizarSolicitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -106,10 +124,9 @@ public class Principal extends JFrame {
 			}
 		});
 		mnEmpresa.add(mntmRealizarSolicitud);
-		
+
 		JMenuItem mntmListarEmpresas = new JMenuItem("Listar Empresas");
-		mntmListarEmpresas.addActionListener(new ActionListener() 
-		{
+		mntmListarEmpresas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ListarEmpresa lista = new ListarEmpresa();
 				lista.setModal(true);
@@ -117,7 +134,7 @@ public class Principal extends JFrame {
 			}
 		});
 		mnEmpresa.add(mntmListarEmpresas);
-		
+
 		JMenuItem mntmListarSolicitudes = new JMenuItem("Listar Solicitudes");
 		mntmListarSolicitudes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -125,14 +142,14 @@ public class Principal extends JFrame {
 				soli.setLocationRelativeTo(null);
 				soli.setModal(true);
 				soli.setVisible(true);
-				
+
 			}
 		});
 		mnEmpresa.add(mntmListarSolicitudes);
-		
+
 		JMenu mnMacheo = new JMenu("Macheo");
 		menuBar.add(mnMacheo);
-		
+
 		JMenuItem mntmRealizarMacheo = new JMenuItem("Realizar Macheo");
 		mntmRealizarMacheo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -145,7 +162,7 @@ public class Principal extends JFrame {
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		mnMacheo.add(mntmRealizarMacheo);
@@ -153,14 +170,67 @@ public class Principal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-		
-		JPanel panelBarras = new JPanel();
-		panelBarras.setBorder(new TitledBorder(null, "Solicitantes Desempleados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelBarras.setBounds(10, 89, 363, 196);
+
+		panelBarras = new JPanel();
+		panelBarras.setBorder(new TitledBorder(null, "Solicitantes Desempleados", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
+		panelBarras.setBounds(10, 11, 579, 294);
 		panel.add(panelBarras);
+		
+		//
+		hiloBarras();
+		actualizarChart();
 	}
+
+	public static void actualizarChart() {
+		datasetBarra = creadorCategoria();
+		chartBarra = creadorGraficoB(datasetBarra, "Solicitantes Desempleados");
+		panelBarras.setLayout(new BorderLayout(0, 0));
+		ChartPanel chartPanel = new ChartPanel(chartBarra);
+		chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
+		panelBarras.add(chartPanel);
+		panelBarras.repaint();
+
+	}
+
+	public static JFreeChart creadorGraficoB(CategoryDataset dataSet, String titulo) {
+		JFreeChart grafico = ChartFactory.createBarChart(titulo, "Tipo de Solicitante", "Catidad Desempleados", dataSet,
+				PlotOrientation.VERTICAL, false, true, false);
+		Color color = new Color(255, 249, 234);
+		grafico.setBackgroundPaint(color);
+		CategoryPlot plot = (CategoryPlot) grafico.getPlot();
+		plot.setForegroundAlpha(0.8f);
+		plot.setBackgroundPaint(new Color(254, 253, 241));
+		return grafico;
+	}
+
+	public static CategoryDataset creadorCategoria() {
+		DefaultCategoryDataset setter = new DefaultCategoryDataset();
+		setter.setValue(BolsaLaboral.getInstance().desempleadoO(), "Tipo de Solicitante", "Obreros");
+		setter.setValue(BolsaLaboral.getInstance().desempleadoU(), "Tipo de Solicitante", "Universitacios");
+		setter.setValue(BolsaLaboral.getInstance().desempleadoT(), "Tipo de Solicitante", "Técnicos");
+		return setter;
+	}
+
+	public void hiloBarras() {
+		Thread actualizar = new Thread() {
+			public void run() {
+				try {
+					for (;;) {
+						actualizarChart();
+						sleep(1000);
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
+		};
+		actualizar.start();
+	}
+
 }
