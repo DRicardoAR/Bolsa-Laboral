@@ -878,6 +878,9 @@ public class InsertarSolicitate extends JDialog {
 										vehiculoP, licencia, annos, misIdiomas, mudarse, misHabilidades);
 								BolsaLaboral.getInstance().insertSolicitante(solicitante);
 								estado = false;
+								JOptionPane.showMessageDialog(null, "El solicitante se ha registrado de manera exitosa.", "Información",
+										JOptionPane.INFORMATION_MESSAGE, null);
+								Principal.actualizarChart();
 								clean();
 							}
 						}
@@ -890,6 +893,9 @@ public class InsertarSolicitate extends JDialog {
 										cbxCarrera.getSelectedItem().toString());
 								BolsaLaboral.getInstance().insertSolicitante(solicitante);
 								estado = false;
+								JOptionPane.showMessageDialog(null, "El solicitante se ha registrado de manera exitosa.", "Información",
+										JOptionPane.INFORMATION_MESSAGE, null);
+								Principal.actualizarChart();
 								clean();
 
 							}
@@ -902,6 +908,9 @@ public class InsertarSolicitate extends JDialog {
 										vehiculoP, licencia, annos, misIdiomas, mudarse,
 										cbxAreaTecnico.getSelectedItem().toString());
 								BolsaLaboral.getInstance().insertSolicitante(solicitante);
+								JOptionPane.showMessageDialog(null, "El solicitante se ha registrado de manera exitosa.", "Información",
+										JOptionPane.INFORMATION_MESSAGE, null);
+								Principal.actualizarChart();
 								estado = false;
 								clean();
 								

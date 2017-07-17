@@ -29,6 +29,8 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import logica.BolsaLaboral;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class Principal extends JFrame {
 
@@ -180,19 +182,26 @@ public class Principal extends JFrame {
 				TitledBorder.TOP, null, null));
 		panelBarras.setBounds(10, 11, 579, 294);
 		panel.add(panelBarras);
+		panelBarras.setLayout(null);
 		
-		//
-		hiloBarras();
-		actualizarChart();
+		JLabel lblCharVacio = new JLabel("        No hay solicitantes desempledos");
+		lblCharVacio.setFont(new Font("Tahoma", Font.PLAIN, 27));
+		lblCharVacio.setBounds(10, 22, 559, 261);
+		panelBarras.add(lblCharVacio);
+		//actualizarChart();
+		//hiloBarras();
+		
 	}
 
 	public static void actualizarChart() {
+		panelBarras.removeAll();
+		panelBarras.revalidate();
 		datasetBarra = creadorCategoria();
 		chartBarra = creadorGraficoB(datasetBarra, "Solicitantes Desempleados");
 		panelBarras.setLayout(new BorderLayout(0, 0));
 		ChartPanel chartPanel = new ChartPanel(chartBarra);
 		chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
-		panelBarras.add(chartPanel);
+		panelBarras.add(chartPanel,BorderLayout.CENTER);
 		panelBarras.repaint();
 
 	}
@@ -211,7 +220,7 @@ public class Principal extends JFrame {
 	public static CategoryDataset creadorCategoria() {
 		DefaultCategoryDataset setter = new DefaultCategoryDataset();
 		setter.setValue(BolsaLaboral.getInstance().desempleadoO(), "Tipo de Solicitante", "Obreros");
-		setter.setValue(BolsaLaboral.getInstance().desempleadoU(), "Tipo de Solicitante", "Universitacios");
+		setter.setValue(BolsaLaboral.getInstance().desempleadoU(), "Tipo de Solicitante", "Universitarios");
 		setter.setValue(BolsaLaboral.getInstance().desempleadoT(), "Tipo de Solicitante", "Técnicos");
 		return setter;
 	}
@@ -232,5 +241,6 @@ public class Principal extends JFrame {
 		};
 		actualizar.start();
 	}
-
+	
+	
 }
