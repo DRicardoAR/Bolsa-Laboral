@@ -31,6 +31,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import logica.BolsaLaboral;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.UIManager;
 
 public class Principal extends JFrame {
 
@@ -38,6 +39,7 @@ public class Principal extends JFrame {
 	private static JPanel panelBarras;
 	private static CategoryDataset datasetBarra;
 	private static JFreeChart chartBarra;
+	private static JPanel panelPastel;
 	private Dimension dim;
 
 	/**
@@ -178,9 +180,8 @@ public class Principal extends JFrame {
 		panel.setLayout(null);
 
 		panelBarras = new JPanel();
-		panelBarras.setBorder(new TitledBorder(null, "Solicitantes Desempleados", TitledBorder.LEADING,
-				TitledBorder.TOP, null, null));
-		panelBarras.setBounds(10, 11, 579, 294);
+		panelBarras.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Gr\u00E1fico de Desempleado por Tipo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelBarras.setBounds(44, 11, 579, 294);
 		panel.add(panelBarras);
 		panelBarras.setLayout(null);
 		
@@ -188,6 +189,17 @@ public class Principal extends JFrame {
 		lblCharVacio.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		lblCharVacio.setBounds(10, 22, 559, 261);
 		panelBarras.add(lblCharVacio);
+		
+		panelPastel = new JPanel();
+		panelPastel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Gr\u00E1fico de Empleados por Tipo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelPastel.setBounds(667, 11, 579, 294);
+		panel.add(panelPastel);
+		panelPastel.setLayout(null);
+		
+		JLabel lblNoHayEmpledos = new JLabel("                        No hay empledos");
+		lblNoHayEmpledos.setFont(new Font("Tahoma", Font.PLAIN, 27));
+		lblNoHayEmpledos.setBounds(10, 22, 559, 261);
+		panelPastel.add(lblNoHayEmpledos);
 		//actualizarChart();
 		//hiloBarras();
 		
@@ -241,6 +253,4 @@ public class Principal extends JFrame {
 		};
 		actualizar.start();
 	}
-	
-	
 }

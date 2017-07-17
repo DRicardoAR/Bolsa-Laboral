@@ -238,11 +238,10 @@ public class InsertarEmpresa extends JDialog {
 						    	JOptionPane.showMessageDialog(null, "Se debe ingresar el email la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
 						    }else if(cbxProvincia.getSelectedIndex()==0){
 						    	JOptionPane.showMessageDialog(null, "Se debe seleccionar la Provincia de la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-						   /* }/*else if (!(BolsaLaboral.getInstance().validarEmail(email))){
-						    	JOptionPane.showMessageDialog(null, "Favor registar un Email valido", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+						   /* }/*else if ((BolsaLaboral.getInstance().validarEmail(email))){
+						    	JOptionPane.showMessageDialog(null, "Favor registar un E-mail valido", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
 						    	txtEmail.setText(null);*/
 						    }else{
-						    
 							BolsaLaboral.getInstance().insertEmpresa(miEmpresa);
 							ftxtRnc.setText(null);
 							txtNombre.setText(null);
@@ -254,7 +253,6 @@ public class InsertarEmpresa extends JDialog {
 							txtCuidad.setText(null);
 							txtReferencia.setText(null);
 							txtCalle.setText(null);
-							System.out.println(BolsaLaboral.getInstance().getMisEmpresas().get(0).getRNC());
 							JOptionPane.showMessageDialog(null, "Empresa Agregada Satisfactoriamente");
 						
 						    }

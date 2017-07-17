@@ -55,7 +55,7 @@ public class Macheo extends JDialog {
 	private DefaultListModel<String> model;
 	private JList list;
 	private String codigo = "";
-	private ArrayList<Solicitante> misSolicitantesC = new ArrayList<Solicitante>();
+	private ArrayList<Solicitante> misSolicitantesC = new ArrayList<>();
 
 	/**
 	 * Launch the application.
@@ -165,7 +165,7 @@ public class Macheo extends JDialog {
 									}
 								}
 							});
-							modelo = new DefaultTableModel();							
+							modelo = new DefaultTableModel();
 							table.setModel(modelo);
 							loadTable();
 							scrollPane.setViewportView(table);
@@ -240,11 +240,11 @@ public class Macheo extends JDialog {
 	}
 
 	private void loadTable() {
-		
+
 		modelo.setColumnIdentifiers(columnNames);
 		modelo.setRowCount(0);
 		fila = new Object[modelo.getColumnCount()];
-		
+
 		for (Solicitud soli : BolsaLaboral.getInstance().getMisSolicitudes()) {
 
 			fila[0] = soli.getCodigo();
@@ -275,15 +275,19 @@ public class Macheo extends JDialog {
 
 	public void solicitantes() {
 		Solicitud miSolicitudc = BolsaLaboral.getInstance().RetornarSolocitudCod(codigo);
-		misSolicitantesC.addAll(BolsaLaboral.getInstance().matcheo(miSolicitudc));
+		if (miSolicitudc != null) {
+			misSolicitantesC = BolsaLaboral.getInstance().matcheo(miSolicitudc);
+		}
 	}
 
 	public void cargarSolicitante() {
-		for (Solicitante soli : misSolicitantesC) {
-			String nombre = soli.getCedula() + " " + soli.getNombres() + " " + soli.getApellidos();
-			model.addElement(nombre);
+		if (misSolicitantesC.size() != 0) {
+			for (Solicitante soli : misSolicitantesC) {
+				String nombre = soli.getCedula() + " " + soli.getNombres() + " " + soli.getApellidos();
+				model.addElement(nombre);
+			}
+			list.setModel(model);
 		}
-		list.setModel(model);
 	}
 
 }
