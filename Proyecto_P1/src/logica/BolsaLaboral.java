@@ -249,13 +249,13 @@ public class BolsaLaboral implements Serializable {
 	}
 
 	public ArrayList<Solicitante> matcheo(Solicitud soli) {
+
 		ArrayList<Solicitante> misContratados = new ArrayList<>();
 		if (soli instanceof SolicitudObrero) {
 			for (Solicitante solicitante : misSolicitantes) {
 				if (solicitante instanceof Obrero) {
 					if (validarGeneral(solicitante, soli)) {
 						if (ValidarObrero(solicitante, soli)) {
-							solicitante.setContratado(true);
 							misContratados.add(solicitante);
 							soli.getEmpresa().insertContratado(solicitante);
 						}
@@ -270,7 +270,6 @@ public class BolsaLaboral implements Serializable {
 				if (solicitante instanceof Tecnico) {
 					if (validarGeneral(solicitante, soli)) {
 						if (ValidarTecnico(solicitante, soli)) {
-							solicitante.setContratado(true);
 							misContratados.add(solicitante);
 							soli.getEmpresa().insertContratado(solicitante);
 						}
@@ -284,7 +283,6 @@ public class BolsaLaboral implements Serializable {
 				if (solicitante instanceof Universitario) {
 					if (validarGeneral(solicitante, soli)) {
 						if (validarUniversitario(solicitante, soli)) {
-							solicitante.setContratado(true);
 							misContratados.add(solicitante);
 							soli.getEmpresa().insertContratado(solicitante);
 						}

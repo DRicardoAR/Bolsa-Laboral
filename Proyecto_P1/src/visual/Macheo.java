@@ -177,7 +177,7 @@ public class Macheo extends JDialog {
 						panel_2.add(label);
 					}
 					{
-						btnCandidatos = new JButton("Candidatos");
+						btnCandidatos = new JButton("Ver Solicitantes");
 						btnCandidatos.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {
 								solicitantes();
@@ -185,7 +185,7 @@ public class Macheo extends JDialog {
 							}
 						});
 						btnCandidatos.setEnabled(false);
-						btnCandidatos.setBounds(377, 361, 102, 23);
+						btnCandidatos.setBounds(335, 361, 144, 23);
 						panel_2.add(btnCandidatos);
 					}
 					{
@@ -226,13 +226,28 @@ public class Macheo extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Macheo");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				JButton btnContratar = new JButton("Contratar Solicitantes");
+				btnContratar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						int i =0;
+						for (Solicitante solis : misSolicitantesC) {
+							if(solis.getCodigo().equalsIgnoreCase(BolsaLaboral.getInstance().getMisPersonas().get(i).getCodigo())){
+								BolsaLaboral.getInstance().getMisPersonas().get(i).setContratado(true);
+							}
+						}
+					}
+				});
+				btnContratar.setActionCommand("OK");
+				buttonPane.add(btnContratar);
+				getRootPane().setDefaultButton(btnContratar);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -287,6 +302,9 @@ public class Macheo extends JDialog {
 				model.addElement(nombre);
 			}
 			list.setModel(model);
+		}else{
+			JOptionPane.showMessageDialog(null, "No existen solicitantes en la actualidad que puedan\n satisfacer esta solicitud", "Información",
+					JOptionPane.INFORMATION_MESSAGE, null);
 		}
 	}
 
