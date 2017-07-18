@@ -19,7 +19,7 @@ public class Obrero extends Solicitante {
 		super(cedula, nombres, apellidos, telefono, fechaNacimiento, nacionalidad,
 				sexo, estadoCivil, direccion, provincia, email, vehiculoPropio,
 				 categoriaLicencia, annosExperiencia, idiomas, mudarse);
-		this.habilidades= new ArrayList<>();
+		this.habilidades= habilidades;
 	}
 
 	public ArrayList<String> getHabilidades() {

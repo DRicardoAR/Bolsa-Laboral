@@ -880,6 +880,8 @@ public class InsertarSolicitate extends JDialog {
 								estado = false;
 								JOptionPane.showMessageDialog(null, "El solicitante se ha registrado de manera exitosa.", "Información",
 										JOptionPane.INFORMATION_MESSAGE, null);
+								Solicitante soli = BolsaLaboral.getInstance().getMisPersonas().get(0);
+								System.out.println(((Obrero) soli).getHabilidades().get(0));
 								Principal.actualizarChart();
 								clean();
 							}

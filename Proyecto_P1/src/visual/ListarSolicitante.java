@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import logica.BolsaLaboral;
@@ -23,8 +24,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -46,7 +50,7 @@ public class ListarSolicitante extends JDialog {
 	private JComboBox cbxFiltro;
 	private JButton cancelButton;
 	private String cedulaCliente = "";
-	
+	private JComboBox<String>habilidades;
 
 	/**
 	 * Launch the application.
@@ -74,7 +78,7 @@ public class ListarSolicitante extends JDialog {
 		});
 		setTitle("Listar Solicitantes\r\n");
 		setResizable(false);
-		setBounds(100, 100, 884, 494);
+		setBounds(100, 100, 879, 494);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -94,9 +98,9 @@ public class ListarSolicitante extends JDialog {
 					}if(seleccion.equalsIgnoreCase("Universitarios")){
 						loadTablaU();
 					}if(seleccion.equalsIgnoreCase("Obreros")){
-						//loadTablaO();
+						loadTablaO();
 					}if(seleccion.equalsIgnoreCase("Técnicos")){
-						//loadTablaT();
+						loadTablaT();
 					}
 				}
 			});
@@ -131,12 +135,13 @@ public class ListarSolicitante extends JDialog {
 
 			modeloTabla = new DefaultTableModel() {
 				
-				@Override
-				public boolean isCellEditable(int row, int coumn) {
-					return false ;
-				}
+				/*@Override
+				public boolean isCellEditable(int row, int 3) {
+					return true ;
+				}*/
 			};
 			String tipo = cbxFiltro.getSelectedItem().toString();
+			
 			loadTabla(tipo);
 			scrollPane.setViewportView(table);
 			}
@@ -268,12 +273,16 @@ public static void loadTabla(String seleccion){
 	
 	public void loadTablaO(){
 		//Falta informacion clave sobre los obreros<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Carrera", "Años de Experiencia","Teléfono","E-Mail"};
+		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Habilidades", "Años de Experiencia","Teléfono","E-Mail"};
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitante soli : BolsaLaboral.getInstance().getMisPersonas()) {
 			if(soli instanceof Obrero){
+				((Obrero) soli).getHabilidades();
+				String []habilidad = llenado(((Obrero) soli).getHabilidades());
+				habilidades = new JComboBox<String>(habilidad);
+				setCombo();
 				fila[0] = soli.getCedula();
 				fila[1] = soli.getNombres() + " " + soli.getApellidos();
 				fila[2] = soli.getEdad()+" años";
@@ -305,6 +314,7 @@ public static void loadTabla(String seleccion){
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitante soli : BolsaLaboral.getInstance().getMisPersonas()) {
 			if(soli instanceof Tecnico){
+			
 				fila[0] = soli.getCedula();
 				fila[1] = soli.getNombres() + " " + soli.getApellidos();
 				fila[2] = soli.getEdad()+" años";
@@ -328,5 +338,28 @@ public static void loadTabla(String seleccion){
 			}
 			
 		}
+		
+	}
+	
+	public void setCombo(){
+		TableColumn col = table.getColumnModel().getColumn(3);
+		col.setCellEditor(new DefaultCellEditor(habilidades));
+		habilidades.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, habilidades);
+				
+			}
+		});
+		
+	}
+	public String[] llenado (ArrayList<String>copiado){
+		String [] arr = new String[10];
+		for (int i = 0; i < copiado.size(); i++) {
+			arr[i] = copiado.get(i);
+		}
+		System.out.println(arr[0]);
+		return arr;
 	}
 }
