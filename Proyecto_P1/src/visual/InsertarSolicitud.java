@@ -79,10 +79,6 @@ public class InsertarSolicitud extends JDialog {
 
 	private ArrayList<String> misIdiomas = new ArrayList<>();
 	private ArrayList<String> misHabilidades = new ArrayList<>();
-	private ArrayList<String> modiMisIdiomas;
-	private ArrayList<String> modMisHabilidades;
-	
-	
 	private String indexListaIdioma;
 	private String indexListaHabilidades;
 	private BolsaLaboral bolsa = BolsaLaboral.getInstance();
@@ -933,15 +929,7 @@ public class InsertarSolicitud extends JDialog {
 		
 	}
 
-	private void cargarIdiomaModi() {
-		DefaultListModel idioma = new DefaultListModel();
-		for (String idio : modiMisIdiomas) {
-			idioma.addElement(idio);
 
-		}
-		listIdioma.setModel(idioma);
-
-	}
 
 	private void cargarHabilidades() {
 		DefaultListModel habilidades = new DefaultListModel();
@@ -953,14 +941,6 @@ public class InsertarSolicitud extends JDialog {
 
 	}
 
-	private void cargarHabilidadModi() {
-		DefaultListModel habilidades = new DefaultListModel();
-		for (String habili : modMisHabilidades) {
-			habilidades.addElement(habili);
 
-		}
-		ListHabilidad.setModel(habilidades);
-
-	}
 
 }
