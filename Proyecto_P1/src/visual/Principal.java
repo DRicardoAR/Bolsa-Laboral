@@ -65,7 +65,7 @@ public class Principal extends JFrame {
 		setResizable(false);
 		setTitle("Bolsa Laboral");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 881, 472);
+		setBounds(100, 100, 1306, 729);
 		dim = super.getToolkit().getScreenSize();
 		super.setSize(dim.width-60, dim.height-10);
 		setLocationRelativeTo(null);
@@ -119,16 +119,6 @@ public class Principal extends JFrame {
 		});
 		mnEmpresa.add(mntmRegistrarEmpresa);
 
-		JMenuItem mntmRealizarSolicitud = new JMenuItem("Realizar Solicitud");
-		mntmRealizarSolicitud.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				InsertarSolicitud solicitud = new InsertarSolicitud(null);
-				solicitud.setModal(true);
-				solicitud.setVisible(true);
-			}
-		});
-		mnEmpresa.add(mntmRealizarSolicitud);
-
 		JMenuItem mntmListarEmpresas = new JMenuItem("Listar Empresas");
 		mntmListarEmpresas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -138,18 +128,29 @@ public class Principal extends JFrame {
 			}
 		});
 		mnEmpresa.add(mntmListarEmpresas);
-
-		JMenuItem mntmListarSolicitudes = new JMenuItem("Listar Solicitudes");
-		mntmListarSolicitudes.addActionListener(new ActionListener() {
+		
+		JMenu mnSolicitud = new JMenu("Solicitud");
+		menuBar.add(mnSolicitud);
+		
+		JMenuItem mntmRegistrarSolicitud = new JMenuItem("Registrar Solicitud");
+		mntmRegistrarSolicitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarSolicitud soli = new ListarSolicitud();
-				soli.setLocationRelativeTo(null);
-				soli.setModal(true);
-				soli.setVisible(true);
-
+				InsertarSolicitud solicitud = new InsertarSolicitud(null);
+				solicitud.setModal(true);
+				solicitud.setVisible(true);
 			}
 		});
-		mnEmpresa.add(mntmListarSolicitudes);
+		mnSolicitud.add(mntmRegistrarSolicitud);
+		
+		JMenuItem mntmListarSolicitud = new JMenuItem("Listar Solicitud");
+		mntmListarSolicitud.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarSolicitud soli = new ListarSolicitud();
+				soli.setModal(true);
+				soli.setVisible(true);
+			}
+		});
+		mnSolicitud.add(mntmListarSolicitud);
 
 		JMenu mnMacheo = new JMenu("Macheo");
 		menuBar.add(mnMacheo);
