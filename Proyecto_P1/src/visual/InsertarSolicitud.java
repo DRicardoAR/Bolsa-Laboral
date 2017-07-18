@@ -77,8 +77,12 @@ public class InsertarSolicitud extends JDialog {
 	private JComboBox cbxHabilidades;
 	private JSpinner spnObreroExperiencia;
 
-	private ArrayList<String> misIdiomas;
-	private ArrayList<String> misHabilidades;
+	private ArrayList<String> misIdiomas = new ArrayList<>();
+	private ArrayList<String> misHabilidades = new ArrayList<>();
+	private ArrayList<String> modiMisIdiomas;
+	private ArrayList<String> modMisHabilidades;
+	
+	
 	private String indexListaIdioma;
 	private String indexListaHabilidades;
 	private BolsaLaboral bolsa = BolsaLaboral.getInstance();
@@ -109,6 +113,9 @@ public class InsertarSolicitud extends JDialog {
 					}
 
 				} else {
+					for (String idioma : modificarSoli.getIdiomas()) {				
+						misIdiomas.add(idioma);				
+					}	
 					ftxtRNC.setValue(modi.getEmpresa().getRNC());
 					ftxtRNC.setEnabled(false);
 					txtNombre.setText(modi.getEmpresa().getNombre());
@@ -128,13 +135,8 @@ public class InsertarSolicitud extends JDialog {
 					spnVacantes.setValue(modi.getCantVacantes());
 					spnEdadMinima.setValue(modi.getEdadMin());
 					spnEdadMaxima.setValue(modi.getEdadMax());
-					cargarIdiomaModi();
-
-					for (String string : modi.getIdiomas()) {
-						System.out.println(string);
-
-					}
-
+					cargarIdioma();
+					
 					if (modificarSoli instanceof SolicitudUniversitario) {
 						rbtnUniversitario.setSelected(true);
 						panelUniversitario.setVisible(true);
@@ -165,6 +167,9 @@ public class InsertarSolicitud extends JDialog {
 
 					}
 					if (modificarSoli instanceof SolicitudObrero) {
+						for (String habili : ((SolicitudObrero) modificarSoli).getHabilidades()) {
+							misHabilidades.add(habili);							
+						}
 						rbtnObrero.setSelected(true);
 						panelObrero.setVisible(true);
 						panelUniversitario.setVisible(false);
@@ -173,7 +178,7 @@ public class InsertarSolicitud extends JDialog {
 						rbtnTecnico.setEnabled(false);
 						rbtnObrero.setEnabled(false);
 						spnObreroExperiencia.setValue(((SolicitudObrero) modi).getAnnosExperiencia());
-						cargarHabilidadModi();
+						cargarHabilidades();
 
 					}
 
@@ -185,17 +190,10 @@ public class InsertarSolicitud extends JDialog {
 		setResizable(false);
 		if (modificarSoli == null) {
 			setTitle("Insertar Solicitud - Bolsa Laboral");
-			misIdiomas = new ArrayList<>();
-			misHabilidades = new ArrayList<>();
+			
 		} else {
-			setTitle("Modificar Solicitud - Bolsa Laboral");
-			misIdiomas = new ArrayList<>();
-			misHabilidades = new ArrayList<>();
-			misIdiomas = modificarSoli.getIdiomas();
-			if (modificarSoli instanceof SolicitudObrero) {
-				misHabilidades = ((SolicitudObrero) modificarSoli).getHabilidades();
-
-			}
+			setTitle("Modificar Solicitud - Bolsa Laboral");			
+				
 
 		}
 
@@ -783,6 +781,7 @@ public class InsertarSolicitud extends JDialog {
 											experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo,
 											localidad, empresa, reubicacion, misIdiomas, categoriaLicencia, posGrado,
 											carrera);
+								
 									bolsa.insertSolicitud(nuevaSoli);
 									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
 											"Información", JOptionPane.INFORMATION_MESSAGE, null);
@@ -931,11 +930,12 @@ public class InsertarSolicitud extends JDialog {
 			idioma.addElement(idio);
 		}
 		listIdioma.setModel(idioma);
+		
 	}
 
 	private void cargarIdiomaModi() {
 		DefaultListModel idioma = new DefaultListModel();
-		for (String idio : modificarSoli.getIdiomas()) {
+		for (String idio : modiMisIdiomas) {
 			idioma.addElement(idio);
 
 		}
@@ -955,7 +955,7 @@ public class InsertarSolicitud extends JDialog {
 
 	private void cargarHabilidadModi() {
 		DefaultListModel habilidades = new DefaultListModel();
-		for (String habili : ((SolicitudObrero) modificarSoli).getHabilidades()) {
+		for (String habili : modMisHabilidades) {
 			habilidades.addElement(habili);
 
 		}

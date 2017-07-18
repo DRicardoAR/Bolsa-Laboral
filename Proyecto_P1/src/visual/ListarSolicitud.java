@@ -209,6 +209,7 @@ public class ListarSolicitud extends JDialog {
 						InsertarSolicitud modificarSOli = new InsertarSolicitud(BolsaLaboral.getInstance().RetornarSolocitudCod(codigo));
 						modificarSOli.setModal(true);
 						modificarSOli.setVisible(true);
+						Solicitud soli = BolsaLaboral.getInstance().RetornarSolocitudCod(codigo);
 					}
 				});
 				btnModificar.setEnabled(false);
@@ -248,7 +249,7 @@ public class ListarSolicitud extends JDialog {
 
 	private static void loadAll() {
 		String[] nombreColumna = { "Código", "Empresa", "Solicitado", "Vacantes", "Experiencia", "Rango Edad",
-				"Contrato", "Vehiculo", "Provincia", "Reubicación" };
+				"Contrato", "Vehiculo", "Provincia", "Reubicación","Idiomas"};
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
@@ -281,6 +282,7 @@ public class ListarSolicitud extends JDialog {
 			} else {
 				fila[9] = "No";
 			}
+			fila[10] = soli.getIdiomas().get(0)+","+ soli.getIdiomas().get(1);
 			modeloTabla.addRow(fila);
 		}
 		table.setModel(modeloTabla);
@@ -302,6 +304,7 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(7).setPreferredWidth(60);
 		columnModel.getColumn(8).setPreferredWidth(110);
 		columnModel.getColumn(9).setPreferredWidth(84);
+		columnModel.getColumn(10).setPreferredWidth(200);
 	}
 
 	private static void loadUniversitario() {
