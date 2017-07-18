@@ -876,6 +876,7 @@ public class InsertarSolicitate extends JDialog {
 								Solicitante solicitante = new Obrero(cedula, nombre, apellido, telefono,
 										fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia, email,
 										vehiculoP, licencia, annos, misIdiomas, mudarse, misHabilidades);
+								
 								BolsaLaboral.getInstance().insertSolicitante(solicitante);
 								estado = false;
 								JOptionPane.showMessageDialog(null, "El solicitante se ha registrado de manera exitosa.", "Información",
