@@ -279,14 +279,15 @@ public static void loadTabla(String seleccion){
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitante soli : BolsaLaboral.getInstance().getMisPersonas()) {
 			if(soli instanceof Obrero){
-				((Obrero) soli).getHabilidades();
+				//System.out.println(((Obrero) soli).getHabilidades().get(0));
 				String []habilidad = llenado(((Obrero) soli).getHabilidades());
 				habilidades = new JComboBox<String>(habilidad);
 				setCombo();
+				
 				fila[0] = soli.getCedula();
 				fila[1] = soli.getNombres() + " " + soli.getApellidos();
 				fila[2] = soli.getEdad()+" años";
-				fila[3] = "";
+				fila[3] = "Hacer click";
 				fila[4] = soli.getAnnosExperiencia()+" años";
 				fila[5] = soli.getTelefono();
 				fila[6] = soli.getEmail();
@@ -348,17 +349,15 @@ public static void loadTabla(String seleccion){
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, habilidades);
+				JOptionPane.showMessageDialog(null, habilidades.getSelectedItem());
 				
 			}
 		});
 		
 	}
 	public String[] llenado (ArrayList<String>copiado){
-		String [] arr = new String[10];
-		for (int i = 0; i < copiado.size(); i++) {
-			arr[i] = copiado.get(i);
-		}
+		String [] arr = new String[copiado.size()];
+		copiado.toArray(arr);
 		System.out.println(arr[0]);
 		return arr;
 	}

@@ -201,7 +201,7 @@ public class Principal extends JFrame {
 		lblNoHayEmpledos.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		lblNoHayEmpledos.setBounds(10, 22, 559, 261);
 		panelPastel.add(lblNoHayEmpledos);
-		//actualizarChart();
+		actualizarChart();
 		//hiloBarras();
 		
 	}
