@@ -79,6 +79,9 @@ public class InsertarSolicitud extends JDialog {
 
 	private ArrayList<String> misIdiomas = new ArrayList<>();
 	private ArrayList<String> misHabilidades = new ArrayList<>();
+	
+
+	
 	private String indexListaIdioma;
 	private String indexListaHabilidades;
 	private BolsaLaboral bolsa = BolsaLaboral.getInstance();
@@ -941,6 +944,7 @@ public class InsertarSolicitud extends JDialog {
 
 	}
 
+	
 
 
 }
