@@ -79,9 +79,7 @@ public class InsertarSolicitud extends JDialog {
 
 	private ArrayList<String> misIdiomas = new ArrayList<>();
 	private ArrayList<String> misHabilidades = new ArrayList<>();
-	
 
-	
 	private String indexListaIdioma;
 	private String indexListaHabilidades;
 	private BolsaLaboral bolsa = BolsaLaboral.getInstance();
@@ -112,9 +110,9 @@ public class InsertarSolicitud extends JDialog {
 					}
 
 				} else {
-					for (String idioma : modificarSoli.getIdiomas()) {				
-						misIdiomas.add(idioma);				
-					}	
+					for (String idioma : modificarSoli.getIdiomas()) {
+						misIdiomas.add(idioma);
+					}
 					ftxtRNC.setValue(modi.getEmpresa().getRNC());
 					ftxtRNC.setEnabled(false);
 					txtNombre.setText(modi.getEmpresa().getNombre());
@@ -135,7 +133,7 @@ public class InsertarSolicitud extends JDialog {
 					spnEdadMinima.setValue(modi.getEdadMin());
 					spnEdadMaxima.setValue(modi.getEdadMax());
 					cargarIdioma();
-					
+
 					if (modificarSoli instanceof SolicitudUniversitario) {
 						rbtnUniversitario.setSelected(true);
 						panelUniversitario.setVisible(true);
@@ -167,7 +165,7 @@ public class InsertarSolicitud extends JDialog {
 					}
 					if (modificarSoli instanceof SolicitudObrero) {
 						for (String habili : ((SolicitudObrero) modificarSoli).getHabilidades()) {
-							misHabilidades.add(habili);							
+							misHabilidades.add(habili);
 						}
 						rbtnObrero.setSelected(true);
 						panelObrero.setVisible(true);
@@ -189,10 +187,9 @@ public class InsertarSolicitud extends JDialog {
 		setResizable(false);
 		if (modificarSoli == null) {
 			setTitle("Insertar Solicitud - Bolsa Laboral");
-			
+
 		} else {
-			setTitle("Modificar Solicitud - Bolsa Laboral");			
-				
+			setTitle("Modificar Solicitud - Bolsa Laboral");
 
 		}
 
@@ -780,7 +777,7 @@ public class InsertarSolicitud extends JDialog {
 											experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo,
 											localidad, empresa, reubicacion, misIdiomas, categoriaLicencia, posGrado,
 											carrera);
-								
+
 									bolsa.insertSolicitud(nuevaSoli);
 									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
 											"Información", JOptionPane.INFORMATION_MESSAGE, null);
@@ -806,11 +803,11 @@ public class InsertarSolicitud extends JDialog {
 								}
 
 							}
-							//////MODIFICAR
+							////// MODIFICAR
 						} else {
-							
+
 							modificarSoli.setTipoContrato((String) cbxContrato.getSelectedItem());
-							
+
 							if (rbtnReubicacionSi.isSelected()) {
 								modificarSoli.setMudarse(true);
 							} else {
@@ -929,10 +926,8 @@ public class InsertarSolicitud extends JDialog {
 			idioma.addElement(idio);
 		}
 		listIdioma.setModel(idioma);
-		
+
 	}
-
-
 
 	private void cargarHabilidades() {
 		DefaultListModel habilidades = new DefaultListModel();
@@ -943,8 +938,5 @@ public class InsertarSolicitud extends JDialog {
 		ListHabilidad.setModel(habilidades);
 
 	}
-
-	
-
 
 }
