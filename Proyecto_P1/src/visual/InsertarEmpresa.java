@@ -28,6 +28,7 @@ import java.text.ParseException;
 
 import logica.BolsaLaboral;
 import logica.Empresa;
+import logica.Solicitud;
 
 public class InsertarEmpresa extends JDialog {
 
@@ -42,12 +43,13 @@ public class InsertarEmpresa extends JDialog {
 	private JFormattedTextField txtTel;
 	private JFormattedTextField ftxtRnc;
 	private JComboBox cbxProvincia;
+	private Empresa modificarEmpre = null;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			InsertarEmpresa dialog = new InsertarEmpresa();
+			InsertarEmpresa dialog = new InsertarEmpresa(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -59,7 +61,9 @@ public class InsertarEmpresa extends JDialog {
 	 * Create the dialog.
 	 * @throws ParseException 
 	 */
-	public InsertarEmpresa() throws ParseException {
+	public InsertarEmpresa(Empresa empre) throws ParseException {
+		modificarEmpre= empre;
+		
 		setTitle("Insertar Empresa\r\n");
 		setBounds(100, 100, 641, 404);
 		getContentPane().setLayout(new BorderLayout());
@@ -201,7 +205,7 @@ public class InsertarEmpresa extends JDialog {
 						String direcion = txtSector.getText() + " " + txtLocalidad.getText() + " " + txtCuidad.getText()
 								+ " " + txtReferencia.getText() + " " + txtCalle.getText();
 						Empresa miEmpresa = new Empresa(rnc, nombre, tele, email, provincia, direcion);
-						
+							
 
 						    if (txtNombre.getText().isEmpty()){
 						    	JOptionPane.showMessageDialog(null, "Se debe ingresar  el nombre de la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
@@ -223,7 +227,10 @@ public class InsertarEmpresa extends JDialog {
 						    	JOptionPane.showMessageDialog(null, "Se debe ingresar una referencia  de la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
 						    }else if(txtLocalidad.getText().isEmpty()){
 						    	JOptionPane.showMessageDialog(null, "Se debe ingresar el No. de localidad de la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-						    }else{
+						    }else if(empresaRep(rnc)){
+						    	JOptionPane.showMessageDialog(null, "Empresa existente", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+						    }
+						    else{
 						    if ((BolsaLaboral.getInstance().validarEmail(email))){
 						    	JOptionPane.showMessageDialog(null, "Favor registar un E-mail valido", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
 						    	txtEmail.setText(null);
@@ -245,6 +252,7 @@ public class InsertarEmpresa extends JDialog {
 						    }
 						
 						    }
+							
 
 					}
 				});
@@ -264,6 +272,16 @@ public class InsertarEmpresa extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	public boolean empresaRep(String rnc){
+		boolean aux = false;
+for (Empresa empresa : BolsaLaboral.getInstance().getMisEmpresas()) {
+	if(empresa.getRNC().equalsIgnoreCase(rnc)){
+		aux=true;
+	}
+	
+}
+		return aux;
 	}
 }
 

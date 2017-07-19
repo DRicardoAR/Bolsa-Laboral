@@ -106,7 +106,7 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				InsertarEmpresa empre;
 				try {
-					empre = new InsertarEmpresa();
+					empre = new InsertarEmpresa(null);
 					empre.setModal(true);
 					empre.setLocationRelativeTo(null);
 					empre.setVisible(true);
