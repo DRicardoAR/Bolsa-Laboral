@@ -175,12 +175,11 @@ public class BolsaLaboral implements Serializable {
 						if (persona.getAnnosExperiencia() >= solicitud.getAnnosExperiencia()) {
 							if ((persona.setEdadSolicitante() >= solicitud.getEdadMin())
 									&& (persona.setEdadSolicitante() <= solicitud.getEdadMax())) {
-								if (persona.getIdiomas().size() == solicitud.getIdiomas().size()) {
-									if (validarIdiomas(persona, solicitud)) {
-										valido = true;
+								if (validarIdiomas(persona, solicitud)) {
+									valido = true;
 
-									}
 								}
+
 							}
 
 						}
@@ -236,12 +235,14 @@ public class BolsaLaboral implements Serializable {
 
 	// Validar Idiomas
 	public boolean validarIdiomas(Solicitante persona, Solicitud soli) {
-		boolean aux = false;
+		boolean aux = false;		
 		for (String idiomas : soli.getIdiomas()) {
 			if (persona.getIdiomas().contains(idiomas)) {
 				aux = true;
 			} else {
 				aux = false;
+				break;
+				
 			}
 		}
 
@@ -518,10 +519,11 @@ public class BolsaLaboral implements Serializable {
 		}
 		return cant;
 	}
-	//funcion eleminnar empresa
-	public void eliminarEmpresa(String cod){
+
+	// funcion eleminnar empresa
+	public void eliminarEmpresa(String cod) {
 		for (Empresa empresa : misEmpresas) {
-			if(empresa.getRNC().equalsIgnoreCase(cod)){
+			if (empresa.getRNC().equalsIgnoreCase(cod)) {
 				misEmpresas.remove(empresa);
 			}
 		}
