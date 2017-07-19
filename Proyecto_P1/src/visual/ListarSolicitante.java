@@ -163,6 +163,8 @@ public class ListarSolicitante extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						Solicitante soli = BolsaLaboral.getInstance().retornarSolicitante(cedulaCliente);
 						System.out.println(soli.getCedula());
+						
+						
 						if(soli!=null){
 							BolsaLaboral.getInstance().eliminarSolicitante(soli);
 							Principal.actualizarChart();
