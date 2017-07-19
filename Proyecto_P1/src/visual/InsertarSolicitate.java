@@ -39,6 +39,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -112,19 +113,13 @@ public class InsertarSolicitate extends JDialog {
 
 	/**
 	 * Launch the application.
-	 
-	public static void main(String[] args) {
-		try {
-			InsertarSolicitate dialog = new InsertarSolicitate();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
+	 * 
+	 * public static void main(String[] args) { try { InsertarSolicitate dialog
+	 * = new InsertarSolicitate();
+	 * dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	 * dialog.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
+	 * 
+	 * /** Create the dialog.
 	 */
 	public InsertarSolicitate(String title, boolean modificar, Solicitante solicitante) {
 		addWindowListener(new WindowAdapter() {
@@ -132,6 +127,9 @@ public class InsertarSolicitate extends JDialog {
 			public void windowActivated(WindowEvent e) {
 				panel1.setVisible(true);
 				panel2.setVisible(false);
+				if (modificar) {
+					loadSolicitanteModi();
+				}
 			}
 
 		});
@@ -652,7 +650,10 @@ public class InsertarSolicitate extends JDialog {
 
 			}
 		});
-		cbxHabilidades.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Artesano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
+		cbxHabilidades.setModel(new DefaultComboBoxModel(
+				new String[] { "< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Artesano", "Carpintero",
+						"Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico",
+						"Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero" }));
 		cbxHabilidades.setBounds(305, 28, 123, 20);
 		panel_Obreo.add(cbxHabilidades);
 
@@ -778,6 +779,7 @@ public class InsertarSolicitate extends JDialog {
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						boolean error = false;
+
 						String cedula = textCedula.getText();
 						String nombre = txtNombre.getText();
 						String apellido = txtApellidos.getText();
@@ -873,10 +875,11 @@ public class InsertarSolicitate extends JDialog {
 								Solicitante solicitante = new Obrero(cedula, nombre, apellido, telefono,
 										fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia, email,
 										vehiculoP, licencia, annos, misIdiomas, mudarse, misHabilidades);
-								
+
 								BolsaLaboral.getInstance().insertSolicitante(solicitante);
 								estado = false;
-								JOptionPane.showMessageDialog(null, "El solicitante se ha registrado de manera exitosa.", "Información",
+								JOptionPane.showMessageDialog(null,
+										"El solicitante se ha registrado de manera exitosa.", "Información",
 										JOptionPane.INFORMATION_MESSAGE, null);
 								Solicitante soli = BolsaLaboral.getInstance().getMisPersonas().get(0);
 								Principal.actualizarChart();
@@ -892,7 +895,8 @@ public class InsertarSolicitate extends JDialog {
 										cbxCarrera.getSelectedItem().toString());
 								BolsaLaboral.getInstance().insertSolicitante(solicitante);
 								estado = false;
-								JOptionPane.showMessageDialog(null, "El solicitante se ha registrado de manera exitosa.", "Información",
+								JOptionPane.showMessageDialog(null,
+										"El solicitante se ha registrado de manera exitosa.", "Información",
 										JOptionPane.INFORMATION_MESSAGE, null);
 								Principal.actualizarChart();
 								call();
@@ -907,13 +911,13 @@ public class InsertarSolicitate extends JDialog {
 										vehiculoP, licencia, annos, misIdiomas, mudarse,
 										cbxAreaTecnico.getSelectedItem().toString());
 								BolsaLaboral.getInstance().insertSolicitante(solicitante);
-								JOptionPane.showMessageDialog(null, "El solicitante se ha registrado de manera exitosa.", "Información",
+								JOptionPane.showMessageDialog(null,
+										"El solicitante se ha registrado de manera exitosa.", "Información",
 										JOptionPane.INFORMATION_MESSAGE, null);
 								Principal.actualizarChart();
 								estado = false;
 								call();
-								
-								
+
 							}
 						}
 					}
@@ -1061,7 +1065,7 @@ public class InsertarSolicitate extends JDialog {
 		spnNumeroCasa.setValue(0);
 		btnMover.setText("Continuar >>");
 		btnRegistrar.setEnabled(false);
-		
+
 		misHabilidades.removeAll(misHabilidades);
 		misIdiomas.removeAll(misIdiomas);
 		modeloHabilidad.clear();
@@ -1091,50 +1095,103 @@ public class InsertarSolicitate extends JDialog {
 		ventana.start();
 
 	}
-	public void call(){
+
+	public void call() {
 		dispose();
 		InsertarSolicitate soli = new InsertarSolicitate("Insertar Solicitante", false, null);
 		soli.setModal(true);
 		soli.setLocationRelativeTo(null);
 		soli.setVisible(true);
 	}
-	public void loadSolicitanteModi(){
-		if(modiS!=null){
-				txtApellidos.setEnabled(false);
-			    txtNombre.setEnabled(false);
-			    rdbFemenino.setEnabled(false);
-			    rdbMasculino.setEnabled(false);
-			    textCedula.setEnabled(false);
-			    FechaNacimiento.setEnabled(false);
-			    cbxNacionalidad.setEnabled(false);
-			    rdbSiReelocalizacion.setEnabled(false);
-			    rdbNoReelocalizacion.setEnabled(false);
-			    
-			    if(modiS instanceof Obrero){
-			    	rdbObrero.setSelected(true);
-			    	rdbTecnico.setSelected(false);
-			    	rdbUniversitario.setSelected(false);
-			    	rdbUniversitario.setEnabled(false);
-			    	rdbTecnico.setEnabled(false);
-			    	rdbObrero.setEnabled(false);
-			    	panel_Obreo.setVisible(true);
-			    	panel_Tecnico.setVisible(false);
-			    	panel_Universitario.setVisible(false);
-			    }
-			    if(modiS instanceof Universitario){
-			    	rdbObrero.setSelected(false);
-			    	rdbTecnico.setSelected(false);
-			    	rdbUniversitario.setSelected(true);
-			    	panel_Obreo.setVisible(false);
-			    	panel_Tecnico.setVisible(false);
-			    	panel_Universitario.setVisible(true);
-			    	rdbUniversitario.setEnabled(false);
-			    	rdbTecnico.setEnabled(false);
-			    	rdbObrero.setEnabled(false);
-			    }
-			    
-			    
-			
+
+	public void loadSolicitanteModi() {
+		if (modiS != null) {
+			LocalDate fecha = modiS.getFechaNacimiento();
+			Date date = java.sql.Date.valueOf(fecha);
+
+			txtApellidos.setEnabled(false);
+			txtNombre.setEnabled(false);
+			rdbFemenino.setEnabled(false);
+			rdbMasculino.setEnabled(false);
+			textCedula.setEnabled(false);
+			FechaNacimiento.setEnabled(false);
+			cbxNacionalidad.setEnabled(false);
+			rdbSiReelocalizacion.setEnabled(false);
+			rdbNoReelocalizacion.setEnabled(false);
+
+			// Incersion de datos
+			txtNombre.setText(modiS.getNombres());
+			txtApellidos.setText(modiS.getApellidos());
+			textCedula.setText(modiS.getCedula());
+			FechaNacimiento.setDate(date);
+			cbxNacionalidad.setSelectedItem(modiS.getNacionalidad());
+			cbxEstadoCilvil.setSelectedItem(modiS.getEstadoCivil());
+			cbxProvincia.setSelectedItem(modiS.getProvincia());
+			txtTelefono.setText(modiS.getTelefono());
+			txtEmail.setText(modiS.getEmail());
+			if (modiS.getSexo().equalsIgnoreCase("Femenino")) {
+				rdbFemenino.setSelected(true);
+			} else {
+				rdbMasculino.setSelected(true);
+			}
+			if (modiS.isVehiculoPropio()) {
+				rdbSiVehiculo.setSelected(true);
+			} else {
+				rdbNoVehiculo.setSelected(true);
+			}
+			if (modiS.getCategoriaLicencia() == 0) {
+				cbxLicencia.setSelectedIndex(1);
+			}
+			if (modiS.getCategoriaLicencia() == 1) {
+				cbxLicencia.setSelectedIndex(2);
+			}
+			if (modiS.getCategoriaLicencia() == 2) {
+				cbxLicencia.setSelectedIndex(3);
+			}
+			if (modiS.getCategoriaLicencia() == 3) {
+				cbxLicencia.setSelectedIndex(4);
+			}
+			if (modiS.getCategoriaLicencia() == 4) {
+				cbxLicencia.setSelectedIndex(5);
+			}
+
+			if (modiS instanceof Obrero) {
+				spnAnnosExpObrero.setValue(modiS.getAnnosExperiencia());
+				cbxHabilidades.setEnabled(false);
+				spnAnnosExpObrero.setEnabled(false);
+				rdbObrero.setSelected(true);
+				rdbTecnico.setSelected(false);
+				rdbUniversitario.setSelected(false);
+				rdbUniversitario.setEnabled(false);
+				rdbTecnico.setEnabled(false);
+				rdbObrero.setEnabled(false);
+				panel_Obreo.setVisible(true);
+				panel_Tecnico.setVisible(false);
+				panel_Universitario.setVisible(false);
+			}
+			if (modiS instanceof Universitario) {
+				rdbObrero.setSelected(false);
+				rdbTecnico.setSelected(false);
+				rdbUniversitario.setSelected(true);
+				panel_Obreo.setVisible(false);
+				panel_Tecnico.setVisible(false);
+				panel_Universitario.setVisible(true);
+				rdbUniversitario.setEnabled(false);
+				rdbTecnico.setEnabled(false);
+				rdbObrero.setEnabled(false);
+			}
+			if (modiS instanceof Tecnico) {
+				rdbObrero.setSelected(false);
+				rdbTecnico.setSelected(true);
+				rdbUniversitario.setSelected(false);
+				panel_Obreo.setVisible(false);
+				panel_Tecnico.setVisible(true);
+				panel_Universitario.setVisible(false);
+				rdbUniversitario.setEnabled(false);
+				rdbTecnico.setEnabled(false);
+				rdbObrero.setEnabled(false);
+			}
+
 		}
 	}
 }
