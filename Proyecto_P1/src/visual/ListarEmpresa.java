@@ -38,7 +38,8 @@ public class ListarEmpresa extends JDialog {
 	private DefaultTableModel model;
 	private JButton BtnUpdate;
 	private BolsaLaboral bolsa= BolsaLaboral.getInstance();
-	private String nom;
+	private String cod;
+	private JButton btnEliminar;
 	
 	
 
@@ -57,6 +58,11 @@ public class ListarEmpresa extends JDialog {
 			panel.setLayout(null);
 			
 			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+				}
+			});
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			scrollPane.setBounds(10, 25, 576, 182);
 			panel.add(scrollPane);
@@ -70,13 +76,15 @@ public class ListarEmpresa extends JDialog {
 						if (aux > -1){
 			
 						BtnUpdate.setEnabled(true);
+						btnEliminar.setEnabled(true);
+					
 						
-						nom =(String) table.getModel().getValueAt(aux, 0);
+						cod =(String) table.getModel().getValueAt(aux, 0);
 						
 						}else {
 							BtnUpdate.setEnabled(false);
-							
-							String nombreVehi = "";
+							btnEliminar.setEnabled(false);
+							String cod = "";
 						}
 					}
 				});
@@ -94,7 +102,13 @@ public class ListarEmpresa extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnEliminar = new JButton("Eliminar");
+				btnEliminar = new JButton("Eliminar");
+				btnEliminar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						BolsaLaboral.getInstance().eliminarEmpresa(cod);
+					}
+				});
+				btnEliminar.setEnabled(false);
 				buttonPane.add(btnEliminar);
 			}
 			{
