@@ -518,4 +518,12 @@ public class BolsaLaboral implements Serializable {
 		}
 		return cant;
 	}
+	//funcion eleminnar empresa
+	public void eliminarEmpresa(String cod){
+		for (Empresa empresa : misEmpresas) {
+			if(empresa.getRNC().equalsIgnoreCase(cod)){
+				misEmpresas.remove(empresa);
+			}
+		}
+	}
 }

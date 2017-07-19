@@ -94,6 +94,10 @@ public class ListarEmpresa extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
+				JButton btnEliminar = new JButton("Eliminar");
+				buttonPane.add(btnEliminar);
+			}
+			{
 				BtnUpdate = new JButton("Modificar");
 				BtnUpdate.setEnabled(false);
 				buttonPane.add(BtnUpdate);
