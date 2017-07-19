@@ -26,9 +26,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 
 import java.awt.Color;
+import java.text.ParseException;
 
 import logica.BolsaLaboral;
 import logica.Empresa;
+import logica.Solicitud;
 
 public class ListarEmpresa extends JDialog {
 
@@ -113,6 +115,23 @@ public class ListarEmpresa extends JDialog {
 			}
 			{
 				BtnUpdate = new JButton("Modificar");
+				BtnUpdate.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						InsertarEmpresa modificaremore = null;
+						
+						try {
+							modificaremore = new InsertarEmpresa(BolsaLaboral.getInstance().RetornarEmpresa(cod));
+							modificaremore.setModal(true);
+							modificaremore.setVisible(true);
+							Empresa empre = BolsaLaboral.getInstance().RetornarEmpresa(cod);
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						
+					}
+				});
 				BtnUpdate.setEnabled(false);
 				buttonPane.add(BtnUpdate);
 			}
@@ -157,4 +176,6 @@ public class ListarEmpresa extends JDialog {
 		
 		
 	}
+	
+	
 }
