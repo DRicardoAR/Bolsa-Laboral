@@ -52,12 +52,10 @@ public class ListarSolicitud extends JDialog {
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JButton btnDetallar;
-	private String codigo ="";
-	
-	private static JComboBox<String>cbxHabilidades ;
+	private String codigo = "";
+
+	private static JComboBox<String> cbxHabilidades;
 	private static JComboBox<String> cbxIdioma;
-	
-	
 
 	/**
 	 * Launch the application.
@@ -113,7 +111,6 @@ public class ListarSolicitud extends JDialog {
 
 					}
 
-
 				});
 				cbxfiltro.setModel(
 						new DefaultComboBoxModel(new String[] { "Todos", "Universitatio", "T\u00E9cnico", "Obrero" }));
@@ -147,19 +144,19 @@ public class ListarSolicitud extends JDialog {
 					table.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-							int aux = table.getSelectedRow();	
-							if(aux > -1){
-								btnModificar.setEnabled(true);	
+							int aux = table.getSelectedRow();
+							if (aux > -1) {
+								btnModificar.setEnabled(true);
 								btnEliminar.setEnabled(true);
 								btnDetallar.setEnabled(true);
 								codigo = (String) table.getModel().getValueAt(aux, 0);
-								
-							}else{
-								btnModificar.setEnabled(false);	
+
+							} else {
+								btnModificar.setEnabled(false);
 								btnEliminar.setEnabled(false);
 								codigo = "";
 							}
-	
+
 						}
 					});
 					modeloTabla = new DefaultTableModel();
@@ -173,7 +170,6 @@ public class ListarSolicitud extends JDialog {
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						empresaListar = BolsaLaboral.getInstance().RetornarEmpresa(ftxtRNCempresa.getText());
-						
 
 						if (empresaListar != null) {
 							loadTablaRNC();
@@ -194,22 +190,23 @@ public class ListarSolicitud extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				 btnEliminar = new JButton("Eliminar");
-				 btnEliminar.setEnabled(false);
-				 btnEliminar.addActionListener(new ActionListener() {
-				 	public void actionPerformed(ActionEvent e) {
-				 		if(!codigo.equalsIgnoreCase("")){
-				 			if(BolsaLaboral.getInstance().EliminarSolicitud(codigo)){
-				 				loadtabla(cbxfiltro.getSelectedIndex());	
-				 				JOptionPane.showMessageDialog(null, "Se ha eliminada la solicitud", "Información", JOptionPane.INFORMATION_MESSAGE, null);
-											 				
+				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setEnabled(false);
+				btnEliminar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (!codigo.equalsIgnoreCase("")) {
+							if (BolsaLaboral.getInstance().EliminarSolicitud(codigo)) {
+								loadtabla(cbxfiltro.getSelectedIndex());
+								JOptionPane.showMessageDialog(null, "Se ha eliminada la solicitud", "Información",
+										JOptionPane.INFORMATION_MESSAGE, null);
+
 								btnEliminar.setEnabled(false);
-				 			}
-				 		}
-				 	}
-				 });
+							}
+						}
+					}
+				});
 				{
-				 btnDetallar = new JButton("Detallar");
+					btnDetallar = new JButton("Detallar");
 					btnDetallar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 						}
@@ -223,7 +220,8 @@ public class ListarSolicitud extends JDialog {
 				btnModificar = new JButton("Modificar");
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						InsertarSolicitud modificarSOli = new InsertarSolicitud(BolsaLaboral.getInstance().RetornarSolocitudCod(codigo));
+						InsertarSolicitud modificarSOli = new InsertarSolicitud(
+								BolsaLaboral.getInstance().RetornarSolocitudCod(codigo));
 						modificarSOli.setModal(true);
 						modificarSOli.setVisible(true);
 						Solicitud soli = BolsaLaboral.getInstance().RetornarSolocitudCod(codigo);
@@ -266,12 +264,12 @@ public class ListarSolicitud extends JDialog {
 	}
 
 	private static void loadAll() {
-		String[] nombreColumna = { "Código", "Empresa", "Tipo", "Vacantes","Rango Edad", "Vehiculo","Provincia"};
+		String[] nombreColumna = { "Código", "Empresa", "Tipo", "Vacantes", "Rango Edad", "Vehiculo", "Provincia" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitud soli : BolsaLaboral.getInstance().getMisSolicitudes()) {
-						
+
 			fila[0] = soli.getCodigo();
 			fila[1] = soli.getEmpresa().getNombre();
 			if (soli instanceof SolicitudUniversitario) {
@@ -287,13 +285,13 @@ public class ListarSolicitud extends JDialog {
 			String min = Integer.toString(soli.getEdadMin());
 			String max = Integer.toString(soli.getEdadMax());
 			fila[4] = min + " - " + max;
-		
+
 			if (soli.isVehiculoPropio()) {
 				fila[5] = "Si";
 			} else {
 				fila[5] = "No";
 			}
-			fila[6] = soli.getLocalidad();				
+			fila[6] = soli.getLocalidad();
 			modeloTabla.addRow(fila);
 		}
 		table.setModel(modeloTabla);
@@ -312,25 +310,24 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(4).setPreferredWidth(120);
 		columnModel.getColumn(5).setPreferredWidth(80);
 		columnModel.getColumn(6).setPreferredWidth(128);
-		
-		
-	
+
 	}
 
 	private static void loadUniversitario() {
-		String[] nombreColumna = { "Código", "Empresa", "Vacantes","Rango Edad","Vehiculo","Provincia","Idiomas" ,"Carrera", "PostGrado" };
+		String[] nombreColumna = { "Código", "Empresa", "Vacantes", "Rango Edad", "Vehiculo", "Provincia", "Idiomas",
+				"Carrera", "PostGrado" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitud soli : BolsaLaboral.getInstance().getMisSolicitudes()) {
 			if (soli instanceof SolicitudUniversitario) {
-				String []idioma = llenado(soli.getIdiomas());
+				String[] idioma = llenado(soli.getIdiomas());
 				cbxIdioma = new JComboBox<String>(idioma);
 				setComboIdiomas();
-				
+
 				fila[0] = soli.getCodigo();
 				fila[1] = soli.getEmpresa().getNombre();
-				fila[2] = soli.getCantVacantes();				
+				fila[2] = soli.getCantVacantes();
 				String min = Integer.toString(soli.getEdadMin());
 				String max = Integer.toString(soli.getEdadMax());
 				fila[3] = min + " - " + max;
@@ -370,29 +367,30 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(6).setPreferredWidth(120);
 		columnModel.getColumn(7).setPreferredWidth(121);
 		columnModel.getColumn(8).setPreferredWidth(80);
-		
+
 	}
 
 	private static void loadTecnico() {
-		String[] nombreColumna = { "Código", "Empresa", "Vacantes","Rango Edad", "Vehiculo","Provincia","Idiomas","Area" };
-		
+		String[] nombreColumna = { "Código", "Empresa", "Vacantes", "Rango Edad", "Vehiculo", "Provincia", "Idiomas",
+				"Area" };
+
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitud soli : BolsaLaboral.getInstance().getMisSolicitudes()) {
 			if (soli instanceof SolicitudTecnico) {
-				String []idioma = llenado(soli.getIdiomas());
+				String[] idioma = llenado(soli.getIdiomas());
 				cbxIdioma = new JComboBox<String>(idioma);
 				setComboIdiomas();
-				
+
 				fila[0] = soli.getCodigo();
 				fila[1] = soli.getEmpresa().getNombre();
 				fila[2] = soli.getCantVacantes();
-			
+
 				String min = Integer.toString(soli.getEdadMin());
 				String max = Integer.toString(soli.getEdadMax());
 				fila[3] = min + " - " + max;
-		
+
 				if (soli.isVehiculoPropio()) {
 					fila[4] = "Si";
 				} else {
@@ -424,29 +422,28 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(5).setPreferredWidth(130);
 		columnModel.getColumn(6).setPreferredWidth(135);
 		columnModel.getColumn(7).setPreferredWidth(135);
-		
-	
 
 	}
 
 	private static void loadObrero() {
-		String[] nombreColumna = { "Código", "Empresa", "Vacantes","Rango Edad","Vehiculo","Provincia","Idiomas","Habilidades" };
+		String[] nombreColumna = { "Código", "Empresa", "Vacantes", "Rango Edad", "Vehiculo", "Provincia", "Idiomas",
+				"Habilidades" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitud soli : BolsaLaboral.getInstance().getMisSolicitudes()) {
 			if (soli instanceof SolicitudObrero) {
-				String []idioma = llenado(soli.getIdiomas());
-				String []habilidad = llenado(((SolicitudObrero) soli).getHabilidades());
+				String[] idioma = llenado(soli.getIdiomas());
+				String[] habilidad = llenado(((SolicitudObrero) soli).getHabilidades());
 				cbxHabilidades = new JComboBox<String>(habilidad);
 				cbxIdioma = new JComboBox<String>(idioma);
 				setComboIdiomas();
 				setCombo();
-				
+
 				fila[0] = soli.getCodigo();
 				fila[1] = soli.getEmpresa().getNombre();
 				fila[2] = soli.getCantVacantes();
-				
+
 				String min = Integer.toString(soli.getEdadMin());
 				String max = Integer.toString(soli.getEdadMax());
 				fila[3] = min + " - " + max;
@@ -481,25 +478,23 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(5).setPreferredWidth(130);
 		columnModel.getColumn(6).setPreferredWidth(135);
 		columnModel.getColumn(7).setPreferredWidth(135);
-		
-		
-	
 
 	}
 
 	private void loadTablaRNC() {
 		ArrayList<Solicitud> lista = new ArrayList<>();
 		lista = BolsaLaboral.getInstance().RetornaSolicitudEmp(empresaListar);
-		String[] nombreColumna = { "Código", "Empresa", "Tipo", "Vacantes","Rango Edad", "Vehiculo","Idiomas","Provincia"};
+		String[] nombreColumna = { "Código", "Empresa", "Tipo", "Vacantes", "Rango Edad", "Vehiculo", "Idiomas",
+				"Provincia" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
-		
+
 		for (Solicitud soli : lista) {
-			String []idioma = llenado(soli.getIdiomas());
+			String[] idioma = llenado(soli.getIdiomas());
 			cbxIdioma = new JComboBox<String>(idioma);
 			setComboIdiomas();
-			
+
 			fila[0] = soli.getCodigo();
 			fila[1] = soli.getEmpresa().getNombre();
 			if (soli instanceof SolicitudUniversitario) {
@@ -544,19 +539,20 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(7).setPreferredWidth(128);
 
 	}
-	
-	public static  void setComboIdiomas(){
+
+	public static void setComboIdiomas() {
 		TableColumn col = table.getColumnModel().getColumn(6);
 		col.setCellEditor(new DefaultCellEditor(cbxIdioma));
 	}
-	public static void setCombo(){
+
+	public static void setCombo() {
 		TableColumn col = table.getColumnModel().getColumn(7);
 		col.setCellEditor(new DefaultCellEditor(cbxHabilidades));
-	
-		
+
 	}
-	public static String[] llenado (ArrayList<String>copiado){
-		String [] arr = new String[copiado.size()];
+
+	public static String[] llenado(ArrayList<String> copiado) {
+		String[] arr = new String[copiado.size()];
 		copiado.toArray(arr);
 		return arr;
 	}
