@@ -196,7 +196,9 @@ public class Macheo extends JDialog {
 								
 								Solicitud soli = BolsaLaboral.getInstance().RetornarSolocitudCod(codigo);
 								if (soli != null) {
-									misSolicitantesC = BolsaLaboral.getInstance().matcheo(soli);
+									for (Solicitante solicitante : BolsaLaboral.getInstance().matcheo(soli)) {
+										misSolicitantesC.add(solicitante);								
+									}
 								}
 								cargarSolicitante();
 							}
@@ -364,8 +366,8 @@ public class Macheo extends JDialog {
 	public void cargarSolicitante() {
 		if (misSolicitantesC.size() != 0) {
 			for (Solicitante soli : misSolicitantesC) {
-				String nombre = soli.getCedula() + " " + soli.getNombres() + " " + soli.getApellidos();
-				model.addElement(nombre);
+				String candidato = soli.getCedula() + " " + soli.getNombres() + " " + soli.getApellidos();
+				model.addElement(candidato);
 			}
 			list.setModel(model);
 		}else{

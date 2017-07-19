@@ -221,9 +221,10 @@ public class BolsaLaboral implements Serializable {
 		boolean validar = false;
 		if (((Universitario) solicitante).getCarrera().equalsIgnoreCase(((SolicitudUniversitario) soli).getCarrera())) {
 			validar = true;
-			if (((Universitario) solicitante).isPostGrado() && !((SolicitudUniversitario) soli).isPostGrado()) {
-				validar = true;
+			if (!((Universitario) solicitante).isPostGrado() && ((SolicitudUniversitario) soli).isPostGrado()) {
+				validar = false;
 			}
+
 		}
 		return validar;
 	}
@@ -246,14 +247,19 @@ public class BolsaLaboral implements Serializable {
 
 	public ArrayList<Solicitante> matcheo(Solicitud soli) {
 
-		ArrayList<Solicitante> misContratados = new ArrayList<>();
+		ArrayList<Solicitante> candito = new ArrayList<>();
 		if (soli instanceof SolicitudObrero) {
 			for (Solicitante solicitante : misSolicitantes) {
 				if (solicitante instanceof Obrero) {
 					if (validarGeneral(solicitante, soli)) {
 						if (ValidarObrero(solicitante, soli)) {
-							misContratados.add(solicitante);
-							soli.getEmpresa().insertContratado(solicitante);
+							candito.add(solicitante);
+							/*
+							 * soli.getEmpresa().insertContratado(solicitante);
+							 * Crear una funcion qune inserte los contradado y
+							 * sea llamada desde el boton: Contratar Solicitante
+							 */
+
 						}
 					}
 				}
@@ -266,8 +272,12 @@ public class BolsaLaboral implements Serializable {
 				if (solicitante instanceof Tecnico) {
 					if (validarGeneral(solicitante, soli)) {
 						if (ValidarTecnico(solicitante, soli)) {
-							misContratados.add(solicitante);
-							soli.getEmpresa().insertContratado(solicitante);
+							candito.add(solicitante);
+							/*
+							 * soli.getEmpresa().insertContratado(solicitante);
+							 * Crear una funcion qune inserte los contradado y
+							 * sea llamada desde el boton: Contratar Solicitante
+							 */
 						}
 
 					}
@@ -279,8 +289,12 @@ public class BolsaLaboral implements Serializable {
 				if (solicitante instanceof Universitario) {
 					if (validarGeneral(solicitante, soli)) {
 						if (validarUniversitario(solicitante, soli)) {
-							misContratados.add(solicitante);
-							soli.getEmpresa().insertContratado(solicitante);
+							candito.add(solicitante);
+							/*
+							 * soli.getEmpresa().insertContratado(solicitante);
+							 * Crear una funcion qune inserte los contradado y
+							 * sea llamada desde el boton: Contratar Solicitante
+							 */
 						}
 
 					}
@@ -288,7 +302,7 @@ public class BolsaLaboral implements Serializable {
 			}
 		}
 
-		return misContratados;
+		return candito;
 	}
 
 	// Escritura & Lectura Binarios
@@ -371,6 +385,16 @@ public class BolsaLaboral implements Serializable {
 
 		}
 		return miSolicitud;
+	}
+	//Retornar Solicitante dando una cedula
+	public Solicitante retornarSolicitante(String cedula){
+		Solicitante solicitante = null;
+		for (Solicitante soli : misSolicitantes) {
+			if(soli.getCedula().equalsIgnoreCase(cedula))
+				solicitante = soli;			
+		}
+		
+		return solicitante;
 	}
 
 	// Retorna todas las solicitudes de una empresa
