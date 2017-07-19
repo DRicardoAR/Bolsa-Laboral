@@ -51,6 +51,7 @@ public class ListarSolicitante extends JDialog {
 	private JButton cancelButton;
 	private String cedulaCliente = "";
 	private JComboBox<String>habilidades;
+	private static JComboBox<String>cbxIdioma;
 
 	/**
 	 * Launch the application.
@@ -78,7 +79,7 @@ public class ListarSolicitante extends JDialog {
 		});
 		setTitle("Listar Solicitantes\r\n");
 		setResizable(false);
-		setBounds(100, 100, 879, 494);
+		setBounds(100, 100, 961, 494);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -106,12 +107,12 @@ public class ListarSolicitante extends JDialog {
 			});
 			cbxFiltro.setModel(
 					new DefaultComboBoxModel(new String[] {"General", "Obreros", "T\u00E9cnicos", "Universitarios"}));
-			cbxFiltro.setBounds(739, 37, 119, 20);
+			cbxFiltro.setBounds(763, 37, 119, 20);
 			panel.add(cbxFiltro);
 			
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			scrollPane.setBounds(10, 68, 848, 343);
+			scrollPane.setBounds(10, 68, 925, 343);
 			panel.add(scrollPane);
 			{
 			table = new JTable();
@@ -132,13 +133,13 @@ public class ListarSolicitante extends JDialog {
 				}
 			});
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+			table.getTableHeader().setResizingAllowed(false);
 			modeloTabla = new DefaultTableModel() {
 				
-				/*@Override
-				public boolean isCellEditable(int row, int 3) {
+				@Override
+				public boolean isCellEditable(int row, int column) {
 					return true ;
-				}*/
+				}
 			};
 			String tipo = cbxFiltro.getSelectedItem().toString();
 			
@@ -149,7 +150,7 @@ public class ListarSolicitante extends JDialog {
 		
 
 			JLabel lblFiltrarPor = new JLabel("Filtrar por :");
-			lblFiltrarPor.setBounds(643, 40, 63, 14);
+			lblFiltrarPor.setBounds(667, 40, 63, 14);
 			panel.add(lblFiltrarPor);
 		}
 		{
@@ -165,6 +166,7 @@ public class ListarSolicitante extends JDialog {
 				btnModificar = new JButton("Modificar");
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						Solicitante persona;
 						InsertarSolicitate soli = new InsertarSolicitate("Modificar Solicitante",true,null);
 						soli.setModal(true);
 						soli.setLocationRelativeTo(null);
@@ -226,11 +228,11 @@ public static void loadTabla(String seleccion){
 					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 					table.getTableHeader().setReorderingAllowed(false);
 					TableColumnModel modeloColumna = table.getColumnModel();
-					modeloColumna.getColumn(0).setPreferredWidth(130);
-					modeloColumna.getColumn(1).setPreferredWidth(250);
-					modeloColumna.getColumn(2).setPreferredWidth(150);
-					modeloColumna.getColumn(3).setPreferredWidth(160);
-					modeloColumna.getColumn(4).setPreferredWidth(140);
+					modeloColumna.getColumn(0).setPreferredWidth(160);
+					modeloColumna.getColumn(1).setPreferredWidth(282);
+					modeloColumna.getColumn(2).setPreferredWidth(160);
+					modeloColumna.getColumn(3).setPreferredWidth(170);
+					modeloColumna.getColumn(4).setPreferredWidth(150);
 				}
 			
 			
@@ -240,57 +242,66 @@ public static void loadTabla(String seleccion){
 	}
 	public static void loadTablaU(){
 		
-		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Carrera", "Años de Experiencia","Teléfono","E-Mail"};
+		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Carrera", "Idiomas","Años de Experiencia","Teléfono","E-Mail"};
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitante soli : BolsaLaboral.getInstance().getMisPersonas()) {
 			if(soli instanceof Universitario){
+				String []idioma = llenado(soli.getIdiomas());
+				cbxIdioma = new JComboBox<String>(idioma);
+				setComboIdiomas();
+				
 				fila[0] = soli.getCedula();
 				fila[1] = soli.getNombres() + " " + soli.getApellidos();
 				fila[2] = soli.getEdad()+" años";
 				fila[3] = ((Universitario) soli).getCarrera();
-				fila[4] = soli.getAnnosExperiencia()+" años";
-				fila[5] = soli.getTelefono();
-				fila[6] = soli.getEmail();
+				fila[4] = "Hacer click";
+				fila[5] = soli.getAnnosExperiencia()+" años";
+				fila[6] = soli.getTelefono();
+				fila[7] = soli.getEmail();
 				modeloTabla.addRow(fila);
 				
 				table.setModel(modeloTabla);
 				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 				table.getTableHeader().setReorderingAllowed(false);
 				TableColumnModel modeloColumna = table.getColumnModel();
-				modeloColumna.getColumn(0).setPreferredWidth(100);
+				modeloColumna.getColumn(0).setPreferredWidth(95);
 				modeloColumna.getColumn(1).setPreferredWidth(150);
-				modeloColumna.getColumn(2).setPreferredWidth(110);
+				modeloColumna.getColumn(2).setPreferredWidth(80);
 				modeloColumna.getColumn(3).setPreferredWidth(110);
-				modeloColumna.getColumn(4).setPreferredWidth(160);
-				modeloColumna.getColumn(5).setPreferredWidth(100);
-				modeloColumna.getColumn(6).setPreferredWidth(140);
+				modeloColumna.getColumn(4).setPreferredWidth(100);
+				modeloColumna.getColumn(5).setPreferredWidth(160);
+				modeloColumna.getColumn(6).setPreferredWidth(100);
+				modeloColumna.getColumn(7).setPreferredWidth(140);
 			}
 			
 		}
 	}
 	
 	public void loadTablaO(){
-		//Falta informacion clave sobre los obreros<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Habilidades", "Años de Experiencia","Teléfono","E-Mail"};
+	
+		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Habilidades", "Idiomas","Años de Experiencia","Teléfono","E-Mail"};
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitante soli : BolsaLaboral.getInstance().getMisPersonas()) {
 			if(soli instanceof Obrero){
-				//System.out.println(((Obrero) soli).getHabilidades().get(0));
+				String []idioma = llenado(soli.getIdiomas());
 				String []habilidad = llenado(((Obrero) soli).getHabilidades());
 				habilidades = new JComboBox<String>(habilidad);
+				cbxIdioma = new JComboBox<String>(idioma);
+				setComboIdiomas();
 				setCombo();
 				
 				fila[0] = soli.getCedula();
 				fila[1] = soli.getNombres() + " " + soli.getApellidos();
 				fila[2] = soli.getEdad()+" años";
 				fila[3] = "Hacer click";
-				fila[4] = soli.getAnnosExperiencia()+" años";
-				fila[5] = soli.getTelefono();
-				fila[6] = soli.getEmail();
+				fila[4] = "Hacer click";
+				fila[5] = soli.getAnnosExperiencia()+" años";
+				fila[6] = soli.getTelefono();
+				fila[7] = soli.getEmail();
 				modeloTabla.addRow(fila);
 				
 				table.setModel(modeloTabla);
@@ -301,28 +312,33 @@ public static void loadTabla(String seleccion){
 				modeloColumna.getColumn(1).setPreferredWidth(140);
 				modeloColumna.getColumn(2).setPreferredWidth(110);
 				modeloColumna.getColumn(3).setPreferredWidth(100);
-				modeloColumna.getColumn(4).setPreferredWidth(160);
-				modeloColumna.getColumn(5).setPreferredWidth(100);
-				modeloColumna.getColumn(6).setPreferredWidth(140);
+				modeloColumna.getColumn(4).setPreferredWidth(100);
+				modeloColumna.getColumn(5).setPreferredWidth(160);
+				modeloColumna.getColumn(6).setPreferredWidth(100);
+				modeloColumna.getColumn(7).setPreferredWidth(140);
 			}
 			
 		}
 	}
 	public void loadTablaT(){
-		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Área", "Años de Experiencia","Teléfono","E-Mail"};
+		String[] nombreColumna = { "Cédula", "Nombre", "Edad","Área","Idiomas", "Años de Experiencia","Teléfono","E-Mail"};
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitante soli : BolsaLaboral.getInstance().getMisPersonas()) {
 			if(soli instanceof Tecnico){
-			
+				String []idioma = llenado(soli.getIdiomas());
+				cbxIdioma = new JComboBox<String>(idioma);
+				setComboIdiomas();
+				
 				fila[0] = soli.getCedula();
 				fila[1] = soli.getNombres() + " " + soli.getApellidos();
 				fila[2] = soli.getEdad()+" años";
 				fila[3] = ((Tecnico) soli).getArea();
-				fila[4] = soli.getAnnosExperiencia()+" años";
-				fila[5] = soli.getTelefono();
-				fila[6] = soli.getEmail();
+				fila[4] = "Hacer click";
+				fila[5] = soli.getAnnosExperiencia()+" años";
+				fila[6] = soli.getTelefono();
+				fila[7] = soli.getEmail();
 				modeloTabla.addRow(fila);
 				
 				table.setModel(modeloTabla);
@@ -333,15 +349,19 @@ public static void loadTabla(String seleccion){
 				modeloColumna.getColumn(1).setPreferredWidth(140);
 				modeloColumna.getColumn(2).setPreferredWidth(110);
 				modeloColumna.getColumn(3).setPreferredWidth(100);
-				modeloColumna.getColumn(4).setPreferredWidth(160);
-				modeloColumna.getColumn(5).setPreferredWidth(100);
-				modeloColumna.getColumn(6).setPreferredWidth(140);
+				modeloColumna.getColumn(4).setPreferredWidth(100);
+				modeloColumna.getColumn(5).setPreferredWidth(160);
+				modeloColumna.getColumn(6).setPreferredWidth(100);
+				modeloColumna.getColumn(7).setPreferredWidth(140);
 			}
 			
 		}
 		
 	}
-	
+	public static  void setComboIdiomas(){
+		TableColumn col = table.getColumnModel().getColumn(4);
+		col.setCellEditor(new DefaultCellEditor(cbxIdioma));
+	}
 	public void setCombo(){
 		TableColumn col = table.getColumnModel().getColumn(3);
 		col.setCellEditor(new DefaultCellEditor(habilidades));
@@ -349,16 +369,15 @@ public static void loadTabla(String seleccion){
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, habilidades.getSelectedItem());
+				
 				
 			}
 		});
 		
 	}
-	public String[] llenado (ArrayList<String>copiado){
+	public static String[] llenado (ArrayList<String>copiado){
 		String [] arr = new String[copiado.size()];
 		copiado.toArray(arr);
-		System.out.println(arr[0]);
 		return arr;
 	}
 }
