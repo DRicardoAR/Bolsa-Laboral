@@ -61,7 +61,7 @@ public class InsertarEmpresa extends JDialog {
 	 */
 	public InsertarEmpresa() throws ParseException {
 		setTitle("Insertar Empresa\r\n");
-		setBounds(100, 100, 529, 404);
+		setBounds(100, 100, 641, 404);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -70,7 +70,7 @@ public class InsertarEmpresa extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBorder(
 				new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 26, 493, 118);
+		panel.setBounds(10, 26, 605, 118);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 
@@ -83,58 +83,38 @@ public class InsertarEmpresa extends JDialog {
 		panel.add(lblTelefono);
 
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(252, 35, 62, 14);
+		lblNombre.setBounds(312, 32, 62, 14);
 		panel.add(lblNombre);
 
 		txtNombre = new JTextField();
-		txtNombre.setBounds(345, 35, 134, 20);
+		txtNombre.setBounds(405, 32, 174, 20);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
 
 		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setBounds(252, 84, 46, 14);
+		lblEmail.setBounds(312, 81, 46, 14);
 		panel.add(lblEmail);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(345, 81, 134, 20);
+		txtEmail.setBounds(405, 78, 174, 20);
 		panel.add(txtEmail);
 		txtEmail.setColumns(10);
 
 		MaskFormatter mascara = new MaskFormatter("##########");
 		ftxtRnc = new JFormattedTextField(mascara);
-		ftxtRnc.setBounds(93, 32, 134, 20);
+		ftxtRnc.setBounds(93, 32, 174, 20);
 		panel.add(ftxtRnc);
 		
 		MaskFormatter mascara1 = new MaskFormatter("##########");
 		txtTel = new JFormattedTextField(mascara1);
-		txtTel.setBounds(93, 81, 134, 20);
+		txtTel.setBounds(93, 81, 174, 20);
 		panel.add(txtTel);
 		txtTel.setColumns(10);
-
-		JLabel label_1 = new JLabel("*");
-		label_1.setForeground(Color.RED);
-		label_1.setBounds(70, 35, 11, 14);
-		panel.add(label_1);
-
-		JLabel label_2 = new JLabel("*");
-		label_2.setForeground(Color.RED);
-		label_2.setBounds(70, 84, 11, 14);
-		panel.add(label_2);
-
-		JLabel label_3 = new JLabel("*");
-		label_3.setForeground(Color.RED);
-		label_3.setBounds(313, 35, 11, 14);
-		panel.add(label_3);
-
-		JLabel label_4 = new JLabel("*");
-		label_4.setForeground(Color.RED);
-		label_4.setBounds(313, 84, 11, 14);
-		panel.add(label_4);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ubicaci\u00F3n",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_1.setBounds(10, 155, 493, 166);
+		panel_1.setBounds(10, 155, 605, 166);
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -151,7 +131,7 @@ public class InsertarEmpresa extends JDialog {
 						"Puerto Plata ", "Hermanas Mirabal ", "Saman\u00E1 ", "S\u00E1nchez Ram\u00EDrez ",
 						"San Crist\u00F3bal ", "San Jos\u00E9 de Ocoa ", "San Juan ", "San Pedro de Macor\u00EDs ",
 						"Santiago ", "Santiago Rodr\u00EDguez ", "Santo Domingo ", "Valverde " }));
-		cbxProvincia.setBounds(93, 35, 134, 20);
+		cbxProvincia.setBounds(93, 35, 174, 20);
 		panel_1.add(cbxProvincia);
 
 		JLabel lblSector = new JLabel("Sector:");
@@ -159,7 +139,7 @@ public class InsertarEmpresa extends JDialog {
 		panel_1.add(lblSector);
 
 		txtSector = new JTextField();
-		txtSector.setBounds(93, 81, 134, 20);
+		txtSector.setBounds(93, 81, 174, 20);
 		panel_1.add(txtSector);
 		txtSector.setColumns(10);
 
@@ -168,47 +148,42 @@ public class InsertarEmpresa extends JDialog {
 		panel_1.add(lblNewLabel);
 
 		txtLocalidad = new JTextField();
-		txtLocalidad.setBounds(93, 131, 134, 20);
+		txtLocalidad.setBounds(93, 131, 174, 20);
 		panel_1.add(txtLocalidad);
 		txtLocalidad.setColumns(10);
 
 		JLabel lblNewLabel_1 = new JLabel("Cuidad:");
-		lblNewLabel_1.setBounds(252, 35, 46, 14);
+		lblNewLabel_1.setBounds(312, 32, 62, 14);
 		panel_1.add(lblNewLabel_1);
 
 		txtCuidad = new JTextField();
-		txtCuidad.setBounds(345, 35, 134, 20);
+		txtCuidad.setBounds(405, 32, 174, 20);
 		panel_1.add(txtCuidad);
 		txtCuidad.setColumns(10);
 
 		JLabel lblCalle = new JLabel("Calle:");
-		lblCalle.setBounds(252, 84, 46, 14);
+		lblCalle.setBounds(312, 81, 46, 14);
 		panel_1.add(lblCalle);
 
 		txtCalle = new JTextField();
-		txtCalle.setBounds(345, 81, 134, 20);
+		txtCalle.setBounds(405, 78, 174, 20);
 		panel_1.add(txtCalle);
 		txtCalle.setColumns(10);
 
 		JLabel lblReferencia = new JLabel("Referencia:");
-		lblReferencia.setBounds(252, 134, 73, 14);
+		lblReferencia.setBounds(312, 131, 73, 14);
 		panel_1.add(lblReferencia);
 
 		txtReferencia = new JTextField();
-		txtReferencia.setBounds(345, 131, 134, 20);
+		txtReferencia.setBounds(405, 128, 174, 20);
 		panel_1.add(txtReferencia);
 		txtReferencia.setColumns(10);
 
-		JLabel label_5 = new JLabel("*");
-		label_5.setForeground(Color.RED);
-		label_5.setBounds(70, 35, 11, 14);
-		panel_1.add(label_5);
-
-		JLabel label = new JLabel("Campos con * son obligatorios.");
-		label.setForeground(Color.RED);
-		label.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		label.setBounds(361, 11, 142, 13);
-		contentPanel.add(label);
+		JLabel lblTodosLosCampos = new JLabel("Todos los campos son obligatorios");
+		lblTodosLosCampos.setForeground(Color.RED);
+		lblTodosLosCampos.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTodosLosCampos.setBounds(454, 11, 220, 13);
+		contentPanel.add(lblTodosLosCampos);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -238,9 +213,18 @@ public class InsertarEmpresa extends JDialog {
 						    	JOptionPane.showMessageDialog(null, "Se debe ingresar el email la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
 						    }else if(cbxProvincia.getSelectedIndex()==0){
 						    	JOptionPane.showMessageDialog(null, "Se debe seleccionar la Provincia de la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-						   /* }/*else if ((BolsaLaboral.getInstance().validarEmail(email))){
+						    } 
+						    
+						    
+						    
+						    
+						    
+						    
+						    
+						    if ((BolsaLaboral.getInstance().validarEmail(email))){
 						    	JOptionPane.showMessageDialog(null, "Favor registar un E-mail valido", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-						    	txtEmail.setText(null);*/
+						    	txtEmail.setText(null);
+				
 						    }else{
 							BolsaLaboral.getInstance().insertEmpresa(miEmpresa);
 							ftxtRnc.setText(null);
