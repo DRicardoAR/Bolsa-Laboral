@@ -883,8 +883,9 @@ public class InsertarSolicitate extends JDialog {
 										JOptionPane.INFORMATION_MESSAGE, null);
 								Solicitante soli = BolsaLaboral.getInstance().getMisPersonas().get(0);
 								System.out.println(((Obrero) soli).getHabilidades().get(0));
+								System.out.println(((Obrero) soli).getHabilidades().size());
 								Principal.actualizarChart();
-								clean();
+								//clean();
 							}
 						}
 						if (rdbUniversitario.isSelected()) {
@@ -1064,6 +1065,7 @@ public class InsertarSolicitate extends JDialog {
 		spnNumeroCasa.setValue(0);
 		btnMover.setText("Continuar >>");
 		btnRegistrar.setEnabled(false);
+		
 		misHabilidades.removeAll(misHabilidades);
 		misIdiomas.removeAll(misIdiomas);
 		modeloHabilidad.clear();

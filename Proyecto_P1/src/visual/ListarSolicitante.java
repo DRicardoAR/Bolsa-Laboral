@@ -54,7 +54,7 @@ public class ListarSolicitante extends JDialog {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		try {
 			ListarSolicitante dialog = new ListarSolicitante();
@@ -72,8 +72,6 @@ public class ListarSolicitante extends JDialog {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
-				Solicitante soli = BolsaLaboral.getInstance().getMisPersonas().get(0);
-				System.out.println(((Obrero) soli).getHabilidades().get(0));
 				cbxFiltro.setSelectedIndex(0);
 				loadTablaG();
 			}
