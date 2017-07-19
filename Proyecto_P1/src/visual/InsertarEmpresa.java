@@ -105,7 +105,7 @@ public class InsertarEmpresa extends JDialog {
 		ftxtRnc.setBounds(93, 32, 174, 20);
 		panel.add(ftxtRnc);
 		
-		MaskFormatter mascara1 = new MaskFormatter("##########");
+		MaskFormatter mascara1 = new MaskFormatter("###-###-####");
 		txtTel = new JFormattedTextField(mascara1);
 		txtTel.setBounds(93, 81, 174, 20);
 		panel.add(txtTel);
