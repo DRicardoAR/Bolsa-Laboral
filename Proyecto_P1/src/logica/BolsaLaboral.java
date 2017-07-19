@@ -547,4 +547,18 @@ public class BolsaLaboral implements Serializable {
 			}
 		}
 	}
+	//Modificar solicitante
+	public void updateSolicitante(Solicitante soli){
+		for (Solicitante solis : misSolicitantes) {
+			if(solis.getCedula().equalsIgnoreCase(soli.getCedula())){
+				solis.setEstadoCivil(soli.getEstadoCivil());
+				solis.setCategoriaLicencia(soli.getCategoriaLicencia());
+				solis.setProvincia(soli.getProvincia());
+				solis.setTelefono(soli.getTelefono());
+				solis.setEmail(soli.getEmail());
+				solis.setIdiomas(soli.getIdiomas());
+				solis.setVehiculoPropio(soli.isVehiculoPropio());
+			}
+		}
+	}
 }

@@ -947,18 +947,25 @@ public class InsertarSolicitate extends JDialog {
 									JOptionPane.showMessageDialog(null, "Favor llenar todos los campos.", "ATENCIÓN",
 											JOptionPane.WARNING_MESSAGE, null);
 								} else {
-									estado = true;
-									btnRegistrar.setEnabled(true);
-									rdbObrero.setSelected(true);
-									rdbTecnico.setSelected(false);
-									rdbUniversitario.setSelected(false);
-									panel_Obreo.setVisible(true);
-									panel_Tecnico.setVisible(false);
-									panel_Universitario.setVisible(false);
-									panel1.setVisible(false);
-									panel2.setVisible(true);
-									btnMover.setText("<< Retroceder");
+									if (!modificar) {
+										estado = true;
+										btnRegistrar.setEnabled(true);
+										rdbObrero.setSelected(true);
+										rdbTecnico.setSelected(false);
+										rdbUniversitario.setSelected(false);
+										panel_Obreo.setVisible(true);
+										panel_Tecnico.setVisible(false);
+										panel_Universitario.setVisible(false);
+										panel1.setVisible(false);
+										panel2.setVisible(true);
+										btnMover.setText("<< Retroceder");
 
+									}else{
+										btnRegistrar.setEnabled(true);
+										btnMover.setText("<< Retroceder");
+										panel1.setVisible(false);
+										panel2.setVisible(true);
+									}
 								}
 							}
 						}
@@ -1106,9 +1113,9 @@ public class InsertarSolicitate extends JDialog {
 
 	public void loadSolicitanteModi() {
 		if (modiS != null) {
+			btnRegistrar.setText("Modificar");
 			LocalDate fecha = modiS.getFechaNacimiento();
 			Date date = java.sql.Date.valueOf(fecha);
-
 			txtApellidos.setEnabled(false);
 			txtNombre.setEnabled(false);
 			rdbFemenino.setEnabled(false);
@@ -1120,6 +1127,10 @@ public class InsertarSolicitate extends JDialog {
 			rdbNoReelocalizacion.setEnabled(false);
 
 			// Incersion de datos
+			for (String idio : modiS.getIdiomas()) {
+				misIdiomas.add(idio);
+			}
+			loadIdioma();
 			txtNombre.setText(modiS.getNombres());
 			txtApellidos.setText(modiS.getApellidos());
 			textCedula.setText(modiS.getCedula());
@@ -1156,6 +1167,11 @@ public class InsertarSolicitate extends JDialog {
 			}
 
 			if (modiS instanceof Obrero) {
+				for (String habi : ((Obrero) modiS).getHabilidades()) {
+					misHabilidades.add(habi);
+				}
+				loadHabilidades();
+				listHabilidades.setEnabled(false);
 				spnAnnosExpObrero.setValue(modiS.getAnnosExperiencia());
 				cbxHabilidades.setEnabled(false);
 				spnAnnosExpObrero.setEnabled(false);
@@ -1170,6 +1186,10 @@ public class InsertarSolicitate extends JDialog {
 				panel_Universitario.setVisible(false);
 			}
 			if (modiS instanceof Universitario) {
+				cbxCarrera.setEnabled(false);
+				cbxCarrera.setSelectedItem(((Universitario) modiS).getCarrera());
+				spnAnosExpUniversitario.setValue(modiS.getAnnosExperiencia());
+				spnAnosExpUniversitario.setEnabled(false);
 				rdbObrero.setSelected(false);
 				rdbTecnico.setSelected(false);
 				rdbUniversitario.setSelected(true);
@@ -1181,6 +1201,10 @@ public class InsertarSolicitate extends JDialog {
 				rdbObrero.setEnabled(false);
 			}
 			if (modiS instanceof Tecnico) {
+				spnAnosExpTecnico.setValue(modiS.getAnnosExperiencia());
+				spnAnosExpTecnico.setEnabled(false);
+				cbxAreaTecnico.setSelectedItem(((Tecnico) modiS).getArea());
+				cbxAreaTecnico.setEnabled(false);
 				rdbObrero.setSelected(false);
 				rdbTecnico.setSelected(true);
 				rdbUniversitario.setSelected(false);
