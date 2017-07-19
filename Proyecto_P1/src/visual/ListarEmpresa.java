@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -107,6 +108,13 @@ public class ListarEmpresa extends JDialog {
 				btnEliminar = new JButton("Eliminar");
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						if (cod != ""){
+							int answer = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar la empresa?", "Devolver publicacion", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+							if (answer == JOptionPane.YES_OPTION){
+								BolsaLaboral.getInstance().eliminarEmpresa(cod);
+								loadTable();
+							}
+						}
 						BolsaLaboral.getInstance().eliminarEmpresa(cod);
 					}
 				});

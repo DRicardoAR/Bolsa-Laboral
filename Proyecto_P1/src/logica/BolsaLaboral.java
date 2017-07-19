@@ -424,6 +424,17 @@ public class BolsaLaboral implements Serializable {
 		misSolicitudes.remove(SolicitudEliminar);
 		return eliminar;
 	}
+	
+	// funcion eleminnar empresa
+		public void eliminarEmpresa(String cod) {
+		Empresa empresaeliminar = null;
+			for (Empresa empresa : misEmpresas) {
+				if (empresa.getRNC().equalsIgnoreCase(cod)) {
+					empresaeliminar=empresa;
+				}
+			}
+			misEmpresas.remove(empresaeliminar);
+		}
 
 	// Actualizar una solicitud cuando se modifica
 	public void ActualizarSolicitud(Solicitud modi, Solicitud modificarSoli) {
@@ -539,14 +550,7 @@ public class BolsaLaboral implements Serializable {
 		return cant;
 	}
 
-	// funcion eleminnar empresa
-	public void eliminarEmpresa(String cod) {
-		for (Empresa empresa : misEmpresas) {
-			if (empresa.getRNC().equalsIgnoreCase(cod)) {
-				misEmpresas.remove(empresa);
-			}
-		}
-	}
+	
 	//Modificar solicitante
 	public void updateSolicitante(Solicitante soli){
 		for (Solicitante solis : misSolicitantes) {
