@@ -159,6 +159,17 @@ public class ListarSolicitante extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnEliminar = new JButton("Eliminar");
+				btnEliminar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Solicitante soli = BolsaLaboral.getInstance().retornarSolicitante(cedulaCliente);
+						System.out.println(soli.getCedula());
+						if(soli!=null){
+							BolsaLaboral.getInstance().eliminarSolicitante(soli);
+							Principal.actualizarChart();
+							
+						}
+					}
+				});
 				btnEliminar.setEnabled(false);
 				buttonPane.add(btnEliminar);
 			}

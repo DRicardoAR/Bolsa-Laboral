@@ -871,53 +871,94 @@ public class InsertarSolicitate extends JDialog {
 						}
 						if (rdbObrero.isSelected()) {
 							if (!error) {
-								int annos = new Integer((int) spnAnnosExpObrero.getValue());
-								Solicitante solicitante = new Obrero(cedula, nombre, apellido, telefono,
-										fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia, email,
-										vehiculoP, licencia, annos, misIdiomas, mudarse, misHabilidades);
+								if (!modificar) {
+									int annos = new Integer((int) spnAnnosExpObrero.getValue());
+									Solicitante solicitante = new Obrero(cedula, nombre, apellido, telefono,
+											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
+											email, vehiculoP, licencia, annos, misIdiomas, mudarse, misHabilidades);
 
-								BolsaLaboral.getInstance().insertSolicitante(solicitante);
-								estado = false;
-								JOptionPane.showMessageDialog(null,
-										"El solicitante se ha registrado de manera exitosa.", "Información",
-										JOptionPane.INFORMATION_MESSAGE, null);
-								Solicitante soli = BolsaLaboral.getInstance().getMisPersonas().get(0);
-								Principal.actualizarChart();
-								call();
+									BolsaLaboral.getInstance().insertSolicitante(solicitante);
+									estado = false;
+									JOptionPane.showMessageDialog(null,
+											"El solicitante se ha registrado de manera exitosa.", "Información",
+											JOptionPane.INFORMATION_MESSAGE, null);
+
+									Principal.actualizarChart();
+									call();
+								}else{
+									int annos = new Integer((int) spnAnnosExpObrero.getValue());
+									Solicitante solicitante = new Obrero(cedula, nombre, apellido, telefono,
+											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
+											email, vehiculoP, licencia, annos, misIdiomas, mudarse, misHabilidades);
+									estado = false;
+									Principal.actualizarChart();
+									call();
+									
+								}
 							}
 						}
 						if (rdbUniversitario.isSelected()) {
 							if (!error) {
-								int annos = new Integer((int) spnAnosExpUniversitario.getValue());
-								Solicitante solicitante = new Universitario(cedula, nombre, apellido, telefono,
-										fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia, email,
-										vehiculoP, licencia, annos, misIdiomas, mudarse, false,
-										cbxCarrera.getSelectedItem().toString());
-								BolsaLaboral.getInstance().insertSolicitante(solicitante);
-								estado = false;
-								JOptionPane.showMessageDialog(null,
-										"El solicitante se ha registrado de manera exitosa.", "Información",
-										JOptionPane.INFORMATION_MESSAGE, null);
-								Principal.actualizarChart();
-								call();
+								if (!modificar) {
+									int annos = new Integer((int) spnAnosExpUniversitario.getValue());
+									Solicitante solicitante = new Universitario(cedula, nombre, apellido, telefono,
+											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
+											email, vehiculoP, licencia, annos, misIdiomas, mudarse, false,
+											cbxCarrera.getSelectedItem().toString());
+									BolsaLaboral.getInstance().insertSolicitante(solicitante);
+									estado = false;
+									JOptionPane.showMessageDialog(null,
+											"El solicitante se ha registrado de manera exitosa.", "Información",
+											JOptionPane.INFORMATION_MESSAGE, null);
+									Principal.actualizarChart();
+									call();
 
+								} else {
+									int annos = new Integer((int) spnAnosExpUniversitario.getValue());
+									Solicitante solicitante = new Universitario(cedula, nombre, apellido, telefono,
+											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
+											email, vehiculoP, licencia, annos, misIdiomas, mudarse, false,
+											cbxCarrera.getSelectedItem().toString());
+
+									estado = false;
+									JOptionPane.showMessageDialog(null,
+											"El solicitante se ha modificado de manera exitosa.", "Información",
+											JOptionPane.INFORMATION_MESSAGE, null);
+									BolsaLaboral.getInstance().updateSolicitante(solicitante);
+									Principal.actualizarChart();
+									call();
+								}
 							}
 						}
 						if (rdbTecnico.isSelected()) {
 							if (!error) {
-								int annos = new Integer((int) spnAnosExpTecnico.getValue());
-								Solicitante solicitante = new Tecnico(cedula, nombre, apellido, apellido,
-										fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia, email,
-										vehiculoP, licencia, annos, misIdiomas, mudarse,
-										cbxAreaTecnico.getSelectedItem().toString());
-								BolsaLaboral.getInstance().insertSolicitante(solicitante);
-								JOptionPane.showMessageDialog(null,
-										"El solicitante se ha registrado de manera exitosa.", "Información",
-										JOptionPane.INFORMATION_MESSAGE, null);
-								Principal.actualizarChart();
-								estado = false;
-								call();
-
+								if (!modificar) {
+									int annos = new Integer((int) spnAnosExpTecnico.getValue());
+									Solicitante solicitante = new Tecnico(cedula, nombre, apellido, telefono,
+											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
+											email, vehiculoP, licencia, annos, misIdiomas, mudarse,
+											cbxAreaTecnico.getSelectedItem().toString());
+									BolsaLaboral.getInstance().insertSolicitante(solicitante);
+									JOptionPane.showMessageDialog(null,
+											"El solicitante se ha registrado de manera exitosa.", "Información",
+											JOptionPane.INFORMATION_MESSAGE, null);
+									BolsaLaboral.getInstance().updateSolicitante(solicitante);
+									Principal.actualizarChart();
+									estado = false;
+									call();
+								} else {
+									int annos = new Integer((int) spnAnosExpTecnico.getValue());
+									Solicitante solicitante = new Tecnico(cedula, nombre, apellido, telefono,
+											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
+											email, vehiculoP, licencia, annos, misIdiomas, mudarse,
+											cbxAreaTecnico.getSelectedItem().toString());
+									BolsaLaboral.getInstance().updateSolicitante(solicitante);
+									JOptionPane.showMessageDialog(null,
+											"El solicitante se ha modificado de manera exitosa.", "Información",
+											JOptionPane.INFORMATION_MESSAGE, null);
+									estado = false;
+									call();
+								}
 							}
 						}
 					}
@@ -960,7 +1001,7 @@ public class InsertarSolicitate extends JDialog {
 										panel2.setVisible(true);
 										btnMover.setText("<< Retroceder");
 
-									}else{
+									} else {
 										btnRegistrar.setEnabled(true);
 										btnMover.setText("<< Retroceder");
 										panel1.setVisible(false);
@@ -1164,6 +1205,11 @@ public class InsertarSolicitate extends JDialog {
 			}
 			if (modiS.getCategoriaLicencia() == 4) {
 				cbxLicencia.setSelectedIndex(5);
+			}
+			if (modiS.isMudarse() == true) {
+				rdbSiReelocalizacion.setSelected(true);
+			} else {
+				rdbNoReelocalizacion.setSelected(true);
 			}
 
 			if (modiS instanceof Obrero) {

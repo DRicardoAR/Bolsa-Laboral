@@ -561,4 +561,20 @@ public class BolsaLaboral implements Serializable {
 			}
 		}
 	}
+	//Retornar indice de Solicitate
+	public int indexSolicitante(String code){
+		int index = 0;
+		for (int i = 0; i < misSolicitantes.size(); i++) {
+			if(misSolicitantes.get(i).getCodigo().equalsIgnoreCase(code)){
+				index = i;
+			}
+		}
+		return index;
+	}
+	//Elimianr solicitante por codigo
+	public void eliminarSolicitante(Solicitante persona){
+		int index = indexSolicitante(persona.getCodigo());
+		misSolicitantes.remove(index);
+	}
+	
 }
