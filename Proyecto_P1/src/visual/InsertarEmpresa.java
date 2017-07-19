@@ -213,14 +213,17 @@ public class InsertarEmpresa extends JDialog {
 						    	JOptionPane.showMessageDialog(null, "Se debe ingresar el email la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
 						    }else if(cbxProvincia.getSelectedIndex()==0){
 						    	JOptionPane.showMessageDialog(null, "Se debe seleccionar la Provincia de la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
-						    } 
-						    
-						    
-						    
-						    
-						    
-						    
-						    
+						    }else if(txtCalle.getText().isEmpty()){
+						    	JOptionPane.showMessageDialog(null, "Se debe ingresar la calle  de la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+						    }else if(txtCuidad.getText().isEmpty()){
+						    	JOptionPane.showMessageDialog(null, "Se debe la cuidad de la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+						    }else if(txtSector.getText().isEmpty()){
+						    	JOptionPane.showMessageDialog(null, "Se debe ingresar el sector de la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+						    }else if(txtReferencia.getText().isEmpty()){
+						    	JOptionPane.showMessageDialog(null, "Se debe ingresar una referencia  de la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+						    }else if(txtLocalidad.getText().isEmpty()){
+						    	JOptionPane.showMessageDialog(null, "Se debe ingresar el No. de localidad de la empresa a registrar", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
+						    }else{
 						    if ((BolsaLaboral.getInstance().validarEmail(email))){
 						    	JOptionPane.showMessageDialog(null, "Favor registar un E-mail valido", "ATENCIÓN",	JOptionPane.WARNING_MESSAGE, null);
 						    	txtEmail.setText(null);
@@ -241,7 +244,7 @@ public class InsertarEmpresa extends JDialog {
 						
 						    }
 						
-						
+						    }
 
 					}
 				});
