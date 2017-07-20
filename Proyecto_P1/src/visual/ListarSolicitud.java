@@ -154,6 +154,7 @@ public class ListarSolicitud extends JDialog {
 							} else {
 								btnModificar.setEnabled(false);
 								btnEliminar.setEnabled(false);
+								btnDetallar.setEnabled(false);
 								codigo = "";
 							}
 
@@ -194,21 +195,30 @@ public class ListarSolicitud extends JDialog {
 				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (!codigo.equalsIgnoreCase("")) {
-							if (BolsaLaboral.getInstance().EliminarSolicitud(codigo)) {
-								loadtabla(cbxfiltro.getSelectedIndex());
-								JOptionPane.showMessageDialog(null, "Se ha eliminada la solicitud", "Información",
-										JOptionPane.INFORMATION_MESSAGE, null);
+						if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esta solicitud?", "Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+							if (!codigo.equalsIgnoreCase("")) {
+								if (BolsaLaboral.getInstance().EliminarSolicitud(codigo)) {
+									loadtabla(cbxfiltro.getSelectedIndex());
+									JOptionPane.showMessageDialog(null, "Se ha eliminada la solicitud", "Información",
+											JOptionPane.INFORMATION_MESSAGE, null);
 
-								btnEliminar.setEnabled(false);
+									btnEliminar.setEnabled(false);
+									btnDetallar.setEnabled(false);
+									btnModificar.setEnabled(false);
+								}
 							}
 						}
+						
 					}
 				});
 				{
 					btnDetallar = new JButton("Detallar");
 					btnDetallar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
+							DetalleSolicitud detalle = new DetalleSolicitud(BolsaLaboral.getInstance().RetornarSolocitudCod(codigo));
+							detalle.setLocationRelativeTo(null);
+							detalle.setModal(true);
+							detalle.setVisible(true);
 						}
 					});
 					btnDetallar.setEnabled(false);
@@ -303,13 +313,13 @@ public class ListarSolicitud extends JDialog {
 			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
 
-		columnModel.getColumn(0).setPreferredWidth(80);
-		columnModel.getColumn(1).setPreferredWidth(154);
-		columnModel.getColumn(2).setPreferredWidth(115);
-		columnModel.getColumn(3).setPreferredWidth(90);
-		columnModel.getColumn(4).setPreferredWidth(120);
-		columnModel.getColumn(5).setPreferredWidth(80);
-		columnModel.getColumn(6).setPreferredWidth(128);
+		columnModel.getColumn(0).setPreferredWidth(100);
+		columnModel.getColumn(1).setPreferredWidth(165);
+		columnModel.getColumn(2).setPreferredWidth(130);
+		columnModel.getColumn(3).setPreferredWidth(120);
+		columnModel.getColumn(4).setPreferredWidth(140);
+		columnModel.getColumn(5).setPreferredWidth(100);
+		columnModel.getColumn(6).setPreferredWidth(140);
 
 	}
 
