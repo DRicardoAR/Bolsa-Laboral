@@ -33,6 +33,8 @@ import logica.Empresa;
 import logica.Solicitud;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class InsertarEmpresa extends JDialog {
 
@@ -168,6 +170,20 @@ public class InsertarEmpresa extends JDialog {
 		panel_1.add(lblNewLabel_1);
 
 		txtCuidad = new JTextField();
+		txtCuidad.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				 char c=e.getKeyChar(); 
+				 if(Character.isDigit(c)) { 
+		              getToolkit().beep(); 
+		               
+		              e.consume(); 
+		              JOptionPane.showMessageDialog(null, "Este campo no adminte número");
+		             
+				 }
+				 
+			}
+		});
 		txtCuidad.setBounds(405, 32, 174, 20);
 		panel_1.add(txtCuidad);
 		txtCuidad.setColumns(10);
