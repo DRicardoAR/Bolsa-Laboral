@@ -58,7 +58,7 @@ public class Macheo extends JDialog {
 	Empresa miEmpresa = null;
 	private JTextField txtNombreEmpresa;
 	private JButton btnCandidatos;
-	private DefaultListModel<String> model;
+	private DefaultListModel<String> model = new DefaultListModel<>();
 	private JList list;
 	private String codigo = "";
 	private ArrayList<Solicitante> misSolicitantesC = new ArrayList<>();
