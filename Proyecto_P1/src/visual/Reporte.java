@@ -29,15 +29,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import logica.BolsaLaboral;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class Reporte extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private static CategoryDataset datasetBarra;
 	private static JPanel BarrasSoli;
+	private static JPanel pastel;
+	private static PieDataset datasetPastel;
+	private static JFreeChart chartPastel;
 	private static JFreeChart chartBarra;
 	private Dimension dim;
 	private static JPanel Panel_Solicitante;
+	private JTextField textField;
 
 	/*
 	public static void main(String[] args) {
@@ -55,7 +61,7 @@ public class Reporte extends JDialog {
 	 */
 	public Reporte() {
 		setTitle("Reportes");
-		setBounds(100, 100, 772, 487);
+		setBounds(100, 100, 772, 818);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -81,7 +87,7 @@ public class Reporte extends JDialog {
 		
 		
 		Panel_Solicitante = new JPanel();
-		Panel_Solicitante.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Graficos", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		Panel_Solicitante.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Graficos Solicitantes", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		Panel_Solicitante.setBounds(10, 83, 736, 321);
 		contentPanel.add(Panel_Solicitante);
 		Panel_Solicitante.setLayout(null);
@@ -92,10 +98,36 @@ public class Reporte extends JDialog {
 		Panel_Solicitante.add(BarrasSoli);
 		BarrasSoli.setLayout(null);
 		
+		pastel = new JPanel();
+		pastel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Graficos empleados por tipo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pastel.setBounds(379, 19, 347, 291);
+		Panel_Solicitante.add(pastel);
+		
+		JPanel Panel_Empresa = new JPanel();
+		Panel_Empresa.setBounds(10, 415, 736, 321);
+		contentPanel.add(Panel_Empresa);
+		Panel_Empresa.setLayout(null);
+		
+		JPanel BarrasEmp = new JPanel();
+		BarrasEmp.setBounds(10, 43, 352, 267);
+		Panel_Empresa.add(BarrasEmp);
+		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Solicitantes Contratados por tipo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_1.setBounds(379, 19, 347, 291);
-		Panel_Solicitante.add(panel_1);
+		panel_1.setBounds(379, 43, 347, 267);
+		Panel_Empresa.add(panel_1);
+		
+		JLabel lblRnc = new JLabel("RNC:");
+		lblRnc.setBounds(10, 18, 46, 14);
+		Panel_Empresa.add(lblRnc);
+		
+		textField = new JTextField();
+		textField.setBounds(66, 15, 121, 21);
+		Panel_Empresa.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(197, 14, 34, 23);
+		Panel_Empresa.add(btnNewButton);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -118,6 +150,7 @@ public class Reporte extends JDialog {
 			}
 		}
 		actualizarChart();
+		actualizarPastel();
 	}
 
 	public static void actualizarChart() {
@@ -131,6 +164,19 @@ public class Reporte extends JDialog {
 		BarrasSoli.add(chartPanel,BorderLayout.CENTER);
 		BarrasSoli.repaint();
 
+	}
+	
+	public static void actualizarPastel(){
+		pastel.removeAll();
+		pastel.revalidate();
+		datasetPastel = dataSetPastel();
+		chartPastel = creadorGraficoP(datasetPastel, "Trabajadores Contratados por Tipo");
+		pastel.setLayout(new BorderLayout(0, 0));
+		ChartPanel chartPanel = new ChartPanel(chartPastel);
+	    chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
+	    pastel.add(chartPanel, BorderLayout.CENTER);
+	    pastel.repaint(); 
+		
 	}
 
 	public static JFreeChart creadorGraficoB(CategoryDataset dataSet, String titulo) {

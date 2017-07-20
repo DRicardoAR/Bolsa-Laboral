@@ -378,6 +378,22 @@ public class BolsaLaboral implements Serializable {
 		return miEmpresa;
 	}
 
+	
+	//Retorna cantidad de solicitudes de obreros hecha por una empresa
+	public int CantSoliO(String rnc){
+		int cantO=0;
+		Empresa miEm= RetornarEmpresa(rnc);
+		for (Solicitud soli : misSolicitudes) {
+			if(soli.getEmpresa().getNombre().equalsIgnoreCase(miEm.getNombre()))
+			{
+				
+				if(soli instanceof SolicitudObrero){
+					cantO++;
+				                                   }
+	       }
+			                                   }
+		return cantO;
+	}
 	// Retornar Solicotud dado su codigo
 	public Solicitud RetornarSolocitudCod(String codigo) {
 		Solicitud miSolicitud = null;
@@ -596,5 +612,6 @@ public class BolsaLaboral implements Serializable {
 		}
 		
 	}
+	
 	
 }
