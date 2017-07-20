@@ -699,7 +699,7 @@ public class InsertarSolicitate extends JDialog {
 		panel_Tecnico.setLayout(null);
 
 		JLabel lblAnosExperienciaTec = new JLabel("A\u00F1os de Experiencia:");
-		lblAnosExperienciaTec.setBounds(10, 44, 132, 14);
+		lblAnosExperienciaTec.setBounds(10, 49, 132, 14);
 		panel_Tecnico.add(lblAnosExperienciaTec);
 
 		JLabel label_8 = new JLabel("*");
@@ -709,11 +709,11 @@ public class InsertarSolicitate extends JDialog {
 		panel_Tecnico.add(label_8);
 
 		spnAnosExpTecnico = new JSpinner();
-		spnAnosExpTecnico.setBounds(142, 41, 123, 20);
+		spnAnosExpTecnico.setBounds(146, 46, 123, 20);
 		panel_Tecnico.add(spnAnosExpTecnico);
 
 		JLabel lblrea = new JLabel("\u00C1rea:");
-		lblrea.setBounds(310, 44, 38, 14);
+		lblrea.setBounds(310, 49, 38, 14);
 		panel_Tecnico.add(lblrea);
 
 		JLabel label_9 = new JLabel("*");
@@ -726,7 +726,7 @@ public class InsertarSolicitate extends JDialog {
 		cbxAreaTecnico
 				.setModel(new DefaultComboBoxModel(new String[] { "< Seleccione >Emprendimiento", "Mecanograf\u00EDa",
 						"Dise\u00F1o Gr\u00E1fico", "Programaci\u00F3n", "Contabilidad", "Programaci\u00F3n Web" }));
-		cbxAreaTecnico.setBounds(396, 41, 123, 20);
+		cbxAreaTecnico.setBounds(396, 46, 123, 20);
 		panel_Tecnico.add(cbxAreaTecnico);
 
 		panel_Universitario = new JPanel();
@@ -737,11 +737,11 @@ public class InsertarSolicitate extends JDialog {
 		panel_Universitario.setLayout(null);
 
 		JLabel lblAnosExpUniversitario = new JLabel("A\u00F1os de Experiencia:");
-		lblAnosExpUniversitario.setBounds(10, 51, 132, 14);
+		lblAnosExpUniversitario.setBounds(10, 49, 132, 14);
 		panel_Universitario.add(lblAnosExpUniversitario);
 
 		spnAnosExpUniversitario = new JSpinner();
-		spnAnosExpUniversitario.setBounds(139, 48, 123, 20);
+		spnAnosExpUniversitario.setBounds(146, 46, 123, 20);
 		panel_Universitario.add(spnAnosExpUniversitario);
 
 		JLabel label_10 = new JLabel("*");
@@ -751,7 +751,7 @@ public class InsertarSolicitate extends JDialog {
 		panel_Universitario.add(label_10);
 
 		JLabel lblCarrera = new JLabel("Carrera:");
-		lblCarrera.setBounds(306, 51, 65, 14);
+		lblCarrera.setBounds(306, 49, 65, 14);
 		panel_Universitario.add(lblCarrera);
 
 		JLabel label_11 = new JLabel("*");
@@ -767,7 +767,7 @@ public class InsertarSolicitate extends JDialog {
 				"Psicolog\u00EDa", "Ing. Civil", "Ing. Electr\u00F3nica", "Ing. Industrial", "Ing. Mecatr\u00F3nica",
 				"Ing. Sistema", "Ing. Telem\u00E1tica", "Enfermeria", "Estomatolog\u00EDa", "Medicina",
 				"Nutricion y Dietetica", "Terapia F\u00EDsica" }));
-		cbxCarrera.setBounds(396, 48, 123, 20);
+		cbxCarrera.setBounds(396, 46, 123, 20);
 		panel_Universitario.add(cbxCarrera);
 		{
 			JPanel buttonPane = new JPanel();
