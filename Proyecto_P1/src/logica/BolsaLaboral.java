@@ -384,7 +384,7 @@ public class BolsaLaboral implements Serializable {
 		int cantO=0;
 		Empresa miEm= RetornarEmpresa(rnc);
 		for (Solicitud soli : misSolicitudes) {
-			if(soli.getEmpresa().getNombre().equalsIgnoreCase(miEm.getNombre()))
+			if(soli.getEmpresa().getRNC().equalsIgnoreCase(rnc))
 			{
 				
 				if(soli instanceof SolicitudObrero){
@@ -394,6 +394,35 @@ public class BolsaLaboral implements Serializable {
 			                                   }
 		return cantO;
 	}
+	//Retorna cantidad de solicitudes de Universitarios hecha por una empresa
+		public int CantSoliU(String rnc){
+			int cantU=0;
+			for (Solicitud soli : misSolicitudes) {
+				if(soli.getEmpresa().getRNC().equalsIgnoreCase(rnc))
+				{
+					
+					if(soli instanceof SolicitudUniversitario){
+						cantU++;
+					                                   }
+		       }
+				                                   }
+			return cantU;
+		}
+		//Retorna cantidad de solicitudes de TECNICOS hecha por una empresa
+		public int CantSoliT(String rnc){
+			int cantT=0;
+			
+			for (Solicitud soli : misSolicitudes) {
+				if(soli.getEmpresa().getRNC().equalsIgnoreCase(rnc))
+				{
+					
+					if(soli instanceof SolicitudTecnico){
+						cantT++;
+					                                   }
+		       }
+				                                   }
+			return cantT;
+		}
 	// Retornar Solicotud dado su codigo
 	public Solicitud RetornarSolocitudCod(String codigo) {
 		Solicitud miSolicitud = null;
