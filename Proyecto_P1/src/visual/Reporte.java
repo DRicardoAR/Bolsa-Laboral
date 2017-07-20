@@ -164,7 +164,7 @@ public class Reporte extends JDialog {
 		pastel.removeAll();
 		pastel.revalidate();
 		datasetPastel = dataSetPastel();
-		chartPastel = creadorGraficoP(datasetPastel, "Trabajadores Contratados por Tipo");
+		chartPastel = creadorGraficoP(datasetPastel, "Trabajadores de una Empresa por tipo");
 		pastel.setLayout(new BorderLayout(0, 0));
 		ChartPanel chartPanel = new ChartPanel(chartPastel);
 	    chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -198,9 +198,9 @@ public class Reporte extends JDialog {
 
 	public static CategoryDataset creadorCategoria() {
 		DefaultCategoryDataset setter = new DefaultCategoryDataset();
-		setter.setValue(BolsaLaboral.getInstance().CantSoliO(rnc), "Tipo de Solicitante", "Obreros");
-		setter.setValue(BolsaLaboral.getInstance().CantSoliU(rnc), "Tipo de Solicitante", "Universitarios");
-		setter.setValue(BolsaLaboral.getInstance().CantSoliT(rnc), "Tipo de Solicitante", "Técnicos");
+		setter.setValue(BolsaLaboral.getInstance().cantSoliO(rnc), "Tipo de Solicitante", "Obreros");
+		setter.setValue(BolsaLaboral.getInstance().cantSoliU(rnc), "Tipo de Solicitante", "Universitarios");
+		setter.setValue(BolsaLaboral.getInstance().cantSoliT(rnc), "Tipo de Solicitante", "Técnicos");
 		return setter;
 	}
 public static PieDataset dataSetPastel(){

@@ -380,7 +380,7 @@ public class BolsaLaboral implements Serializable {
 
 	
 	//Retorna cantidad de solicitudes de obreros hecha por una empresa
-	public int CantSoliO(String rnc){
+	public int cantSoliO(String rnc){
 		int cantO=0;
 		Empresa miEm= RetornarEmpresa(rnc);
 		for (Solicitud soli : misSolicitudes) {
@@ -395,7 +395,7 @@ public class BolsaLaboral implements Serializable {
 		return cantO;
 	}
 	//Retorna cantidad de solicitudes de Universitarios hecha por una empresa
-		public int CantSoliU(String rnc){
+		public int cantSoliU(String rnc){
 			int cantU=0;
 			for (Solicitud soli : misSolicitudes) {
 				if(soli.getEmpresa().getRNC().equalsIgnoreCase(rnc))
@@ -409,7 +409,7 @@ public class BolsaLaboral implements Serializable {
 			return cantU;
 		}
 		//Retorna cantidad de solicitudes de TECNICOS hecha por una empresa
-		public int CantSoliT(String rnc){
+		public int cantSoliT(String rnc){
 			int cantT=0;
 			
 			for (Solicitud soli : misSolicitudes) {
@@ -422,6 +422,48 @@ public class BolsaLaboral implements Serializable {
 		       }
 				                                   }
 			return cantT;
+		}
+		//retorna la cantidad de Obreros que contrato una empresa determinada
+		public int CantOCon(String rnc){
+			int CantconO=0;
+			for (Empresa empresa : misEmpresas) {
+				if(empresa.getRNC().equalsIgnoreCase(rnc)){
+					for (Solicitante soli : empresa.getMisContratados()) {
+						if(soli instanceof Obrero){
+							CantconO++;	
+						}
+					}
+				}
+			}
+			return CantconO;	
+		}
+		//retorna la cantidad de Universitaarios que contrato una empresa determinada
+		public int CantUCon(String rnc){
+			int CantconU=0;
+			for (Empresa empresa : misEmpresas) {
+				if(empresa.getRNC().equalsIgnoreCase(rnc)){
+					for (Solicitante soli : empresa.getMisContratados()) {
+						if(soli instanceof Universitario){
+							CantconU++;	
+						}
+					}
+				}
+			}
+			return CantconU;	
+		}
+		//retorna la cantidad de Tecnicos que contrato una empresa determinada
+		public int CantTCon(String rnc){
+			int CantconT=0;
+			for (Empresa empresa : misEmpresas) {
+				if(empresa.getRNC().equalsIgnoreCase(rnc)){
+					for (Solicitante soli : empresa.getMisContratados()) {
+						if(soli instanceof Tecnico){
+							CantconT++;	
+						}
+					}
+				}
+			}
+			return CantconT;	
 		}
 	// Retornar Solicotud dado su codigo
 	public Solicitud RetornarSolocitudCod(String codigo) {
