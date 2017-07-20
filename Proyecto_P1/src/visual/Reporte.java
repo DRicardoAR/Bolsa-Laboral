@@ -88,7 +88,7 @@ public class Reporte extends JDialog {
 		
 		
 		Panel_Solicitante = new JPanel();
-		Panel_Solicitante.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Graficos Solicitantes", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		Panel_Solicitante.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Graficos Empresas", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		Panel_Solicitante.setBounds(10, 83, 736, 321);
 		contentPanel.add(Panel_Solicitante);
 		Panel_Solicitante.setLayout(null);
@@ -116,7 +116,10 @@ public class Reporte extends JDialog {
 		JButton btnNewButton = new JButton("");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				rnc = txtrnc.getText();
+				actualizarChart();
+				actualizarPastel();
 			}
 		});
 		btnNewButton.setBounds(207, 23, 25, 23);
@@ -205,14 +208,14 @@ public class Reporte extends JDialog {
 	}
 public static PieDataset dataSetPastel(){
 	DefaultPieDataset result = new DefaultPieDataset();
-	if(BolsaLaboral.getInstance().porcientoO() !=0){
-		result.setValue("Obrero", BolsaLaboral.getInstance().porcientoO());
+	if(BolsaLaboral.getInstance().CantTCon(rnc) !=0){
+		result.setValue("Obrero", BolsaLaboral.getInstance().CantOCon(rnc));
 	}
-	if(BolsaLaboral.getInstance().porcientoT() != 0){
-		result.setValue("Tecnico", BolsaLaboral.getInstance().porcientoT());
+	if(BolsaLaboral.getInstance().CantTCon(rnc) != 0){
+		result.setValue("Tecnico", BolsaLaboral.getInstance().CantTCon(rnc));
 	}
-	if(BolsaLaboral.getInstance().porcientoU() != 0){
-		result.setValue("Universitario", BolsaLaboral.getInstance().porcientoU());
+	if(BolsaLaboral.getInstance().CantUCon(rnc) != 0){
+		result.setValue("Universitario", BolsaLaboral.getInstance().CantUCon(rnc));
 	}
 	
 	return result;

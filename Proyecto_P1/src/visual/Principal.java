@@ -178,6 +178,20 @@ public class Principal extends JFrame {
 			}
 		});
 		mnMacheo.add(mntmRealizarMacheo);
+		
+		JMenu mnReporte = new JMenu("Reporte");
+		menuBar.add(mnReporte);
+		
+		JMenuItem mntmReportes = new JMenuItem("Reportes");
+		mntmReportes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Reporte repor = new Reporte();
+				repor.setModal(true);
+				repor.setLocationRelativeTo(null);
+				repor.setVisible(true);
+			}
+		});
+		mnReporte.add(mntmReportes);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

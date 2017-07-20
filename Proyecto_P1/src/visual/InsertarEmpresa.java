@@ -342,18 +342,25 @@ public class InsertarEmpresa extends JDialog {
 			String nombre = txtNombre.getText();
 			String tele = txtTel.getText();
 			String email = txtEmail.getText();
-			String provincia = cbxProvincia.getSelectedItem().toString();
+			int provincia = cbxProvincia.getSelectedIndex();
+			cbxProvincia.setSelectedItem(provincia);
+			String pro= cbxProvincia.getSelectedItem().toString();
 
 			String direcion = txtSector.getText() + " " + txtLocalidad.getText() + " " + txtCuidad.getText() + " "
 					+ txtReferencia.getText() + " " + txtCalle.getText();
 
-			Empresa modificada = new Empresa(rnc, nombre, tele, email, provincia, direcion);
+			Empresa modificada = new Empresa(rnc, nombre, tele, email, pro, direcion);
 			BolsaLaboral.getInstance().insertEmpresa(modificada);
 
 		}
-
+		
 	}
-
+	
+		
+		
+		
+		
+	
 	public boolean empresaRep(String rnc) {
 		boolean aux = false;
 		for (Empresa empresa : BolsaLaboral.getInstance().getMisEmpresas()) {
