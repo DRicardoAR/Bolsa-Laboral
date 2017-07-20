@@ -240,7 +240,7 @@ public class InsertarSolicitud extends JDialog {
 					} else {
 						 if(JOptionPane.showConfirmDialog(null, "No se encontro ninguna Empresa. \n ¿Désea registrar una empresa nueva?", "Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
 							try {
-								InsertarEmpresa nuevaEmpresa = new InsertarEmpresa(null);
+								InsertarEmpresa nuevaEmpresa = new InsertarEmpresa("Insertar Empresa", true, null, ftxtRNC.getText());
 								nuevaEmpresa.setLocationRelativeTo(null);
 								nuevaEmpresa.setModal(true);
 								nuevaEmpresa.setVisible(true);
