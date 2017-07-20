@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JRadioButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Reporte extends JDialog {
 
@@ -29,11 +32,29 @@ public class Reporte extends JDialog {
 	 * Create the dialog.
 	 */
 	public Reporte() {
+		setTitle("Reportes");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 11, 414, 61);
+		contentPanel.add(panel);
+		panel.setLayout(null);
+		
+		JRadioButton rbtEmpresas = new JRadioButton("Empresas");
+		rbtEmpresas.setBounds(21, 17, 109, 23);
+		panel.add(rbtEmpresas);
+		
+		JRadioButton rbtSolicitantes = new JRadioButton("Solicitantes");
+		rbtSolicitantes.setBounds(151, 17, 109, 23);
+		panel.add(rbtSolicitantes);
+		
+		JRadioButton rbtSilicitudes = new JRadioButton("Solitudes");
+		rbtSilicitudes.setBounds(281, 17, 109, 23);
+		panel.add(rbtSilicitudes);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -46,10 +67,14 @@ public class Reporte extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
-
 }
