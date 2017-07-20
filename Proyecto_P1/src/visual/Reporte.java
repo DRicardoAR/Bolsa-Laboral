@@ -34,6 +34,7 @@ public class Reporte extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private static CategoryDataset datasetBarra;
+	private static JPanel BarrasSoli;
 	private static JFreeChart chartBarra;
 	private Dimension dim;
 	private static JPanel Panel_Solicitante;
@@ -85,8 +86,8 @@ public class Reporte extends JDialog {
 		contentPanel.add(Panel_Solicitante);
 		Panel_Solicitante.setLayout(null);
 		
-		JPanel BarrasSoli = new JPanel();
-		BarrasSoli.setBorder(new TitledBorder(null, "Solicitantes por Tipo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		BarrasSoli = new JPanel();
+		BarrasSoli.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Graficos Desempleados por tipo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		BarrasSoli.setBounds(10, 19, 352, 291);
 		Panel_Solicitante.add(BarrasSoli);
 		BarrasSoli.setLayout(null);
@@ -116,19 +117,19 @@ public class Reporte extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		actualizarChart();
 	}
 
 	public static void actualizarChart() {
-		Panel_Solicitante.removeAll();
-        Panel_Solicitante.revalidate();
-		
+		BarrasSoli.removeAll();
+		BarrasSoli.revalidate();
 		datasetBarra = creadorCategoria();
 		chartBarra = creadorGraficoB(datasetBarra, "Solicitantes Desempleados");
-		Panel_Solicitante.setLayout(new BorderLayout(0, 0));
+		BarrasSoli.setLayout(new BorderLayout(0, 0));
 		ChartPanel chartPanel = new ChartPanel(chartBarra);
 		chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
-		Panel_Solicitante.add(chartPanel,BorderLayout.CENTER);
-		Panel_Solicitante.repaint();
+		BarrasSoli.add(chartPanel,BorderLayout.CENTER);
+		BarrasSoli.repaint();
 
 	}
 
