@@ -342,15 +342,15 @@ public class InsertarEmpresa extends JDialog {
 			String nombre = txtNombre.getText();
 			String tele = txtTel.getText();
 			String email = txtEmail.getText();
-			int provincia = cbxProvincia.getSelectedIndex();
-			cbxProvincia.setSelectedItem(provincia);
-			String pro= cbxProvincia.getSelectedItem().toString();
-
+			String pro=modificarEmpre.getArea();
+			System.out.println(pro);
+			cbxProvincia.setSelectedItem(pro);
 			String direcion = txtSector.getText() + " " + txtLocalidad.getText() + " " + txtCuidad.getText() + " "
 					+ txtReferencia.getText() + " " + txtCalle.getText();
 
 			Empresa modificada = new Empresa(rnc, nombre, tele, email, pro, direcion);
 			BolsaLaboral.getInstance().insertEmpresa(modificada);
+			
 
 		}
 		

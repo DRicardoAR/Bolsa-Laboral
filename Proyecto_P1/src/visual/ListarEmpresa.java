@@ -133,7 +133,8 @@ public class ListarEmpresa extends JDialog {
 							modificaremore.setModal(true);
 							modificaremore.setLocationRelativeTo(null);
 							modificaremore.setVisible(true);
-							
+							BolsaLaboral.getInstance().eliminarEmpresa(cod);
+							loadTable();
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

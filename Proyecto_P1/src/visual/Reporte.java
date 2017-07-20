@@ -7,10 +7,12 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JRadioButton;
 
 import org.jfree.chart.ChartFactory;
@@ -27,8 +29,10 @@ import org.jfree.util.Rotation;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
 
 import logica.BolsaLaboral;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -43,7 +47,7 @@ public class Reporte extends JDialog {
 	private static JFreeChart chartBarra;
 	private Dimension dim;
 	private static JPanel Panel_Solicitante;
-	private JTextField txtrnc;
+	private JFormattedTextField txtrnc;
 	private static String rnc;
 
 	/*
@@ -60,7 +64,7 @@ public class Reporte extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Reporte() {
+	public Reporte() throws ParseException {
 		setTitle("Reportes");
 		setBounds(100, 100, 772, 473);
 		getContentPane().setLayout(new BorderLayout());
@@ -108,7 +112,8 @@ public class Reporte extends JDialog {
 		lblRnc.setBounds(20, 27, 46, 14);
 		Panel_Solicitante.add(lblRnc);
 		
-		txtrnc = new JTextField();
+		MaskFormatter mascara = new MaskFormatter("##########");
+		txtrnc = new JFormattedTextField(mascara);
 		txtrnc.setBounds(76, 24, 121, 21);
 		Panel_Solicitante.add(txtrnc);
 		txtrnc.setColumns(10);
