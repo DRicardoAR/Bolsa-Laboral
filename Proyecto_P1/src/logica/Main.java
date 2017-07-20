@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Main {
 
 	public static void main(String[] args) {
-		LocalDate fecha= LocalDate.now();
+		/*LocalDate fecha= LocalDate.now();
 		ArrayList<String>idiomas = new ArrayList<>();
 		idiomas.add("Ingles");
 		idiomas.add("Frances");

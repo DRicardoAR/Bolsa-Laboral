@@ -230,8 +230,7 @@ public class ListarSolicitud extends JDialog {
 				btnModificar = new JButton("Modificar");
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						InsertarSolicitud modificarSOli = new InsertarSolicitud(
-								BolsaLaboral.getInstance().RetornarSolocitudCod(codigo));
+						InsertarSolicitud modificarSOli = new InsertarSolicitud(BolsaLaboral.getInstance().RetornarSolocitudCod(codigo));
 						modificarSOli.setModal(true);
 						modificarSOli.setVisible(true);
 						Solicitud soli = BolsaLaboral.getInstance().RetornarSolocitudCod(codigo);

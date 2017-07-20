@@ -562,6 +562,11 @@ public class BolsaLaboral implements Serializable {
 				solis.setEmail(soli.getEmail());
 				solis.setIdiomas(soli.getIdiomas());
 				solis.setVehiculoPropio(soli.isVehiculoPropio());
+				solis.setCalle(soli.getCalle());
+				solis.setCiudad(soli.getCiudad());
+				solis.setSector(soli.getSector());
+				solis.setReferencia(soli.getReferencia());
+				solis.setNumeroCasa(soli.getNumeroCasa());
 			}
 		}
 	}

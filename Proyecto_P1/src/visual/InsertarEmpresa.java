@@ -21,6 +21,8 @@ import java.awt.Color;
 
 import javax.swing.JFormattedTextField;
 
+import com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -43,10 +45,9 @@ public class InsertarEmpresa extends JDialog {
 	private JFormattedTextField txtTel;
 	private JFormattedTextField ftxtRnc;
 	private JComboBox cbxProvincia;
+	private JButton btnregistrar;
 	private Empresa modificarEmpre = null;
-	/**
-	 * Launch the application.
-	 */
+	/*
 	public static void main(String[] args) {
 		try {
 			InsertarEmpresa dialog = new InsertarEmpresa(null);
@@ -61,23 +62,25 @@ public class InsertarEmpresa extends JDialog {
 	 * Create the dialog.
 	 * @throws ParseException 
 	 */
-	public InsertarEmpresa(Empresa empre) throws ParseException {
-		modificarEmpre= empre;
+	public InsertarEmpresa(String title, boolean modi, Empresa empresa, String rnc) throws ParseException {
+		modificarEmpre= empresa;
+		if(rnc != null){
+			ftxtRnc.setText(rnc);
+		}
 		
-		setTitle("Insertar Empresa\r\n");
 		setBounds(100, 100, 641, 404);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-
+		setTitle(title);
 		JPanel panel = new JPanel();
 		panel.setBorder(
-				new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 26, 605, 118);
 		contentPanel.add(panel);
 		panel.setLayout(null);
-
+		
 		JLabel lblRnc = new JLabel("RNC:");
 		lblRnc.setBounds(10, 35, 46, 14);
 		panel.add(lblRnc);
@@ -188,13 +191,14 @@ public class InsertarEmpresa extends JDialog {
 		lblTodosLosCampos.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblTodosLosCampos.setBounds(454, 11, 220, 13);
 		contentPanel.add(lblTodosLosCampos);
+		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Registrar");
-				okButton.addActionListener(new ActionListener() {
+				btnregistrar = new JButton("Registrar");
+				btnregistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						String rnc = ftxtRnc.getText();
 						String nombre = txtNombre.getText();
@@ -256,9 +260,9 @@ public class InsertarEmpresa extends JDialog {
 
 					}
 				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				btnregistrar.setActionCommand("OK");
+				buttonPane.add(btnregistrar);
+				getRootPane().setDefaultButton(btnregistrar);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
@@ -272,6 +276,44 @@ public class InsertarEmpresa extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		if(modi){
+			loadEmpresaModi();
+		}
+	}
+	private void loadEmpresaModi() {
+		if (modificarEmpre !=null){
+			
+		btnregistrar.setText("Modificar");
+		ftxtRnc.setText(modificarEmpre.getRNC());
+		txtEmail.setText(modificarEmpre.getEmail());
+		txtNombre.setText(modificarEmpre.getNombre());
+		txtTel.setText(modificarEmpre.getTelefono());
+		String[] parts = modificarEmpre.getDireccion().split(" ");
+		String sector = parts[0]; 
+		String localidad = parts[1];
+		String cuidad= parts[2];
+		String referencia = parts[3];
+		String calle = parts[4];
+		txtSector.setText(sector);
+		txtLocalidad.setText(localidad);
+		txtCuidad.setText(cuidad);
+		txtReferencia.setText(referencia);
+		txtCalle.setText(calle);
+		String rnc = ftxtRnc.getText();
+		String nombre = txtNombre.getText();
+		String tele = txtTel.getText();
+		String email = txtEmail.getText();
+		String provincia = cbxProvincia.getSelectedItem().toString();
+		
+		String direcion = txtSector.getText() + " " + txtLocalidad.getText() + " " + txtCuidad.getText()
+				+ " " + txtReferencia.getText() + " " + txtCalle.getText();
+		
+		Empresa modificada = new Empresa(rnc, nombre, tele, email, provincia, direcion);
+		BolsaLaboral.getInstance().insertEmpresa(modificada);
+		
+		}
+		
+		
 	}
 	public boolean empresaRep(String rnc){
 		boolean aux = false;
