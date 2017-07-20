@@ -196,10 +196,11 @@ public class Macheo extends JDialog {
 								
 								Solicitud soli = BolsaLaboral.getInstance().RetornarSolocitudCod(codigo);
 								if (soli != null) {
-									for (Solicitante solicitante : BolsaLaboral.getInstance().matcheo(soli)) {
-										misSolicitantesC.add(solicitante);								
-									}
+									misSolicitantesC = BolsaLaboral.getInstance().matcheo(soli);
+									System.out.println(misSolicitantesC.size());
+									
 								}
+								
 								cargarSolicitante();
 							}
 						});
@@ -371,7 +372,7 @@ public class Macheo extends JDialog {
 			}
 			list.setModel(model);
 		}else{
-			JOptionPane.showMessageDialog(null, "No existen solicitantes en la actualidad que puedan\n satisfacer esta solicitud", "Información",
+			JOptionPane.showMessageDialog(null, "No existen solicitantes en la actualidad para satisfacer esta solicitud", "Información",
 					JOptionPane.INFORMATION_MESSAGE, null);
 		}
 	}
