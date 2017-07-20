@@ -544,6 +544,7 @@ public class InsertarSolicitud extends JDialog {
 			panelUniversitario.add(lblExperiencia);
 
 			spnUniversitarioExperiencia = new JSpinner();
+			spnUniversitarioExperiencia.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 			spnUniversitarioExperiencia.setBounds(93, 26, 160, 21);
 			panelUniversitario.add(spnUniversitarioExperiencia);
 
@@ -781,8 +782,12 @@ public class InsertarSolicitud extends JDialog {
 
 							} else if (panelUniversitario.isVisible() && !rbtnPostGradoSi.isSelected()
 									&& !rbtnPostGradoNo.isSelected()) {
-								rbtnPostGradoNo.setSelected(true);
-							} else {
+								rbtnPostGradoNo.setSelected(true);								
+							}else if((int)spnEdadMaxima.getValue() <(int) spnEdadMinima.getValue()){
+								JOptionPane.showMessageDialog(null, "Edad minima no puede ser mayor que la máxima", "ATENCIÓN",
+										JOptionPane.WARNING_MESSAGE, null);	
+								
+							}else {
 								if (rbtnUniversitario.isSelected()) {
 									SolicitudUniversitario nuevaSoli = new SolicitudUniversitario(vacantes,
 											experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo,

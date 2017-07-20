@@ -93,8 +93,17 @@ public class ListarSolicitud extends JDialog {
 			}
 			{
 				cbxfiltro = new JComboBox();
+				cbxfiltro.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						btnDetallar.setEnabled(false);
+						btnEliminar.setEnabled(false);
+						btnModificar.setEnabled(false);
+					}
+				});
 				cbxfiltro.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						
 						if (cbxfiltro.getSelectedIndex() == 0) {
 							ftxtRNCempresa.setText("");
 							loadtabla(0);
@@ -127,6 +136,14 @@ public class ListarSolicitud extends JDialog {
 				try {
 					mascara = new MaskFormatter("##########");
 					ftxtRNCempresa = new JFormattedTextField(mascara);
+					ftxtRNCempresa.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							btnDetallar.setEnabled(false);
+							btnEliminar.setEnabled(false);
+							btnModificar.setEnabled(false);
+						}
+					});
 					ftxtRNCempresa.setBounds(306, 22, 118, 21);
 					panel.add(ftxtRNCempresa);
 				} catch (ParseException e) {
@@ -137,6 +154,14 @@ public class ListarSolicitud extends JDialog {
 			}
 			{
 				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						btnDetallar.setEnabled(false);
+						btnEliminar.setEnabled(false);
+						btnModificar.setEnabled(false);
+					}
+				});
 				scrollPane.setBounds(10, 63, 898, 363);
 				panel.add(scrollPane);
 				{
@@ -170,6 +195,9 @@ public class ListarSolicitud extends JDialog {
 				JButton button = new JButton("");
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						btnDetallar.setEnabled(false);
+						btnEliminar.setEnabled(false);
+						btnModificar.setEnabled(false);
 						empresaListar = BolsaLaboral.getInstance().RetornarEmpresa(ftxtRNCempresa.getText());
 
 						if (empresaListar != null) {
@@ -242,7 +270,7 @@ public class ListarSolicitud extends JDialog {
 				getRootPane().setDefaultButton(btnModificar);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
