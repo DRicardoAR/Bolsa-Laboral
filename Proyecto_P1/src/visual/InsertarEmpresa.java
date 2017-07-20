@@ -31,6 +31,8 @@ import java.text.ParseException;
 import logica.BolsaLaboral;
 import logica.Empresa;
 import logica.Solicitud;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class InsertarEmpresa extends JDialog {
 
@@ -63,10 +65,17 @@ public class InsertarEmpresa extends JDialog {
 	 * @throws ParseException 
 	 */
 	public InsertarEmpresa(String title, boolean modi, Empresa empresa, String rnc) throws ParseException {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				if(rnc != null){
+					ftxtRnc.setText(rnc);
+					ftxtRnc.setEnabled(false);
+				}
+			}
+		});
 		modificarEmpre= empresa;
-		if(rnc != null){
-			ftxtRnc.setText(rnc);
-		}
+		
 		
 		setBounds(100, 100, 641, 404);
 		getContentPane().setLayout(new BorderLayout());
