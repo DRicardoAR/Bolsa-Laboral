@@ -44,9 +44,7 @@ public class InsertarEmpresa extends JDialog {
 	private JFormattedTextField ftxtRnc;
 	private JComboBox cbxProvincia;
 	private Empresa modificarEmpre = null;
-	/**
-	 * Launch the application.
-	 */
+	/*
 	public static void main(String[] args) {
 		try {
 			InsertarEmpresa dialog = new InsertarEmpresa(null);
@@ -61,19 +59,19 @@ public class InsertarEmpresa extends JDialog {
 	 * Create the dialog.
 	 * @throws ParseException 
 	 */
-	public InsertarEmpresa(Empresa empre) throws ParseException {
-		modificarEmpre= empre;
+	public InsertarEmpresa(String title, boolean modi, Empresa empresa) throws ParseException {
+		modificarEmpre= empresa;
 		
-		setTitle("Insertar Empresa\r\n");
+		
 		setBounds(100, 100, 641, 404);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-
+		setTitle(title);
 		JPanel panel = new JPanel();
 		panel.setBorder(
-				new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 26, 605, 118);
 		contentPanel.add(panel);
 		panel.setLayout(null);
