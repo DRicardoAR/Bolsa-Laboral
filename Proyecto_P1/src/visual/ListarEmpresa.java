@@ -42,6 +42,7 @@ public class ListarEmpresa extends JDialog {
 	private JButton BtnUpdate;
 	private BolsaLaboral bolsa= BolsaLaboral.getInstance();
 	private String cod;
+	private Empresa miem= null;
 	private JButton btnEliminar;
 	
 	
@@ -125,16 +126,15 @@ public class ListarEmpresa extends JDialog {
 				BtnUpdate = new JButton("Modificar");
 				BtnUpdate.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						
-						
-						try {
-							Empresa miem = BolsaLaboral.getInstance().RetornarEmpresa(cod);
-							InsertarEmpresa modificaremore = new InsertarEmpresa("Modificar Empresa",true,miem,null);
-							modificaremore.setModal(true);
-							modificaremore.setLocationRelativeTo(null);
-							modificaremore.setVisible(true);
-							BolsaLaboral.getInstance().eliminarEmpresa(cod);
-							loadTable();
+						if(cod!=""){
+							miem = BolsaLaboral.getInstance().RetornarEmpresa(cod);
+							
+						}
+						try {InsertarEmpresa modificaremore = new InsertarEmpresa("Modificar Empresa",true,miem,null);
+						modificaremore.setModal(true);
+						modificaremore.setLocationRelativeTo(null);
+						modificaremore.setVisible(true);
+						loadTable();
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

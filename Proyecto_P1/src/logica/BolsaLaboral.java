@@ -56,6 +56,19 @@ public class BolsaLaboral implements Serializable {
 		misEmpresas.add(empresa);
 	}
 
+	public void modificaEmpresa(Empresa empresa) {
+
+		for (Empresa miempresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(miempresa.getRNC())) {
+				miempresa.setArea(empresa.getArea());
+				miempresa.setNombre(empresa.getNombre());
+				miempresa.setDireccion(empresa.getDireccion());
+				miempresa.setEmail(empresa.getEmail());
+				miempresa.setTelefono(empresa.getRNC());
+			}
+		}
+	}
+
 	public void insertSolicitante(Solicitante pSolicitante) {
 		String code = getCodeSolicitante();
 		pSolicitante.setCodigo(code);
@@ -171,10 +184,14 @@ public class BolsaLaboral implements Serializable {
 		if (persona.contratado == false) {
 			if (persona.isVehiculoPropio() == solicitud.isVehiculoPropio()) {
 				if (persona.isMudarse() == solicitud.isMudarse()) {
-					if (persona.getCategoriaLicencia() >= solicitud.getCategoriaLicencia()) {
-						if (persona.getAnnosExperiencia() >= solicitud.getAnnosExperiencia()) {
-							if ((persona.setEdadSolicitante() >= solicitud.getEdadMin())
-									&& (persona.setEdadSolicitante() <= solicitud.getEdadMax())) {
+					if (persona.getCategoriaLicencia() >= solicitud
+							.getCategoriaLicencia()) {
+						if (persona.getAnnosExperiencia() >= solicitud
+								.getAnnosExperiencia()) {
+							if ((persona.setEdadSolicitante() >= solicitud
+									.getEdadMin())
+									&& (persona.setEdadSolicitante() <= solicitud
+											.getEdadMax())) {
 								if (validarIdiomas(persona, solicitud)) {
 									valido = true;
 
@@ -195,8 +212,10 @@ public class BolsaLaboral implements Serializable {
 	// Validacion Obrero con solicitud
 	private boolean ValidarObrero(Solicitante solicitante, Solicitud solicitud) {
 		boolean validar = false;
-		for (String habilidadObrero : ((SolicitudObrero) solicitud).getHabilidades()) {
-			if (((Obrero) solicitante).getHabilidades().contains(habilidadObrero)) {
+		for (String habilidadObrero : ((SolicitudObrero) solicitud)
+				.getHabilidades()) {
+			if (((Obrero) solicitante).getHabilidades().contains(
+					habilidadObrero)) {
 				validar = true;
 			} else {
 				validar = false;
@@ -210,7 +229,8 @@ public class BolsaLaboral implements Serializable {
 	// Validacion Tecnico con solicitud
 	private boolean ValidarTecnico(Solicitante solicitante, Solicitud soli) {
 		boolean validar = false;
-		if (((Tecnico) solicitante).getArea().equalsIgnoreCase(((SolicitudTecnico) soli).getArea())) {
+		if (((Tecnico) solicitante).getArea().equalsIgnoreCase(
+				((SolicitudTecnico) soli).getArea())) {
 			validar = true;
 		}
 		return validar;
@@ -219,9 +239,11 @@ public class BolsaLaboral implements Serializable {
 	// Validacion Universitario con solicitud
 	private boolean validarUniversitario(Solicitante solicitante, Solicitud soli) {
 		boolean validar = false;
-		if (((Universitario) solicitante).getCarrera().equalsIgnoreCase(((SolicitudUniversitario) soli).getCarrera())) {
+		if (((Universitario) solicitante).getCarrera().equalsIgnoreCase(
+				((SolicitudUniversitario) soli).getCarrera())) {
 			validar = true;
-			if (!((Universitario) solicitante).isPostGrado() && ((SolicitudUniversitario) soli).isPostGrado()) {
+			if (!((Universitario) solicitante).isPostGrado()
+					&& ((SolicitudUniversitario) soli).isPostGrado()) {
 				validar = false;
 			}
 
@@ -232,7 +254,7 @@ public class BolsaLaboral implements Serializable {
 	// Validar Idiomas
 	public boolean validarIdiomas(Solicitante persona, Solicitud soli) {
 		boolean aux = false;
-		if(soli.idiomas.size()==0){
+		if (soli.idiomas.size() == 0) {
 			aux = true;
 		}
 		for (String idiomas : soli.getIdiomas()) {
@@ -357,7 +379,8 @@ public class BolsaLaboral implements Serializable {
 
 	// validacion de Email
 	public boolean validarEmail(String email) {
-		Pattern patt = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		Pattern patt = Pattern
+				.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 		Matcher match = patt.matcher(email);
 		if (!match.find()) {
 			return true;
@@ -373,98 +396,101 @@ public class BolsaLaboral implements Serializable {
 			if (empresa.getRNC().equalsIgnoreCase(RNC)) {
 				miEmpresa = empresa;
 			}
-		}
 
+		}
 		return miEmpresa;
 	}
 
-	
-	//Retorna cantidad de solicitudes de obreros hecha por una empresa
-	public int cantSoliO(String rnc){
-		int cantO=0;
-		Empresa miEm= RetornarEmpresa(rnc);
+	// Retorna cantidad de solicitudes de obreros hecha por una empresa
+	public int cantSoliO(String rnc) {
+		int cantO = 0;
+		Empresa miEm = RetornarEmpresa(rnc);
 		for (Solicitud soli : misSolicitudes) {
-			if(soli.getEmpresa().getRNC().equalsIgnoreCase(rnc))
-			{
-				
-				if(soli instanceof SolicitudObrero){
+			if (soli.getEmpresa().getRNC().equalsIgnoreCase(rnc)) {
+
+				if (soli instanceof SolicitudObrero) {
 					cantO++;
-				                                   }
-	       }
-			                                   }
+				}
+			}
+		}
 		return cantO;
 	}
-	//Retorna cantidad de solicitudes de Universitarios hecha por una empresa
-		public int cantSoliU(String rnc){
-			int cantU=0;
-			for (Solicitud soli : misSolicitudes) {
-				if(soli.getEmpresa().getRNC().equalsIgnoreCase(rnc))
-				{
-					
-					if(soli instanceof SolicitudUniversitario){
-						cantU++;
-					                                   }
-		       }
-				                                   }
-			return cantU;
+
+	// Retorna cantidad de solicitudes de Universitarios hecha por una empresa
+	public int cantSoliU(String rnc) {
+		int cantU = 0;
+		for (Solicitud soli : misSolicitudes) {
+			if (soli.getEmpresa().getRNC().equalsIgnoreCase(rnc)) {
+
+				if (soli instanceof SolicitudUniversitario) {
+					cantU++;
+				}
+			}
 		}
-		//Retorna cantidad de solicitudes de TECNICOS hecha por una empresa
-		public int cantSoliT(String rnc){
-			int cantT=0;
-			
-			for (Solicitud soli : misSolicitudes) {
-				if(soli.getEmpresa().getRNC().equalsIgnoreCase(rnc))
-				{
-					
-					if(soli instanceof SolicitudTecnico){
-						cantT++;
-					                                   }
-		       }
-				                                   }
-			return cantT;
+		return cantU;
+	}
+
+	// Retorna cantidad de solicitudes de TECNICOS hecha por una empresa
+	public int cantSoliT(String rnc) {
+		int cantT = 0;
+
+		for (Solicitud soli : misSolicitudes) {
+			if (soli.getEmpresa().getRNC().equalsIgnoreCase(rnc)) {
+
+				if (soli instanceof SolicitudTecnico) {
+					cantT++;
+				}
+			}
 		}
-		//retorna la cantidad de Obreros que contrato una empresa determinada
-		public int CantOCon(String rnc){
-			int CantconO=0;
-			for (Empresa empresa : misEmpresas) {
-				if(empresa.getRNC().equalsIgnoreCase(rnc)){
-					for (Solicitante soli : empresa.getMisContratados()) {
-						if(soli instanceof Obrero){
-							CantconO++;	
-						}
+		return cantT;
+	}
+
+	// retorna la cantidad de Obreros que contrato una empresa determinada
+	public int CantOCon(String rnc) {
+		int CantconO = 0;
+		for (Empresa empresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(rnc)) {
+				for (Solicitante soli : empresa.getMisContratados()) {
+					if (soli instanceof Obrero) {
+						CantconO++;
 					}
 				}
 			}
-			return CantconO;	
 		}
-		//retorna la cantidad de Universitaarios que contrato una empresa determinada
-		public int CantUCon(String rnc){
-			int CantconU=0;
-			for (Empresa empresa : misEmpresas) {
-				if(empresa.getRNC().equalsIgnoreCase(rnc)){
-					for (Solicitante soli : empresa.getMisContratados()) {
-						if(soli instanceof Universitario){
-							CantconU++;	
-						}
+		return CantconO;
+	}
+
+	// retorna la cantidad de Universitaarios que contrato una empresa
+	// determinada
+	public int CantUCon(String rnc) {
+		int CantconU = 0;
+		for (Empresa empresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(rnc)) {
+				for (Solicitante soli : empresa.getMisContratados()) {
+					if (soli instanceof Universitario) {
+						CantconU++;
 					}
 				}
 			}
-			return CantconU;	
 		}
-		//retorna la cantidad de Tecnicos que contrato una empresa determinada
-		public int CantTCon(String rnc){
-			int CantconT=0;
-			for (Empresa empresa : misEmpresas) {
-				if(empresa.getRNC().equalsIgnoreCase(rnc)){
-					for (Solicitante soli : empresa.getMisContratados()) {
-						if(soli instanceof Tecnico){
-							CantconT++;	
-						}
+		return CantconU;
+	}
+
+	// retorna la cantidad de Tecnicos que contrato una empresa determinada
+	public int CantTCon(String rnc) {
+		int CantconT = 0;
+		for (Empresa empresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(rnc)) {
+				for (Solicitante soli : empresa.getMisContratados()) {
+					if (soli instanceof Tecnico) {
+						CantconT++;
 					}
 				}
 			}
-			return CantconT;	
 		}
+		return CantconT;
+	}
+
 	// Retornar Solicotud dado su codigo
 	public Solicitud RetornarSolocitudCod(String codigo) {
 		Solicitud miSolicitud = null;
@@ -476,14 +502,15 @@ public class BolsaLaboral implements Serializable {
 		}
 		return miSolicitud;
 	}
-	//Retornar Solicitante dando una cedula
-	public Solicitante retornarSolicitante(String cedula){
+
+	// Retornar Solicitante dando una cedula
+	public Solicitante retornarSolicitante(String cedula) {
 		Solicitante solicitante = null;
 		for (Solicitante soli : misSolicitantes) {
-			if(soli.getCedula().equalsIgnoreCase(cedula))
-				solicitante = soli;			
+			if (soli.getCedula().equalsIgnoreCase(cedula))
+				solicitante = soli;
 		}
-		
+
 		return solicitante;
 	}
 
@@ -499,6 +526,7 @@ public class BolsaLaboral implements Serializable {
 		}
 		return solicitudes;
 	}
+
 	// Retorna solicid
 
 	public boolean EliminarSolicitud(String codigo) {
@@ -514,17 +542,17 @@ public class BolsaLaboral implements Serializable {
 		misSolicitudes.remove(SolicitudEliminar);
 		return eliminar;
 	}
-	
+
 	// funcion eleminnar empresa
-		public void eliminarEmpresa(String cod) {
+	public void eliminarEmpresa(String cod) {
 		Empresa empresaeliminar = null;
-			for (Empresa empresa : misEmpresas) {
-				if (empresa.getRNC().equalsIgnoreCase(cod)) {
-					empresaeliminar=empresa;
-				}
+		for (Empresa empresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(cod)) {
+				empresaeliminar = empresa;
 			}
-			misEmpresas.remove(empresaeliminar);
 		}
+		misEmpresas.remove(empresaeliminar);
+	}
 
 	// Actualizar una solicitud cuando se modifica
 	public void ActualizarSolicitud(Solicitud modi, Solicitud modificarSoli) {
@@ -640,11 +668,10 @@ public class BolsaLaboral implements Serializable {
 		return cant;
 	}
 
-	
-	//Modificar solicitante
-	public void updateSolicitante(Solicitante soli){
+	// Modificar solicitante
+	public void updateSolicitante(Solicitante soli) {
 		for (Solicitante solis : misSolicitantes) {
-			if(solis.getCedula().equalsIgnoreCase(soli.getCedula())){
+			if (solis.getCedula().equalsIgnoreCase(soli.getCedula())) {
 				solis.setEstadoCivil(soli.getEstadoCivil());
 				solis.setCategoriaLicencia(soli.getCategoriaLicencia());
 				solis.setProvincia(soli.getProvincia());
@@ -660,29 +687,32 @@ public class BolsaLaboral implements Serializable {
 			}
 		}
 	}
-	//Retornar indice de Solicitate
-	public int indexSolicitante(String code){
+
+	// Retornar indice de Solicitate
+	public int indexSolicitante(String code) {
 		int index = 0;
 		for (int i = 0; i < misSolicitantes.size(); i++) {
-			if(misSolicitantes.get(i).getCodigo().equalsIgnoreCase(code)){
+			if (misSolicitantes.get(i).getCodigo().equalsIgnoreCase(code)) {
 				index = i;
 			}
 		}
 		return index;
 	}
-	//Elimianr solicitante por codigo
-	public void eliminarSolicitante(Solicitante persona){
+
+	// Elimianr solicitante por codigo
+	public void eliminarSolicitante(Solicitante persona) {
 		int index = indexSolicitante(persona.getCodigo());
 		misSolicitantes.remove(index);
 	}
-	//Contratar Candidatos
-	public void contratarCandidatos(Solicitud solicitud,ArrayList<Solicitante>empleados){
+
+	// Contratar Candidatos
+	public void contratarCandidatos(Solicitud solicitud,
+			ArrayList<Solicitante> empleados) {
 		Empresa empresa = solicitud.getEmpresa();
 		for (Solicitante solicitante : empleados) {
 			empresa.insertContratado(solicitante);
 		}
-		
+
 	}
-	
-	
+
 }

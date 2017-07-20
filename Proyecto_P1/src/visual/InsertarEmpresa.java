@@ -62,7 +62,8 @@ public class InsertarEmpresa extends JDialog {
 	 * 
 	 * @throws ParseException
 	 */
-	public InsertarEmpresa(String title, boolean modi, Empresa empresa, String RNCsoli) throws ParseException {
+	public InsertarEmpresa(String title, boolean modi, Empresa empresa,
+			String RNCsoli) throws ParseException {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
@@ -81,8 +82,8 @@ public class InsertarEmpresa extends JDialog {
 		contentPanel.setLayout(null);
 		setTitle(title);
 		JPanel panel = new JPanel();
-		panel.setBorder(
-				new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(null, "Informaci\u00F3n General",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 26, 605, 118);
 		contentPanel.add(panel);
 		panel.setLayout(null);
@@ -125,8 +126,10 @@ public class InsertarEmpresa extends JDialog {
 		txtTel.setColumns(10);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ubicaci\u00F3n",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_1.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Ubicaci\u00F3n",
+				TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
 		panel_1.setBounds(10, 155, 605, 166);
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
@@ -136,14 +139,19 @@ public class InsertarEmpresa extends JDialog {
 		panel_1.add(lblProvincia);
 
 		cbxProvincia = new JComboBox();
-		cbxProvincia.setModel(new DefaultComboBoxModel(
-				new String[] { "<Seleccione>", "Azua ", "Bahoruco ", "Barahona ", "Dajab\u00F3n ", "Distrito Nacional ",
-						"Duarte ", "El\u00EDas Pi\u00F1a ", "El Seibo ", "Espaillat ", "Hato Mayor ", "Independencia ",
-						"La Altagracia ", "La Romana ", "La Vega ", "Mar\u00EDa Trinidad S\u00E1nchez ",
-						"Monse\u00F1or Nouel ", "Montecristi ", "Monte Plata ", "Pedernales ", "Peravia ",
-						"Puerto Plata ", "Hermanas Mirabal ", "Saman\u00E1 ", "S\u00E1nchez Ram\u00EDrez ",
-						"San Crist\u00F3bal ", "San Jos\u00E9 de Ocoa ", "San Juan ", "San Pedro de Macor\u00EDs ",
-						"Santiago ", "Santiago Rodr\u00EDguez ", "Santo Domingo ", "Valverde " }));
+		cbxProvincia.setModel(new DefaultComboBoxModel(new String[] {
+				"<Seleccione>", "Azua ", "Bahoruco ", "Barahona ",
+				"Dajab\u00F3n ", "Distrito Nacional ", "Duarte ",
+				"El\u00EDas Pi\u00F1a ", "El Seibo ", "Espaillat ",
+				"Hato Mayor ", "Independencia ", "La Altagracia ",
+				"La Romana ", "La Vega ", "Mar\u00EDa Trinidad S\u00E1nchez ",
+				"Monse\u00F1or Nouel ", "Montecristi ", "Monte Plata ",
+				"Pedernales ", "Peravia ", "Puerto Plata ",
+				"Hermanas Mirabal ", "Saman\u00E1 ",
+				"S\u00E1nchez Ram\u00EDrez ", "San Crist\u00F3bal ",
+				"San Jos\u00E9 de Ocoa ", "San Juan ",
+				"San Pedro de Macor\u00EDs ", "Santiago ",
+				"Santiago Rodr\u00EDguez ", "Santo Domingo ", "Valverde " }));
 		cbxProvincia.setBounds(93, 35, 174, 20);
 		panel_1.add(cbxProvincia);
 
@@ -173,15 +181,16 @@ public class InsertarEmpresa extends JDialog {
 		txtCuidad.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				 char c=e.getKeyChar(); 
-				 if(Character.isDigit(c)) { 
-		              getToolkit().beep(); 
-		               
-		              e.consume(); 
-		              JOptionPane.showMessageDialog(null, "Este campo no adminte número");
-		             
-				 }
-				 
+				char c = e.getKeyChar();
+				if (Character.isDigit(c)) {
+					getToolkit().beep();
+
+					e.consume();
+					JOptionPane.showMessageDialog(null,
+							"Este campo no adminte número");
+
+				}
+
 			}
 		});
 		txtCuidad.setBounds(405, 32, 174, 20);
@@ -206,7 +215,8 @@ public class InsertarEmpresa extends JDialog {
 		panel_1.add(txtReferencia);
 		txtReferencia.setColumns(10);
 
-		JLabel lblTodosLosCampos = new JLabel("Todos los campos son obligatorios");
+		JLabel lblTodosLosCampos = new JLabel(
+				"Todos los campos son obligatorios");
 		lblTodosLosCampos.setForeground(Color.RED);
 		lblTodosLosCampos.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblTodosLosCampos.setBounds(454, 11, 220, 13);
@@ -218,85 +228,168 @@ public class InsertarEmpresa extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnregistrar = new JButton("Registrar");
+				if(modi){
+					btnregistrar.setText("Salvas Modificaciones");
+				}
 				btnregistrar.addActionListener(new ActionListener() {
+
 					public void actionPerformed(ActionEvent arg0) {
-						String rnc = ftxtRnc.getText();
-						String nombre = txtNombre.getText();
-						String tele = txtTel.getText();
-						String email = txtEmail.getText();
-						String provincia = cbxProvincia.getSelectedItem().toString();
+						if (!(modi)) {
+							String rnc = ftxtRnc.getText();
+							String nombre = txtNombre.getText();
+							String tele = txtTel.getText();
+							String email = txtEmail.getText();
+							String provincia = cbxProvincia.getSelectedItem()
+									.toString();
 
-						String direcion = txtSector.getText() + " " + txtLocalidad.getText() + " " + txtCuidad.getText()
-								+ " " + txtReferencia.getText() + " " + txtCalle.getText();
-						Empresa miEmpresa = new Empresa(rnc, nombre, tele, email, provincia, direcion);
+							String direcion = txtSector.getText() + " "
+									+ txtLocalidad.getText() + " "
+									+ txtCuidad.getText() + " "
+									+ txtReferencia.getText() + " "
+									+ txtCalle.getText();
+							Empresa miEmpresa = new Empresa(rnc, nombre, tele,
+									email, provincia, direcion);
 
-						if (txtNombre.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "Se debe ingresar  el nombre de la empresa a registrar",
-									"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
-						} else if (ftxtRnc.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "Se debe ingresar el RNC de la empresa a registrar",
-									"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
-						} else if (txtTel.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "Se debe ingresar el telefono la empresa a registrar",
-									"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
-						} else if (txtEmail.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "Se debe ingresar el email la empresa a registrar",
-									"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
-						} else if (cbxProvincia.getSelectedIndex() == 0) {
-							JOptionPane.showMessageDialog(null,
-									"Se debe seleccionar la Provincia de la empresa a registrar", "ATENCIÓN",
-									JOptionPane.WARNING_MESSAGE, null);
-						} else if (txtCalle.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "Se debe ingresar la calle  de la empresa a registrar",
-									"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
-						} else if (txtCuidad.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "Se debe la cuidad de la empresa a registrar",
-									"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
-						} else if (txtSector.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "Se debe ingresar el sector de la empresa a registrar",
-									"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
-						} else if (txtReferencia.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null,
-									"Se debe ingresar una referencia  de la empresa a registrar", "ATENCIÓN",
-									JOptionPane.WARNING_MESSAGE, null);
-						} else if (txtLocalidad.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null,
-									"Se debe ingresar el No. de localidad de la empresa a registrar", "ATENCIÓN",
-									JOptionPane.WARNING_MESSAGE, null);
-						} else if (empresaRep(rnc)) {
-							JOptionPane.showMessageDialog(null, "Empresa existente", "ATENCIÓN",
-									JOptionPane.WARNING_MESSAGE, null);
-						} else {
-							if ((BolsaLaboral.getInstance().validarEmail(email))) {
-								JOptionPane.showMessageDialog(null, "Favor registar un E-mail valido", "ATENCIÓN",
+							if (txtNombre.getText().isEmpty()) {
+								JOptionPane
+										.showMessageDialog(
+												null,
+												"Se debe ingresar  el nombre de la empresa a registrar",
+												"ATENCIÓN",
+												JOptionPane.WARNING_MESSAGE,
+												null);
+							} else if (ftxtRnc.getText().isEmpty()) {
+								JOptionPane
+										.showMessageDialog(
+												null,
+												"Se debe ingresar el RNC de la empresa a registrar",
+												"ATENCIÓN",
+												JOptionPane.WARNING_MESSAGE,
+												null);
+							} else if (txtTel.getText().isEmpty()) {
+								JOptionPane
+										.showMessageDialog(
+												null,
+												"Se debe ingresar el telefono la empresa a registrar",
+												"ATENCIÓN",
+												JOptionPane.WARNING_MESSAGE,
+												null);
+							} else if (txtEmail.getText().isEmpty()) {
+								JOptionPane
+										.showMessageDialog(
+												null,
+												"Se debe ingresar el email la empresa a registrar",
+												"ATENCIÓN",
+												JOptionPane.WARNING_MESSAGE,
+												null);
+							} else if (cbxProvincia.getSelectedIndex() == 0) {
+								JOptionPane
+										.showMessageDialog(
+												null,
+												"Se debe seleccionar la Provincia de la empresa a registrar",
+												"ATENCIÓN",
+												JOptionPane.WARNING_MESSAGE,
+												null);
+							} else if (txtCalle.getText().isEmpty()) {
+								JOptionPane
+										.showMessageDialog(
+												null,
+												"Se debe ingresar la calle  de la empresa a registrar",
+												"ATENCIÓN",
+												JOptionPane.WARNING_MESSAGE,
+												null);
+							} else if (txtCuidad.getText().isEmpty()) {
+								JOptionPane
+										.showMessageDialog(
+												null,
+												"Se debe la cuidad de la empresa a registrar",
+												"ATENCIÓN",
+												JOptionPane.WARNING_MESSAGE,
+												null);
+							} else if (txtSector.getText().isEmpty()) {
+								JOptionPane
+										.showMessageDialog(
+												null,
+												"Se debe ingresar el sector de la empresa a registrar",
+												"ATENCIÓN",
+												JOptionPane.WARNING_MESSAGE,
+												null);
+							} else if (txtReferencia.getText().isEmpty()) {
+								JOptionPane
+										.showMessageDialog(
+												null,
+												"Se debe ingresar una referencia  de la empresa a registrar",
+												"ATENCIÓN",
+												JOptionPane.WARNING_MESSAGE,
+												null);
+							} else if (txtLocalidad.getText().isEmpty()) {
+								JOptionPane
+										.showMessageDialog(
+												null,
+												"Se debe ingresar el No. de localidad de la empresa a registrar",
+												"ATENCIÓN",
+												JOptionPane.WARNING_MESSAGE,
+												null);
+							} else if (empresaRep(rnc)) {
+								JOptionPane.showMessageDialog(null,
+										"Empresa existente", "ATENCIÓN",
 										JOptionPane.WARNING_MESSAGE, null);
-								txtEmail.setText(null);
-
 							} else {
-								BolsaLaboral.getInstance().insertEmpresa(miEmpresa);
-								if (RNCsoli == null) {
-									ftxtRnc.setText(null);
-								}
+								if ((BolsaLaboral.getInstance()
+										.validarEmail(email))) {
+									JOptionPane.showMessageDialog(null,
+											"Favor registar un E-mail valido",
+											"ATENCIÓN",
+											JOptionPane.WARNING_MESSAGE, null);
+									txtEmail.setText(null);
 
-								txtNombre.setText(null);
-								txtTel.setText(null);
-								txtEmail.setText(null);
-								cbxProvincia.setSelectedIndex(0);
-								txtSector.setText(null);
-								txtLocalidad.setText(null);
-								txtCuidad.setText(null);
-								txtReferencia.setText(null);
-								txtCalle.setText(null);
-								JOptionPane.showMessageDialog(null, "Empresa Agregada Satisfactoriamente");
-								if (RNCsoli != null) {
-									dispose();
+								} else {
+									BolsaLaboral.getInstance().insertEmpresa(
+											miEmpresa);
+									if (RNCsoli == null) {
+										ftxtRnc.setText(null);
+									}
+
+									txtNombre.setText(null);
+									txtTel.setText(null);
+									txtEmail.setText(null);
+									cbxProvincia.setSelectedIndex(0);
+									txtSector.setText(null);
+									txtLocalidad.setText(null);
+									txtCuidad.setText(null);
+									txtReferencia.setText(null);
+									txtCalle.setText(null);
+									JOptionPane
+											.showMessageDialog(null,
+													"Empresa Agregada Satisfactoriamente");
+									if (RNCsoli != null) {
+										dispose();
+									}
+
 								}
 
 							}
 
-						}
+						} else {String rnc = ftxtRnc.getText();
+						String nombre = txtNombre.getText();
+						String tele = txtTel.getText();
+						String email = txtEmail.getText();
+						String provincia = cbxProvincia.getSelectedItem()
+								.toString();
 
+						String direcion = txtSector.getText() + " "
+								+ txtLocalidad.getText() + " "
+								+ txtCuidad.getText() + " "
+								+ txtReferencia.getText() + " "
+								+ txtCalle.getText();
+						Empresa modiEmpre = new Empresa(rnc, nombre, tele,
+								email, provincia, direcion);
+							BolsaLaboral.getInstance().modificaEmpresa(modiEmpre);
+							JOptionPane.showMessageDialog(null, "Empresa Modificada");
+							
+						}
 					}
+
 				});
 				btnregistrar.setActionCommand("OK");
 				buttonPane.add(btnregistrar);
@@ -314,15 +407,13 @@ public class InsertarEmpresa extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		if (modi) {
-			loadEmpresaModi();
-		}
+if(modi){
+	loadEmpresaModi();
+}
 	}
 
 	private void loadEmpresaModi() {
 		if (modificarEmpre != null) {
-
-			btnregistrar.setText("Modificar");
 			ftxtRnc.setText(modificarEmpre.getRNC());
 			txtEmail.setText(modificarEmpre.getEmail());
 			txtNombre.setText(modificarEmpre.getNombre());
@@ -338,29 +429,10 @@ public class InsertarEmpresa extends JDialog {
 			txtCuidad.setText(cuidad);
 			txtReferencia.setText(referencia);
 			txtCalle.setText(calle);
-			String rnc = ftxtRnc.getText();
-			String nombre = txtNombre.getText();
-			String tele = txtTel.getText();
-			String email = txtEmail.getText();
-			String pro=modificarEmpre.getArea();
-			System.out.println(pro);
-			cbxProvincia.setSelectedItem(pro);
-			String direcion = txtSector.getText() + " " + txtLocalidad.getText() + " " + txtCuidad.getText() + " "
-					+ txtReferencia.getText() + " " + txtCalle.getText();
-
-			Empresa modificada = new Empresa(rnc, nombre, tele, email, pro, direcion);
-			BolsaLaboral.getInstance().insertEmpresa(modificada);
-			
-
 		}
-		
+
 	}
-	
-		
-		
-		
-		
-	
+
 	public boolean empresaRep(String rnc) {
 		boolean aux = false;
 		for (Empresa empresa : BolsaLaboral.getInstance().getMisEmpresas()) {
