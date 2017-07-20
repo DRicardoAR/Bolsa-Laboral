@@ -414,6 +414,7 @@ if(modi){
 
 	private void loadEmpresaModi() {
 		if (modificarEmpre != null) {
+			ftxtRnc.setEnabled(false);
 			ftxtRnc.setText(modificarEmpre.getRNC());
 			txtEmail.setText(modificarEmpre.getEmail());
 			txtNombre.setText(modificarEmpre.getNombre());
@@ -429,6 +430,7 @@ if(modi){
 			txtCuidad.setText(cuidad);
 			txtReferencia.setText(referencia);
 			txtCalle.setText(calle);
+			cbxProvincia.setSelectedItem(modificarEmpre.getArea());
 		}
 
 	}
