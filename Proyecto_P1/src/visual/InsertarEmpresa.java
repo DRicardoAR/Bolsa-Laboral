@@ -78,9 +78,7 @@ public class InsertarEmpresa extends JDialog {
 		panel.setBounds(10, 26, 605, 118);
 		contentPanel.add(panel);
 		panel.setLayout(null);
-		if(modi){
-			loadEmpresaModi();
-		}
+		
 		JLabel lblRnc = new JLabel("RNC:");
 		lblRnc.setBounds(10, 35, 46, 14);
 		panel.add(lblRnc);
@@ -191,6 +189,7 @@ public class InsertarEmpresa extends JDialog {
 		lblTodosLosCampos.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblTodosLosCampos.setBounds(454, 11, 220, 13);
 		contentPanel.add(lblTodosLosCampos);
+		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -275,6 +274,9 @@ public class InsertarEmpresa extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		if(modi){
+			loadEmpresaModi();
+		}
 	}
 	private void loadEmpresaModi() {
 		if (modificarEmpre !=null){
@@ -283,6 +285,31 @@ public class InsertarEmpresa extends JDialog {
 		ftxtRnc.setText(modificarEmpre.getRNC());
 		txtEmail.setText(modificarEmpre.getEmail());
 		txtNombre.setText(modificarEmpre.getNombre());
+		txtTel.setText(modificarEmpre.getTelefono());
+		String[] parts = modificarEmpre.getDireccion().split(" ");
+		String sector = parts[0]; 
+		String localidad = parts[1];
+		String cuidad= parts[2];
+		String referencia = parts[3];
+		String calle = parts[4];
+		txtSector.setText(sector);
+		txtLocalidad.setText(localidad);
+		txtCuidad.setText(cuidad);
+		txtReferencia.setText(referencia);
+		txtCalle.setText(calle);
+		String rnc = ftxtRnc.getText();
+		String nombre = txtNombre.getText();
+		String tele = txtTel.getText();
+		String email = txtEmail.getText();
+		String provincia = cbxProvincia.getSelectedItem().toString();
+		
+		String direcion = txtSector.getText() + " " + txtLocalidad.getText() + " " + txtCuidad.getText()
+				+ " " + txtReferencia.getText() + " " + txtCalle.getText();
+		
+		Empresa modificada = new Empresa(rnc, nombre, tele, email, provincia, direcion);
+		BolsaLaboral.getInstance().eliminarEmpresa(rnc);
+		BolsaLaboral.getInstance().insertEmpresa(modificada);
+		
 		}
 		
 		
