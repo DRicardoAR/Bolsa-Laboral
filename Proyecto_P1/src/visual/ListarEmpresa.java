@@ -129,11 +129,11 @@ public class ListarEmpresa extends JDialog {
 						
 						try {
 							Empresa miem = BolsaLaboral.getInstance().RetornarEmpresa(cod);
-							InsertarEmpresa modificaremore = new InsertarEmpresa("Modificar Empresa",true,miem);
+							InsertarEmpresa modificaremore = new InsertarEmpresa("Modificar Empresa",true,miem,null);
 							modificaremore.setModal(true);
 							modificaremore.setLocationRelativeTo(null);
 							modificaremore.setVisible(true);
-							
+							BolsaLaboral.getInstance().eliminarEmpresa(cod);
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

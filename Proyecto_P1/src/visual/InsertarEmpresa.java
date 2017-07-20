@@ -62,9 +62,11 @@ public class InsertarEmpresa extends JDialog {
 	 * Create the dialog.
 	 * @throws ParseException 
 	 */
-	public InsertarEmpresa(String title, boolean modi, Empresa empresa) throws ParseException {
+	public InsertarEmpresa(String title, boolean modi, Empresa empresa, String rnc) throws ParseException {
 		modificarEmpre= empresa;
-		
+		if(rnc != null){
+			ftxtRnc.setText(rnc);
+		}
 		
 		setBounds(100, 100, 641, 404);
 		getContentPane().setLayout(new BorderLayout());
@@ -307,7 +309,6 @@ public class InsertarEmpresa extends JDialog {
 				+ " " + txtReferencia.getText() + " " + txtCalle.getText();
 		
 		Empresa modificada = new Empresa(rnc, nombre, tele, email, provincia, direcion);
-		BolsaLaboral.getInstance().eliminarEmpresa(rnc);
 		BolsaLaboral.getInstance().insertEmpresa(modificada);
 		
 		}
