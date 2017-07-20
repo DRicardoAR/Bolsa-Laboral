@@ -890,6 +890,8 @@ public class InsertarSolicitud extends JDialog {
 						cbxContrato.setSelectedIndex(0);
 						rbtnReubicacionNo.setSelected(false);
 						rbtnReubicacionSi.setSelected(false);
+						rbtnVehiculoSi.setSelected(false);
+						rbtnVehiculoNo.setSelected(false);
 						spnVacantes.setValue(1);
 						cbxLocalidad.setSelectedIndex(0);
 						cbxLicencia.setSelectedIndex(0);
@@ -907,7 +909,7 @@ public class InsertarSolicitud extends JDialog {
 						if (i == 2) {
 							rbtnTecnico.setSelected(false);
 							spnTecnicoExperiencia.setValue(0);
-							cbxArea.setSelectedItem(0);
+							cbxArea.setSelectedIndex(0);
 						}
 						if (i == 3) {
 							rbtnObrero.setSelected(false);
