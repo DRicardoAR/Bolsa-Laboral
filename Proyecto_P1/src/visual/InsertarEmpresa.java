@@ -261,6 +261,9 @@ public class InsertarEmpresa extends JDialog {
 							txtReferencia.setText(null);
 							txtCalle.setText(null);
 							JOptionPane.showMessageDialog(null, "Empresa Agregada Satisfactoriamente");
+							if(rnc != null){
+								dispose();
+							}
 						
 						    }
 						
