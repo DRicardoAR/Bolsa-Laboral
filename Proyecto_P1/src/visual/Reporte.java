@@ -43,7 +43,8 @@ public class Reporte extends JDialog {
 	private static JFreeChart chartBarra;
 	private Dimension dim;
 	private static JPanel Panel_Solicitante;
-	private JTextField textField;
+	private JTextField txtrnc;
+	private static String rnc;
 
 	/*
 	public static void main(String[] args) {
@@ -61,7 +62,7 @@ public class Reporte extends JDialog {
 	 */
 	public Reporte() {
 		setTitle("Reportes");
-		setBounds(100, 100, 772, 818);
+		setBounds(100, 100, 772, 473);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -94,40 +95,32 @@ public class Reporte extends JDialog {
 		
 		BarrasSoli = new JPanel();
 		BarrasSoli.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Graficos Desempleados por tipo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		BarrasSoli.setBounds(10, 19, 352, 291);
+		BarrasSoli.setBounds(10, 52, 352, 258);
 		Panel_Solicitante.add(BarrasSoli);
 		BarrasSoli.setLayout(null);
 		
 		pastel = new JPanel();
 		pastel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Graficos empleados por tipo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pastel.setBounds(379, 19, 347, 291);
+		pastel.setBounds(379, 52, 347, 258);
 		Panel_Solicitante.add(pastel);
 		
-		JPanel Panel_Empresa = new JPanel();
-		Panel_Empresa.setBounds(10, 415, 736, 321);
-		contentPanel.add(Panel_Empresa);
-		Panel_Empresa.setLayout(null);
-		
-		JPanel BarrasEmp = new JPanel();
-		BarrasEmp.setBounds(10, 43, 352, 267);
-		Panel_Empresa.add(BarrasEmp);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(379, 43, 347, 267);
-		Panel_Empresa.add(panel_1);
-		
 		JLabel lblRnc = new JLabel("RNC:");
-		lblRnc.setBounds(10, 18, 46, 14);
-		Panel_Empresa.add(lblRnc);
+		lblRnc.setBounds(20, 27, 46, 14);
+		Panel_Solicitante.add(lblRnc);
 		
-		textField = new JTextField();
-		textField.setBounds(66, 15, 121, 21);
-		Panel_Empresa.add(textField);
-		textField.setColumns(10);
+		txtrnc = new JTextField();
+		txtrnc.setBounds(76, 24, 121, 21);
+		Panel_Solicitante.add(txtrnc);
+		txtrnc.setColumns(10);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(197, 14, 34, 23);
-		Panel_Empresa.add(btnNewButton);
+		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				rnc = txtrnc.getText();
+			}
+		});
+		btnNewButton.setBounds(207, 23, 25, 23);
+		Panel_Solicitante.add(btnNewButton);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -149,6 +142,7 @@ public class Reporte extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		
 		actualizarChart();
 		actualizarPastel();
 	}
@@ -157,7 +151,7 @@ public class Reporte extends JDialog {
 		BarrasSoli.removeAll();
 		BarrasSoli.revalidate();
 		datasetBarra = creadorCategoria();
-		chartBarra = creadorGraficoB(datasetBarra, "Solicitantes Desempleados");
+		chartBarra = creadorGraficoB(datasetBarra, "Solicitudes de una empresa por tipo");
 		BarrasSoli.setLayout(new BorderLayout(0, 0));
 		ChartPanel chartPanel = new ChartPanel(chartBarra);
 		chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -180,7 +174,7 @@ public class Reporte extends JDialog {
 	}
 
 	public static JFreeChart creadorGraficoB(CategoryDataset dataSet, String titulo) {
-		JFreeChart grafico = ChartFactory.createBarChart(titulo, "Tipo de Solicitante", "Catidad Desempleados", dataSet,
+		JFreeChart grafico = ChartFactory.createBarChart(titulo, "Tipo de Solicitante", "Catidad Solicitudes", dataSet,
 				PlotOrientation.VERTICAL, false, true, false);
 		Color color = new Color(255, 249, 234);
 		grafico.setBackgroundPaint(color);
@@ -204,9 +198,9 @@ public class Reporte extends JDialog {
 
 	public static CategoryDataset creadorCategoria() {
 		DefaultCategoryDataset setter = new DefaultCategoryDataset();
-		setter.setValue(BolsaLaboral.getInstance().desempleadoO(), "Tipo de Solicitante", "Obreros");
-		setter.setValue(BolsaLaboral.getInstance().desempleadoU(), "Tipo de Solicitante", "Universitarios");
-		setter.setValue(BolsaLaboral.getInstance().desempleadoT(), "Tipo de Solicitante", "Técnicos");
+		setter.setValue(BolsaLaboral.getInstance().CantSoliO(rnc), "Tipo de Solicitante", "Obreros");
+		setter.setValue(BolsaLaboral.getInstance().CantSoliU(rnc), "Tipo de Solicitante", "Universitarios");
+		setter.setValue(BolsaLaboral.getInstance().CantSoliT(rnc), "Tipo de Solicitante", "Técnicos");
 		return setter;
 	}
 public static PieDataset dataSetPastel(){
