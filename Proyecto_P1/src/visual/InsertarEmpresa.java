@@ -21,6 +21,8 @@ import java.awt.Color;
 
 import javax.swing.JFormattedTextField;
 
+import com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -43,6 +45,7 @@ public class InsertarEmpresa extends JDialog {
 	private JFormattedTextField txtTel;
 	private JFormattedTextField ftxtRnc;
 	private JComboBox cbxProvincia;
+	private JButton btnregistrar;
 	private Empresa modificarEmpre = null;
 	/*
 	public static void main(String[] args) {
@@ -75,7 +78,9 @@ public class InsertarEmpresa extends JDialog {
 		panel.setBounds(10, 26, 605, 118);
 		contentPanel.add(panel);
 		panel.setLayout(null);
-
+		if(modi){
+			loadEmpresaModi();
+		}
 		JLabel lblRnc = new JLabel("RNC:");
 		lblRnc.setBounds(10, 35, 46, 14);
 		panel.add(lblRnc);
@@ -191,8 +196,8 @@ public class InsertarEmpresa extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Registrar");
-				okButton.addActionListener(new ActionListener() {
+				btnregistrar = new JButton("Registrar");
+				btnregistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						String rnc = ftxtRnc.getText();
 						String nombre = txtNombre.getText();
@@ -254,9 +259,9 @@ public class InsertarEmpresa extends JDialog {
 
 					}
 				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				btnregistrar.setActionCommand("OK");
+				buttonPane.add(btnregistrar);
+				getRootPane().setDefaultButton(btnregistrar);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
@@ -270,6 +275,17 @@ public class InsertarEmpresa extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	private void loadEmpresaModi() {
+		if (modificarEmpre !=null){
+			
+		btnregistrar.setText("Modificar");
+		ftxtRnc.setText(modificarEmpre.getRNC());
+		txtEmail.setText(modificarEmpre.getEmail());
+		txtNombre.setText(modificarEmpre.getNombre());
+		}
+		
+		
 	}
 	public boolean empresaRep(String rnc){
 		boolean aux = false;
