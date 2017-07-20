@@ -23,10 +23,14 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
+import org.jfree.util.Rotation;
 
 import logica.BolsaLaboral;
 import javax.swing.JLabel;
@@ -38,7 +42,9 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private static JPanel panelBarras;
 	private static CategoryDataset datasetBarra;
+	private static PieDataset datasetPastel;
 	private static JFreeChart chartBarra;
+	private static JFreeChart chartPastel;
 	private static JPanel panelPastel;
 	private Dimension dim;
 
@@ -203,7 +209,20 @@ public class Principal extends JFrame {
 		lblNoHayEmpledos.setBounds(10, 22, 559, 261);
 		panelPastel.add(lblNoHayEmpledos);
 		actualizarChart();
+		actualizarPastel();
 		//hiloBarras();
+		
+	}
+	public static void actualizarPastel(){
+		panelPastel.removeAll();
+		panelPastel.revalidate();
+		datasetPastel = dataSetPastel();
+		chartPastel = creadorGraficoP(datasetPastel, "Trabajadores Contratados por Tipo");
+		panelPastel.setLayout(new BorderLayout(0, 0));
+		ChartPanel chartPanel = new ChartPanel(chartPastel);
+	    chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
+	    panelPastel.add(chartPanel, BorderLayout.CENTER);
+	    panelPastel.repaint(); 
 		
 	}
 
@@ -230,6 +249,18 @@ public class Principal extends JFrame {
 		plot.setBackgroundPaint(new Color(254, 253, 241));
 		return grafico;
 	}
+	public static JFreeChart creadorGraficoP(PieDataset dataSet, String titulo){
+		JFreeChart chart = ChartFactory.createPieChart3D(titulo, dataSet, true, true, false);
+		Color col = new Color(255, 249, 234);
+		chart.setBackgroundPaint(col);
+		PiePlot3D plot = (PiePlot3D) chart.getPlot();
+		plot.setStartAngle(0.5);
+		plot.setDirection(Rotation.CLOCKWISE);
+		plot.setForegroundAlpha(0.5f);
+		plot.setBackgroundPaint(new Color(254, 253, 241));
+		return chart;
+		
+	}
 
 	public static CategoryDataset creadorCategoria() {
 		DefaultCategoryDataset setter = new DefaultCategoryDataset();
@@ -238,7 +269,20 @@ public class Principal extends JFrame {
 		setter.setValue(BolsaLaboral.getInstance().desempleadoT(), "Tipo de Solicitante", "Técnicos");
 		return setter;
 	}
-
+public static PieDataset dataSetPastel(){
+	DefaultPieDataset result = new DefaultPieDataset();
+	if(BolsaLaboral.getInstance().porcientoO() !=0){
+		result.setValue("Obrero", BolsaLaboral.getInstance().porcientoO());
+	}
+	if(BolsaLaboral.getInstance().porcientoT() != 0){
+		result.setValue("Tecnico", BolsaLaboral.getInstance().porcientoT());
+	}
+	if(BolsaLaboral.getInstance().porcientoU() != 0){
+		result.setValue("Universitario", BolsaLaboral.getInstance().porcientoU());
+	}
+	
+	return result;
+}
 	public void hiloBarras() {
 		Thread actualizar = new Thread() {
 			public void run() {

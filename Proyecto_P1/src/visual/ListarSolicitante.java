@@ -184,6 +184,10 @@ public class ListarSolicitante extends JDialog {
 						soli.setModal(true);
 						soli.setLocationRelativeTo(null);
 						soli.setVisible(true);
+						btnModificar.setEnabled(false);
+						btnEliminar.setEnabled(false);
+						cedulaCliente = "";
+						
 					}
 				});
 				btnModificar.setEnabled(false);

@@ -588,5 +588,13 @@ public class BolsaLaboral implements Serializable {
 		int index = indexSolicitante(persona.getCodigo());
 		misSolicitantes.remove(index);
 	}
+	//Contratar Candidatos
+	public void contratarCandidatos(Solicitud solicitud,ArrayList<Solicitante>empleados){
+		Empresa empresa = solicitud.getEmpresa();
+		for (Solicitante solicitante : empleados) {
+			empresa.insertContratado(solicitante);
+		}
+		
+	}
 	
 }

@@ -51,7 +51,7 @@ public class Macheo extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private static Object[] fila;
-	
+
 	private static DefaultTableModel modelo;
 	private static DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
 	private JFormattedTextField ftxtRNC;
@@ -66,7 +66,7 @@ public class Macheo extends JDialog {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		try {
 			Macheo dialog = new Macheo();
@@ -83,8 +83,7 @@ public class Macheo extends JDialog {
 	 * @throws ParseException
 	 */
 	public Macheo() throws ParseException {
-				
-			
+
 		setTitle("Macheo");
 		setBounds(100, 100, 903, 535);
 		setLocationRelativeTo(null);
@@ -136,7 +135,7 @@ public class Macheo extends JDialog {
 						button.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								ftxtCodSolicitud.setValue("");
-								
+
 								if (BolsaLaboral.getInstance().RetornarEmpresa(ftxtRNC.getText()) != null) {
 									miEmpresa = BolsaLaboral.getInstance().RetornarEmpresa(ftxtRNC.getText());
 									txtNombreEmpresa.setText(miEmpresa.getNombre());
@@ -193,14 +192,14 @@ public class Macheo extends JDialog {
 						btnCandidatos = new JButton("Ver Solicitantes");
 						btnCandidatos.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {
-								
+
 								Solicitud soli = BolsaLaboral.getInstance().RetornarSolocitudCod(codigo);
 								if (soli != null) {
 									misSolicitantesC = BolsaLaboral.getInstance().matcheo(soli);
-									System.out.println(misSolicitantesC.size());
-									
-								}
 								
+
+								}
+
 								cargarSolicitante();
 							}
 						});
@@ -220,7 +219,7 @@ public class Macheo extends JDialog {
 						ftxtCodSolicitud.setBounds(335, 32, 134, 21);
 						panel_2.add(ftxtCodSolicitud);
 					}
-					
+
 					JButton btnFiltralTodo = new JButton("Filtrar todo");
 					btnFiltralTodo.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -261,11 +260,18 @@ public class Macheo extends JDialog {
 				JButton btnContratar = new JButton("Contratar Solicitantes");
 				btnContratar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						int i =0;
-						for (Solicitante solis : misSolicitantesC) {
-							if(solis.getCodigo().equalsIgnoreCase(BolsaLaboral.getInstance().getMisPersonas().get(i).getCodigo())){
-								BolsaLaboral.getInstance().getMisPersonas().get(i).setContratado(true);
-							}
+						if (misSolicitantesC.size() != 0) {
+							Solicitud solicitud = BolsaLaboral.getInstance().RetornarSolocitudCod(codigo);
+							BolsaLaboral.getInstance().contratarCandidatos(solicitud, misSolicitantesC);
+							JOptionPane.showMessageDialog(null,
+									"Los solicitantes han sido contratados.", "Información",
+									JOptionPane.INFORMATION_MESSAGE, null);
+							Principal.actualizarChart();
+							Principal.actualizarPastel();
+						}else{
+							JOptionPane.showMessageDialog(null,
+									"No existen solicitantes en la actualidad para satisfacer esta solicitud", "Información",
+									JOptionPane.INFORMATION_MESSAGE, null);
 						}
 					}
 				});
@@ -287,23 +293,23 @@ public class Macheo extends JDialog {
 	}
 
 	private void loadTable(Empresa empresa) {
-		String[] columnNames = { "Código","Tipo","Vacantes", "Rango Edad", "Localidad"};
+		String[] columnNames = { "Código", "Tipo", "Vacantes", "Rango Edad", "Localidad" };
 		modelo.setColumnIdentifiers(columnNames);
 		modelo.setRowCount(0);
 		fila = new Object[modelo.getColumnCount()];
-		
-		if(empresa == null){
+
+		if (empresa == null) {
 			for (Solicitud soli : BolsaLaboral.getInstance().getMisSolicitudes()) {
 
 				fila[0] = soli.getCodigo();
-				if(soli instanceof SolicitudUniversitario){
-					fila[1] = "Universitario";					
+				if (soli instanceof SolicitudUniversitario) {
+					fila[1] = "Universitario";
 				}
-				if(soli instanceof SolicitudTecnico){
-					fila[1] = "Técnico";					
+				if (soli instanceof SolicitudTecnico) {
+					fila[1] = "Técnico";
 				}
-				if(soli instanceof SolicitudObrero){
-					fila[1] = "Obrero";					
+				if (soli instanceof SolicitudObrero) {
+					fila[1] = "Obrero";
 				}
 				fila[2] = soli.getCantVacantes();
 				String min = Integer.toString(soli.getEdadMin());
@@ -315,23 +321,23 @@ public class Macheo extends JDialog {
 				modelo.addRow(fila);
 
 			}
-			
-		}else{
+
+		} else {
 			ArrayList<Solicitud> solicitudesEmpresa = new ArrayList<>();
 			for (Solicitud solicitud : BolsaLaboral.getInstance().RetornaSolicitudEmp(empresa)) {
-				solicitudesEmpresa.add(solicitud);				
+				solicitudesEmpresa.add(solicitud);
 			}
-			
+
 			for (Solicitud soli : solicitudesEmpresa) {
 				fila[0] = soli.getCodigo();
-				if(soli instanceof SolicitudUniversitario){
-					fila[1] = "Universitario";					
+				if (soli instanceof SolicitudUniversitario) {
+					fila[1] = "Universitario";
 				}
-				if(soli instanceof SolicitudTecnico){
-					fila[1] = "Técnico";					
+				if (soli instanceof SolicitudTecnico) {
+					fila[1] = "Técnico";
 				}
-				if(soli instanceof SolicitudObrero){
-					fila[1] = "Obrero";					
+				if (soli instanceof SolicitudObrero) {
+					fila[1] = "Obrero";
 				}
 				fila[2] = soli.getCantVacantes();
 				String min = Integer.toString(soli.getEdadMin());
@@ -339,15 +345,12 @@ public class Macheo extends JDialog {
 				String rango = max + "-" + min;
 				fila[3] = rango;
 				fila[4] = soli.getLocalidad();
-				
 
 				modelo.addRow(fila);
 
-				
-				
 			}
 		}
-		
+
 		TableColumnModel columnModel = table.getColumnModel();
 		centrar.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -362,8 +365,6 @@ public class Macheo extends JDialog {
 
 	}
 
-
-
 	public void cargarSolicitante() {
 		if (misSolicitantesC.size() != 0) {
 			for (Solicitante soli : misSolicitantesC) {
@@ -371,8 +372,9 @@ public class Macheo extends JDialog {
 				model.addElement(candidato);
 			}
 			list.setModel(model);
-		}else{
-			JOptionPane.showMessageDialog(null, "No existen solicitantes en la actualidad para satisfacer esta solicitud", "Información",
+		} else {
+			JOptionPane.showMessageDialog(null,
+					"No existen solicitantes en la actualidad para satisfacer esta solicitud", "Información",
 					JOptionPane.INFORMATION_MESSAGE, null);
 		}
 	}
