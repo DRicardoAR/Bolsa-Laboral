@@ -83,6 +83,8 @@ public class InsertarSolicitate extends JDialog {
 	private JRadioButton rdbNoReelocalizacion;
 	private JRadioButton rdbMasculino;
 	private JRadioButton rdbFemenino;
+	private JRadioButton rdbSiPost;
+	private JRadioButton rdbNoPost;
 	private JFormattedTextField txtTelefono;
 	private JFormattedTextField txtEmail;
 	private JFormattedTextField textCedula;
@@ -142,7 +144,7 @@ public class InsertarSolicitate extends JDialog {
 			e1.printStackTrace();
 		}
 		setTitle(title);
-		setBounds(100, 100, 626, 460);
+		setBounds(100, 100, 626, 447);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new CardLayout(0, 0));
@@ -728,6 +730,12 @@ public class InsertarSolicitate extends JDialog {
 						"Dise\u00F1o Gr\u00E1fico", "Programaci\u00F3n", "Contabilidad", "Programaci\u00F3n Web" }));
 		cbxAreaTecnico.setBounds(396, 46, 123, 20);
 		panel_Tecnico.add(cbxAreaTecnico);
+		
+		JSeparator separator_3 = new JSeparator();
+		separator_3.setOrientation(SwingConstants.VERTICAL);
+		separator_3.setBackground(Color.BLUE);
+		separator_3.setBounds(293, 11, 2, 82);
+		panel_Tecnico.add(separator_3);
 
 		panel_Universitario = new JPanel();
 		panel_Universitario
@@ -751,13 +759,13 @@ public class InsertarSolicitate extends JDialog {
 		panel_Universitario.add(label_10);
 
 		JLabel lblCarrera = new JLabel("Carrera:");
-		lblCarrera.setBounds(306, 49, 65, 14);
+		lblCarrera.setBounds(305, 26, 65, 14);
 		panel_Universitario.add(lblCarrera);
 
 		JLabel label_11 = new JLabel("*");
 		label_11.setHorizontalAlignment(SwingConstants.LEFT);
 		label_11.setForeground(Color.RED);
-		label_11.setBounds(359, 51, 38, 14);
+		label_11.setBounds(362, 26, 38, 14);
 		panel_Universitario.add(label_11);
 
 		cbxCarrera = new JComboBox();
@@ -767,8 +775,32 @@ public class InsertarSolicitate extends JDialog {
 				"Psicolog\u00EDa", "Ing. Civil", "Ing. Electr\u00F3nica", "Ing. Industrial", "Ing. Mecatr\u00F3nica",
 				"Ing. Sistema", "Ing. Telem\u00E1tica", "Enfermeria", "Estomatolog\u00EDa", "Medicina",
 				"Nutricion y Dietetica", "Terapia F\u00EDsica" }));
-		cbxCarrera.setBounds(396, 46, 123, 20);
+		cbxCarrera.setBounds(391, 23, 123, 20);
 		panel_Universitario.add(cbxCarrera);
+		
+		JLabel lblPostgrado = new JLabel("PostGrado:");
+		lblPostgrado.setBounds(305, 64, 65, 14);
+		panel_Universitario.add(lblPostgrado);
+		
+		JLabel label_6 = new JLabel("*");
+		label_6.setHorizontalAlignment(SwingConstants.LEFT);
+		label_6.setForeground(Color.RED);
+		label_6.setBounds(369, 64, 38, 14);
+		panel_Universitario.add(label_6);
+		
+		rdbSiPost = new JRadioButton("S\u00ED");
+		rdbSiPost.setBounds(391, 60, 38, 23);
+		panel_Universitario.add(rdbSiPost);
+		
+		rdbNoPost = new JRadioButton("No");
+		rdbNoPost.setBounds(431, 60, 58, 23);
+		panel_Universitario.add(rdbNoPost);
+		
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setOrientation(SwingConstants.VERTICAL);
+		separator_2.setBackground(Color.BLUE);
+		separator_2.setBounds(293, 11, 2, 82);
+		panel_Universitario.add(separator_2);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -788,13 +820,17 @@ public class InsertarSolicitate extends JDialog {
 						String nacionalidad = cbxNacionalidad.getSelectedItem().toString();
 						String sexo = "";
 						String provincia = cbxProvincia.getSelectedItem().toString();
-						String direccion = "Ciudad: " + txtCiudad.getText() + " Secotr: " + txtSector + " Calle: "
-								+ txtCalle + " Número: " + " " + spnNumeroCasa.getValue().toString() + " Referencia: "
-								+ txtReferencia;
+						String ciudad = txtCiudad.getText();
+						String sector = txtSector.getText();
+						String calle = txtCalle.getText();
+						String direccion = "";
+						int numeroCasa = new Integer((int) spnNumeroCasa.getValue());
+						String referencia = txtReferencia.getText();
 						String email = txtEmail.getText();
 						Date fechaN = FechaNacimiento.getDate();
 						LocalDate fechaNacimiento = fechaN.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 						boolean vehiculoP = false;
+						boolean postGrado = false;
 						boolean mudarse = false;
 						if (rdbSiReelocalizacion.isSelected()) {
 							mudarse = true;
@@ -827,6 +863,8 @@ public class InsertarSolicitate extends JDialog {
 						}
 						if (rdbMasculino.isSelected()) {
 							sexo = "Masculino";
+						}if(rdbSiPost.isSelected()){
+							postGrado = true;
 						}
 						if (telefono.equalsIgnoreCase("") || email.equalsIgnoreCase("")) {
 							error = true;
@@ -875,7 +913,8 @@ public class InsertarSolicitate extends JDialog {
 									int annos = new Integer((int) spnAnnosExpObrero.getValue());
 									Solicitante solicitante = new Obrero(cedula, nombre, apellido, telefono,
 											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
-											email, vehiculoP, licencia, annos, misIdiomas, mudarse, misHabilidades);
+											email, vehiculoP, licencia, annos, misIdiomas, postGrado, mudarse, ciudad,
+											sector, calle, numeroCasa, referencia, misHabilidades);
 
 									BolsaLaboral.getInstance().insertSolicitante(solicitante);
 									estado = false;
@@ -885,15 +924,16 @@ public class InsertarSolicitate extends JDialog {
 
 									Principal.actualizarChart();
 									call();
-								}else{
+								} else {
 									int annos = new Integer((int) spnAnnosExpObrero.getValue());
 									Solicitante solicitante = new Obrero(cedula, nombre, apellido, telefono,
 											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
-											email, vehiculoP, licencia, annos, misIdiomas, mudarse, misHabilidades);
+											email, vehiculoP, licencia, annos, misIdiomas, postGrado, mudarse, ciudad,
+											sector, calle, numeroCasa, referencia, misHabilidades);
 									estado = false;
 									Principal.actualizarChart();
 									call();
-									
+
 								}
 							}
 						}
@@ -903,7 +943,8 @@ public class InsertarSolicitate extends JDialog {
 									int annos = new Integer((int) spnAnosExpUniversitario.getValue());
 									Solicitante solicitante = new Universitario(cedula, nombre, apellido, telefono,
 											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
-											email, vehiculoP, licencia, annos, misIdiomas, mudarse, false,
+											email, vehiculoP, licencia, annos, misIdiomas, postGrado, mudarse, ciudad,
+											sector, calle, numeroCasa, referencia, false,
 											cbxCarrera.getSelectedItem().toString());
 									BolsaLaboral.getInstance().insertSolicitante(solicitante);
 									estado = false;
@@ -917,7 +958,8 @@ public class InsertarSolicitate extends JDialog {
 									int annos = new Integer((int) spnAnosExpUniversitario.getValue());
 									Solicitante solicitante = new Universitario(cedula, nombre, apellido, telefono,
 											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
-											email, vehiculoP, licencia, annos, misIdiomas, mudarse, false,
+											email, vehiculoP, licencia, annos, misIdiomas, postGrado, mudarse, ciudad,
+											sector, calle, numeroCasa, referencia, false,
 											cbxCarrera.getSelectedItem().toString());
 
 									estado = false;
@@ -936,7 +978,8 @@ public class InsertarSolicitate extends JDialog {
 									int annos = new Integer((int) spnAnosExpTecnico.getValue());
 									Solicitante solicitante = new Tecnico(cedula, nombre, apellido, telefono,
 											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
-											email, vehiculoP, licencia, annos, misIdiomas, mudarse,
+											email, vehiculoP, licencia, annos, misIdiomas, postGrado, mudarse, ciudad,
+											sector, calle, numeroCasa, referencia,
 											cbxAreaTecnico.getSelectedItem().toString());
 									BolsaLaboral.getInstance().insertSolicitante(solicitante);
 									JOptionPane.showMessageDialog(null,
@@ -950,7 +993,8 @@ public class InsertarSolicitate extends JDialog {
 									int annos = new Integer((int) spnAnosExpTecnico.getValue());
 									Solicitante solicitante = new Tecnico(cedula, nombre, apellido, telefono,
 											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
-											email, vehiculoP, licencia, annos, misIdiomas, mudarse,
+											email, vehiculoP, licencia, annos, misIdiomas, postGrado, mudarse, ciudad,
+											sector, calle, numeroCasa, referencia,
 											cbxAreaTecnico.getSelectedItem().toString());
 									BolsaLaboral.getInstance().updateSolicitante(solicitante);
 									JOptionPane.showMessageDialog(null,
@@ -1172,6 +1216,11 @@ public class InsertarSolicitate extends JDialog {
 				misIdiomas.add(idio);
 			}
 			loadIdioma();
+			txtCiudad.setText(modiS.getCiudad());
+			txtCalle.setText(modiS.getCalle());
+			txtSector.setText(modiS.getSector());
+			txtReferencia.setText(modiS.getReferencia());
+			spnNumeroCasa.setValue(modiS.getNumeroCasa());
 			txtNombre.setText(modiS.getNombres());
 			txtApellidos.setText(modiS.getApellidos());
 			textCedula.setText(modiS.getCedula());
@@ -1245,6 +1294,13 @@ public class InsertarSolicitate extends JDialog {
 				rdbUniversitario.setEnabled(false);
 				rdbTecnico.setEnabled(false);
 				rdbObrero.setEnabled(false);
+				rdbNoPost.setEnabled(false);
+				rdbSiPost.setEnabled(false);
+				if(((Universitario) modiS).isPostGrado()){
+					rdbSiPost.setSelected(true);
+				}else{
+					rdbNoPost.setSelected(true);
+				}
 			}
 			if (modiS instanceof Tecnico) {
 				spnAnosExpTecnico.setValue(modiS.getAnnosExperiencia());

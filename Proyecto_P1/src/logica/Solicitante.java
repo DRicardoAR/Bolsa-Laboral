@@ -1,4 +1,5 @@
 package logica;
+
 import java.io.Serializable;
 
 import java.time.LocalDate;
@@ -31,11 +32,19 @@ public abstract class Solicitante implements Serializable {
 	protected boolean contratado;
 	protected long edad;
 	protected boolean mudarse;
+	protected String ciudad;
+	protected String sector;
+	protected String calle;
+	protected int numeroCasa;
+	protected String referencia;
 
-	public Solicitante(String cedula, String nombres, String apellidos, String telefono, LocalDate fechaNacimiento,
-			String nacionalidad, String sexo, String estadoCivil, String direccion, String provincia, String email,
-			boolean vehiculoPropio, int categoriaLicencia, int annosExperiencia,
-			ArrayList<String> idiomas, boolean mudarse) {
+	
+
+	public Solicitante( String cedula, String nombres, String apellidos, String telefono,
+			LocalDate fechaNacimiento, String nacionalidad, String sexo, String estadoCivil, String direccion,
+			String provincia, String email, boolean vehiculoPropio, int categoriaLicencia, int annosExperiencia,
+			ArrayList<String> idiomas, boolean contratado, boolean mudarse, String ciudad, String sector,
+			String calle, int numeroCasa, String referencia) {
 		super();
 		this.cedula = cedula;
 		this.nombres = nombres;
@@ -52,8 +61,53 @@ public abstract class Solicitante implements Serializable {
 		this.categoriaLicencia = categoriaLicencia;
 		this.annosExperiencia = annosExperiencia;
 		this.idiomas = idiomas;
+		this.contratado = contratado;
 		this.mudarse = mudarse;
-		this.idiomas = idiomas;
+		this.ciudad = ciudad;
+		this.sector = sector;
+		this.calle = calle;
+		this.numeroCasa = numeroCasa;
+		this.referencia = referencia;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+
+	public String getSector() {
+		return sector;
+	}
+
+	public void setSector(String sector) {
+		this.sector = sector;
+	}
+
+	public String getCalle() {
+		return calle;
+	}
+
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+
+	public int getNumeroCasa() {
+		return numeroCasa;
+	}
+
+	public void setNumeroCasa(int numeroCasa) {
+		this.numeroCasa = numeroCasa;
+	}
+
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
 	}
 
 	public boolean isMudarse() {
