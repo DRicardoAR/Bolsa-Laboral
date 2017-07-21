@@ -37,6 +37,7 @@ import logica.BolsaLaboral;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.UIManager;
+import javax.swing.border.EtchedBorder;
 
 public class Principal extends JFrame {
 
@@ -74,9 +75,9 @@ public class Principal extends JFrame {
 		setResizable(false);
 		setTitle("Bolsa Laboral");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1306, 729);
+		setBounds(100, 100, 1306, 727);
 		dim = super.getToolkit().getScreenSize();
-		super.setSize(dim.width-60, dim.height-10);
+		super.setSize(dim.width-60, dim.height-50);
 		setLocationRelativeTo(null);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -205,7 +206,7 @@ public class Principal extends JFrame {
 		panel.setLayout(null);
 
 		panelBarras = new JPanel();
-		panelBarras.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Gr\u00E1fico de Desempleado por Tipo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelBarras.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panelBarras.setBounds(44, 11, 579, 294);
 		panel.add(panelBarras);
 		panelBarras.setLayout(null);
@@ -216,7 +217,7 @@ public class Principal extends JFrame {
 		panelBarras.add(lblCharVacio);
 		
 		panelPastel = new JPanel();
-		panelPastel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Gr\u00E1fico de Empleados por Tipo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelPastel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panelPastel.setBounds(667, 11, 579, 294);
 		panel.add(panelPastel);
 		panelPastel.setLayout(null);
