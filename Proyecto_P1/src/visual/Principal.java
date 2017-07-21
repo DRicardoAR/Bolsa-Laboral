@@ -32,6 +32,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
 
+import de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel;
 import logica.BolsaLaboral;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -55,6 +56,7 @@ public class Principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel() );
 					Principal frame = new Principal();
 					frame.setVisible(true);
 				} catch (Exception e) {
