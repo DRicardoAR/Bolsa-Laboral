@@ -243,6 +243,7 @@ public class InsertarEmpresa extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnregistrar = new JButton("Registrar");
+				btnregistrar.setIcon(new ImageIcon(InsertarEmpresa.class.getResource("/img/add.png")));
 				btnregistrar.setBackground(UIManager.getColor("Button.darkShadow"));
 				if(modi){
 					btnregistrar.setText("Salvas Modificaciones");
@@ -413,6 +414,7 @@ public class InsertarEmpresa extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(InsertarEmpresa.class.getResource("/img/cancelar.png")));
 				cancelButton.setBackground(UIManager.getColor("Button.darkShadow"));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
