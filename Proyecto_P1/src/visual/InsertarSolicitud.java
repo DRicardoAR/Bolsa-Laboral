@@ -222,6 +222,7 @@ public class InsertarSolicitud extends JDialog {
 			try {
 				MaskFormatter mascara = new MaskFormatter("##########");
 				ftxtRNC = new JFormattedTextField(mascara);
+				ftxtRNC.setBackground(Color.WHITE);
 				ftxtRNC.setBounds(81, 28, 122, 21);
 				panelEmpresa.add(ftxtRNC);
 
@@ -265,6 +266,7 @@ public class InsertarSolicitud extends JDialog {
 			panelEmpresa.add(lblNombre);
 
 			txtNombre = new JTextField();
+			txtNombre.setBackground(Color.WHITE);
 			txtNombre.setEnabled(false);
 			txtNombre.setBounds(338, 28, 160, 20);
 			panelEmpresa.add(txtNombre);
@@ -283,6 +285,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblNewLabel_1);
 
 			cbxContrato = new JComboBox();
+			cbxContrato.setBackground(Color.WHITE);
 			cbxContrato.setModel(new DefaultComboBoxModel(
 					new String[] { "< Seleccione >", "Largo Plazo", "Corto Plazo", "Temporal" }));
 			cbxContrato.setBounds(81, 24, 149, 21);
@@ -293,6 +296,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblReubicacin);
 
 			rbtnReubicacionSi = new JRadioButton("Si");
+			rbtnReubicacionSi.setBackground(Color.WHITE);
 			rbtnReubicacionSi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnReubicacionNo.setSelected(false);
@@ -303,6 +307,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(rbtnReubicacionSi);
 
 			rbtnReubicacionNo = new JRadioButton("No");
+			rbtnReubicacionNo.setBackground(Color.WHITE);
 			rbtnReubicacionNo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnReubicacionSi.setSelected(false);
@@ -316,6 +321,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblVehiculo);
 
 			rbtnVehiculoSi = new JRadioButton("Si");
+			rbtnVehiculoSi.setBackground(Color.WHITE);
 			rbtnVehiculoSi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnVehiculoNo.setSelected(false);
@@ -326,6 +332,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(rbtnVehiculoSi);
 
 			rbtnVehiculoNo = new JRadioButton("No");
+			rbtnVehiculoNo.setBackground(Color.WHITE);
 			rbtnVehiculoNo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnVehiculoSi.setSelected(false);
@@ -353,6 +360,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblCategoriaLic);
 
 			cbxLocalidad = new JComboBox();
+			cbxLocalidad.setBackground(Color.WHITE);
 			cbxLocalidad.setModel(new DefaultComboBoxModel(new String[] { "< Seleccione >", "Azua ", "Bahoruco ",
 					"Barahona ", "Dajab\u00F3n ", "Distrito Nacional ", "Duarte ", "El\u00EDas Pi\u00F1a ", "El Seibo ",
 					"Espaillat ", "Hato Mayor ", "Independencia ", "La Altagracia ", "La Romana ", "La Vega ",
@@ -380,6 +388,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(label_4);
 
 			cbxLicencia = new JComboBox();
+			cbxLicencia.setBackground(Color.WHITE);
 			cbxLicencia.setEnabled(false);
 			cbxLicencia.setModel(new DefaultComboBoxModel(new String[] { "< Seleccione >", "Categor\u00EDa 1",
 					"Categor\u00EDa 2", "Categor\u00EDa 3", "Categor\u00EDa 4" }));
@@ -403,11 +412,13 @@ public class InsertarSolicitud extends JDialog {
 			panelEdad.add(lblMxima);
 
 			spnEdadMinima = new JSpinner();
+			spnEdadMinima.setBackground(Color.WHITE);
 			spnEdadMinima.setModel(new SpinnerNumberModel(18, 17, 65, 1));
 			spnEdadMinima.setBounds(62, 25, 51, 21);
 			panelEdad.add(spnEdadMinima);
 
 			spnEdadMaxima = new JSpinner();
+			spnEdadMaxima.setBackground(Color.WHITE);
 			spnEdadMaxima.setModel(new SpinnerNumberModel(19, 18, 65, 1));
 			spnEdadMaxima.setBounds(180, 25, 51, 21);
 			panelEdad.add(spnEdadMaxima);
@@ -430,6 +441,7 @@ public class InsertarSolicitud extends JDialog {
 			panelIdioma.add(lblIdioma);
 
 			cbxIdioma = new JComboBox();
+			cbxIdioma.setBackground(Color.WHITE);
 			cbxIdioma.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
@@ -494,6 +506,7 @@ public class InsertarSolicitud extends JDialog {
 			panel.add(PanelVacante);
 
 			rbtnTecnico = new JRadioButton("T\u00E9cnico ");
+			rbtnTecnico.setBackground(Color.WHITE);
 			rbtnTecnico.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnUniversitario.setSelected(false);
@@ -507,6 +520,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelVacante.add(rbtnTecnico);
 
 			rbtnUniversitario = new JRadioButton("Universitario");
+			rbtnUniversitario.setBackground(Color.WHITE);
 			rbtnUniversitario.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnTecnico.setSelected(false);
@@ -520,6 +534,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelVacante.add(rbtnUniversitario);
 
 			rbtnObrero = new JRadioButton("Obrero");
+			rbtnObrero.setBackground(Color.WHITE);
 			rbtnObrero.setBounds(184, 22, 75, 23);
 			PanelVacante.add(rbtnObrero);
 
@@ -560,6 +575,7 @@ public class InsertarSolicitud extends JDialog {
 			panelUniversitario.add(lblPostgrado);
 
 			rbtnPostGradoSi = new JRadioButton("Si");
+			rbtnPostGradoSi.setBackground(Color.WHITE);
 			rbtnPostGradoSi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnPostGradoNo.setSelected(false);
@@ -569,6 +585,7 @@ public class InsertarSolicitud extends JDialog {
 			panelUniversitario.add(rbtnPostGradoSi);
 
 			rbtnPostGradoNo = new JRadioButton("No");
+			rbtnPostGradoNo.setBackground(Color.WHITE);
 			rbtnPostGradoNo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnPostGradoSi.setSelected(false);
@@ -582,6 +599,7 @@ public class InsertarSolicitud extends JDialog {
 			panelUniversitario.add(lblCarrera);
 
 			cbxCarrera = new JComboBox();
+			cbxCarrera.setBackground(Color.WHITE);
 			cbxCarrera.setModel(new DefaultComboBoxModel(new String[] { "< Seleccione >", "Adm. de Empresas",
 					"Adm. Hotelera", "Derecho", "Econom\u00EDa", "Contabilidad", "Mercadotecnia", "Arquitectura",
 					"Comunicacion Social", "Dise\u00F1o e Interiorismo", "Ecologia", "Educaci\u00F3n", "Filosof\u00EDa",
