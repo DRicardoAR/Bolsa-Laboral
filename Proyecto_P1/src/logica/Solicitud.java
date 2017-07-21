@@ -10,6 +10,7 @@ public abstract class Solicitud implements Serializable{
 	private static final long serialVersionUID = 1L;
 	protected String codigo;
 	protected int cantVacantes;
+	protected int cantReal;
 	protected int annosExperiencia;
 	protected int edadMax;
 	protected int edadMin;
@@ -33,6 +34,7 @@ public abstract class Solicitud implements Serializable{
 		this.localidad = localidad;
 		this.empresa = empresa;
 		this.mudarse = mudarse;		
+		this.cantReal=cantVacantes;
 		this.categoriaLicencia = categoriaLicencia;
 		for (String idio : idiomas) {
 			this.idiomas.add(idio);
@@ -135,6 +137,14 @@ public abstract class Solicitud implements Serializable{
 
 	public void setMudarse(boolean mudarse) {
 		this.mudarse = mudarse;
+	}
+
+	public int getCantReal() {
+		return cantReal;
+	}
+
+	public void setCantReal(int cantReal) {
+		this.cantReal = cantReal;
 	}
 
 }

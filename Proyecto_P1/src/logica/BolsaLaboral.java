@@ -710,9 +710,14 @@ public class BolsaLaboral implements Serializable {
 			ArrayList<Solicitante> empleados) {
 		Empresa empresa = solicitud.getEmpresa();
 		for (Solicitante solicitante : empleados) {
+			solicitud.setCantVacantes(solicitud.getCantVacantes()-1);
 			empresa.insertContratado(solicitante);
 		}
 
 	}
-
+	
+	public float porcientoSolicitud(Solicitud soli){
+		
+		return (soli.getCantVacantes()/soli.getCantReal())*100;
+	}
 }
