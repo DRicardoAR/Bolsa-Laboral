@@ -37,6 +37,7 @@ public abstract class Solicitante implements Serializable {
 	protected String calle;
 	protected int numeroCasa;
 	protected String referencia;
+	protected LocalDate FechaContratado;
 
 	
 
@@ -69,6 +70,17 @@ public abstract class Solicitante implements Serializable {
 		this.numeroCasa = numeroCasa;
 		this.referencia = referencia;
 	}
+	
+
+	public LocalDate getFechaContratado() {
+		return FechaContratado;
+	}
+
+
+	public void setFechaContratado(LocalDate fechaContratado) {
+		FechaContratado = fechaContratado;
+	}
+
 
 	public String getCiudad() {
 		return ciudad;

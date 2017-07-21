@@ -2,6 +2,7 @@ package logica;
 
 import java.util.ArrayList;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Empresa implements Serializable{
 	/**
@@ -31,6 +32,8 @@ public class Empresa implements Serializable{
 		return misContratados;
 	}
 public void insertContratado(Solicitante trabajador){
+	LocalDate date = LocalDate.now();
+	trabajador.setFechaContratado(date);
 	trabajador.setContratado(true);
 	misContratados.add(trabajador);
 }
