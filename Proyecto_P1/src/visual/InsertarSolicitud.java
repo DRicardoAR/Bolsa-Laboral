@@ -244,9 +244,12 @@ public class InsertarSolicitud extends JDialog {
 					if (empresa != null) {
 						txtNombre.setText(empresa.getNombre());
 					} else {
-						 if(JOptionPane.showConfirmDialog(null, "No se encontro ninguna Empresa. \n ¿Désea registrar una empresa nueva?", "Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+						if (JOptionPane.showConfirmDialog(null,
+								"No se encontro ninguna Empresa. \n ¿Désea registrar una empresa nueva?",
+								"Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 							try {
-								InsertarEmpresa nuevaEmpresa = new InsertarEmpresa("Insertar Empresa", false, null, ftxtRNC.getText());
+								InsertarEmpresa nuevaEmpresa = new InsertarEmpresa("Insertar Empresa", false, null,
+										ftxtRNC.getText());
 								nuevaEmpresa.setLocationRelativeTo(null);
 								nuevaEmpresa.setModal(true);
 								nuevaEmpresa.setVisible(true);
@@ -254,8 +257,8 @@ public class InsertarSolicitud extends JDialog {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-							
-						 }
+
+						}
 
 					}
 
@@ -571,7 +574,8 @@ public class InsertarSolicitud extends JDialog {
 
 			spnUniversitarioExperiencia = new JSpinner();
 			spnUniversitarioExperiencia.setBackground(new Color(255, 255, 240));
-			spnUniversitarioExperiencia.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+			spnUniversitarioExperiencia
+					.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 			spnUniversitarioExperiencia.setBounds(93, 26, 160, 21);
 			panelUniversitario.add(spnUniversitarioExperiencia);
 
@@ -813,12 +817,12 @@ public class InsertarSolicitud extends JDialog {
 
 							} else if (panelUniversitario.isVisible() && !rbtnPostGradoSi.isSelected()
 									&& !rbtnPostGradoNo.isSelected()) {
-								rbtnPostGradoNo.setSelected(true);								
-							}else if((int)spnEdadMaxima.getValue() <(int) spnEdadMinima.getValue()){
-								JOptionPane.showMessageDialog(null, "Edad minima no puede ser mayor que la máxima", "ATENCIÓN",
-										JOptionPane.WARNING_MESSAGE, null);	
-								
-							}else {
+								rbtnPostGradoNo.setSelected(true);
+							} else if ((int) spnEdadMaxima.getValue() < (int) spnEdadMinima.getValue()) {
+								JOptionPane.showMessageDialog(null, "Edad minima no puede ser mayor que la máxima",
+										"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
+
+							} else {
 								if (rbtnUniversitario.isSelected()) {
 									SolicitudUniversitario nuevaSoli = new SolicitudUniversitario(vacantes,
 											experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo,
