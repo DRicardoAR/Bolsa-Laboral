@@ -36,6 +36,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.border.EtchedBorder;
+import java.awt.SystemColor;
 
 public class InsertarEmpresa extends JDialog {
 
@@ -65,6 +66,7 @@ public class InsertarEmpresa extends JDialog {
 	 */
 	public InsertarEmpresa(String title, boolean modi, Empresa empresa,
 			String RNCsoli) throws ParseException {
+		setBackground(SystemColor.inactiveCaptionBorder);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
@@ -76,15 +78,15 @@ public class InsertarEmpresa extends JDialog {
 		});
 		modificarEmpre = empresa;
 
-		setBounds(100, 100, 641, 404);
+		setBounds(100, 100, 641, 417);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(new Color(255, 250, 250));
+		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		setTitle(title);
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 250, 250));
+		panel.setBackground(new Color(204, 204, 255));
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(10, 26, 605, 118);
 		contentPanel.add(panel);
@@ -132,7 +134,7 @@ public class InsertarEmpresa extends JDialog {
 		txtTel.setColumns(10);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(255, 250, 250));
+		panel_1.setBackground(new Color(204, 204, 255));
 		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Ubicaci\u00F3n", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_1.setBounds(10, 155, 605, 166);
 		contentPanel.add(panel_1);
@@ -235,12 +237,12 @@ public class InsertarEmpresa extends JDialog {
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			buttonPane.setBackground(new Color(255, 250, 250));
+			buttonPane.setBackground(new Color(204, 204, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnregistrar = new JButton("Registrar");
-				btnregistrar.setBackground(new Color(255, 0, 255));
+				btnregistrar.setBackground(Color.LIGHT_GRAY);
 				if(modi){
 					btnregistrar.setText("Salvas Modificaciones");
 				}

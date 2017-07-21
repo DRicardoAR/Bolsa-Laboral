@@ -196,7 +196,7 @@ public class InsertarSolicitud extends JDialog {
 
 		}
 
-		setBounds(100, 100, 547, 580);
+		setBounds(100, 100, 547, 598);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(240, 255, 240));
