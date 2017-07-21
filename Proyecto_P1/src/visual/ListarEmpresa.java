@@ -50,7 +50,7 @@ public class ListarEmpresa extends JDialog {
 	
 	public ListarEmpresa() {
 		setTitle("Lista Empresas");
-		setBounds(100, 100, 614, 300);
+		setBounds(100, 100, 630, 487);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -68,7 +68,7 @@ public class ListarEmpresa extends JDialog {
 				}
 			});
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			scrollPane.setBounds(10, 25, 576, 182);
+			scrollPane.setBounds(10, 25, 591, 369);
 			panel.add(scrollPane);
 			{
 				table = new JTable();
@@ -97,6 +97,7 @@ public class ListarEmpresa extends JDialog {
 				model = new DefaultTableModel();
 				model.setColumnIdentifiers(colimneNames);
 				table.setModel(model);
+				table.getTableHeader().setResizingAllowed(false);
 				loadTable();
 				scrollPane.setViewportView(table);
 			}
@@ -177,7 +178,7 @@ public class ListarEmpresa extends JDialog {
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getTableHeader().setReorderingAllowed(false);
 		TableColumnModel columnModel = table.getColumnModel();
-		columnModel.getColumn(0).setPreferredWidth(77);
+		columnModel.getColumn(0).setPreferredWidth(90);
 		columnModel.getColumn(1).setPreferredWidth(145);
 		columnModel.getColumn(2).setPreferredWidth(115);
 		columnModel.getColumn(3).setPreferredWidth(100);
