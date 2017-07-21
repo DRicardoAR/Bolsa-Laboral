@@ -197,6 +197,17 @@ public class Principal extends JFrame {
 			}
 		});
 		mnReporte.add(mntmReporteDeEmpresa);
+		
+		JMenuItem mntmReporteDeSolicitudes = new JMenuItem("Reporte de Solicitudes");
+		mntmReporteDeSolicitudes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListarSolicitudes soli = new ListarSolicitudes();
+				soli.setModal(true);
+				soli.setLocationRelativeTo(null);
+				soli.setVisible(true);
+			}
+		});
+		mnReporte.add(mntmReporteDeSolicitudes);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
