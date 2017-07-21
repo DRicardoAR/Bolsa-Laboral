@@ -58,6 +58,7 @@ public class Principal extends JFrame {
 				try {
 					UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel() );
 					Principal frame = new Principal();
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
