@@ -50,7 +50,7 @@ public class ListarEmpresa extends JDialog {
 	
 	public ListarEmpresa() {
 		setTitle("Lista Empresas");
-		setBounds(100, 100, 630, 487);
+		setBounds(100, 100, 630, 498);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -68,7 +68,7 @@ public class ListarEmpresa extends JDialog {
 				}
 			});
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			scrollPane.setBounds(10, 25, 591, 369);
+			scrollPane.setBounds(10, 25, 594, 360);
 			panel.add(scrollPane);
 			{
 				table = new JTable();

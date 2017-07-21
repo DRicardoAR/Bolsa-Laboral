@@ -37,6 +37,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.border.EtchedBorder;
 import java.awt.SystemColor;
+import javax.swing.border.BevelBorder;
 
 public class InsertarEmpresa extends JDialog {
 
@@ -78,17 +79,17 @@ public class InsertarEmpresa extends JDialog {
 		});
 		modificarEmpre = empresa;
 
-		setBounds(100, 100, 641, 417);
+		setBounds(100, 100, 614, 413);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
+		contentPanel.setBackground(new Color(248, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		setTitle(title);
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(204, 204, 255));
+		panel.setBackground(new Color(248, 248, 255));
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(10, 26, 605, 118);
+		panel.setBounds(5, 26, 605, 118);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 
@@ -105,8 +106,8 @@ public class InsertarEmpresa extends JDialog {
 		panel.add(lblNombre);
 
 		txtNombre = new JTextField();
-		txtNombre.setBackground(new Color(255, 255, 255));
-		txtNombre.setBounds(405, 32, 174, 20);
+		txtNombre.setBackground(Color.WHITE);
+		txtNombre.setBounds(405, 32, 174, 23);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
 
@@ -115,28 +116,28 @@ public class InsertarEmpresa extends JDialog {
 		panel.add(lblEmail);
 
 		txtEmail = new JTextField();
-		txtEmail.setBackground(new Color(255, 255, 255));
-		txtEmail.setBounds(405, 78, 174, 20);
+		txtEmail.setBackground(Color.WHITE);
+		txtEmail.setBounds(405, 78, 174, 23);
 		panel.add(txtEmail);
 		txtEmail.setColumns(10);
 
 		MaskFormatter mascara = new MaskFormatter("##########");
 		ftxtRnc = new JFormattedTextField(mascara);
-		ftxtRnc.setBackground(new Color(255, 255, 255));
-		ftxtRnc.setBounds(93, 32, 174, 20);
+		ftxtRnc.setBackground(Color.WHITE);
+		ftxtRnc.setBounds(93, 32, 174, 23);
 		panel.add(ftxtRnc);
 
 		MaskFormatter mascara1 = new MaskFormatter("###-###-####");
 		txtTel = new JFormattedTextField(mascara1);
-		txtTel.setBackground(new Color(255, 255, 255));
-		txtTel.setBounds(93, 81, 174, 20);
+		txtTel.setBackground(Color.WHITE);
+		txtTel.setBounds(93, 81, 174, 23);
 		panel.add(txtTel);
 		txtTel.setColumns(10);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(204, 204, 255));
+		panel_1.setBackground(new Color(248, 248, 255));
 		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Ubicaci\u00F3n", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_1.setBounds(10, 155, 605, 166);
+		panel_1.setBounds(5, 155, 605, 166);
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -145,7 +146,7 @@ public class InsertarEmpresa extends JDialog {
 		panel_1.add(lblProvincia);
 
 		cbxProvincia = new JComboBox();
-		cbxProvincia.setBackground(new Color(255, 250, 250));
+		cbxProvincia.setBackground(Color.WHITE);
 		cbxProvincia.setModel(new DefaultComboBoxModel(new String[] {
 				"<Seleccione>", "Azua ", "Bahoruco ", "Barahona ",
 				"Dajab\u00F3n ", "Distrito Nacional ", "Duarte ",
@@ -159,7 +160,7 @@ public class InsertarEmpresa extends JDialog {
 				"San Jos\u00E9 de Ocoa ", "San Juan ",
 				"San Pedro de Macor\u00EDs ", "Santiago ",
 				"Santiago Rodr\u00EDguez ", "Santo Domingo ", "Valverde " }));
-		cbxProvincia.setBounds(93, 35, 174, 20);
+		cbxProvincia.setBounds(93, 35, 174, 23);
 		panel_1.add(cbxProvincia);
 
 		JLabel lblSector = new JLabel("Sector:");
@@ -167,8 +168,8 @@ public class InsertarEmpresa extends JDialog {
 		panel_1.add(lblSector);
 
 		txtSector = new JTextField();
-		txtSector.setBackground(new Color(255, 255, 255));
-		txtSector.setBounds(93, 81, 174, 20);
+		txtSector.setBackground(Color.WHITE);
+		txtSector.setBounds(93, 81, 174, 23);
 		panel_1.add(txtSector);
 		txtSector.setColumns(10);
 
@@ -177,8 +178,8 @@ public class InsertarEmpresa extends JDialog {
 		panel_1.add(lblNewLabel);
 
 		txtLocalidad = new JTextField();
-		txtLocalidad.setBackground(new Color(255, 255, 255));
-		txtLocalidad.setBounds(93, 131, 174, 20);
+		txtLocalidad.setBackground(Color.WHITE);
+		txtLocalidad.setBounds(93, 131, 174, 23);
 		panel_1.add(txtLocalidad);
 		txtLocalidad.setColumns(10);
 
@@ -187,7 +188,7 @@ public class InsertarEmpresa extends JDialog {
 		panel_1.add(lblNewLabel_1);
 
 		txtCuidad = new JTextField();
-		txtCuidad.setBackground(new Color(255, 255, 255));
+		txtCuidad.setBackground(Color.WHITE);
 		txtCuidad.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -203,7 +204,7 @@ public class InsertarEmpresa extends JDialog {
 
 			}
 		});
-		txtCuidad.setBounds(405, 32, 174, 20);
+		txtCuidad.setBounds(405, 32, 174, 23);
 		panel_1.add(txtCuidad);
 		txtCuidad.setColumns(10);
 
@@ -212,8 +213,8 @@ public class InsertarEmpresa extends JDialog {
 		panel_1.add(lblCalle);
 
 		txtCalle = new JTextField();
-		txtCalle.setBackground(new Color(255, 255, 255));
-		txtCalle.setBounds(405, 78, 174, 20);
+		txtCalle.setBackground(Color.WHITE);
+		txtCalle.setBounds(405, 78, 174, 23);
 		panel_1.add(txtCalle);
 		txtCalle.setColumns(10);
 
@@ -222,8 +223,8 @@ public class InsertarEmpresa extends JDialog {
 		panel_1.add(lblReferencia);
 
 		txtReferencia = new JTextField();
-		txtReferencia.setBackground(new Color(255, 255, 255));
-		txtReferencia.setBounds(405, 128, 174, 20);
+		txtReferencia.setBackground(Color.WHITE);
+		txtReferencia.setBounds(405, 128, 174, 23);
 		panel_1.add(txtReferencia);
 		txtReferencia.setColumns(10);
 
@@ -237,12 +238,12 @@ public class InsertarEmpresa extends JDialog {
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			buttonPane.setBackground(new Color(204, 204, 255));
+			buttonPane.setBackground(new Color(248, 248, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnregistrar = new JButton("Registrar");
-				btnregistrar.setBackground(Color.LIGHT_GRAY);
+				btnregistrar.setBackground(UIManager.getColor("Button.darkShadow"));
 				if(modi){
 					btnregistrar.setText("Salvas Modificaciones");
 				}
@@ -412,6 +413,7 @@ public class InsertarEmpresa extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setBackground(UIManager.getColor("Button.darkShadow"));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
