@@ -65,11 +65,16 @@ public class ListarEmpleados extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
+			
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(null, "Empleados Cnotratados por Empresa", TitledBorder.LEADING,
 					TitledBorder.TOP, null, null));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
+			txtRnc = new JTextField();
+			txtRnc.setBounds(73, 28, 106, 20);
+			panel.add(txtRnc);
+			txtRnc.setColumns(10);
 			{
 				JScrollPane scrollPane = new JScrollPane();
 				scrollPane.setBounds(10, 57, 734, 272);
@@ -101,18 +106,24 @@ public class ListarEmpleados extends JDialog {
 					}
 				};
 				modeloTabla.setColumnIdentifiers(nombreColumna);
-				loadTabla();
+				
 				scrollPane.setViewportView(table);
 				}
 			}
 			JLabel lblEmpresa = new JLabel("Empresa:");
 			lblEmpresa.setBounds(10, 31, 65, 14);
 			panel.add(lblEmpresa);
+			
+			JButton btnBuscar = new JButton("");
+			btnBuscar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					loadTabla();
+				}
+			});
+			btnBuscar.setBounds(189, 28, 27, 21);
+			panel.add(btnBuscar);
 
-			txtRnc = new JTextField();
-			txtRnc.setBounds(64, 28, 106, 20);
-			panel.add(txtRnc);
-			txtRnc.setColumns(10);
+			
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -135,10 +146,11 @@ public class ListarEmpleados extends JDialog {
 		}
 	}
 	public static void loadTabla(){
+		Empresa empresa = BolsaLaboral.getInstance().RetornarEmpresa(txtRnc.getText());
 		String tipo = "";
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
-		Empresa empresa = BolsaLaboral.getInstance().RetornarEmpresa(txtRnc.getText());
+	
 		if(empresa!=null){
 			for (Solicitante soli: empresa.getMisContratados()) {
 				if(soli instanceof Tecnico){
