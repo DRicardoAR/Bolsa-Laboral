@@ -202,11 +202,13 @@ public class InsertarSolicitud extends JDialog {
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(Color.WHITE);
 			panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 
 			JPanel panelEmpresa = new JPanel();
+			panelEmpresa.setBackground(Color.WHITE);
 			panelEmpresa.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Empresa",
 					TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panelEmpresa.setBounds(10, 35, 507, 72);
@@ -269,6 +271,7 @@ public class InsertarSolicitud extends JDialog {
 			txtNombre.setColumns(10);
 
 			PanelGeneral = new JPanel();
+			PanelGeneral.setBackground(Color.WHITE);
 			PanelGeneral.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "General",
 					TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			PanelGeneral.setBounds(10, 107, 507, 150);
@@ -384,6 +387,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(cbxLicencia);
 
 			JPanel panelEdad = new JPanel();
+			panelEdad.setBackground(Color.WHITE);
 			panelEdad.setLayout(null);
 			panelEdad.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Rango De Edad",
 					TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -414,6 +418,7 @@ public class InsertarSolicitud extends JDialog {
 			panelEdad.add(label_5);
 
 			JPanel panelIdioma = new JPanel();
+			panelIdioma.setBackground(Color.WHITE);
 			panelIdioma.setLayout(null);
 			panelIdioma.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Idiomas",
 					TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -481,6 +486,7 @@ public class InsertarSolicitud extends JDialog {
 			panelIdioma.add(btnEliminarIdioma);
 
 			JPanel PanelVacante = new JPanel();
+			PanelVacante.setBackground(Color.WHITE);
 			PanelVacante.setLayout(null);
 			PanelVacante.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Tipo Vacante",
 					TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -533,6 +539,7 @@ public class InsertarSolicitud extends JDialog {
 			});
 
 			panelUniversitario = new JPanel();
+			panelUniversitario.setBackground(Color.WHITE);
 			panelUniversitario.setLayout(null);
 			panelUniversitario.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
 					"Universitario", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -698,6 +705,7 @@ public class InsertarSolicitud extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
