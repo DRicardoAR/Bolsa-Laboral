@@ -57,9 +57,9 @@ public class Principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel() );
+					UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel());
 					Principal frame = new Principal();
-					
+
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -77,7 +77,7 @@ public class Principal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1306, 727);
 		dim = super.getToolkit().getScreenSize();
-		super.setSize(dim.width-60, dim.height-50);
+		super.setSize(dim.width - 60, dim.height - 50);
 		setLocationRelativeTo(null);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -116,7 +116,7 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				InsertarEmpresa empre;
 				try {
-					empre = new InsertarEmpresa("Insertar Empresa",false,null,null);
+					empre = new InsertarEmpresa("Insertar Empresa", false, null, null);
 					empre.setModal(true);
 					empre.setLocationRelativeTo(null);
 					empre.setVisible(true);
@@ -139,10 +139,10 @@ public class Principal extends JFrame {
 			}
 		});
 		mnEmpresa.add(mntmListarEmpresas);
-		
+
 		JMenu mnSolicitud = new JMenu("Solicitud");
 		menuBar.add(mnSolicitud);
-		
+
 		JMenuItem mntmRegistrarSolicitud = new JMenuItem("Registrar Solicitud");
 		mntmRegistrarSolicitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -152,7 +152,7 @@ public class Principal extends JFrame {
 			}
 		});
 		mnSolicitud.add(mntmRegistrarSolicitud);
-		
+
 		JMenuItem mntmListarSolicitud = new JMenuItem("Listar Solicitud");
 		mntmListarSolicitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -182,22 +182,22 @@ public class Principal extends JFrame {
 			}
 		});
 		mnMacheo.add(mntmRealizarMacheo);
-		
+
 		JMenu mnReporte = new JMenu("Reporte");
 		menuBar.add(mnReporte);
-		
+
 		JMenuItem mntmReporteDeEmpresa = new JMenuItem("Reporte de Empresa");
 		mntmReporteDeEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarEmpleados  emple = new ListarEmpleados();
+				ListarEmpleados emple = new ListarEmpleados();
 				emple.setModal(true);
 				emple.setLocationRelativeTo(null);
 				emple.setVisible(true);
-				
+
 			}
 		});
 		mnReporte.add(mntmReporteDeEmpresa);
-		
+
 		JMenuItem mntmReporteDeSolicitudes = new JMenuItem("Reporte de Solicitudes");
 		mntmReporteDeSolicitudes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -222,38 +222,39 @@ public class Principal extends JFrame {
 		panelBarras.setBounds(44, 11, 579, 294);
 		panel.add(panelBarras);
 		panelBarras.setLayout(null);
-		
+
 		JLabel lblCharVacio = new JLabel("        No hay solicitantes desempledos");
 		lblCharVacio.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		lblCharVacio.setBounds(10, 22, 559, 261);
 		panelBarras.add(lblCharVacio);
-		
+
 		panelPastel = new JPanel();
 		panelPastel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panelPastel.setBounds(667, 11, 579, 294);
 		panel.add(panelPastel);
 		panelPastel.setLayout(null);
-		
+
 		JLabel lblNoHayEmpledos = new JLabel("                        No hay empledos");
 		lblNoHayEmpledos.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		lblNoHayEmpledos.setBounds(10, 22, 559, 261);
 		panelPastel.add(lblNoHayEmpledos);
 		actualizarChart();
 		actualizarPastel();
-		//hiloBarras();
-		
+		// hiloBarras();
+
 	}
-	public static void actualizarPastel(){
+
+	public static void actualizarPastel() {
 		panelPastel.removeAll();
 		panelPastel.revalidate();
 		datasetPastel = dataSetPastel();
 		chartPastel = creadorGraficoP(datasetPastel, "Trabajadores Contratados por Tipo");
 		panelPastel.setLayout(new BorderLayout(0, 0));
 		ChartPanel chartPanel = new ChartPanel(chartPastel);
-	    chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
-	    panelPastel.add(chartPanel, BorderLayout.CENTER);
-	    panelPastel.repaint(); 
-		
+		chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
+		panelPastel.add(chartPanel, BorderLayout.CENTER);
+		panelPastel.repaint();
+
 	}
 
 	public static void actualizarChart() {
@@ -264,7 +265,7 @@ public class Principal extends JFrame {
 		panelBarras.setLayout(new BorderLayout(0, 0));
 		ChartPanel chartPanel = new ChartPanel(chartBarra);
 		chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
-		panelBarras.add(chartPanel,BorderLayout.CENTER);
+		panelBarras.add(chartPanel, BorderLayout.CENTER);
 		panelBarras.repaint();
 
 	}
@@ -279,7 +280,8 @@ public class Principal extends JFrame {
 		plot.setBackgroundPaint(new Color(254, 253, 241));
 		return grafico;
 	}
-	public static JFreeChart creadorGraficoP(PieDataset dataSet, String titulo){
+
+	public static JFreeChart creadorGraficoP(PieDataset dataSet, String titulo) {
 		JFreeChart chart = ChartFactory.createPieChart3D(titulo, dataSet, true, true, false);
 		Color col = new Color(255, 249, 234);
 		chart.setBackgroundPaint(col);
@@ -289,7 +291,7 @@ public class Principal extends JFrame {
 		plot.setForegroundAlpha(0.5f);
 		plot.setBackgroundPaint(new Color(254, 253, 241));
 		return chart;
-		
+
 	}
 
 	public static CategoryDataset creadorCategoria() {
@@ -299,20 +301,22 @@ public class Principal extends JFrame {
 		setter.setValue(BolsaLaboral.getInstance().desempleadoT(), "Tipo de Solicitante", "Técnicos");
 		return setter;
 	}
-public static PieDataset dataSetPastel(){
-	DefaultPieDataset result = new DefaultPieDataset();
-	if(BolsaLaboral.getInstance().porcientoO() !=0){
-		result.setValue("Obrero", BolsaLaboral.getInstance().porcientoO());
+
+	public static PieDataset dataSetPastel() {
+		DefaultPieDataset result = new DefaultPieDataset();
+		if (BolsaLaboral.getInstance().porcientoO() != 0) {
+			result.setValue("Obrero", BolsaLaboral.getInstance().porcientoO());
+		}
+		if (BolsaLaboral.getInstance().porcientoT() != 0) {
+			result.setValue("Tecnico", BolsaLaboral.getInstance().porcientoT());
+		}
+		if (BolsaLaboral.getInstance().porcientoU() != 0) {
+			result.setValue("Universitario", BolsaLaboral.getInstance().porcientoU());
+		}
+
+		return result;
 	}
-	if(BolsaLaboral.getInstance().porcientoT() != 0){
-		result.setValue("Tecnico", BolsaLaboral.getInstance().porcientoT());
-	}
-	if(BolsaLaboral.getInstance().porcientoU() != 0){
-		result.setValue("Universitario", BolsaLaboral.getInstance().porcientoU());
-	}
-	
-	return result;
-}
+
 	public void hiloBarras() {
 		Thread actualizar = new Thread() {
 			public void run() {
