@@ -182,23 +182,16 @@ public class Principal extends JFrame {
 		JMenu mnReporte = new JMenu("Reporte");
 		menuBar.add(mnReporte);
 		
-		JMenuItem mntmReportes = new JMenuItem("Reportes");
-		mntmReportes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Reporte repor;
-				try {
-					repor = new Reporte();
-					repor.setModal(true);
-					repor.setLocationRelativeTo(null);
-					repor.setVisible(true);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+		JMenuItem mntmReporteDeEmpresa = new JMenuItem("Reporte de Empresa");
+		mntmReporteDeEmpresa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarEmpleados emple = new ListarEmpleados();
+				emple.setModal(true);
+				emple.setLocationRelativeTo(null);
+				emple.setVisible(true);
 			}
 		});
-		mnReporte.add(mntmReportes);
+		mnReporte.add(mntmReporteDeEmpresa);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
