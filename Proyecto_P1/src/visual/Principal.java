@@ -189,10 +189,11 @@ public class Principal extends JFrame {
 		JMenuItem mntmReporteDeEmpresa = new JMenuItem("Reporte de Empresa");
 		mntmReporteDeEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarEmpleados emple = new ListarEmpleados();
+				ListarEmpleados  emple = new ListarEmpleados();
 				emple.setModal(true);
 				emple.setLocationRelativeTo(null);
 				emple.setVisible(true);
+				
 			}
 		});
 		mnReporte.add(mntmReporteDeEmpresa);

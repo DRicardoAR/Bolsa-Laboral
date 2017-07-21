@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.text.MaskFormatter;
 
 import logica.BolsaLaboral;
 import logica.Empresa;
@@ -18,6 +19,7 @@ import logica.Solicitante;
 import logica.Tecnico;
 import logica.Universitario;
 
+import javax.swing.JFormattedTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
@@ -29,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
 
 public class ListarEmpleados extends JDialog {
 
@@ -36,9 +39,9 @@ public class ListarEmpleados extends JDialog {
 	private static JTable table;
 	private static Object[] fila;
 	private static DefaultTableModel modeloTabla;
-	private static JTextField txtRnc;
 	private JButton btnVerEmpleado;
 	private String cedulaCliente = "";
+	private static JFormattedTextField formattedTextField;
 
 	/**
 	 * Launch the application.
@@ -55,8 +58,9 @@ public class ListarEmpleados extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @throws ParseException 
 	 */
-	public ListarEmpleados() {
+	public ListarEmpleados()  {
 		setTitle("Reporte de Empleados");
 		setResizable(false);
 		setBounds(100, 100, 770, 412);
@@ -71,10 +75,7 @@ public class ListarEmpleados extends JDialog {
 					TitledBorder.TOP, null, null));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
-			txtRnc = new JTextField();
-			txtRnc.setBounds(73, 28, 106, 20);
-			panel.add(txtRnc);
-			txtRnc.setColumns(10);
+			
 			{
 				JScrollPane scrollPane = new JScrollPane();
 				scrollPane.setBounds(10, 57, 734, 272);
@@ -122,6 +123,16 @@ public class ListarEmpleados extends JDialog {
 			});
 			btnBuscar.setBounds(189, 28, 27, 21);
 			panel.add(btnBuscar);
+			try {
+				MaskFormatter mask = new MaskFormatter("##########");
+				formattedTextField = new JFormattedTextField(mask);
+				formattedTextField.setBounds(73, 28, 106, 21);
+				panel.add(formattedTextField);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 
 			
 		}
@@ -146,7 +157,7 @@ public class ListarEmpleados extends JDialog {
 		}
 	}
 	public static void loadTabla(){
-		Empresa empresa = BolsaLaboral.getInstance().RetornarEmpresa(txtRnc.getText());
+		Empresa empresa = BolsaLaboral.getInstance().RetornarEmpresa(formattedTextField.getText());
 		String tipo = "";
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
