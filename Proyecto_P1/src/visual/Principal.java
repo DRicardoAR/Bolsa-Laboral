@@ -128,6 +128,16 @@ public class Principal extends JFrame {
 		mnCandidatos.add(mntmListarCandidatos);
 
 		JMenu mnEmpresa = new JMenu("Empresa");
+		mnEmpresa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				mnEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/img/edificio.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				mnEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/img/empresa24.png")));
+			}
+		});
 		mnEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/img/empresa24.png")));
 		mnEmpresa.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnEmpresa);
@@ -160,8 +170,17 @@ public class Principal extends JFrame {
 			}
 		});
 		mnEmpresa.add(mntmListarEmpresas);
-
 		JMenu mnSolicitud = new JMenu("Solicitudes Empresariales");
+		mnSolicitud.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				mnSolicitud.setIcon(new ImageIcon(Principal.class.getResource("/img/Solicitud.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				mnSolicitud.setIcon(new ImageIcon(Principal.class.getResource("/img/Solicitud24.png")));
+			}
+		});
 		mnSolicitud.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		mnSolicitud.setIcon(new ImageIcon(Principal.class.getResource("/img/Solicitud24.png")));
 		menuBar.add(mnSolicitud);
@@ -185,8 +204,17 @@ public class Principal extends JFrame {
 			}
 		});
 		mnSolicitud.add(mntmListarSolicitud);
-
 		JMenu mnMacheo = new JMenu("Ubicaci\u00F3n Laboral");
+		mnMacheo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				mnMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/macheo.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				mnMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/pareo24.png")));
+			}
+		});
 		mnMacheo.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		mnMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/pareo24.png")));
 		menuBar.add(mnMacheo);
@@ -209,6 +237,16 @@ public class Principal extends JFrame {
 		mnMacheo.add(mntmRealizarMacheo);
 
 		JMenu mnReporte = new JMenu("Reporte");
+		mnReporte.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				mnReporte.setIcon(new ImageIcon(Principal.class.getResource("/img/reportar.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				mnReporte.setIcon(new ImageIcon(Principal.class.getResource("/img/reportar24.png")));
+			}
+		});
 		mnReporte.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		mnReporte.setIcon(new ImageIcon(Principal.class.getResource("/img/reportar24.png")));
 		menuBar.add(mnReporte);
@@ -237,6 +275,16 @@ public class Principal extends JFrame {
 		mnReporte.add(mntmReporteDeSolicitudes);
 
 		JMenu mnImportar = new JMenu("Exportar");
+		mnImportar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				mnImportar.setIcon(new ImageIcon(Principal.class.getResource("/img/export.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				mnImportar.setIcon(new ImageIcon(Principal.class.getResource("/img/export24.png")));
+			}
+		});
 		mnImportar.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		mnImportar.setIcon(new ImageIcon(Principal.class.getResource("/img/export24.png")));
 		menuBar.add(mnImportar);
