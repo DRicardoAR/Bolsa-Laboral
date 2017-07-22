@@ -210,21 +210,21 @@ public class Principal extends JFrame {
 			}
 		});
 		mnReporte.add(mntmReporteDeSolicitudes);
-		
+
 		JMenu mnImportar = new JMenu("Exportar");
 		menuBar.add(mnImportar);
-		
+
 		JMenuItem mntmImportarEmpresa = new JMenuItem("Exportar Empresa");
 		mntmImportarEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ImportarEmpresa imem= new ImportarEmpresa();
+				ImportarEmpresa imem = new ImportarEmpresa();
 				imem.setModal(true);
 				imem.setLocationRelativeTo(null);
 				imem.setVisible(true);
 			}
 		});
 		mnImportar.add(mntmImportarEmpresa);
-		
+
 		JMenuItem mntmImportarSolicitante = new JMenuItem("Exportar Solicitante");
 		mntmImportarSolicitante.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
