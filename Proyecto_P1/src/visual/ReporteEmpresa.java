@@ -36,7 +36,7 @@ import logica.BolsaLaboral;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class Reporte extends JDialog {
+public class ReporteEmpresa extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private static CategoryDataset datasetBarra;
@@ -64,7 +64,7 @@ public class Reporte extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Reporte() throws ParseException {
+	public ReporteEmpresa() throws ParseException {
 		setTitle("Reportes");
 		setBounds(100, 100, 772, 473);
 		getContentPane().setLayout(new BorderLayout());
