@@ -190,7 +190,7 @@ public class ListarSolicitante extends JDialog {
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Solicitante persona = BolsaLaboral.getInstance().retornarSolicitante(cedulaCliente);
-						InsertarSolicitate soli = new InsertarSolicitate("Modificar Solicitante", true, persona);
+						InsertarSolicitate soli = new InsertarSolicitate("Modificar Solicitante", true, persona,null);
 						soli.setModal(true);
 						soli.setLocationRelativeTo(null);
 						soli.setVisible(true);

@@ -116,6 +116,7 @@ public class InsertarSolicitate extends JDialog {
 	private boolean error = false;
 	private boolean estado = false;
 	private Solicitante modiS = null;
+	private Solicitante verSoli= null;
 
 	/**
 	 * Launch the application.
@@ -127,7 +128,7 @@ public class InsertarSolicitate extends JDialog {
 	 * 
 	 * /** Create the dialog.
 	 */
-	public InsertarSolicitate(String title, boolean modificar, Solicitante solicitante) {
+	public InsertarSolicitate(String title, boolean modificar, Solicitante solicitante, Solicitante persona) {
 		setBackground(new Color(248, 248, 255));
 		getContentPane().setBackground(new Color(248, 248, 255));
 		addWindowListener(new WindowAdapter() {
@@ -142,6 +143,7 @@ public class InsertarSolicitate extends JDialog {
 
 		});
 		modiS = solicitante;
+		verSoli = persona;
 		try {
 			telefono = new MaskFormatter("(###)-###-####");
 			cedula = new MaskFormatter("###-#######-#");
@@ -1277,7 +1279,7 @@ public class InsertarSolicitate extends JDialog {
 
 	public void call() {
 		dispose();
-		InsertarSolicitate soli = new InsertarSolicitate("Insertar Solicitante", false, null);
+		InsertarSolicitate soli = new InsertarSolicitate("Insertar Solicitante", false, null,null);
 		soli.setModal(true);
 		soli.setLocationRelativeTo(null);
 		soli.setVisible(true);

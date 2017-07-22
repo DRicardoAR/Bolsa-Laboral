@@ -198,7 +198,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmRegistrarCandidato = new JMenuItem("Registrar Solicitante");
 		mntmRegistrarCandidato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InsertarSolicitate soli = new InsertarSolicitate("Insertar Solicitante", false, null);
+				InsertarSolicitate soli = new InsertarSolicitate("Insertar Solicitante", false, null,null);
 				soli.setModal(true);
 				soli.setLocationRelativeTo(null);
 				soli.setVisible(true);
