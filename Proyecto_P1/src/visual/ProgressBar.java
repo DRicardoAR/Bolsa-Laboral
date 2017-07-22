@@ -64,8 +64,7 @@ public class ProgressBar extends JDialog {
 				timer.start();
 			}
 
-		});		
-		
+		});	
 		setBounds(100, 100, 450, 150);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(248, 248, 255));
