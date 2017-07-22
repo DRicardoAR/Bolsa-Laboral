@@ -15,6 +15,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Locale.Category;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
@@ -165,10 +167,10 @@ public class Principal extends JFrame {
 		});
 		mnSolicitud.add(mntmListarSolicitud);
 
-		JMenu mnMacheo = new JMenu("Macheo");
+		JMenu mnMacheo = new JMenu("Ubicaci\u00F3n Laboral");
 		menuBar.add(mnMacheo);
 
-		JMenuItem mntmRealizarMacheo = new JMenuItem("Realizar Macheo");
+		JMenuItem mntmRealizarMacheo = new JMenuItem("Realizar Pareo");
 		mntmRealizarMacheo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Macheo macheo;
@@ -269,6 +271,7 @@ public class Principal extends JFrame {
 		panelPastel.add(lblNoHayEmpledos);
 		actualizarChart();
 		actualizarPastel();
+		reloj();
 		// hiloBarras();
 
 	}
@@ -360,5 +363,35 @@ public class Principal extends JFrame {
 
 		};
 		actualizar.start();
+	}
+public void reloj(){
+		
+		Thread reloj = new Thread(){
+		public void run(){
+			try {
+				for(;;){
+				Calendar calen = new GregorianCalendar();
+				int dia = calen.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+				int mes = calen.get(Calendar.MONTH+1);
+				int minutos = calen.get(Calendar.MINUTE);
+				int hora = calen.get(Calendar.HOUR);
+				int sec = calen.get(Calendar.SECOND);
+				int meri = calen.get(Calendar.AM_PM);
+				String merid = "";
+				if(meri == 1){
+					merid = " PM";
+				}else {
+					merid = " AM";
+				}
+				//lblClock.setText(hora+":"+minutos+":"+sec+merid);
+				
+				sleep(1000);}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}	
+		};
+		reloj.start();
+		
 	}
 }
