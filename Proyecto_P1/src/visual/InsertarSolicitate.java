@@ -1003,6 +1003,7 @@ public class InsertarSolicitate extends JDialog {
 
 									Principal.actualizarChart();
 									call();
+									
 								} else {
 									int annos = new Integer((int) spnAnnosExpObrero.getValue());
 									Solicitante solicitante = new Obrero(cedula, nombre, apellido, telefono,
