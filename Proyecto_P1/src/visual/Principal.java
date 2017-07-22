@@ -67,7 +67,7 @@ public class Principal extends JFrame {
 			public void run() {
 				try {
 					UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel());
-					BolsaLaboral.getInstance().leerBolsa();
+					
 					Principal frame = new Principal();
 
 					frame.setVisible(true);
@@ -99,6 +99,7 @@ public class Principal extends JFrame {
 				}
 			}
 		});
+		BolsaLaboral.getInstance().leerBolsa();
 		setBackground(new Color(248, 248, 255));
 		setResizable(false);
 		setTitle("Bolsa Laboral");

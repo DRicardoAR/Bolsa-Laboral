@@ -24,7 +24,7 @@ public class BolsaLaboral implements Serializable {
 	private ArrayList<Solicitud> misSolicitudes;
 	private static BolsaLaboral bolsa;
 	private FileWriter writer_1;
-	private String archivo = "BolsaLaboral.dat";
+	private String archivo = "files/BolsaLaboral.dat";
 
 	public BolsaLaboral() {
 		super();
@@ -363,7 +363,7 @@ public class BolsaLaboral implements Serializable {
 		FileInputStream bolsaFile = null;
 		ObjectInputStream bolsaIn = null;
 		try {
-			bolsaFile = new FileInputStream("BolsaLaboral.dat");
+			bolsaFile = new FileInputStream("files/BolsaLaboral.dat");
 			bolsaIn = new ObjectInputStream(bolsaFile);
 			try {
 				bolsa = (BolsaLaboral) bolsaIn.readObject();
