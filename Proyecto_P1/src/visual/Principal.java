@@ -144,7 +144,7 @@ public class Principal extends JFrame {
 		});
 		mnEmpresa.add(mntmListarEmpresas);
 
-		JMenu mnSolicitud = new JMenu("Solicitud");
+		JMenu mnSolicitud = new JMenu("Solicitudes Empresariales");
 		menuBar.add(mnSolicitud);
 
 		JMenuItem mntmRegistrarSolicitud = new JMenuItem("Registrar Solicitud");
