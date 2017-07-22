@@ -96,6 +96,7 @@ public class Principal extends JFrame {
 				}else{
 					dispose();
 					
+					
 				}
 			}
 		});
