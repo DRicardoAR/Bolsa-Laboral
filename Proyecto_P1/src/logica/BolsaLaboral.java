@@ -1,9 +1,11 @@
 package logica;
 
 import java.util.ArrayList;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -21,6 +23,7 @@ public class BolsaLaboral implements Serializable {
 	private ArrayList<Solicitante> misSolicitantes;
 	private ArrayList<Solicitud> misSolicitudes;
 	private static BolsaLaboral bolsa;
+	private FileWriter writer_1;
 	private String archivo = "BolsaLaboral.dat";
 
 	public BolsaLaboral() {
@@ -725,4 +728,62 @@ public class BolsaLaboral implements Serializable {
 		}
 		return por;
 	}
+	// retorna una solicitud dado el rnc de una empresa
+	public Solicitud RetornaEmpresaSoli (String rnc){
+		Solicitud soli=null;
+		for (Solicitud solicitud : misSolicitudes) {
+			if(solicitud.getEmpresa().getRNC().equalsIgnoreCase(rnc)){
+				soli=solicitud;
+			}
+			
+		}
+		return soli;
+		
+	}
+	
+	// escribe fichero texto de una empresa
+	public void writeEmpresaTXT(String rnc) throws IOException{
+		writer_1 = new FileWriter(new File("cliente.txt"));
+		Solicitud soli =RetornaEmpresaSoli(rnc);
+		writer_1.write("***********************************************************************************"+"\n");
+		writer_1.write("*                               Bolsa Laboral                                     *"+"\n");
+		writer_1.write("*                                   Empresa                                       *"+"\n");
+		writer_1.write("***********************************************************************************"+"\n");
+		writer_1.write("Empresa: "+soli.getEmpresa().getNombre()+"\n");
+		writer_1.write("Cantidad Vacantes inicial: "+soli.getCantReal()+"\n");
+		writer_1.write("Cantidad Vacantes real: "+soli.getCantVacantes()+"\n");
+		writer_1.write("Cantidad Empleados: "+soli.getCantReal()+"\n");
+		writer_1.write("***********************************************************************************"+"\n");
+		writer_1.close();
+		 
+	
+}
+//buscar solicitante por cedula
+	
+	public Solicitante BuscarSoliCedula(String Cedula){
+		Solicitante solicitante =null;
+		for (Solicitante soli : misSolicitantes) {
+			if(soli.getCedula().equalsIgnoreCase(Cedula)){
+				solicitante=soli;
+			}
+			
+		}
+		return solicitante;
+	}
+	
+	
+	
+public void writeSolicitanteTXT(String cedula) throws IOException{
+	writer_1 = new FileWriter(new File("cliente.txt"));
+	Solicitante soli =BuscarSoliCedula(cedula);
+	writer_1.write("***********************************************************************************"+"\n");
+	writer_1.write("*                               Bolsa Laboral                                     *"+"\n");
+	writer_1.write("*                                 Empleado                                        *"+"\n");
+	writer_1.write("***********************************************************************************"+"\n");
+	writer_1.write("Nombres: "+soli.getNombres()+"\n");
+	writer_1.write("Apellidos: "+soli.getApellidos()+"\n");
+	writer_1.write("***********************************************************************************"+"\n");
+	writer_1.close();
+	 
+}
 }

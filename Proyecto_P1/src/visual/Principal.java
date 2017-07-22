@@ -208,6 +208,31 @@ public class Principal extends JFrame {
 			}
 		});
 		mnReporte.add(mntmReporteDeSolicitudes);
+		
+		JMenu mnImportar = new JMenu("Exportar");
+		menuBar.add(mnImportar);
+		
+		JMenuItem mntmImportarEmpresa = new JMenuItem("Exportar Empresa");
+		mntmImportarEmpresa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ImportarEmpresa imem= new ImportarEmpresa();
+				imem.setModal(true);
+				imem.setLocationRelativeTo(null);
+				imem.setVisible(true);
+			}
+		});
+		mnImportar.add(mntmImportarEmpresa);
+		
+		JMenuItem mntmImportarSolicitante = new JMenuItem("Exportar Solicitante");
+		mntmImportarSolicitante.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ImportarEmpleado im = new ImportarEmpleado();
+				im.setModal(true);
+				im.setLocationRelativeTo(null);
+				im.setVisible(true);
+			}
+		});
+		mnImportar.add(mntmImportarSolicitante);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
