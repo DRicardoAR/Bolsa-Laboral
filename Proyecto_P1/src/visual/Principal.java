@@ -41,6 +41,9 @@ import java.awt.Font;
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JSeparator;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Principal extends JFrame {
 
@@ -88,6 +91,18 @@ public class Principal extends JFrame {
 		setJMenuBar(menuBar);
 
 		JMenu mnCandidatos = new JMenu("Solicitante");
+		mnCandidatos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				mnCandidatos.setIcon(new ImageIcon(Principal.class.getResource("/img/24.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				mnCandidatos.setIcon(new ImageIcon(Principal.class.getResource("/img/Solicitante24.png")));
+			}
+		});
+		mnCandidatos.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		mnCandidatos.setIcon(new ImageIcon(Principal.class.getResource("/img/Solicitante24.png")));
 		menuBar.add(mnCandidatos);
 
 		JMenuItem mntmRegistrarCandidato = new JMenuItem("Registrar Solicitante");
@@ -113,6 +128,8 @@ public class Principal extends JFrame {
 		mnCandidatos.add(mntmListarCandidatos);
 
 		JMenu mnEmpresa = new JMenu("Empresa");
+		mnEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/img/empresa24.png")));
+		mnEmpresa.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnEmpresa);
 
 		JMenuItem mntmRegistrarEmpresa = new JMenuItem("Registrar Empresa");
@@ -145,6 +162,8 @@ public class Principal extends JFrame {
 		mnEmpresa.add(mntmListarEmpresas);
 
 		JMenu mnSolicitud = new JMenu("Solicitudes Empresariales");
+		mnSolicitud.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		mnSolicitud.setIcon(new ImageIcon(Principal.class.getResource("/img/Solicitud24.png")));
 		menuBar.add(mnSolicitud);
 
 		JMenuItem mntmRegistrarSolicitud = new JMenuItem("Registrar Solicitud");
@@ -168,6 +187,8 @@ public class Principal extends JFrame {
 		mnSolicitud.add(mntmListarSolicitud);
 
 		JMenu mnMacheo = new JMenu("Ubicaci\u00F3n Laboral");
+		mnMacheo.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		mnMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/pareo24.png")));
 		menuBar.add(mnMacheo);
 
 		JMenuItem mntmRealizarMacheo = new JMenuItem("Realizar Pareo");
@@ -188,6 +209,8 @@ public class Principal extends JFrame {
 		mnMacheo.add(mntmRealizarMacheo);
 
 		JMenu mnReporte = new JMenu("Reporte");
+		mnReporte.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		mnReporte.setIcon(new ImageIcon(Principal.class.getResource("/img/reportar24.png")));
 		menuBar.add(mnReporte);
 
 		JMenuItem mntmReporteDeEmpresa = new JMenuItem("Reporte de Empresa");
@@ -214,6 +237,8 @@ public class Principal extends JFrame {
 		mnReporte.add(mntmReporteDeSolicitudes);
 
 		JMenu mnImportar = new JMenu("Exportar");
+		mnImportar.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		mnImportar.setIcon(new ImageIcon(Principal.class.getResource("/img/export24.png")));
 		menuBar.add(mnImportar);
 
 		JMenuItem mntmImportarEmpresa = new JMenuItem("Exportar Empresa");
