@@ -199,6 +199,7 @@ public class Principal extends JFrame {
 		mntmRegistrarCandidato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InsertarSolicitate soli = new InsertarSolicitate("Insertar Solicitante", false, null,null);
+				
 				soli.setModal(true);
 				soli.setLocationRelativeTo(null);
 				soli.setVisible(true);
