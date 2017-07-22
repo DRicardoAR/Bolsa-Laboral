@@ -79,7 +79,7 @@ public class ListarSolicitante extends JDialog {
 		setModal(true);
 		setTitle("Listar Solicitantes\r\n");
 		setResizable(false);
-		setBounds(100, 100, 961, 511);
+		setBounds(100, 100, 987, 511);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(248, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -117,7 +117,7 @@ public class ListarSolicitante extends JDialog {
 
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			scrollPane.setBounds(10, 60, 925, 343);
+			scrollPane.setBounds(10, 60, 951, 343);
 			panel.add(scrollPane);
 			{
 				table = new JTable();
@@ -293,13 +293,14 @@ public class ListarSolicitante extends JDialog {
 				fila[5] = soli.getAnnosExperiencia() + " años";
 				fila[6] = soli.getTelefono();
 				fila[7] = soli.getEmail();
+				
 				modeloTabla.addRow(fila);
 
 				table.setModel(modeloTabla);
 				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 				table.getTableHeader().setReorderingAllowed(false);
 				TableColumnModel modeloColumna = table.getColumnModel();
-				modeloColumna.getColumn(0).setPreferredWidth(95);
+				modeloColumna.getColumn(0).setPreferredWidth(110);
 				modeloColumna.getColumn(1).setPreferredWidth(150);
 				modeloColumna.getColumn(2).setPreferredWidth(80);
 				modeloColumna.getColumn(3).setPreferredWidth(110);
@@ -342,9 +343,9 @@ public class ListarSolicitante extends JDialog {
 				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 				table.getTableHeader().setReorderingAllowed(false);
 				TableColumnModel modeloColumna = table.getColumnModel();
-				modeloColumna.getColumn(0).setPreferredWidth(90);
-				modeloColumna.getColumn(1).setPreferredWidth(140);
-				modeloColumna.getColumn(2).setPreferredWidth(110);
+				modeloColumna.getColumn(0).setPreferredWidth(110);
+				modeloColumna.getColumn(1).setPreferredWidth(160);
+				modeloColumna.getColumn(2).setPreferredWidth(90);
 				modeloColumna.getColumn(3).setPreferredWidth(100);
 				modeloColumna.getColumn(4).setPreferredWidth(100);
 				modeloColumna.getColumn(5).setPreferredWidth(160);
@@ -381,9 +382,9 @@ public class ListarSolicitante extends JDialog {
 				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 				table.getTableHeader().setReorderingAllowed(false);
 				TableColumnModel modeloColumna = table.getColumnModel();
-				modeloColumna.getColumn(0).setPreferredWidth(90);
-				modeloColumna.getColumn(1).setPreferredWidth(140);
-				modeloColumna.getColumn(2).setPreferredWidth(110);
+				modeloColumna.getColumn(0).setPreferredWidth(110);
+				modeloColumna.getColumn(1).setPreferredWidth(160);
+				modeloColumna.getColumn(2).setPreferredWidth(90);
 				modeloColumna.getColumn(3).setPreferredWidth(100);
 				modeloColumna.getColumn(4).setPreferredWidth(100);
 				modeloColumna.getColumn(5).setPreferredWidth(160);
