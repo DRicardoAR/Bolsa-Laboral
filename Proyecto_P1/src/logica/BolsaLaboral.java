@@ -363,7 +363,7 @@ public class BolsaLaboral implements Serializable {
 		FileInputStream bolsaFile = null;
 		ObjectInputStream bolsaIn = null;
 		try {
-			bolsaFile = new FileInputStream("Biblioteca.dat");
+			bolsaFile = new FileInputStream("BolsaLaboral.dat");
 			bolsaIn = new ObjectInputStream(bolsaFile);
 			try {
 				bolsa = (BolsaLaboral) bolsaIn.readObject();
