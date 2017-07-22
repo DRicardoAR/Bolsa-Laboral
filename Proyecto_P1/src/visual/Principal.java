@@ -85,19 +85,24 @@ public class Principal extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "¿Desea guardar los nuevos cambios de la biblioteca?",
+				if (JOptionPane.showConfirmDialog(null, "¿Desea guardar los nuevos cambios en la bolsa laboral?",
 						"Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					
+					ProgressBar progress = new ProgressBar(1);
+					progress.setVisible(true);				
+					progress.setLocationRelativeTo(null);
 					BolsaLaboral.getInstance().esribirBolsa();
 					dispose();
 				}else{
 					dispose();
+					
 				}
 			}
 		});
 		setBackground(new Color(248, 248, 255));
 		setResizable(false);
 		setTitle("Bolsa Laboral");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 1306, 727);
 		dim = super.getToolkit().getScreenSize();
 		super.setSize(dim.width - 60, dim.height - 50);
