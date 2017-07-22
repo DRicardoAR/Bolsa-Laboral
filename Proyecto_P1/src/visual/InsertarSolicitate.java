@@ -128,6 +128,7 @@ public class InsertarSolicitate extends JDialog {
 	 * /** Create the dialog.
 	 */
 	public InsertarSolicitate(String title, boolean modificar, Solicitante solicitante) {
+		setBackground(new Color(248, 248, 255));
 		getContentPane().setBackground(new Color(248, 248, 255));
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -870,7 +871,7 @@ public class InsertarSolicitate extends JDialog {
 		panel_Universitario.add(separator_2);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			buttonPane.setBorder(null);
 			buttonPane.setBackground(new Color(248, 248, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);

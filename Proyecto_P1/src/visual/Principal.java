@@ -38,6 +38,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
+import javax.swing.JSeparator;
 
 public class Principal extends JFrame {
 
@@ -72,6 +73,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		setBackground(new Color(248, 248, 255));
 		setResizable(false);
 		setTitle("Bolsa Laboral");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -234,11 +236,13 @@ public class Principal extends JFrame {
 		});
 		mnImportar.add(mntmImportarSolicitante);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(248, 248, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(248, 248, 255));
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 

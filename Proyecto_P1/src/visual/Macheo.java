@@ -269,7 +269,7 @@ public class Macheo extends JDialog {
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(new Color(248, 248, 255));
-			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			buttonPane.setBorder(null);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

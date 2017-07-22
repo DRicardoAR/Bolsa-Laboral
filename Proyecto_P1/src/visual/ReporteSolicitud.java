@@ -49,7 +49,7 @@ public class ReporteSolicitud extends JDialog {
 		getContentPane().setBackground(new Color(248, 248, 255));
 		setBackground(new Color(248, 248, 255));
 		setTitle("Reporte De Solicitudes");
-		setBounds(100, 100, 719, 464);
+		setBounds(100, 100, 719, 472);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(248, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -69,7 +69,7 @@ public class ReporteSolicitud extends JDialog {
 				}
 			});
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			scrollPane.setBounds(10, 25, 684, 336);
+			scrollPane.setBounds(10, 25, 684, 341);
 			panel.add(scrollPane);
 			{
 				table = new JTable();

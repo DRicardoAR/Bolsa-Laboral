@@ -60,7 +60,7 @@ public class ListarEmpleados extends JDialog {
 		setBackground(new Color(248, 248, 255));
 		setTitle("Reporte de Empleados");
 		setResizable(false);
-		setBounds(100, 100, 770, 412);
+		setBounds(100, 100, 770, 425);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(248, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -76,7 +76,7 @@ public class ListarEmpleados extends JDialog {
 			
 			{
 				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.setBounds(10, 57, 734, 272);
+				scrollPane.setBounds(10, 57, 734, 258);
 				panel.add(scrollPane);
 				{
 				table = new JTable();

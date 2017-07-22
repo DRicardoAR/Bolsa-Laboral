@@ -156,7 +156,7 @@ public class ListarSolicitante extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			buttonPane.setBorder(null);
 			buttonPane.setBackground(new Color(248, 248, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
