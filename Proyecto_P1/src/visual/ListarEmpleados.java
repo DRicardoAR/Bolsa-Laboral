@@ -32,6 +32,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.border.EtchedBorder;
 
 public class ListarEmpleados extends JDialog {
 
@@ -46,33 +49,28 @@ public class ListarEmpleados extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ListarEmpleados dialog = new ListarEmpleados();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Create the dialog.
 	 * @throws ParseException 
 	 */
 	public ListarEmpleados()  {
+		getContentPane().setBackground(new Color(248, 248, 255));
+		setBackground(new Color(248, 248, 255));
 		setTitle("Reporte de Empleados");
 		setResizable(false);
 		setBounds(100, 100, 770, 412);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(248, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			
 			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(null, "Empleados Cnotratados por Empresa", TitledBorder.LEADING,
-					TitledBorder.TOP, null, null));
+			panel.setBackground(new Color(248, 248, 255));
+			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Empleados Cnotratados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
@@ -111,22 +109,24 @@ public class ListarEmpleados extends JDialog {
 				scrollPane.setViewportView(table);
 				}
 			}
-			JLabel lblEmpresa = new JLabel("Empresa:");
-			lblEmpresa.setBounds(10, 31, 65, 14);
+			JLabel lblEmpresa = new JLabel("RNC Empresa:");
+			lblEmpresa.setBounds(10, 31, 89, 14);
 			panel.add(lblEmpresa);
 			
 			JButton btnBuscar = new JButton("");
+			btnBuscar.setIcon(new ImageIcon(ListarEmpleados.class.getResource("/img/buscar.png")));
 			btnBuscar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					loadTabla();
 				}
 			});
-			btnBuscar.setBounds(189, 28, 27, 21);
+			btnBuscar.setBounds(200, 26, 29, 25);
 			panel.add(btnBuscar);
 			try {
 				MaskFormatter mask = new MaskFormatter("##########");
 				formattedTextField = new JFormattedTextField(mask);
-				formattedTextField.setBounds(73, 28, 106, 21);
+				formattedTextField.setBackground(new Color(255, 255, 255));
+				formattedTextField.setBounds(89, 27, 106, 23);
 				panel.add(formattedTextField);
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
@@ -138,14 +138,17 @@ public class ListarEmpleados extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(248, 248, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnVerEmpleado = new JButton("Ver Empleado");
+				btnVerEmpleado.setIcon(new ImageIcon(ListarEmpleados.class.getResource("/img/ver.png")));
 				buttonPane.add(btnVerEmpleado);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(ListarEmpleados.class.getResource("/img/cancelar.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

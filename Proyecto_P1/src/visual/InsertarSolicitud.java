@@ -89,8 +89,8 @@ public class InsertarSolicitud extends JDialog {
 	private Solicitud modificarSoli = null;
 
 	public InsertarSolicitud(Solicitud modi) {
-		setBackground(new Color(255, 250, 205));
-		getContentPane().setBackground(new Color(255, 250, 205));
+		setBackground(new Color(248, 248, 255));
+		getContentPane().setBackground(new Color(248, 248, 255));
 		modificarSoli = modi;
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -227,7 +227,7 @@ public class InsertarSolicitud extends JDialog {
 				MaskFormatter mascara = new MaskFormatter("##########");
 				ftxtRNC = new JFormattedTextField(mascara);
 				ftxtRNC.setBackground(new Color(255, 255, 255));
-				ftxtRNC.setBounds(81, 27, 122, 23);
+				ftxtRNC.setBounds(81, 27, 120, 23);
 				panelEmpresa.add(ftxtRNC);
 
 			} catch (Exception e) {
@@ -235,7 +235,7 @@ public class InsertarSolicitud extends JDialog {
 			}
 
 			JButton btnNewButton = new JButton("");
-			btnNewButton.setIcon(new ImageIcon(InsertarSolicitud.class.getResource("/img/borrar.png")));
+			btnNewButton.setIcon(new ImageIcon(InsertarSolicitud.class.getResource("/img/buscar.png")));
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
@@ -266,7 +266,7 @@ public class InsertarSolicitud extends JDialog {
 
 				}
 			});
-			btnNewButton.setBounds(204, 28, 27, 23);
+			btnNewButton.setBounds(204, 26, 29, 25);
 			panelEmpresa.add(btnNewButton);
 
 			JLabel lblNombre = new JLabel("Nombre:");
@@ -477,7 +477,7 @@ public class InsertarSolicitud extends JDialog {
 					"Ruso", "Serbio", "Somali", "Suahili", "Sueco", "Tagalog-Filipino", "Tajik", "Tamil",
 					"Tailand\u00E9s", "Tibetano", "Tigrinia", "Tongan\u00E9s", "Turco", "Turkmenistano", "Ucraniano",
 					"Urdu", "Uzbekistano", "Vasco", "Vietnam\u00E9s" }));
-			cbxIdioma.setBounds(68, 28, 132, 21);
+			cbxIdioma.setBounds(68, 27, 130, 23);
 			panelIdioma.add(cbxIdioma);
 
 			JScrollPane scrollPane = new JScrollPane();
@@ -497,13 +497,14 @@ public class InsertarSolicitud extends JDialog {
 			scrollPane.setViewportView(listIdioma);
 
 			JButton btnEliminarIdioma = new JButton("");
+			btnEliminarIdioma.setIcon(new ImageIcon(InsertarSolicitud.class.getResource("/img/borrar.png")));
 			btnEliminarIdioma.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					misIdiomas.remove(indexListaIdioma);
 					cargarIdioma();
 				}
 			});
-			btnEliminarIdioma.setBounds(204, 28, 27, 21);
+			btnEliminarIdioma.setBounds(201, 26, 29, 25);
 			panelIdioma.add(btnEliminarIdioma);
 
 			JPanel PanelVacante = new JPanel();
@@ -578,7 +579,7 @@ public class InsertarSolicitud extends JDialog {
 			spnUniversitarioExperiencia.setBackground(new Color(255, 255, 255));
 			spnUniversitarioExperiencia
 					.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-			spnUniversitarioExperiencia.setBounds(93, 26, 160, 21);
+			spnUniversitarioExperiencia.setBounds(93, 25, 160, 23);
 			panelUniversitario.add(spnUniversitarioExperiencia);
 
 			JLabel lblPostgrado = new JLabel("PostGrado:");
@@ -602,7 +603,7 @@ public class InsertarSolicitud extends JDialog {
 					rbtnPostGradoSi.setSelected(false);
 				}
 			});
-			rbtnPostGradoNo.setBounds(180, 96, 40, 23);
+			rbtnPostGradoNo.setBounds(180, 96, 51, 23);
 			panelUniversitario.add(rbtnPostGradoNo);
 
 			JLabel lblCarrera = new JLabel("Carrera:");
@@ -617,7 +618,7 @@ public class InsertarSolicitud extends JDialog {
 					"Psicolog\u00EDa", "Ing. Civil", "Ing. Electr\u00F3nica", "Ing. Industrial",
 					"Ing. Mecatr\u00F3nica", "Ing. Sistema", "Ing. Telem\u00E1tica", "Enfermeria", "Estomatolog\u00EDa",
 					"Medicina", "Nutricion y Dietetica", "Terapia F\u00EDsica" }));
-			cbxCarrera.setBounds(93, 62, 160, 21);
+			cbxCarrera.setBounds(93, 61, 160, 23);
 			panelUniversitario.add(cbxCarrera);
 
 			JLabel label_7 = new JLabel("*");
@@ -639,7 +640,7 @@ public class InsertarSolicitud extends JDialog {
 
 			spnTecnicoExperiencia = new JSpinner();
 			spnTecnicoExperiencia.setBackground(new Color(248, 248, 255));
-			spnTecnicoExperiencia.setBounds(93, 26, 160, 21);
+			spnTecnicoExperiencia.setBounds(93, 25, 160, 23);
 			panelTecnico.add(spnTecnicoExperiencia);
 
 			JLabel label_8 = new JLabel("*");
@@ -656,7 +657,7 @@ public class InsertarSolicitud extends JDialog {
 			cbxArea.setModel(new DefaultComboBoxModel(
 					new String[] { "<Seleccionar>", "Emprendimiento", "Mecanograf\u00EDa", "Dise\u00F1o Gr\u00E1fico",
 							"Programaci\u00F3n", "Contabilidad", "Programaci\u00F3n Web" }));
-			cbxArea.setBounds(93, 62, 160, 20);
+			cbxArea.setBounds(93, 61, 160, 23);
 			panelTecnico.add(cbxArea);
 
 			panelObrero = new JPanel();
@@ -673,7 +674,7 @@ public class InsertarSolicitud extends JDialog {
 
 			spnObreroExperiencia = new JSpinner();
 			spnObreroExperiencia.setBackground(new Color(248, 248, 255));
-			spnObreroExperiencia.setBounds(93, 26, 160, 21);
+			spnObreroExperiencia.setBounds(93, 25, 160, 23);
 			panelObrero.add(spnObreroExperiencia);
 
 			JLabel lblHabilidades = new JLabel("Habilidades:");
@@ -706,7 +707,7 @@ public class InsertarSolicitud extends JDialog {
 					new String[] { "< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Arsano", "Carpintero",
 							"Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico",
 							"Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero" }));
-			cbxHabilidades.setBounds(93, 62, 129, 20);
+			cbxHabilidades.setBounds(93, 61, 126, 23);
 			panelObrero.add(cbxHabilidades);
 
 			JScrollPane scrollPane_1 = new JScrollPane();
@@ -724,13 +725,14 @@ public class InsertarSolicitud extends JDialog {
 			scrollPane_1.setViewportView(ListHabilidad);
 
 			JButton bntEliminarHabilidad = new JButton("");
+			bntEliminarHabilidad.setIcon(new ImageIcon(InsertarSolicitud.class.getResource("/img/borrar.png")));
 			bntEliminarHabilidad.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					misHabilidades.remove(indexListaHabilidades);
 					cargarHabilidades();
 				}
 			});
-			bntEliminarHabilidad.setBounds(226, 61, 27, 21);
+			bntEliminarHabilidad.setBounds(224, 60, 29, 25);
 			panelObrero.add(bntEliminarHabilidad);
 
 			JLabel lblcampos = new JLabel("* Campos Obligatorios");
