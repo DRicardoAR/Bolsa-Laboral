@@ -345,7 +345,6 @@ public class Principal extends JFrame {
 
 		return result;
 	}
-
 	public void hiloBarras() {
 		Thread actualizar = new Thread() {
 			public void run() {
