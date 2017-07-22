@@ -122,6 +122,62 @@ public class Principal extends JFrame {
 				mnCandidatos.setIcon(new ImageIcon(Principal.class.getResource("/img/Solicitante24.png")));
 			}
 		});
+		JMenu mnMacheo = new JMenu("Ubicaci\u00F3n Laboral");
+		mnMacheo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				mnMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/macheo.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				mnMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/pareo24.png")));
+			}
+		});
+		mnMacheo.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		mnMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/pareo24.png")));
+		menuBar.add(mnMacheo);
+		
+				JMenuItem mntmRealizarMacheo = new JMenuItem("Realizar Pareo");
+				mntmRealizarMacheo.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Macheo macheo;
+						try {
+							macheo = new Macheo();
+							macheo.setModal(true);
+							macheo.setLocationRelativeTo(null);
+							macheo.setVisible(true);
+						} catch (ParseException e1) {
+							e1.printStackTrace();
+						}
+
+					}
+				});
+				mnMacheo.add(mntmRealizarMacheo);
+				
+				JMenu mnNewMenu = new JMenu("Exportar");
+				mnMacheo.add(mnNewMenu);
+				
+				JMenuItem mntmExportarEmpresa = new JMenuItem("Exportar Empresa");
+				mntmExportarEmpresa.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						// Exportar EMpresa
+					}
+				});
+				mnNewMenu.add(mntmExportarEmpresa);
+				
+				JMenuItem mntmExportarSolicitud = new JMenuItem("Exportar Solicitante");
+				mnNewMenu.add(mntmExportarSolicitud);
+				
+				JSeparator separator = new JSeparator();
+				mnMacheo.add(separator);
+				
+				JMenuItem mntmCerrar = new JMenuItem("Cerrar");
+				mntmCerrar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
+				mnMacheo.add(mntmCerrar);
 		mnCandidatos.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		mnCandidatos.setIcon(new ImageIcon(Principal.class.getResource("/img/Solicitante24.png")));
 		menuBar.add(mnCandidatos);
@@ -225,37 +281,6 @@ public class Principal extends JFrame {
 			}
 		});
 		mnSolicitud.add(mntmListarSolicitud);
-		JMenu mnMacheo = new JMenu("Ubicaci\u00F3n Laboral");
-		mnMacheo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				mnMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/macheo.png")));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				mnMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/pareo24.png")));
-			}
-		});
-		mnMacheo.setFont(new Font("Segoe UI", Font.BOLD, 13));
-		mnMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/pareo24.png")));
-		menuBar.add(mnMacheo);
-
-		JMenuItem mntmRealizarMacheo = new JMenuItem("Realizar Pareo");
-		mntmRealizarMacheo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Macheo macheo;
-				try {
-					macheo = new Macheo();
-					macheo.setModal(true);
-					macheo.setLocationRelativeTo(null);
-					macheo.setVisible(true);
-				} catch (ParseException e1) {
-					e1.printStackTrace();
-				}
-
-			}
-		});
-		mnMacheo.add(mntmRealizarMacheo);
 
 		JMenu mnReporte = new JMenu("Reporte");
 		mnReporte.addMouseListener(new MouseAdapter() {
