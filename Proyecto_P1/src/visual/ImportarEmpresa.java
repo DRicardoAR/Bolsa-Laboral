@@ -24,7 +24,7 @@ public class ImportarEmpresa extends JDialog {
 	private JFormattedTextField ftxtrnc;
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		try {
 			ImportarEmpresa dialog = new ImportarEmpresa();
@@ -39,6 +39,8 @@ public class ImportarEmpresa extends JDialog {
 	 * Create the dialog.
 	 */
 	public ImportarEmpresa() {
+		setResizable(false);
+		setModal(true);
 		setTitle("Exportar Empresa");
 		setBounds(100, 100, 444, 167);
 		getContentPane().setLayout(new BorderLayout());

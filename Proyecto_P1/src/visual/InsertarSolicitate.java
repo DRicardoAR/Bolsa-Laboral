@@ -149,6 +149,8 @@ public class InsertarSolicitate extends JDialog {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		setResizable(false);
+		setModal(true);
 		setTitle(title);
 		setBounds(100, 100, 612, 453);
 		getContentPane().setLayout(new BorderLayout());

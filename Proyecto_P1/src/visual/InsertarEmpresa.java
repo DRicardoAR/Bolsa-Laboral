@@ -78,7 +78,8 @@ public class InsertarEmpresa extends JDialog {
 			}
 		});
 		modificarEmpre = empresa;
-
+		setResizable(false);
+		setModal(true);
 		setBounds(100, 100, 614, 413);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(248, 248, 255));

@@ -28,7 +28,7 @@ public class ImportarEmpleado extends JDialog {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		try {
 			ImportarEmpleado dialog = new ImportarEmpleado();
@@ -43,6 +43,8 @@ public class ImportarEmpleado extends JDialog {
 	 * Create the dialog.
 	 */
 	public ImportarEmpleado() {
+		setResizable(false);
+		setModal(true);
 		getContentPane().setBackground(new Color(248, 248, 255));
 		setBackground(new Color(248, 248, 255));
 		setResizable(false);

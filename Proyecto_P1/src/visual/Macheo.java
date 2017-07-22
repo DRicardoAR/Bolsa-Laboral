@@ -85,6 +85,8 @@ public class Macheo extends JDialog {
 	 * @throws ParseException
 	 */
 	public Macheo() throws ParseException {
+		setResizable(false);
+		setModal(true);
 		getContentPane().setBackground(new Color(248, 248, 255));
 		setBackground(new Color(248, 248, 255));
 

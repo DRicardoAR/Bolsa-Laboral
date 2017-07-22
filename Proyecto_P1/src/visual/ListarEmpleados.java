@@ -56,6 +56,8 @@ public class ListarEmpleados extends JDialog {
 	 * @throws ParseException 
 	 */
 	public ListarEmpleados()  {
+		setResizable(false);
+		setModal(true);
 		getContentPane().setBackground(new Color(248, 248, 255));
 		setBackground(new Color(248, 248, 255));
 		setTitle("Reporte de Empleados");

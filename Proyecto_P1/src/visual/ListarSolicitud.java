@@ -68,6 +68,8 @@ public class ListarSolicitud extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListarSolicitud() {
+		setResizable(false);
+		setModal(true);
 		setBounds(100, 100, 943, 519);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());

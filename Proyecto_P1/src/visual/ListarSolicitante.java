@@ -75,6 +75,8 @@ public class ListarSolicitante extends JDialog {
 				loadTablaG();
 			}
 		});
+		setResizable(false);
+		setModal(true);
 		setTitle("Listar Solicitantes\r\n");
 		setResizable(false);
 		setBounds(100, 100, 961, 511);

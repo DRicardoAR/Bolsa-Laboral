@@ -196,7 +196,8 @@ public class InsertarSolicitud extends JDialog {
 			setTitle("Modificar Solicitud - Bolsa Laboral");
 
 		}
-
+		setResizable(false);
+		setModal(true);
 		setBounds(100, 100, 547, 598);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());

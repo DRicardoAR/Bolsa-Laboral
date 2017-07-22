@@ -46,6 +46,8 @@ public class ReporteSolicitud extends JDialog {
 
 	
 	public ReporteSolicitud() {
+		setResizable(false);
+		setModal(true);
 		getContentPane().setBackground(new Color(248, 248, 255));
 		setBackground(new Color(248, 248, 255));
 		setTitle("Reporte De Solicitudes");

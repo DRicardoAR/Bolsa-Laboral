@@ -46,6 +46,8 @@ public class ListarEmpresa extends JDialog {
 	private JButton btnEliminar;
 
 	public ListarEmpresa() {
+		setResizable(false);
+		setModal(true);
 		getContentPane().setBackground(new Color(248, 248, 255));
 		setBackground(new Color(248, 248, 255));
 		setTitle("Lista Empresas");

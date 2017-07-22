@@ -60,6 +60,8 @@ public class DetalleSolicitud extends JDialog {
 
 
 	public DetalleSolicitud(Solicitud solicitud) {
+		setResizable(false);
+		setModal(true);
 		miSolicitud = solicitud;
 		addWindowListener(new WindowAdapter() {
 			@Override
