@@ -79,7 +79,9 @@ public class ImportarEmpleado extends JDialog {
 					if(BolsaLaboral.getInstance().SolicitanteExiste(txtCedula.getText())){
 									try {
 										BolsaLaboral.getInstance().writeSolicitanteTXT(txtCedula.getText());
-										JOptionPane.showMessageDialog(null, "El empleado ha sido Importado");
+										ProgressBar pr = new ProgressBar(3);
+										pr.setLocationRelativeTo( null);
+										pr.setVisible(true);			
 										txtCedula.setText(null);
 									} catch (IOException e1) {
 										// TODO Auto-generated catch block
@@ -87,7 +89,7 @@ public class ImportarEmpleado extends JDialog {
 									}
 								}else{
 
-									JOptionPane.showMessageDialog(null, "Empleado no encontrado, Intente nuevamen");
+									JOptionPane.showMessageDialog(null, "Solicitante no encontrado");
 									txtCedula.setText(null);
 								}
 								

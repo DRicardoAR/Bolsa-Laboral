@@ -57,7 +57,7 @@ public class ProgressBar extends JDialog {
 
 			@Override
 			public void windowOpened(WindowEvent e) {
-				if(option == 1 ){
+				if(option == 1 || option == 2 || option == 3){
 					timer = new Timer(25, new progreso());
 				}
 				
@@ -73,8 +73,14 @@ public class ProgressBar extends JDialog {
 		contentPanel.setLayout(null);
 		
 		lblTitulo = new JLabel("New label");
-		if(option == 1 || option ==6){
+		if(option == 1){
 			lblTitulo.setText("Guardando Cambios...");
+		}
+		if(option == 2){
+			lblTitulo.setText("Exportando Empresa...");
+		}
+		if(option == 3){
+			lblTitulo.setText("Exportando Solicitante...");
 		}
 		lblTitulo.setBounds(30, 22, 321, 14);
 		contentPanel.add(lblTitulo);
@@ -101,7 +107,16 @@ public class ProgressBar extends JDialog {
 							JOptionPane.INFORMATION_MESSAGE, null);
 
 				}
-				
+				if (option == 2) {
+					JOptionPane.showMessageDialog(null, "La empresa se exporto correctamente", "Bolsa Laboral",
+							JOptionPane.INFORMATION_MESSAGE, null);
+
+				}
+				if (option == 3) {
+					JOptionPane.showMessageDialog(null, "El solicitante se exporto correctamente", "Bolsa Laboral",
+							JOptionPane.INFORMATION_MESSAGE, null);
+
+				}
 				timer.stop();
 				dispose();
 

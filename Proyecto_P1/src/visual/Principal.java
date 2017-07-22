@@ -161,12 +161,23 @@ public class Principal extends JFrame {
 				JMenuItem mntmExportarEmpresa = new JMenuItem("Exportar Empresa");
 				mntmExportarEmpresa.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						// Exportar EMpresa
+						ImportarEmpresa imem = new ImportarEmpresa();
+						imem.setModal(true);
+						imem.setLocationRelativeTo(null);
+						imem.setVisible(true);
 					}
 				});
 				mnNewMenu.add(mntmExportarEmpresa);
 				
 				JMenuItem mntmExportarSolicitud = new JMenuItem("Exportar Solicitante");
+				mntmExportarSolicitud.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ImportarEmpleado im = new ImportarEmpleado();
+						im.setModal(true);
+						im.setLocationRelativeTo(null);
+						im.setVisible(true);
+					}
+				});
 				mnNewMenu.add(mntmExportarSolicitud);
 				
 				JSeparator separator = new JSeparator();
@@ -339,10 +350,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmImportarEmpresa = new JMenuItem("Exportar Empresa");
 		mntmImportarEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ImportarEmpresa imem = new ImportarEmpresa();
-				imem.setModal(true);
-				imem.setLocationRelativeTo(null);
-				imem.setVisible(true);
+				
 			}
 		});
 		mnImportar.add(mntmImportarEmpresa);
@@ -350,10 +358,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmImportarSolicitante = new JMenuItem("Exportar Solicitante");
 		mntmImportarSolicitante.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ImportarEmpleado im = new ImportarEmpleado();
-				im.setModal(true);
-				im.setLocationRelativeTo(null);
-				im.setVisible(true);
+				
 			}
 		});
 		mnImportar.add(mntmImportarSolicitante);

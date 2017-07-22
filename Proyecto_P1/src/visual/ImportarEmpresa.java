@@ -17,6 +17,9 @@ import java.io.IOException;
 
 import jdk.nashorn.internal.scripts.JO;
 import logica.BolsaLaboral;
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.border.EtchedBorder;
 
 public class ImportarEmpresa extends JDialog {
 
@@ -39,16 +42,21 @@ public class ImportarEmpresa extends JDialog {
 	 * Create the dialog.
 	 */
 	public ImportarEmpresa() {
+		getContentPane().setBackground(new Color(248, 248, 255));
+		setBackground(new Color(248, 248, 255));
 		setResizable(false);
 		setModal(true);
 		setTitle("Exportar Empresa");
-		setBounds(100, 100, 444, 167);
+		setBounds(100, 100, 404, 167);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(248, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			panel.setBackground(new Color(248, 248, 255));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
@@ -57,12 +65,15 @@ public class ImportarEmpresa extends JDialog {
 			panel.add(lblNewLabel);
 			{
 				JButton okButton = new JButton("Exportar");
+				okButton.setIcon(new ImageIcon(ImportarEmpresa.class.getResource("/img/exportar.png")));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						if(BolsaLaboral.getInstance().EmpresaExiste(ftxtrnc.getText())){
 							try {
 								BolsaLaboral.getInstance().writeEmpresaTXT(ftxtrnc.getText());
-								JOptionPane.showMessageDialog(null, "La empresa fue Exportada");
+								ProgressBar pr = new ProgressBar(2);
+								pr.setLocationRelativeTo( null);
+								pr.setVisible(true);								
 								ftxtrnc.setText(null);
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
@@ -75,23 +86,25 @@ public class ImportarEmpresa extends JDialog {
 					}
 
 				});
-				okButton.setBounds(307, 31, 89, 23);
+				okButton.setBounds(259, 31, 111, 23);
 				panel.add(okButton);
 				okButton.setActionCommand("OK");
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				ftxtrnc = new JFormattedTextField();
-				ftxtrnc.setBounds(77, 32, 197, 20);
+				ftxtrnc.setBounds(52, 32, 197, 20);
 				panel.add(ftxtrnc);
 			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(248, 248, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(ImportarEmpresa.class.getResource("/img/cancelar.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
