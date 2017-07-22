@@ -30,6 +30,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JList;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.ImageIcon;
 
 public class DetalleSolicitud extends JDialog {
 
@@ -57,22 +58,7 @@ public class DetalleSolicitud extends JDialog {
 	private JList ListaIdioma;
 	private JList listasHabilidades ;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			DetalleSolicitud dialog = new DetalleSolicitud(null);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	/**
-	 * Create the dialog.
-	 */
 	public DetalleSolicitud(Solicitud solicitud) {
 		miSolicitud = solicitud;
 		addWindowListener(new WindowAdapter() {
@@ -336,7 +322,8 @@ public class DetalleSolicitud extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton cancelButton = new JButton("Salir");
+				JButton cancelButton = new JButton("Aceptar");
+				cancelButton.setIcon(new ImageIcon(DetalleSolicitud.class.getResource("/img/aceptar.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

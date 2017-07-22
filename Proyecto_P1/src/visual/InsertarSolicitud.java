@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.ImageIcon;
 
 public class InsertarSolicitud extends JDialog {
 
@@ -199,19 +200,19 @@ public class InsertarSolicitud extends JDialog {
 		setBounds(100, 100, 547, 598);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(new Color(240, 255, 240));
+		contentPanel.setBackground(new Color(248, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBackground(new Color(255, 255, 240));
+			panel.setBackground(new Color(248, 248, 255));
 			panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 
 			JPanel panelEmpresa = new JPanel();
-			panelEmpresa.setBackground(new Color(255, 255, 240));
+			panelEmpresa.setBackground(new Color(248, 248, 255));
 			panelEmpresa.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Empresa",
 					TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panelEmpresa.setBounds(10, 35, 507, 72);
@@ -225,8 +226,8 @@ public class InsertarSolicitud extends JDialog {
 			try {
 				MaskFormatter mascara = new MaskFormatter("##########");
 				ftxtRNC = new JFormattedTextField(mascara);
-				ftxtRNC.setBackground(new Color(255, 255, 240));
-				ftxtRNC.setBounds(81, 28, 122, 21);
+				ftxtRNC.setBackground(new Color(255, 255, 255));
+				ftxtRNC.setBounds(81, 27, 122, 23);
 				panelEmpresa.add(ftxtRNC);
 
 			} catch (Exception e) {
@@ -234,6 +235,7 @@ public class InsertarSolicitud extends JDialog {
 			}
 
 			JButton btnNewButton = new JButton("");
+			btnNewButton.setIcon(new ImageIcon(InsertarSolicitud.class.getResource("/img/borrar.png")));
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
@@ -264,7 +266,7 @@ public class InsertarSolicitud extends JDialog {
 
 				}
 			});
-			btnNewButton.setBounds(204, 28, 27, 21);
+			btnNewButton.setBounds(204, 28, 27, 23);
 			panelEmpresa.add(btnNewButton);
 
 			JLabel lblNombre = new JLabel("Nombre:");
@@ -272,14 +274,14 @@ public class InsertarSolicitud extends JDialog {
 			panelEmpresa.add(lblNombre);
 
 			txtNombre = new JTextField();
-			txtNombre.setBackground(new Color(255, 255, 240));
+			txtNombre.setBackground(new Color(255, 255, 255));
 			txtNombre.setEnabled(false);
-			txtNombre.setBounds(338, 28, 160, 20);
+			txtNombre.setBounds(338, 27, 160, 23);
 			panelEmpresa.add(txtNombre);
 			txtNombre.setColumns(10);
 
 			PanelGeneral = new JPanel();
-			PanelGeneral.setBackground(new Color(255, 255, 240));
+			PanelGeneral.setBackground(new Color(248, 248, 255));
 			PanelGeneral.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "General",
 					TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			PanelGeneral.setBounds(10, 107, 507, 150);
@@ -291,10 +293,10 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblNewLabel_1);
 
 			cbxContrato = new JComboBox();
-			cbxContrato.setBackground(new Color(255, 255, 240));
+			cbxContrato.setBackground(new Color(255, 255, 255));
 			cbxContrato.setModel(new DefaultComboBoxModel(
 					new String[] { "< Seleccione >", "Largo Plazo", "Corto Plazo", "Temporal" }));
-			cbxContrato.setBounds(81, 24, 149, 21);
+			cbxContrato.setBounds(81, 23, 149, 23);
 			PanelGeneral.add(cbxContrato);
 
 			JLabel lblReubicacin = new JLabel("Reubicaci\u00F3n:");
@@ -302,7 +304,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblReubicacin);
 
 			rbtnReubicacionSi = new JRadioButton("Si");
-			rbtnReubicacionSi.setBackground(new Color(255, 255, 240));
+			rbtnReubicacionSi.setBackground(new Color(248, 248, 255));
 			rbtnReubicacionSi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnReubicacionNo.setSelected(false);
@@ -313,7 +315,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(rbtnReubicacionSi);
 
 			rbtnReubicacionNo = new JRadioButton("No");
-			rbtnReubicacionNo.setBackground(new Color(255, 255, 240));
+			rbtnReubicacionNo.setBackground(new Color(248, 248, 255));
 			rbtnReubicacionNo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnReubicacionSi.setSelected(false);
@@ -327,7 +329,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblVehiculo);
 
 			rbtnVehiculoSi = new JRadioButton("Si");
-			rbtnVehiculoSi.setBackground(new Color(255, 255, 240));
+			rbtnVehiculoSi.setBackground(new Color(248, 248, 255));
 			rbtnVehiculoSi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnVehiculoNo.setSelected(false);
@@ -338,7 +340,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(rbtnVehiculoSi);
 
 			rbtnVehiculoNo = new JRadioButton("No");
-			rbtnVehiculoNo.setBackground(new Color(255, 255, 240));
+			rbtnVehiculoNo.setBackground(new Color(248, 248, 255));
 			rbtnVehiculoNo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnVehiculoSi.setSelected(false);
@@ -353,9 +355,9 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblVacantes);
 
 			spnVacantes = new JSpinner();
-			spnVacantes.setBackground(new Color(255, 255, 240));
+			spnVacantes.setBackground(new Color(255, 255, 255));
 			spnVacantes.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-			spnVacantes.setBounds(338, 24, 160, 21);
+			spnVacantes.setBounds(338, 23, 160, 23);
 			PanelGeneral.add(spnVacantes);
 
 			JLabel lblLocalidad = new JLabel("Localidad:");
@@ -367,7 +369,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(lblCategoriaLic);
 
 			cbxLocalidad = new JComboBox();
-			cbxLocalidad.setBackground(new Color(255, 255, 240));
+			cbxLocalidad.setBackground(new Color(255, 255, 255));
 			cbxLocalidad.setModel(new DefaultComboBoxModel(new String[] { "< Seleccione >", "Azua ", "Bahoruco ",
 					"Barahona ", "Dajab\u00F3n ", "Distrito Nacional ", "Duarte ", "El\u00EDas Pi\u00F1a ", "El Seibo ",
 					"Espaillat ", "Hato Mayor ", "Independencia ", "La Altagracia ", "La Romana ", "La Vega ",
@@ -376,7 +378,7 @@ public class InsertarSolicitud extends JDialog {
 					"S\u00E1nchez Ram\u00EDrez ", "San Crist\u00F3bal ", "San Jos\u00E9 de Ocoa ", "San Juan ",
 					"San Pedro de Macor\u00EDs ", "Santiago ", "Santiago Rodr\u00EDguez ", "Santo Domingo ",
 					"Valverde " }));
-			cbxLocalidad.setBounds(338, 65, 160, 21);
+			cbxLocalidad.setBounds(338, 64, 160, 23);
 			PanelGeneral.add(cbxLocalidad);
 
 			JLabel label_2 = new JLabel("*");
@@ -395,15 +397,15 @@ public class InsertarSolicitud extends JDialog {
 			PanelGeneral.add(label_4);
 
 			cbxLicencia = new JComboBox();
-			cbxLicencia.setBackground(new Color(255, 255, 240));
+			cbxLicencia.setBackground(new Color(255, 255, 255));
 			cbxLicencia.setEnabled(false);
 			cbxLicencia.setModel(new DefaultComboBoxModel(new String[] { "< Seleccione >", "Categor\u00EDa 1",
 					"Categor\u00EDa 2", "Categor\u00EDa 3", "Categor\u00EDa 4" }));
-			cbxLicencia.setBounds(338, 106, 160, 21);
+			cbxLicencia.setBounds(338, 105, 160, 23);
 			PanelGeneral.add(cbxLicencia);
 
 			JPanel panelEdad = new JPanel();
-			panelEdad.setBackground(new Color(255, 255, 240));
+			panelEdad.setBackground(new Color(248, 248, 255));
 			panelEdad.setLayout(null);
 			panelEdad.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Rango De Edad",
 					TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -419,15 +421,15 @@ public class InsertarSolicitud extends JDialog {
 			panelEdad.add(lblMxima);
 
 			spnEdadMinima = new JSpinner();
-			spnEdadMinima.setBackground(new Color(255, 255, 240));
+			spnEdadMinima.setBackground(new Color(255, 255, 255));
 			spnEdadMinima.setModel(new SpinnerNumberModel(18, 17, 65, 1));
-			spnEdadMinima.setBounds(62, 25, 51, 21);
+			spnEdadMinima.setBounds(62, 24, 51, 23);
 			panelEdad.add(spnEdadMinima);
 
 			spnEdadMaxima = new JSpinner();
-			spnEdadMaxima.setBackground(new Color(255, 255, 240));
+			spnEdadMaxima.setBackground(new Color(255, 255, 255));
 			spnEdadMaxima.setModel(new SpinnerNumberModel(19, 18, 65, 1));
-			spnEdadMaxima.setBounds(180, 25, 51, 21);
+			spnEdadMaxima.setBounds(180, 24, 51, 23);
 			panelEdad.add(spnEdadMaxima);
 
 			JLabel label_5 = new JLabel("*");
@@ -436,7 +438,7 @@ public class InsertarSolicitud extends JDialog {
 			panelEdad.add(label_5);
 
 			JPanel panelIdioma = new JPanel();
-			panelIdioma.setBackground(new Color(255, 255, 240));
+			panelIdioma.setBackground(new Color(248, 248, 255));
 			panelIdioma.setLayout(null);
 			panelIdioma.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Idiomas",
 					TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -448,7 +450,7 @@ public class InsertarSolicitud extends JDialog {
 			panelIdioma.add(lblIdioma);
 
 			cbxIdioma = new JComboBox();
-			cbxIdioma.setBackground(new Color(255, 255, 240));
+			cbxIdioma.setBackground(new Color(255, 255, 255));
 			cbxIdioma.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
@@ -505,7 +507,7 @@ public class InsertarSolicitud extends JDialog {
 			panelIdioma.add(btnEliminarIdioma);
 
 			JPanel PanelVacante = new JPanel();
-			PanelVacante.setBackground(new Color(255, 255, 240));
+			PanelVacante.setBackground(new Color(248, 248, 255));
 			PanelVacante.setLayout(null);
 			PanelVacante.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Tipo Vacante",
 					TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -513,7 +515,7 @@ public class InsertarSolicitud extends JDialog {
 			panel.add(PanelVacante);
 
 			rbtnTecnico = new JRadioButton("T\u00E9cnico ");
-			rbtnTecnico.setBackground(new Color(255, 255, 240));
+			rbtnTecnico.setBackground(new Color(248, 248, 255));
 			rbtnTecnico.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnUniversitario.setSelected(false);
@@ -527,7 +529,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelVacante.add(rbtnTecnico);
 
 			rbtnUniversitario = new JRadioButton("Universitario");
-			rbtnUniversitario.setBackground(new Color(255, 255, 240));
+			rbtnUniversitario.setBackground(new Color(248, 248, 255));
 			rbtnUniversitario.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnTecnico.setSelected(false);
@@ -541,7 +543,7 @@ public class InsertarSolicitud extends JDialog {
 			PanelVacante.add(rbtnUniversitario);
 
 			rbtnObrero = new JRadioButton("Obrero");
-			rbtnObrero.setBackground(new Color(255, 255, 240));
+			rbtnObrero.setBackground(new Color(248, 248, 255));
 			rbtnObrero.setBounds(184, 22, 75, 23);
 			PanelVacante.add(rbtnObrero);
 
@@ -561,7 +563,7 @@ public class InsertarSolicitud extends JDialog {
 			});
 
 			panelUniversitario = new JPanel();
-			panelUniversitario.setBackground(new Color(255, 255, 240));
+			panelUniversitario.setBackground(new Color(248, 248, 255));
 			panelUniversitario.setLayout(null);
 			panelUniversitario.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
 					"Universitario", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -573,7 +575,7 @@ public class InsertarSolicitud extends JDialog {
 			panelUniversitario.add(lblExperiencia);
 
 			spnUniversitarioExperiencia = new JSpinner();
-			spnUniversitarioExperiencia.setBackground(new Color(255, 255, 240));
+			spnUniversitarioExperiencia.setBackground(new Color(255, 255, 255));
 			spnUniversitarioExperiencia
 					.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 			spnUniversitarioExperiencia.setBounds(93, 26, 160, 21);
@@ -584,7 +586,7 @@ public class InsertarSolicitud extends JDialog {
 			panelUniversitario.add(lblPostgrado);
 
 			rbtnPostGradoSi = new JRadioButton("Si");
-			rbtnPostGradoSi.setBackground(new Color(255, 255, 240));
+			rbtnPostGradoSi.setBackground(new Color(248, 248, 255));
 			rbtnPostGradoSi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnPostGradoNo.setSelected(false);
@@ -594,7 +596,7 @@ public class InsertarSolicitud extends JDialog {
 			panelUniversitario.add(rbtnPostGradoSi);
 
 			rbtnPostGradoNo = new JRadioButton("No");
-			rbtnPostGradoNo.setBackground(new Color(255, 255, 240));
+			rbtnPostGradoNo.setBackground(new Color(248, 248, 255));
 			rbtnPostGradoNo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbtnPostGradoSi.setSelected(false);
@@ -608,7 +610,7 @@ public class InsertarSolicitud extends JDialog {
 			panelUniversitario.add(lblCarrera);
 
 			cbxCarrera = new JComboBox();
-			cbxCarrera.setBackground(new Color(255, 255, 240));
+			cbxCarrera.setBackground(new Color(255, 255, 255));
 			cbxCarrera.setModel(new DefaultComboBoxModel(new String[] { "< Seleccione >", "Adm. de Empresas",
 					"Adm. Hotelera", "Derecho", "Econom\u00EDa", "Contabilidad", "Mercadotecnia", "Arquitectura",
 					"Comunicacion Social", "Dise\u00F1o e Interiorismo", "Ecologia", "Educaci\u00F3n", "Filosof\u00EDa",
@@ -624,6 +626,7 @@ public class InsertarSolicitud extends JDialog {
 			panelUniversitario.add(label_7);
 
 			panelTecnico = new JPanel();
+			panelTecnico.setBackground(new Color(248, 248, 255));
 			panelTecnico.setLayout(null);
 			panelTecnico.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "T\u00E9cnico",
 					TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -635,6 +638,7 @@ public class InsertarSolicitud extends JDialog {
 			panelTecnico.add(label);
 
 			spnTecnicoExperiencia = new JSpinner();
+			spnTecnicoExperiencia.setBackground(new Color(248, 248, 255));
 			spnTecnicoExperiencia.setBounds(93, 26, 160, 21);
 			panelTecnico.add(spnTecnicoExperiencia);
 
@@ -648,6 +652,7 @@ public class InsertarSolicitud extends JDialog {
 			panelTecnico.add(lblArea);
 
 			cbxArea = new JComboBox();
+			cbxArea.setBackground(new Color(248, 248, 255));
 			cbxArea.setModel(new DefaultComboBoxModel(
 					new String[] { "<Seleccionar>", "Emprendimiento", "Mecanograf\u00EDa", "Dise\u00F1o Gr\u00E1fico",
 							"Programaci\u00F3n", "Contabilidad", "Programaci\u00F3n Web" }));
@@ -655,6 +660,7 @@ public class InsertarSolicitud extends JDialog {
 			panelTecnico.add(cbxArea);
 
 			panelObrero = new JPanel();
+			panelObrero.setBackground(new Color(248, 248, 255));
 			panelObrero.setLayout(null);
 			panelObrero.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Obrero",
 					TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -666,6 +672,7 @@ public class InsertarSolicitud extends JDialog {
 			panelObrero.add(label_1);
 
 			spnObreroExperiencia = new JSpinner();
+			spnObreroExperiencia.setBackground(new Color(248, 248, 255));
 			spnObreroExperiencia.setBounds(93, 26, 160, 21);
 			panelObrero.add(spnObreroExperiencia);
 
@@ -679,6 +686,7 @@ public class InsertarSolicitud extends JDialog {
 			panelObrero.add(label_9);
 
 			cbxHabilidades = new JComboBox();
+			cbxHabilidades.setBackground(new Color(248, 248, 255));
 			cbxHabilidades.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
@@ -732,12 +740,19 @@ public class InsertarSolicitud extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(new Color(255, 255, 240));
+			buttonPane.setBackground(new Color(248, 248, 255));
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("");
+				if(modi == null ){
+					okButton.setIcon(new ImageIcon(InsertarSolicitud.class.getResource("/img/add.png")));					
+				}else{
+					okButton.setIcon(new ImageIcon(InsertarSolicitud.class.getResource("/img/modificar.png")));
+				}
+				
+				
 				if (modificarSoli != null) {
 					okButton.setText("Modificar");
 				} else {
@@ -961,6 +976,7 @@ public class InsertarSolicitud extends JDialog {
 
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(InsertarSolicitud.class.getResource("/img/cancelar.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
