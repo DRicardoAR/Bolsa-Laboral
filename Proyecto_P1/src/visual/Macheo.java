@@ -45,6 +45,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class Macheo extends JDialog {
 
@@ -83,30 +85,36 @@ public class Macheo extends JDialog {
 	 * @throws ParseException
 	 */
 	public Macheo() throws ParseException {
+		getContentPane().setBackground(new Color(248, 248, 255));
+		setBackground(new Color(248, 248, 255));
 
 		setTitle("Macheo");
-		setBounds(100, 100, 903, 535);
+		setBounds(100, 100, 853, 509);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(248, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(new Color(248, 248, 255));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
 				JPanel panel_1 = new JPanel();
-				panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-				panel_1.setBounds(10, 11, 846, 430);
+				panel_1.setBackground(new Color(248, 248, 255));
+				panel_1.setBorder(null);
+				panel_1.setBounds(3, 3, 846, 430);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
 					JPanel panel_2 = new JPanel();
+					panel_2.setBackground(new Color(248, 248, 255));
 					panel_2.setLayout(null);
 					panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Empresa",
 							TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-					panel_2.setBounds(10, 11, 505, 400);
+					panel_2.setBounds(5, 5, 505, 400);
 					panel_1.add(panel_2);
 					{
 						JLabel label = new JLabel("RNC:");
@@ -120,9 +128,10 @@ public class Macheo extends JDialog {
 					}
 					{
 						txtNombreEmpresa = new JTextField();
+						txtNombreEmpresa.setBackground(new Color(255, 255, 255));
 						txtNombreEmpresa.setEnabled(false);
 						txtNombreEmpresa.setColumns(10);
-						txtNombreEmpresa.setBounds(63, 63, 406, 21);
+						txtNombreEmpresa.setBounds(63, 62, 406, 23);
 						panel_2.add(txtNombreEmpresa);
 					}
 					{
@@ -148,7 +157,7 @@ public class Macheo extends JDialog {
 
 							}
 						});
-						button.setBounds(205, 32, 24, 21);
+						button.setBounds(205, 30, 29, 25);
 						panel_2.add(button);
 					}
 					{
@@ -185,11 +194,13 @@ public class Macheo extends JDialog {
 					}
 					{
 						JLabel label = new JLabel("Solicitudes");
+						label.setFont(new Font("Tahoma", Font.PLAIN, 12));
 						label.setBounds(202, 93, 88, 14);
 						panel_2.add(label);
 					}
 					{
 						btnCandidatos = new JButton("Ver Solicitantes");
+						btnCandidatos.setIcon(new ImageIcon(Macheo.class.getResource("/img/ver.png")));
 						btnCandidatos.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {
 
@@ -204,23 +215,26 @@ public class Macheo extends JDialog {
 							}
 						});
 						btnCandidatos.setEnabled(false);
-						btnCandidatos.setBounds(335, 361, 144, 23);
+						btnCandidatos.setBounds(340, 360, 139, 25);
 						panel_2.add(btnCandidatos);
 					}
 					{
 						MaskFormatter mascara = new MaskFormatter("##########");
 						ftxtRNC = new JFormattedTextField(mascara);
-						ftxtRNC.setBounds(63, 32, 140, 21);
+						ftxtRNC.setBackground(new Color(255, 255, 255));
+						ftxtRNC.setBounds(63, 31, 139, 23);
 						panel_2.add(ftxtRNC);
 					}
 					{
 						ftxtCodSolicitud = new JFormattedTextField();
+						ftxtCodSolicitud.setBackground(new Color(255, 255, 255));
 						ftxtCodSolicitud.setEnabled(false);
-						ftxtCodSolicitud.setBounds(335, 32, 134, 21);
+						ftxtCodSolicitud.setBounds(335, 31, 134, 23);
 						panel_2.add(ftxtCodSolicitud);
 					}
 
 					JButton btnFiltralTodo = new JButton("Filtrar todo");
+					btnFiltralTodo.setIcon(new ImageIcon(Macheo.class.getResource("/img/filtrar.png")));
 					btnFiltralTodo.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							loadTable(null);
@@ -229,15 +243,16 @@ public class Macheo extends JDialog {
 							ftxtRNC.setText("");
 						}
 					});
-					btnFiltralTodo.setBounds(225, 362, 102, 21);
+					btnFiltralTodo.setBounds(205, 360, 122, 25);
 					panel_2.add(btnFiltralTodo);
 				}
 				{
 					JPanel panel_2 = new JPanel();
+					panel_2.setBackground(new Color(248, 248, 255));
 					panel_2.setLayout(null);
 					panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
 							"Solicitantes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-					panel_2.setBounds(525, 11, 311, 400);
+					panel_2.setBounds(520, 5, 311, 400);
 					panel_1.add(panel_2);
 					{
 						JScrollPane scrollPane = new JScrollPane();
@@ -253,11 +268,13 @@ public class Macheo extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(248, 248, 255));
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnContratar = new JButton("Contratar Solicitantes");
+				JButton btnContratar = new JButton("Contratar");
+				btnContratar.setIcon(new ImageIcon(Macheo.class.getResource("/img/Contratar.png")));
 				btnContratar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (misSolicitantesC.size() != 0) {
@@ -281,6 +298,7 @@ public class Macheo extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(Macheo.class.getResource("/img/cancelar.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
