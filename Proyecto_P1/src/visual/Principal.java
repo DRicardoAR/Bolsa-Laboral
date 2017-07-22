@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButtonMenuItem;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -44,6 +45,8 @@ import javax.swing.JSeparator;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Principal extends JFrame {
 
@@ -64,6 +67,7 @@ public class Principal extends JFrame {
 			public void run() {
 				try {
 					UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel());
+					BolsaLaboral.getInstance().leerBolsa();
 					Principal frame = new Principal();
 
 					frame.setVisible(true);
@@ -78,6 +82,18 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				if (JOptionPane.showConfirmDialog(null, "¿Desea guardar los nuevos cambios de la biblioteca?",
+						"Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					BolsaLaboral.getInstance().esribirBolsa();
+					dispose();
+				}else{
+					dispose();
+				}
+			}
+		});
 		setBackground(new Color(248, 248, 255));
 		setResizable(false);
 		setTitle("Bolsa Laboral");
