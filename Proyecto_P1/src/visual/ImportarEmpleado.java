@@ -75,14 +75,23 @@ public class ImportarEmpleado extends JDialog {
 			btnNewButton.setIcon(new ImageIcon(ImportarEmpleado.class.getResource("/img/exportar.png")));
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					try {
-						BolsaLaboral.getInstance().writeSolicitanteTXT(txtCedula.getText());
-						JOptionPane.showMessageDialog(null, "El empleado ha sido Importado");
-						txtCedula.setText(null);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+
+					if(BolsaLaboral.getInstance().SolicitanteExiste(txtCedula.getText())){
+									try {
+										BolsaLaboral.getInstance().writeSolicitanteTXT(txtCedula.getText());
+										JOptionPane.showMessageDialog(null, "El empleado ha sido Importado");
+										txtCedula.setText(null);
+									} catch (IOException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}else{
+
+									JOptionPane.showMessageDialog(null, "Empleado no encontrado, Intente nuevamen");
+									txtCedula.setText(null);
+								}
+								
+
 				}
 			});
 			btnNewButton.setBounds(217, 31, 116, 23);

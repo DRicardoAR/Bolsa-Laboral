@@ -59,15 +59,21 @@ public class ImportarEmpresa extends JDialog {
 				JButton okButton = new JButton("Exportar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						try {
-							BolsaLaboral.getInstance().writeEmpresaTXT(ftxtrnc.getText());
-							JOptionPane.showMessageDialog(null, "La empresa fue Exportada");
+						if(BolsaLaboral.getInstance().EmpresaExiste(ftxtrnc.getText())){
+							try {
+								BolsaLaboral.getInstance().writeEmpresaTXT(ftxtrnc.getText());
+								JOptionPane.showMessageDialog(null, "La empresa fue Exportada");
+								ftxtrnc.setText(null);
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, "Empresa no encontrada, Intente de nuevo");
 							ftxtrnc.setText(null);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
 						}
 					}
+
 				});
 				okButton.setBounds(307, 31, 89, 23);
 				panel.add(okButton);

@@ -740,6 +740,17 @@ public class BolsaLaboral implements Serializable {
 		return soli;
 		
 	}
+	public boolean EmpresaExiste(String rnc){
+		boolean existe=false;
+		for (Empresa empresa : misEmpresas) {
+			if(empresa.getRNC().equalsIgnoreCase(rnc)){
+				existe = true;
+			}
+		}
+		return existe;
+		
+	}
+
 	
 	// escribe fichero texto de una empresa
 	public void writeEmpresaTXT(String rnc) throws IOException{
@@ -773,17 +784,81 @@ public class BolsaLaboral implements Serializable {
 	
 	
 	
-public void writeSolicitanteTXT(String cedula) throws IOException{
-	writer_1 = new FileWriter(new File("cliente.txt"));
-	Solicitante soli =BuscarSoliCedula(cedula);
-	writer_1.write("***********************************************************************************"+"\n");
-	writer_1.write("*                               Bolsa Laboral                                     *"+"\n");
-	writer_1.write("*                                 Empleado                                        *"+"\n");
-	writer_1.write("***********************************************************************************"+"\n");
-	writer_1.write("Nombres: "+soli.getNombres()+"\n");
-	writer_1.write("Apellidos: "+soli.getApellidos()+"\n");
-	writer_1.write("***********************************************************************************"+"\n");
-	writer_1.close();
-	 
-}
+	
+		
+		// retorna si existe un solicitante
+		public boolean SolicitanteExiste(String cedula){
+			boolean existe = false;
+			for (Solicitante solicitante : misSolicitantes) {
+
+				if(solicitante.getCedula().equalsIgnoreCase(cedula)){
+					existe = true;
+				}
+			}
+			return existe;
+		}
+		
+		// retorna el tipo de solicitante
+		public String tipoSolicitante(Solicitante soli){
+		String solici=null;
+
+			if(soli instanceof Obrero){
+				solici="Obrero";
+				
+			}
+			if(soli instanceof Universitario){
+				solici="Universitario";
+				
+			}
+			if(soli instanceof Tecnico){
+				solici="Tecnico";
+				
+			}
+				
+		return solici;
+		
+		}
+		
+		// retorna si esta contratado o no
+		
+		public String contradato(Solicitante soli){
+			String estado=null;
+			if(soli.isContratado()){
+				estado="Contratado";
+				
+			}else{
+				estado="Desempleado";
+			}
+			return estado;
+		}
+		
+		// retorna cantidad de solicitudes del solicitane
+		public int cantidadSolicitante(Solicitante soli){
+			int cant=0;
+			for (Solicitante misoli : misSolicitantes) {
+				if(soli.getCedula().equalsIgnoreCase(misoli.getCedula())){
+					cant++;
+				}
+				
+			}
+			return cant;
+			
+		}
+	public void writeSolicitanteTXT(String cedula) throws IOException{
+		writer_1 = new FileWriter(new File("cliente.txt"));
+		Solicitante soli =BuscarSoliCedula(cedula);
+		writer_1.write("***********************************************************************************"+"\n");
+		writer_1.write("*                               Bolsa Laboral                                     *"+"\n");
+		writer_1.write("*                                 Empleado                                        *"+"\n");
+		writer_1.write("***********************************************************************************"+"\n");
+		writer_1.write("Nombres: "+soli.getNombres()+"\n");
+		writer_1.write("Apellidos: "+soli.getApellidos()+"\n");
+		writer_1.write("Tipo Solicitante: "+tipoSolicitante(soli)+"\n");
+		writer_1.write("Estado: "+contradato(soli)+"\n");
+		writer_1.write("Cantidad de Solicitudes: "+cantidadSolicitante(soli)+"\n");
+		writer_1.write("***********************************************************************************"+"\n");
+		writer_1.close();
+		 
+	}
+
 }
