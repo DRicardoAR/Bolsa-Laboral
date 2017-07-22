@@ -332,37 +332,6 @@ public class Principal extends JFrame {
 			}
 		});
 		mnReporte.add(mntmReporteDeSolicitudes);
-
-		JMenu mnImportar = new JMenu("Exportar");
-		mnImportar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				mnImportar.setIcon(new ImageIcon(Principal.class.getResource("/img/export.png")));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				mnImportar.setIcon(new ImageIcon(Principal.class.getResource("/img/export24.png")));
-			}
-		});
-		mnImportar.setFont(new Font("Segoe UI", Font.BOLD, 13));
-		mnImportar.setIcon(new ImageIcon(Principal.class.getResource("/img/export24.png")));
-		menuBar.add(mnImportar);
-
-		JMenuItem mntmImportarEmpresa = new JMenuItem("Exportar Empresa");
-		mntmImportarEmpresa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		mnImportar.add(mntmImportarEmpresa);
-
-		JMenuItem mntmImportarSolicitante = new JMenuItem("Exportar Solicitante");
-		mntmImportarSolicitante.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		mnImportar.add(mntmImportarSolicitante);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(248, 248, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
