@@ -197,8 +197,7 @@ public class InsertarEmpresa extends JDialog {
 					getToolkit().beep();
 
 					e.consume();
-					JOptionPane.showMessageDialog(null,
-							"Este campo no adminte número");
+					JOptionPane.showMessageDialog(null,"Este campo no adminte número");
 
 				}
 
