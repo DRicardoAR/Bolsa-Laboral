@@ -293,6 +293,7 @@ public class ListarSolicitante extends JDialog {
 				fila[5] = soli.getAnnosExperiencia() + " años";
 				fila[6] = soli.getTelefono();
 				fila[7] = soli.getEmail();
+				
 				modeloTabla.addRow(fila);
 
 				table.setModel(modeloTabla);
