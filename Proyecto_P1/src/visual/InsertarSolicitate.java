@@ -1004,15 +1004,19 @@ public class InsertarSolicitate extends JDialog {
 									Principal.actualizarChart();
 									call();
 									
-								} else {
+								}  if(modificar){
 									int annos = new Integer((int) spnAnnosExpObrero.getValue());
 									Solicitante solicitante = new Obrero(cedula, nombre, apellido, telefono,
 											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
 											email, vehiculoP, licencia, annos, misIdiomas, postGrado, mudarse, ciudad,
 											sector, calle, numeroCasa, referencia, misHabilidades);
+									BolsaLaboral.getInstance().updateSolicitante(solicitante);
 									estado = false;
+									JOptionPane.showMessageDialog(null,
+											"El solicitante se ha modificado de manera exitosa.", "Información",
+											JOptionPane.INFORMATION_MESSAGE, null);
 									Principal.actualizarChart();
-									call();
+									dispose();
 
 								}
 							}
@@ -1034,7 +1038,7 @@ public class InsertarSolicitate extends JDialog {
 									Principal.actualizarChart();
 									call();
 
-								} else {
+								}  if(modificar){
 									int annos = new Integer((int) spnAnosExpUniversitario.getValue());
 									Solicitante solicitante = new Universitario(cedula, nombre, apellido, telefono,
 											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
@@ -1043,12 +1047,13 @@ public class InsertarSolicitate extends JDialog {
 											cbxCarrera.getSelectedItem().toString());
 
 									estado = false;
+									BolsaLaboral.getInstance().updateSolicitante(solicitante);
 									JOptionPane.showMessageDialog(null,
 											"El solicitante se ha modificado de manera exitosa.", "Información",
 											JOptionPane.INFORMATION_MESSAGE, null);
-									BolsaLaboral.getInstance().updateSolicitante(solicitante);
+									
 									Principal.actualizarChart();
-									call();
+									dispose();
 								}
 							}
 						}
@@ -1069,7 +1074,7 @@ public class InsertarSolicitate extends JDialog {
 									Principal.actualizarChart();
 									estado = false;
 									call();
-								} else {
+								}  if(modificar){
 									int annos = new Integer((int) spnAnosExpTecnico.getValue());
 									Solicitante solicitante = new Tecnico(cedula, nombre, apellido, telefono,
 											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
@@ -1081,7 +1086,7 @@ public class InsertarSolicitate extends JDialog {
 											"El solicitante se ha modificado de manera exitosa.", "Información",
 											JOptionPane.INFORMATION_MESSAGE, null);
 									estado = false;
-									call();
+									dispose();
 								}
 							}
 						}
