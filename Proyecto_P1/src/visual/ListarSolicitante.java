@@ -38,6 +38,8 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.UIManager;
 import java.awt.Color;
+import javax.swing.border.EtchedBorder;
+import javax.swing.ImageIcon;
 
 public class ListarSolicitante extends JDialog {
 
@@ -64,6 +66,8 @@ public class ListarSolicitante extends JDialog {
 	 * /** Create the dialog.
 	 */
 	public ListarSolicitante() {
+		getContentPane().setBackground(new Color(248, 248, 255));
+		setBackground(new Color(248, 248, 255));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
@@ -73,16 +77,16 @@ public class ListarSolicitante extends JDialog {
 		});
 		setTitle("Listar Solicitantes\r\n");
 		setResizable(false);
-		setBounds(100, 100, 961, 494);
+		setBounds(100, 100, 961, 511);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(248, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"),
-					"Listado de Solicitudes de  Solicitantes", TitledBorder.CENTER, TitledBorder.TOP, null,
-					new Color(0, 0, 0)));
+			panel.setBackground(new Color(248, 248, 255));
+			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Listado De Solicitantes", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 
@@ -106,12 +110,12 @@ public class ListarSolicitante extends JDialog {
 			});
 			cbxFiltro.setModel(
 					new DefaultComboBoxModel(new String[] { "General", "Obreros", "T\u00E9cnicos", "Universitarios" }));
-			cbxFiltro.setBounds(763, 37, 119, 20);
+			cbxFiltro.setBounds(80, 26, 119, 20);
 			panel.add(cbxFiltro);
 
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			scrollPane.setBounds(10, 68, 925, 343);
+			scrollPane.setBounds(10, 60, 925, 343);
 			panel.add(scrollPane);
 			{
 				table = new JTable();
@@ -147,15 +151,18 @@ public class ListarSolicitante extends JDialog {
 			}
 
 			JLabel lblFiltrarPor = new JLabel("Filtrar por :");
-			lblFiltrarPor.setBounds(667, 40, 63, 14);
+			lblFiltrarPor.setBounds(10, 29, 63, 14);
 			panel.add(lblFiltrarPor);
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			buttonPane.setBackground(new Color(248, 248, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setIcon(new ImageIcon(ListarSolicitante.class.getResource("/img/borrar.png")));
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
@@ -177,6 +184,7 @@ public class ListarSolicitante extends JDialog {
 			}
 			{
 				btnModificar = new JButton("Modificar");
+				btnModificar.setIcon(new ImageIcon(ListarSolicitante.class.getResource("/img/modificar.png")));
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Solicitante persona = BolsaLaboral.getInstance().retornarSolicitante(cedulaCliente);
@@ -197,6 +205,7 @@ public class ListarSolicitante extends JDialog {
 			}
 			{
 				cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(ListarSolicitante.class.getResource("/img/cancelar.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

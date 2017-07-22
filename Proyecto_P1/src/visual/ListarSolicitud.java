@@ -38,6 +38,9 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.UIManager;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class ListarSolicitud extends JDialog {
 
@@ -58,23 +61,14 @@ public class ListarSolicitud extends JDialog {
 	private static JComboBox<String> cbxIdioma;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			ListarSolicitud dialog = new ListarSolicitud();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	
 	}
 
 	/**
 	 * Create the dialog.
 	 */
 	public ListarSolicitud() {
-		setBounds(100, 100, 941, 519);
+		setBounds(100, 100, 943, 519);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -83,7 +77,7 @@ public class ListarSolicitud extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(
-					new TitledBorder(null, "Lista de Solicitudes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+					new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Lista De Solicitudes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
@@ -123,7 +117,7 @@ public class ListarSolicitud extends JDialog {
 				});
 				cbxfiltro.setModel(
 						new DefaultComboBoxModel(new String[] { "Todos", "Universitatio", "T\u00E9cnico", "Obrero" }));
-				cbxfiltro.setBounds(77, 22, 118, 21);
+				cbxfiltro.setBounds(77, 21, 118, 23);
 				panel.add(cbxfiltro);
 			}
 			{
@@ -144,7 +138,7 @@ public class ListarSolicitud extends JDialog {
 							btnModificar.setEnabled(false);
 						}
 					});
-					ftxtRNCempresa.setBounds(306, 22, 118, 21);
+					ftxtRNCempresa.setBounds(306, 21, 118, 23);
 					panel.add(ftxtRNCempresa);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
@@ -162,7 +156,7 @@ public class ListarSolicitud extends JDialog {
 						btnModificar.setEnabled(false);
 					}
 				});
-				scrollPane.setBounds(10, 63, 898, 363);
+				scrollPane.setBounds(10, 58, 903, 363);
 				panel.add(scrollPane);
 				{
 					table = new JTable();
@@ -193,6 +187,7 @@ public class ListarSolicitud extends JDialog {
 			}
 			{
 				JButton button = new JButton("");
+				button.setIcon(new ImageIcon(ListarSolicitud.class.getResource("/img/buscar.png")));
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						btnDetallar.setEnabled(false);
@@ -210,7 +205,7 @@ public class ListarSolicitud extends JDialog {
 					}
 
 				});
-				button.setBounds(430, 22, 27, 21);
+				button.setBounds(430, 22, 29, 25);
 				panel.add(button);
 			}
 		}
@@ -220,6 +215,7 @@ public class ListarSolicitud extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setIcon(new ImageIcon(ListarSolicitud.class.getResource("/img/borrar.png")));
 				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -240,7 +236,8 @@ public class ListarSolicitud extends JDialog {
 					}
 				});
 				{
-					btnDetallar = new JButton("Detallar");
+					btnDetallar = new JButton("Ver Solicitud");
+					btnDetallar.setIcon(new ImageIcon(ListarSolicitud.class.getResource("/img/ver.png")));
 					btnDetallar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							DetalleSolicitud detalle = new DetalleSolicitud(BolsaLaboral.getInstance().RetornarSolocitudCod(codigo));
@@ -256,6 +253,7 @@ public class ListarSolicitud extends JDialog {
 			}
 			{
 				btnModificar = new JButton("Modificar");
+				btnModificar.setIcon(new ImageIcon(ListarSolicitud.class.getResource("/img/modificar.png")));
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						InsertarSolicitud modificarSOli = new InsertarSolicitud(BolsaLaboral.getInstance().RetornarSolocitudCod(codigo));
@@ -271,6 +269,7 @@ public class ListarSolicitud extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(ListarSolicitud.class.getResource("/img/cancelar.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -346,7 +345,7 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(3).setPreferredWidth(120);
 		columnModel.getColumn(4).setPreferredWidth(140);
 		columnModel.getColumn(5).setPreferredWidth(100);
-		columnModel.getColumn(6).setPreferredWidth(140);
+		columnModel.getColumn(6).setPreferredWidth(144);
 
 	}
 
@@ -403,7 +402,7 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(5).setPreferredWidth(110);
 		columnModel.getColumn(6).setPreferredWidth(120);
 		columnModel.getColumn(7).setPreferredWidth(121);
-		columnModel.getColumn(8).setPreferredWidth(80);
+		columnModel.getColumn(8).setPreferredWidth(84);
 
 	}
 
@@ -458,7 +457,7 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(4).setPreferredWidth(81);
 		columnModel.getColumn(5).setPreferredWidth(130);
 		columnModel.getColumn(6).setPreferredWidth(135);
-		columnModel.getColumn(7).setPreferredWidth(135);
+		columnModel.getColumn(7).setPreferredWidth(139);
 
 	}
 
@@ -514,7 +513,7 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(4).setPreferredWidth(81);
 		columnModel.getColumn(5).setPreferredWidth(130);
 		columnModel.getColumn(6).setPreferredWidth(135);
-		columnModel.getColumn(7).setPreferredWidth(135);
+		columnModel.getColumn(7).setPreferredWidth(139);
 
 	}
 
@@ -573,7 +572,7 @@ public class ListarSolicitud extends JDialog {
 		columnModel.getColumn(4).setPreferredWidth(120);
 		columnModel.getColumn(5).setPreferredWidth(80);
 		columnModel.getColumn(6).setPreferredWidth(128);
-		columnModel.getColumn(7).setPreferredWidth(128);
+		columnModel.getColumn(7).setPreferredWidth(133);
 
 	}
 

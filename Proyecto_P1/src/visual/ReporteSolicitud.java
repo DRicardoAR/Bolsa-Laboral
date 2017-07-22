@@ -34,8 +34,9 @@ import logica.Empresa;
 import logica.Solicitud;
 import logica.SolicitudObrero;
 import logica.SolicitudTecnico;
+import javax.swing.ImageIcon;
 
-public class ListarSolicitudes extends JDialog {
+public class ReporteSolicitud extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
@@ -44,28 +45,20 @@ public class ListarSolicitudes extends JDialog {
 	private BolsaLaboral bolsa= BolsaLaboral.getInstance();
 
 	
-	public static void main(String[] args) {
-		try {
-			ListarSolicitudes dialog = new ListarSolicitudes();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-
-	
-	public ListarSolicitudes() {
-		setTitle("Solicitudes");
-		setBounds(100, 100, 730, 454);
+	public ReporteSolicitud() {
+		getContentPane().setBackground(new Color(248, 248, 255));
+		setBackground(new Color(248, 248, 255));
+		setTitle("Reporte De Solicitudes");
+		setBounds(100, 100, 719, 464);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(248, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Reporte Solicitudes", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel.setBackground(new Color(248, 248, 255));
+			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Reporte Solicitudes", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
@@ -92,10 +85,12 @@ public class ListarSolicitudes extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(248, 248, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton cancelButton = new JButton("Cancelar");
+				JButton cancelButton = new JButton("Aceptar");
+				cancelButton.setIcon(new ImageIcon(ReporteSolicitud.class.getResource("/img/aceptar.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();

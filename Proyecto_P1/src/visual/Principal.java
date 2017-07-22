@@ -201,7 +201,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmReporteDeSolicitudes = new JMenuItem("Reporte de Solicitudes");
 		mntmReporteDeSolicitudes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ListarSolicitudes soli = new ListarSolicitudes();
+				ReporteSolicitud soli = new ReporteSolicitud();
 				soli.setModal(true);
 				soli.setLocationRelativeTo(null);
 				soli.setVisible(true);
