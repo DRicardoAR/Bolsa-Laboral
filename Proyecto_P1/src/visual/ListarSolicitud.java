@@ -68,17 +68,20 @@ public class ListarSolicitud extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListarSolicitud() {
+		getContentPane().setBackground(new Color(245, 255, 250));
 		setTitle("Listar Solicitudes");
 		setResizable(false);
 		setModal(true);
 		setBounds(100, 100, 943, 519);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(245, 255, 250));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(new Color(245, 255, 250));
 			panel.setBorder(
 					new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Lista De Solicitudes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
@@ -214,6 +217,7 @@ public class ListarSolicitud extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(245, 255, 250));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
