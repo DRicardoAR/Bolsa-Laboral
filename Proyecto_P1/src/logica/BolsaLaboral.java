@@ -24,7 +24,7 @@ public class BolsaLaboral implements Serializable {
 	private ArrayList<Solicitud> misSolicitudes;
 	private static BolsaLaboral bolsa;
 	private FileWriter writer_1;
-	private String archivo = "BolsaLaboral.dat";
+	private String archivo = "olsaLaboral.dat";
 
 	public BolsaLaboral() {
 		super();
