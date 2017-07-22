@@ -42,7 +42,6 @@ public class ListarEmpleados extends JDialog {
 	private static JTable table;
 	private static Object[] fila;
 	private static DefaultTableModel modeloTabla;
-	private JButton btnVerEmpleado;
 	private String cedulaCliente = "";
 	private static JFormattedTextField formattedTextField;
 
@@ -87,14 +86,7 @@ public class ListarEmpleados extends JDialog {
 					public void mouseClicked(MouseEvent e) {
 						int aux = table.getSelectedRow();
 
-						if (aux > -1) {
-							btnVerEmpleado.setEnabled(true);
-							cedulaCliente = (String) table.getModel().getValueAt(aux, 0);
-
-						} else {
-							btnVerEmpleado.setEnabled(false);
-							cedulaCliente = "";
-						}
+					
 					}
 				});
 				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -143,11 +135,6 @@ public class ListarEmpleados extends JDialog {
 			buttonPane.setBackground(new Color(248, 248, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				btnVerEmpleado = new JButton("Ver Empleado");
-				btnVerEmpleado.setIcon(new ImageIcon(ListarEmpleados.class.getResource("/img/ver.png")));
-				buttonPane.add(btnVerEmpleado);
-			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setIcon(new ImageIcon(ListarEmpleados.class.getResource("/img/cancelar.png")));

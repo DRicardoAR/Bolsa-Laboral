@@ -27,6 +27,7 @@ import logica.Solicitante;
 import logica.Tecnico;
 import logica.Universitario;
 import sun.util.locale.provider.AuxLocaleProviderAdapter;
+import sun.util.resources.cldr.dav.LocaleNames_dav;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
@@ -138,6 +139,9 @@ public class InsertarSolicitate extends JDialog {
 				panel2.setVisible(false);
 				if (modificar) {
 					loadSolicitanteModi();
+				}
+				if(persona!=null){
+			
 				}
 			}
 
@@ -1139,6 +1143,11 @@ public class InsertarSolicitate extends JDialog {
 										panel1.setVisible(false);
 										panel2.setVisible(true);
 									}
+									if(persona!=null){
+									
+										btnRegistrar.setEnabled(false);
+										
+									}
 								}
 							}
 						}
@@ -1409,6 +1418,131 @@ public class InsertarSolicitate extends JDialog {
 
 		}
 	}
+	public void laodVer(){
+		panel1.setEnabled(false);
+		panel2.setEnabled(false);
+		LocalDate fecha = verSoli.getFechaNacimiento();
+		Date date = java.sql.Date.valueOf(fecha);
+		txtApellidos.setEnabled(false);
+		txtNombre.setEnabled(false);
+		rdbFemenino.setEnabled(false);
+		rdbMasculino.setEnabled(false);
+		textCedula.setEnabled(false);
+		FechaNacimiento.setEnabled(false);
+		cbxNacionalidad.setEnabled(false);
+		rdbSiReelocalizacion.setEnabled(false);
+		rdbNoReelocalizacion.setEnabled(false);
+
+		// Incersion de datos
+		for (String idio : verSoli.getIdiomas()) {
+			misIdiomas.add(idio);
+		}
+		loadIdioma();
+		txtCiudad.setText(verSoli.getCiudad());
+		txtCalle.setText(verSoli.getCalle());
+		txtSector.setText(verSoli.getSector());
+		txtReferencia.setText(verSoli.getReferencia());
+		spnNumeroCasa.setValue(verSoli.getNumeroCasa());
+		txtNombre.setText(verSoli.getNombres());
+		txtApellidos.setText(verSoli.getApellidos());
+		textCedula.setText(verSoli.getCedula());
+		FechaNacimiento.setDate(date);
+		cbxNacionalidad.setSelectedItem(verSoli.getNacionalidad());
+		cbxEstadoCilvil.setSelectedItem(verSoli.getEstadoCivil());
+		cbxProvincia.setSelectedItem(verSoli.getProvincia());
+		txtTelefono.setText(verSoli.getTelefono());
+		txtEmail.setText(verSoli.getEmail());
+		
+		if (verSoli.getSexo().equalsIgnoreCase("Femenino")) {
+			rdbFemenino.setSelected(true);
+		} else {
+			rdbMasculino.setSelected(true);
+		}
+		if (verSoli.isVehiculoPropio()) {
+			rdbSiVehiculo.setSelected(true);
+		} else {
+			rdbNoVehiculo.setSelected(true);
+		}
+		if (verSoli.getCategoriaLicencia() == 0) {
+			cbxLicencia.setSelectedIndex(1);
+		}
+		if (verSoli.getCategoriaLicencia() == 1) {
+			cbxLicencia.setSelectedIndex(2);
+		}
+		if (verSoli.getCategoriaLicencia() == 2) {
+			cbxLicencia.setSelectedIndex(3);
+		}
+		if (verSoli.getCategoriaLicencia() == 3) {
+			cbxLicencia.setSelectedIndex(4);
+		}
+		if (verSoli.getCategoriaLicencia() == 4) {
+			cbxLicencia.setSelectedIndex(5);
+		}
+		if (verSoli.isMudarse() == true) {
+			rdbSiReelocalizacion.setSelected(true);
+		} else {
+			rdbNoReelocalizacion.setSelected(true);
+		}
+
+		if (modiS instanceof Obrero) {
+			for (String habi : ((Obrero) verSoli).getHabilidades()) {
+				misHabilidades.add(habi);
+			}
+			loadHabilidades();
+			listHabilidades.setEnabled(false);
+			spnAnnosExpObrero.setValue(verSoli.getAnnosExperiencia());
+			cbxHabilidades.setEnabled(false);
+			spnAnnosExpObrero.setEnabled(false);
+			rdbObrero.setSelected(true);
+			rdbTecnico.setSelected(false);
+			rdbUniversitario.setSelected(false);
+			rdbUniversitario.setEnabled(false);
+			rdbTecnico.setEnabled(false);
+			rdbObrero.setEnabled(false);
+			panel_Obreo.setVisible(true);
+			panel_Tecnico.setVisible(false);
+			panel_Universitario.setVisible(false);
+		}
+		if (modiS instanceof Universitario) {
+			cbxCarrera.setEnabled(false);
+			cbxCarrera.setSelectedItem(((Universitario) verSoli).getCarrera());
+			spnAnosExpUniversitario.setValue(verSoli.getAnnosExperiencia());
+			spnAnosExpUniversitario.setEnabled(false);
+			rdbObrero.setSelected(false);
+			rdbTecnico.setSelected(false);
+			rdbUniversitario.setSelected(true);
+			panel_Obreo.setVisible(false);
+			panel_Tecnico.setVisible(false);
+			panel_Universitario.setVisible(true);
+			rdbUniversitario.setEnabled(false);
+			rdbTecnico.setEnabled(false);
+			rdbObrero.setEnabled(false);
+			rdbNoPost.setEnabled(false);
+			rdbSiPost.setEnabled(false);
+			if (((Universitario)verSoli).isPostGrado()) {
+				rdbSiPost.setSelected(true);
+			} else {
+				rdbNoPost.setSelected(true);
+			}
+		}
+		if (modiS instanceof Tecnico) {
+			spnAnosExpTecnico.setValue(verSoli.getAnnosExperiencia());
+			spnAnosExpTecnico.setEnabled(false);
+			cbxAreaTecnico.setSelectedItem(((Tecnico) verSoli).getArea());
+			cbxAreaTecnico.setEnabled(false);
+			rdbObrero.setSelected(false);
+			rdbTecnico.setSelected(true);
+			rdbUniversitario.setSelected(false);
+			panel_Obreo.setVisible(false);
+			panel_Tecnico.setVisible(true);
+			panel_Universitario.setVisible(false);
+			rdbUniversitario.setEnabled(false);
+			rdbTecnico.setEnabled(false);
+			rdbObrero.setEnabled(false);
+		}
+
+	}
+	
 
 	public void validacion(KeyEvent e) {
 		char c = e.getKeyChar();
