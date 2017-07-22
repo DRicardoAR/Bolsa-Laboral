@@ -68,6 +68,7 @@ public class ListarSolicitud extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListarSolicitud() {
+		setTitle("Listar Solicitudes");
 		setResizable(false);
 		setModal(true);
 		setBounds(100, 100, 943, 519);
