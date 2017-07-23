@@ -174,7 +174,7 @@ public class InsertarEmpresa extends JDialog {
 				"Hermanas Mirabal ", "Samaná ",
 				"Sánchez Ramírez ", "San Cristóbal ",
 				"San José de Ocoa ", "San Juan ",
-				"San Pedro de Macor\u00EDs ", "Santiago ",
+				"San Pedro de Macorís ", "Santiago ",
 				"Santiago Rodr\u00EDguez ", "Santo Domingo ", "Valverde " }));
 		cbxProvincia.setBounds(93, 35, 174, 23);
 		panel_1.add(cbxProvincia);
