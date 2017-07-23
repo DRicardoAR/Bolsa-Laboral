@@ -38,6 +38,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.border.EtchedBorder;
 import java.awt.SystemColor;
 import javax.swing.border.BevelBorder;
+import javax.swing.JSpinner;
 
 public class InsertarEmpresa extends JDialog {
 
@@ -45,7 +46,6 @@ public class InsertarEmpresa extends JDialog {
 	private JTextField txtNombre;
 	private JTextField txtEmail;
 	private JTextField txtSector;
-	private JTextField txtLocalidad;
 	private JTextField txtCuidad;
 	private JTextField txtCalle;
 	private JTextField txtReferencia;
@@ -178,12 +178,6 @@ public class InsertarEmpresa extends JDialog {
 		lblNewLabel.setBounds(10, 134, 88, 14);
 		panel_1.add(lblNewLabel);
 
-		txtLocalidad = new JTextField();
-		txtLocalidad.setBackground(Color.WHITE);
-		txtLocalidad.setBounds(93, 131, 174, 23);
-		panel_1.add(txtLocalidad);
-		txtLocalidad.setColumns(10);
-
 		JLabel lblNewLabel_1 = new JLabel("Cuidad:");
 		lblNewLabel_1.setBounds(312, 32, 62, 14);
 		panel_1.add(lblNewLabel_1);
@@ -227,6 +221,10 @@ public class InsertarEmpresa extends JDialog {
 		txtReferencia.setBounds(405, 128, 174, 23);
 		panel_1.add(txtReferencia);
 		txtReferencia.setColumns(10);
+		
+		JSpinner spnlocalidad = new JSpinner();
+		spnlocalidad.setBounds(93, 131, 174, 21);
+		panel_1.add(spnlocalidad);
 
 		JLabel lblTodosLosCampos = new JLabel(
 				"Todos los campos son obligatorios");
