@@ -312,56 +312,58 @@ public class Macheo extends JDialog {
 
 		if (empresa == null) {
 			for (Solicitud soli : BolsaLaboral.getInstance().getMisSolicitudes()) {
+				if (soli.getCantVacantes() > 0) {
+					fila[0] = soli.getCodigo();
+					if (soli instanceof SolicitudUniversitario) {
+						fila[1] = "Universitario";
+					}
+					if (soli instanceof SolicitudTecnico) {
+						fila[1] = "Técnico";
+					}
+					if (soli instanceof SolicitudObrero) {
+						fila[1] = "Obrero";
+					}
+					fila[2] = soli.getCantVacantes();
+					String min = Integer.toString(soli.getEdadMin());
+					String max = Integer.toString(soli.getEdadMax());
+					String rango = min + "-" + max;
+					fila[3] = rango;
+					fila[4] = soli.getLocalidad();
 
-				fila[0] = soli.getCodigo();
-				if (soli instanceof SolicitudUniversitario) {
-					fila[1] = "Universitario";
-				}
-				if (soli instanceof SolicitudTecnico) {
-					fila[1] = "Técnico";
-				}
-				if (soli instanceof SolicitudObrero) {
-					fila[1] = "Obrero";
-				}
-				fila[2] = soli.getCantVacantes();
-				String min = Integer.toString(soli.getEdadMin());
-				String max = Integer.toString(soli.getEdadMax());
-				String rango = min + "-" + max;
-				fila[3] = rango;
-				fila[4] = soli.getLocalidad();
+					modelo.addRow(fila);
 
-				modelo.addRow(fila);
-
+				}
 			}
 
 		} else {
 			ArrayList<Solicitud> solicitudesEmpresa = new ArrayList<>();
 			for (Solicitud solicitud : BolsaLaboral.getInstance().RetornaSolicitudEmp(empresa)) {
-				if (solicitud.getCantReal() > 0) {
-					solicitudesEmpresa.add(solicitud);
-				}
+				solicitudesEmpresa.add(solicitud);
+
 			}
 
 			for (Solicitud soli : solicitudesEmpresa) {
-				fila[0] = soli.getCodigo();
-				if (soli instanceof SolicitudUniversitario) {
-					fila[1] = "Universitario";
-				}
-				if (soli instanceof SolicitudTecnico) {
-					fila[1] = "Técnico";
-				}
-				if (soli instanceof SolicitudObrero) {
-					fila[1] = "Obrero";
-				}
-				fila[2] = soli.getCantVacantes();
-				String min = Integer.toString(soli.getEdadMin());
-				String max = Integer.toString(soli.getEdadMax());
-				String rango = min + "-" + max + " Años";
-				fila[3] = rango;
-				fila[4] = soli.getLocalidad();
+				if (soli.getCantVacantes() > 0) {
+					fila[0] = soli.getCodigo();
+					if (soli instanceof SolicitudUniversitario) {
+						fila[1] = "Universitario";
+					}
+					if (soli instanceof SolicitudTecnico) {
+						fila[1] = "Técnico";
+					}
+					if (soli instanceof SolicitudObrero) {
+						fila[1] = "Obrero";
+					}
+					fila[2] = soli.getCantVacantes();
+					String min = Integer.toString(soli.getEdadMin());
+					String max = Integer.toString(soli.getEdadMax());
+					String rango = min + "-" + max + " Años";
+					fila[3] = rango;
+					fila[4] = soli.getLocalidad();
 
-				modelo.addRow(fila);
+					modelo.addRow(fila);
 
+				}
 			}
 		}
 
@@ -392,9 +394,10 @@ public class Macheo extends JDialog {
 					JOptionPane.INFORMATION_MESSAGE, null);
 		}
 	}
-	public void clean(){
-	model.clear();
-	misSolicitantesC = new ArrayList<>();
-	loadTable(null);
+
+	public void clean() {
+		model.clear();
+		misSolicitantesC = new ArrayList<>();
+		loadTable(null);
 	}
 }
