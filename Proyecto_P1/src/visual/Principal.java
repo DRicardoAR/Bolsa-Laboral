@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButtonMenuItem;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale.Category;
@@ -57,6 +58,8 @@ public class Principal extends JFrame {
 	private static JFreeChart chartBarra;
 	private static JFreeChart chartPastel;
 	private static JPanel panelPastel;
+	private JLabel lblYear;
+	private JLabel lblhora;
 	private Dimension dim;
 
 	/**
@@ -67,7 +70,7 @@ public class Principal extends JFrame {
 			public void run() {
 				try {
 					UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel());
-					
+
 					Principal frame = new Principal();
 
 					frame.setVisible(true);
@@ -87,16 +90,15 @@ public class Principal extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				if (JOptionPane.showConfirmDialog(null, "¿Desea guardar los nuevos cambios en la bolsa laboral?",
 						"Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					
+
 					ProgressBar progress = new ProgressBar(1);
-					progress.setVisible(true);				
+					progress.setVisible(true);
 					progress.setLocationRelativeTo(null);
 					BolsaLaboral.getInstance().esribirBolsa();
 					dispose();
-				}else{
+				} else {
 					dispose();
-					
-					
+
 				}
 			}
 		});
@@ -119,6 +121,7 @@ public class Principal extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				mnCandidatos.setIcon(new ImageIcon(Principal.class.getResource("/img/24.png")));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				mnCandidatos.setIcon(new ImageIcon(Principal.class.getResource("/img/Solicitante24.png")));
@@ -130,6 +133,7 @@ public class Principal extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				mnMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/macheo.png")));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				mnMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/pareo24.png")));
@@ -138,76 +142,75 @@ public class Principal extends JFrame {
 		mnMacheo.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		mnMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/pareo24.png")));
 		menuBar.add(mnMacheo);
-		
-				JMenuItem mntmRealizarMacheo = new JMenuItem("Realizar Pareo");
-				mntmRealizarMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/pareo.png")));
-				mntmRealizarMacheo.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Macheo macheo;
-						try {
-							macheo = new Macheo();
-							macheo.setModal(true);
-							macheo.setLocationRelativeTo(null);
-							macheo.setVisible(true);
-						} catch (ParseException e1) {
-							e1.printStackTrace();
-						}
 
-					}
-				});
-				mnMacheo.add(mntmRealizarMacheo);
-				
-				JMenu mnNewMenu = new JMenu("Exportar");
-				mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/img/exportar.png")));
-				mnMacheo.add(mnNewMenu);
-				
-				JMenuItem mntmExportarEmpresa = new JMenuItem("Exportar Empresa");
-				mntmExportarEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/img/addEmpresa.png")));
-				mntmExportarEmpresa.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						ImportarEmpresa imem = new ImportarEmpresa();
-						imem.setModal(true);
-						imem.setLocationRelativeTo(null);
-						imem.setVisible(true);
-					}
-				});
-				mnNewMenu.add(mntmExportarEmpresa);
-				
-				JMenuItem mntmExportarSolicitud = new JMenuItem("Exportar Solicitante");
-				mntmExportarSolicitud.setIcon(new ImageIcon(Principal.class.getResource("/img/persona.png")));
-				mntmExportarSolicitud.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						ImportarEmpleado im = new ImportarEmpleado();
-						im.setModal(true);
-						im.setLocationRelativeTo(null);
-						im.setVisible(true);
-					}
-				});
-				mnNewMenu.add(mntmExportarSolicitud);
-				
-				JSeparator separator = new JSeparator();
-				mnMacheo.add(separator);
-				
-				JMenuItem mntmCerrar = new JMenuItem("Salir");
-				mntmCerrar.setIcon(new ImageIcon(Principal.class.getResource("/img/cancelar.png")));
-				mntmCerrar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if (JOptionPane.showConfirmDialog(null, "¿Desea guardar los nuevos cambios en la bolsa laboral?",
-								"Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-							
-							ProgressBar progress = new ProgressBar(1);
-							progress.setVisible(true);				
-							progress.setLocationRelativeTo(null);
-							BolsaLaboral.getInstance().esribirBolsa();
-							dispose();
-						}else{
-							dispose();
-							
-							
-						}
-					}
-				});
-				mnMacheo.add(mntmCerrar);
+		JMenuItem mntmRealizarMacheo = new JMenuItem("Realizar Pareo");
+		mntmRealizarMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/pareo.png")));
+		mntmRealizarMacheo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Macheo macheo;
+				try {
+					macheo = new Macheo();
+					macheo.setModal(true);
+					macheo.setLocationRelativeTo(null);
+					macheo.setVisible(true);
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		mnMacheo.add(mntmRealizarMacheo);
+
+		JMenu mnNewMenu = new JMenu("Exportar");
+		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/img/exportar.png")));
+		mnMacheo.add(mnNewMenu);
+
+		JMenuItem mntmExportarEmpresa = new JMenuItem("Exportar Empresa");
+		mntmExportarEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/img/addEmpresa.png")));
+		mntmExportarEmpresa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ImportarEmpresa imem = new ImportarEmpresa();
+				imem.setModal(true);
+				imem.setLocationRelativeTo(null);
+				imem.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmExportarEmpresa);
+
+		JMenuItem mntmExportarSolicitud = new JMenuItem("Exportar Solicitante");
+		mntmExportarSolicitud.setIcon(new ImageIcon(Principal.class.getResource("/img/persona.png")));
+		mntmExportarSolicitud.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ImportarEmpleado im = new ImportarEmpleado();
+				im.setModal(true);
+				im.setLocationRelativeTo(null);
+				im.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmExportarSolicitud);
+
+		JSeparator separator = new JSeparator();
+		mnMacheo.add(separator);
+
+		JMenuItem mntmCerrar = new JMenuItem("Salir");
+		mntmCerrar.setIcon(new ImageIcon(Principal.class.getResource("/img/cancelar.png")));
+		mntmCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (JOptionPane.showConfirmDialog(null, "¿Desea guardar los nuevos cambios en la bolsa laboral?",
+						"Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+					ProgressBar progress = new ProgressBar(1);
+					progress.setVisible(true);
+					progress.setLocationRelativeTo(null);
+					BolsaLaboral.getInstance().esribirBolsa();
+					dispose();
+				} else {
+					dispose();
+
+				}
+			}
+		});
+		mnMacheo.add(mntmCerrar);
 		mnCandidatos.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		mnCandidatos.setIcon(new ImageIcon(Principal.class.getResource("/img/Solicitante24.png")));
 		menuBar.add(mnCandidatos);
@@ -216,8 +219,8 @@ public class Principal extends JFrame {
 		mntmRegistrarCandidato.setIcon(new ImageIcon(Principal.class.getResource("/img/agregarSolicitante.png")));
 		mntmRegistrarCandidato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InsertarSolicitate soli = new InsertarSolicitate("Insertar Solicitante", false, null,null);
-				
+				InsertarSolicitate soli = new InsertarSolicitate("Insertar Solicitante", false, null, null);
+
 				soli.setModal(true);
 				soli.setLocationRelativeTo(null);
 				soli.setVisible(true);
@@ -243,6 +246,7 @@ public class Principal extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				mnEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/img/edificio.png")));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				mnEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/img/empresa24.png")));
@@ -288,6 +292,7 @@ public class Principal extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				mnSolicitud.setIcon(new ImageIcon(Principal.class.getResource("/img/Solicitud.png")));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				mnSolicitud.setIcon(new ImageIcon(Principal.class.getResource("/img/Solicitud24.png")));
@@ -325,6 +330,7 @@ public class Principal extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				mnReporte.setIcon(new ImageIcon(Principal.class.getResource("/img/reportar.png")));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				mnReporte.setIcon(new ImageIcon(Principal.class.getResource("/img/reportar24.png")));
@@ -390,6 +396,16 @@ public class Principal extends JFrame {
 		lblNoHayEmpledos.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		lblNoHayEmpledos.setBounds(10, 22, 559, 261);
 		panelPastel.add(lblNoHayEmpledos);
+
+		lblhora = new JLabel("");
+		lblhora.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblhora.setBounds(0, 603, 140, 39);
+		panel.add(lblhora);
+		
+		lblYear = new JLabel("");
+		lblYear.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblYear.setBounds(112, 603, 116, 39);
+		panel.add(lblYear);
 		actualizarChart();
 		actualizarPastel();
 		reloj();
@@ -469,6 +485,7 @@ public class Principal extends JFrame {
 
 		return result;
 	}
+
 	public void hiloBarras() {
 		Thread actualizar = new Thread() {
 			public void run() {
@@ -485,34 +502,83 @@ public class Principal extends JFrame {
 		};
 		actualizar.start();
 	}
-public void reloj(){
-		
-		Thread reloj = new Thread(){
-		public void run(){
-			try {
-				for(;;){
-				Calendar calen = new GregorianCalendar();
-				int dia = calen.get(Calendar.DAY_OF_WEEK_IN_MONTH);
-				int mes = calen.get(Calendar.MONTH+1);
-				int minutos = calen.get(Calendar.MINUTE);
-				int hora = calen.get(Calendar.HOUR);
-				int sec = calen.get(Calendar.SECOND);
-				int meri = calen.get(Calendar.AM_PM);
-				String merid = "";
-				if(meri == 1){
-					merid = " PM";
-				}else {
-					merid = " AM";
+
+	public void reloj() {
+
+		Thread reloj = new Thread() {
+			public void run() {
+				try {
+					for (;;) {
+						Calendar calen = new GregorianCalendar();
+						int dia = calen.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+						int diaSemana = calen.get(Calendar.DAY_OF_WEEK);
+						int mes = calen.get(Calendar.MONTH + 1);
+						int minutos = calen.get(Calendar.MINUTE);
+						int hora = calen.get(Calendar.HOUR);
+						int sec = calen.get(Calendar.SECOND);
+						int meri = calen.get(Calendar.AM_PM);
+						LocalDate date = LocalDate.now();
+						int anno = date.getYear();
+						int mess= date.getMonthValue();
+						int dias = date.getDayOfMonth();
+						String realmes = "";
+						String merid = "";
+						if (meri == 1) {
+							merid = " PM";
+						} else {
+							merid = " AM";
+						}
+						if (mess == 1) {
+							realmes = "Enero";
+						}
+						if (mess == 1) {
+							realmes = "Enero";
+						}
+						if (mess == 2) {
+							realmes = "Febreo";
+						}
+						if (mess == 3) {
+							realmes = "Marzo";
+						}
+						if (mess == 4) {
+							realmes = "Abril";
+						}
+						if (mess == 5) {
+							realmes = "Mayo";
+						}
+						if (mess == 6) {
+							realmes = "Junio";
+						}
+						if (mess == 7) {
+							realmes = "Julio";
+						}
+						if (mess == 8) {
+							realmes = "Agosto";
+						}
+						if (mess == 9) {
+							realmes = "Septiembre";
+						}
+						if (mess == 10) {
+							realmes = "Octubre";
+						}
+						if (mess == 11) {
+							realmes = "Novienbre";
+						}
+						if (mess == 12) {
+							realmes = "Diciembre";
+						}
+						lblhora.setText(hora + ":" + minutos + ":" + sec + merid);
+						lblYear.setText(dias+", "+realmes+", "+anno);
+						
+
+						sleep(1000);
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-				//lblClock.setText(hora+":"+minutos+":"+sec+merid);
-				
-				sleep(1000);}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
-		}	
 		};
 		reloj.start();
-		
+
 	}
 }
