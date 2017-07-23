@@ -168,7 +168,7 @@ public class InsertarEmpresa extends JDialog {
 				"Dajabón ", "Distrito Nacional ", "Duarte ",
 				"Elías Piña ", "El Seibo ", "Espaillat ",
 				"Hato Mayor ", "Independencia ", "La Altagracia ",
-				"La Romana ", "La Vega ", "Mar\u00EDa Trinidad S\u00E1nchez ",
+				"La Romana ", "La Vega ", "María Trinidad Sánchez ",
 				"Monse\u00F1or Nouel ", "Montecristi ", "Monte Plata ",
 				"Pedernales ", "Peravia ", "Puerto Plata ",
 				"Hermanas Mirabal ", "Saman\u00E1 ",
