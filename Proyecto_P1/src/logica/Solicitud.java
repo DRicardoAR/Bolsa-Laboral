@@ -9,8 +9,8 @@ public abstract class Solicitud implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	protected String codigo;
-	protected int cantVacantes;
-	protected int cantReal;
+	protected float cantVacantes;
+	protected float cantReal;
 	protected int annosExperiencia;
 	protected int edadMax;
 	protected int edadMin;
@@ -67,7 +67,7 @@ public abstract class Solicitud implements Serializable{
 		this.codigo = codigo;
 	}
 
-	public int getCantVacantes() {
+	public float getCantVacantes() {
 		return cantVacantes;
 	}
 
@@ -139,7 +139,7 @@ public abstract class Solicitud implements Serializable{
 		this.mudarse = mudarse;
 	}
 
-	public int getCantReal() {
+	public float getCantReal() {
 		return cantReal;
 	}
 

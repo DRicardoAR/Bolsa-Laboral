@@ -104,13 +104,22 @@ public class ReporteSolicitud extends JDialog {
 	}
 
 	private void loadTable() {
+		float cant1 = 0;
+		float cant2 = 0;
+		float porciento = 0;
+		
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		for (Solicitud soli : bolsa.getMisSolicitudes()) {
+			
 			fila[0] = soli.getEmpresa().getNombre();
 			fila[1] = tipoSolicitud(soli);
 			fila[2] = soli.getCantVacantes();
-			fila[3] = bolsa.porcientoSolicitud(soli);
+			cant1 = soli.getCantVacantes();
+			cant2 = soli.getCantReal();
+			porciento = (cant2 / cant1 )*100;
+			
+			fila[3] = porciento+" %";
 			model.addRow(fila);
 
 		}

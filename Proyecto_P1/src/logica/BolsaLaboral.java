@@ -711,8 +711,8 @@ public class BolsaLaboral implements Serializable {
 	public float porcientoSolicitud(Solicitud soli) {
 		float por = 0;
 		if(soli.getCantReal()!=soli.cantVacantes){
-		int cantTotal = soli.getCantVacantes();
-		int cantActual = soli.getCantReal();
+		float cantTotal = soli.getCantVacantes();
+		float cantActual = soli.getCantReal();
 		por = (cantActual / cantTotal) * 100;
 		}else {
 			por = 100;
@@ -748,9 +748,9 @@ public class BolsaLaboral implements Serializable {
 	public void writeEmpresaTXT(String rnc) throws IOException {
 		writer_1 = new FileWriter(new File("Archivo.txt"));
 		Empresa soli = RetornaEmpresaSoli(rnc);
-		int cant = 0;
-		int cot = 0;
-		int cantcontratados = 0;
+		float cant = 0;
+		float cot = 0;
+		float cantcontratados = 0;
 		writer_1.write("***********************************************************************************" + "\n");
 		writer_1.write("*                               Bolsa Laboral                                     *" + "\n");
 		writer_1.write("*                                   Empresa                                       *" + "\n");

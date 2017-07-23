@@ -342,7 +342,7 @@ public class DetalleSolicitud extends JDialog {
 		txtNombre.setText(miSolicitud.getEmpresa().getNombre());
 		
 		txtContrato.setText(miSolicitud.getTipoContrato());
-		txtVancante.setText(Integer.toString(miSolicitud.getCantVacantes()));
+		txtVancante.setText(Float.toString(miSolicitud.getCantVacantes()));
 		txtLocalidad.setText(miSolicitud.getLocalidad());
 		txtLicencia.setText("Categoria "+Integer.toString(miSolicitud.getCategoriaLicencia()));
 		String edadMin = Integer.toString(miSolicitud.getEdadMin());
