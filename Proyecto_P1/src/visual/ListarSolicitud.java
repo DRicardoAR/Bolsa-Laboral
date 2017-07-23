@@ -307,7 +307,7 @@ public class ListarSolicitud extends JDialog {
 	}
 
 	private static void loadAll() {
-		String[] nombreColumna = { "Código", "Empresa", "Tipo", "Vacantes", "Rango Edad", "Vehiculo", "Provincia" };
+		String[] nombreColumna = { "Código", "Empresa", "Tipo", "Rango Edad", "Vehiculo", "Provincia" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
@@ -324,17 +324,16 @@ public class ListarSolicitud extends JDialog {
 			if (soli instanceof SolicitudObrero) {
 				fila[2] = "Obrero";
 			}
-			fila[3] = soli.getCantVacantes();
 			String min = Integer.toString(soli.getEdadMin());
 			String max = Integer.toString(soli.getEdadMax());
-			fila[4] = min + " - " + max;
+			fila[3] = min + " - " + max;
 
 			if (soli.isVehiculoPropio()) {
-				fila[5] = "Si";
+				fila[4] = "Si";
 			} else {
-				fila[5] = "No";
+				fila[4] = "No";
 			}
-			fila[6] = soli.getLocalidad();
+			fila[5] = soli.getLocalidad();
 			modeloTabla.addRow(fila);
 		}
 		table.setModel(modeloTabla);
@@ -346,13 +345,12 @@ public class ListarSolicitud extends JDialog {
 			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
 
-		columnModel.getColumn(0).setPreferredWidth(100);
-		columnModel.getColumn(1).setPreferredWidth(165);
-		columnModel.getColumn(2).setPreferredWidth(130);
-		columnModel.getColumn(3).setPreferredWidth(120);
-		columnModel.getColumn(4).setPreferredWidth(140);
-		columnModel.getColumn(5).setPreferredWidth(100);
-		columnModel.getColumn(6).setPreferredWidth(144);
+		columnModel.getColumn(0).setPreferredWidth(110);
+		columnModel.getColumn(1).setPreferredWidth(180);
+		columnModel.getColumn(2).setPreferredWidth(150);
+		columnModel.getColumn(3).setPreferredWidth(170);
+		columnModel.getColumn(4).setPreferredWidth(130);
+		columnModel.getColumn(5).setPreferredWidth(159);
 
 	}
 
@@ -527,17 +525,13 @@ public class ListarSolicitud extends JDialog {
 	private void loadTablaRNC() {
 		ArrayList<Solicitud> lista = new ArrayList<>();
 		lista = BolsaLaboral.getInstance().RetornaSolicitudEmp(empresaListar);
-		String[] nombreColumna = { "Código", "Empresa", "Tipo", "Vacantes", "Rango Edad", "Vehiculo", "Idiomas",
-				"Provincia" };
+		String[] nombreColumna = { "Código", "Empresa", "Tipo","Rango Edad", "Vehiculo","Provincia" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 
 		for (Solicitud soli : lista) {
-			String[] idioma = llenado(soli.getIdiomas());
-			cbxIdioma = new JComboBox<String>(idioma);
-			setComboIdiomas();
-
+		
 			fila[0] = soli.getCodigo();
 			fila[1] = soli.getEmpresa().getNombre();
 			if (soli instanceof SolicitudUniversitario) {
@@ -549,17 +543,15 @@ public class ListarSolicitud extends JDialog {
 			if (soli instanceof SolicitudObrero) {
 				fila[2] = "Obrero";
 			}
-			fila[3] = soli.getCantVacantes();
 			String min = Integer.toString(soli.getEdadMin());
 			String max = Integer.toString(soli.getEdadMax());
-			fila[4] = min + " - " + max;
+			fila[3] = min + " - " + max;
 			if (soli.isVehiculoPropio()) {
-				fila[5] = "Si";
+				fila[4] = "Si";
 			} else {
-				fila[5] = "No";
+				fila[4] = "No";
 			}
-			fila[6] = "Ver idiomas";
-			fila[7] = soli.getLocalidad();
+			fila[5] = soli.getLocalidad();
 			modeloTabla.addRow(fila);
 
 		}
@@ -572,15 +564,12 @@ public class ListarSolicitud extends JDialog {
 			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
 
-		columnModel.getColumn(0).setPreferredWidth(80);
-		columnModel.getColumn(1).setPreferredWidth(154);
-		columnModel.getColumn(2).setPreferredWidth(115);
-		columnModel.getColumn(3).setPreferredWidth(90);
-		columnModel.getColumn(4).setPreferredWidth(120);
-		columnModel.getColumn(5).setPreferredWidth(80);
-		columnModel.getColumn(6).setPreferredWidth(128);
-		columnModel.getColumn(7).setPreferredWidth(133);
-
+		columnModel.getColumn(0).setPreferredWidth(110);
+		columnModel.getColumn(1).setPreferredWidth(180);
+		columnModel.getColumn(2).setPreferredWidth(150);
+		columnModel.getColumn(3).setPreferredWidth(170);
+		columnModel.getColumn(4).setPreferredWidth(130);
+		columnModel.getColumn(5).setPreferredWidth(159);
 	}
 
 	public static void setComboIdiomas() {
