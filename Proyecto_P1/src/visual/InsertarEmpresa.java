@@ -90,7 +90,7 @@ public class InsertarEmpresa extends JDialog {
 		setTitle(title);
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(248, 248, 255));
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Información General", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(5, 26, 605, 118);
 		contentPanel.add(panel);
 		panel.setLayout(null);
