@@ -88,8 +88,8 @@ public class Principal extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "¿Desea guardar los nuevos cambios en la bolsa laboral?",
-						"Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				if (JOptionPane.showConfirmDialog(null, "ï¿½Desea guardar los nuevos cambios en la bolsa laboral?",
+						"Atenciï¿½n Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
 					ProgressBar progress = new ProgressBar(1);
 					progress.setVisible(true);
@@ -181,10 +181,17 @@ public class Principal extends JFrame {
 		mntmExportarSolicitud.setIcon(new ImageIcon(Principal.class.getResource("/img/persona.png")));
 		mntmExportarSolicitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ImportarEmpleado im = new ImportarEmpleado();
-				im.setModal(true);
-				im.setLocationRelativeTo(null);
-				im.setVisible(true);
+				ImportarEmpleado im;
+				try {
+					im = new ImportarEmpleado();
+					im.setModal(true);
+					im.setLocationRelativeTo(null);
+					im.setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		mnNewMenu.add(mntmExportarSolicitud);
@@ -196,8 +203,8 @@ public class Principal extends JFrame {
 		mntmCerrar.setIcon(new ImageIcon(Principal.class.getResource("/img/cancelar.png")));
 		mntmCerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "¿Desea guardar los nuevos cambios en la bolsa laboral?",
-						"Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				if (JOptionPane.showConfirmDialog(null, "ï¿½Desea guardar los nuevos cambios en la bolsa laboral?",
+						"Atenciï¿½n Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
 					ProgressBar progress = new ProgressBar(1);
 					progress.setVisible(true);
@@ -467,7 +474,7 @@ public class Principal extends JFrame {
 		DefaultCategoryDataset setter = new DefaultCategoryDataset();
 		setter.setValue(BolsaLaboral.getInstance().desempleadoO(), "Tipo de Solicitante", "Obreros");
 		setter.setValue(BolsaLaboral.getInstance().desempleadoU(), "Tipo de Solicitante", "Universitarios");
-		setter.setValue(BolsaLaboral.getInstance().desempleadoT(), "Tipo de Solicitante", "Técnicos");
+		setter.setValue(BolsaLaboral.getInstance().desempleadoT(), "Tipo de Solicitante", "Tï¿½cnicos");
 		return setter;
 	}
 

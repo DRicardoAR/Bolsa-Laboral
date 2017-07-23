@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -14,17 +15,20 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.text.ParseException;
 
 import logica.BolsaLaboral;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.text.MaskFormatter;
+
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
 public class ImportarEmpleado extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCedula;
+	private JFormattedTextField txtCedula;
 
 	/**
 	 * Launch the application.
@@ -41,8 +45,9 @@ public class ImportarEmpleado extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @throws ParseException 
 	 */
-	public ImportarEmpleado() {
+	public ImportarEmpleado() throws ParseException {
 		setResizable(false);
 		setModal(true);
 		getContentPane().setBackground(new Color(248, 248, 255));
@@ -66,7 +71,9 @@ public class ImportarEmpleado extends JDialog {
 			lblCedula.setBounds(10, 35, 46, 14);
 			panel.add(lblCedula);
 			
-			txtCedula = new JTextField();
+			
+			MaskFormatter mascara = new MaskFormatter("###-#######-#");
+			txtCedula = new JFormattedTextField(mascara);
 			txtCedula.setBounds(77, 31, 130, 23);
 			panel.add(txtCedula);
 			txtCedula.setColumns(10);

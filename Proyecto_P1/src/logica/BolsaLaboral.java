@@ -726,16 +726,20 @@ public class BolsaLaboral implements Serializable {
 	
 		return por;
 	}
+	
+	
+	
+	
 	// retorna una solicitud dado el rnc de una empresa
-	public Solicitud RetornaEmpresaSoli (String rnc){
-		Solicitud soli=null;
-		for (Solicitud solicitud : misSolicitudes) {
-			if(solicitud.getEmpresa().getRNC().equalsIgnoreCase(rnc)){
-				soli=solicitud;
+	public Empresa RetornaEmpresaSoli (String rnc){
+		Empresa empre=null;
+		for (Empresa empresa : misEmpresas) {
+			if(empresa.getRNC().equalsIgnoreCase(rnc)){
+				empre = empresa;
 			}
 			
 		}
-		return soli;
+		return empre;
 		
 	}
 	public boolean EmpresaExiste(String rnc){
@@ -752,16 +756,28 @@ public class BolsaLaboral implements Serializable {
 	
 	// escribe fichero texto de una empresa
 	public void writeEmpresaTXT(String rnc) throws IOException{
-		writer_1 = new FileWriter(new File("cliente.txt"));
-		Solicitud soli =RetornaEmpresaSoli(rnc);
+		writer_1 = new FileWriter(new File("Archivo.txt"));
+		Empresa soli =RetornaEmpresaSoli(rnc);
+		int cant =0;
+		int cot=0;
+		int cantcontratados=0;
 		writer_1.write("***********************************************************************************"+"\n");
 		writer_1.write("*                               Bolsa Laboral                                     *"+"\n");
 		writer_1.write("*                                   Empresa                                       *"+"\n");
 		writer_1.write("***********************************************************************************"+"\n");
-		writer_1.write("Empresa: "+soli.getEmpresa().getNombre()+"\n");
-		writer_1.write("Cantidad Vacantes inicial: "+soli.getCantReal()+"\n");
-		writer_1.write("Cantidad Vacantes real: "+soli.getCantVacantes()+"\n");
-		writer_1.write("Cantidad Empleados: "+soli.getCantReal()+"\n");
+		writer_1.write("Empresa:                "+soli.getNombre()+"\n");
+		for(Solicitud misoli : misSolicitudes) {
+			if(misoli.getEmpresa().getRNC().equalsIgnoreCase(rnc)) {
+				cant = misoli.getCantVacantes();
+			 cantcontratados= misoli.getCantReal();
+			 cot++;
+			}
+			
+			
+		}
+		writer_1.write("Cantidad Vacantes inicial: "+cant+"\n");
+		writer_1.write("Cantidad Vacantes real:    "+cantcontratados+"\n");
+		writer_1.write("Cantidad Solicitudes       "+cot+"\n");
 		writer_1.write("***********************************************************************************"+"\n");
 		writer_1.close();
 		 
@@ -771,7 +787,7 @@ public class BolsaLaboral implements Serializable {
 	
 	public Solicitante BuscarSoliCedula(String Cedula){
 		Solicitante solicitante =null;
-		for (Solicitante soli : misSolicitantes) {
+		for (Solicitante soli: misSolicitantes) {
 			if(soli.getCedula().equalsIgnoreCase(Cedula)){
 				solicitante=soli;
 			}
@@ -843,16 +859,16 @@ public class BolsaLaboral implements Serializable {
 			
 		}
 	public void writeSolicitanteTXT(String cedula) throws IOException{
-		writer_1 = new FileWriter(new File("cliente.txt"));
+		writer_1 = new FileWriter(new File("Archivo.txt"));
 		Solicitante soli =BuscarSoliCedula(cedula);
 		writer_1.write("***********************************************************************************"+"\n");
 		writer_1.write("*                               Bolsa Laboral                                     *"+"\n");
 		writer_1.write("*                                 Empleado                                        *"+"\n");
 		writer_1.write("***********************************************************************************"+"\n");
-		writer_1.write("Nombres: "+soli.getNombres()+"\n");
-		writer_1.write("Apellidos: "+soli.getApellidos()+"\n");
-		writer_1.write("Tipo Solicitante: "+tipoSolicitante(soli)+"\n");
-		writer_1.write("Estado: "+contradato(soli)+"\n");
+		writer_1.write("Nombres:                 "+soli.getNombres()+"\n");
+		writer_1.write("Apellidos:               "+soli.getApellidos()+"\n");
+		writer_1.write("Tipo Solicitante:        "+tipoSolicitante(soli)+"\n");
+		writer_1.write("Estado:                  "+contradato(soli)+"\n");
 		writer_1.write("Cantidad de Solicitudes: "+cantidadSolicitante(soli)+"\n");
 		writer_1.write("***********************************************************************************"+"\n");
 		writer_1.close();
