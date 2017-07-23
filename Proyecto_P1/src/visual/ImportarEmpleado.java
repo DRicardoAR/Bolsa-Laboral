@@ -89,6 +89,7 @@ public class ImportarEmpleado extends JDialog {
 										ProgressBar pr = new ProgressBar(3);
 										pr.setLocationRelativeTo( null);
 										pr.setVisible(true);			
+										JOptionPane.showMessageDialog(null, "Empleado Importado");
 										txtCedula.setText(null);
 									} catch (IOException e1) {
 										// TODO Auto-generated catch block
