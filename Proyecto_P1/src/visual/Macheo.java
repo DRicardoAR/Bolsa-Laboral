@@ -334,7 +334,7 @@ public class Macheo extends JDialog {
 				fila[2] = soli.getCantVacantes();
 				String min = Integer.toString(soli.getEdadMin());
 				String max = Integer.toString(soli.getEdadMax());
-				String rango = max + "-" + min;
+				String rango = min + "-" + max;
 				fila[3] = rango;
 				fila[4] = soli.getLocalidad();
 
