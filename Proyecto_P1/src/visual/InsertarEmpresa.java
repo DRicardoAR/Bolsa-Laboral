@@ -54,6 +54,7 @@ public class InsertarEmpresa extends JDialog {
 	private JComboBox cbxProvincia;
 	private JButton btnregistrar;
 	private Empresa modificarEmpre = null;
+	private JSpinner spnlocalidad;
 
 	/*
 	 * public static void main(String[] args) { try { InsertarEmpresa dialog =
@@ -222,7 +223,7 @@ public class InsertarEmpresa extends JDialog {
 		panel_1.add(txtReferencia);
 		txtReferencia.setColumns(10);
 		
-		JSpinner spnlocalidad = new JSpinner();
+		spnlocalidad = new JSpinner();
 		spnlocalidad.setBounds(93, 131, 174, 21);
 		panel_1.add(spnlocalidad);
 
@@ -258,7 +259,7 @@ public class InsertarEmpresa extends JDialog {
 									.toString();
 
 							String direcion = txtSector.getText() + " "
-									+ txtLocalidad.getText() + " "
+									+ spnlocalidad.getValue().toString() + " "
 									+ txtCuidad.getText() + " "
 									+ txtReferencia.getText() + " "
 									+ txtCalle.getText();
@@ -337,7 +338,7 @@ public class InsertarEmpresa extends JDialog {
 												"ATENCIÓN",
 												JOptionPane.WARNING_MESSAGE,
 												null);
-							} else if (txtLocalidad.getText().isEmpty()) {
+							} else if (spnlocalidad.getValue().toString().equalsIgnoreCase("0")) {
 								JOptionPane
 										.showMessageDialog(
 												null,
@@ -370,7 +371,7 @@ public class InsertarEmpresa extends JDialog {
 									txtEmail.setText(null);
 									cbxProvincia.setSelectedIndex(0);
 									txtSector.setText(null);
-									txtLocalidad.setText(null);
+									spnlocalidad.setValue(0);
 									txtCuidad.setText(null);
 									txtReferencia.setText(null);
 									txtCalle.setText(null);
@@ -393,7 +394,7 @@ public class InsertarEmpresa extends JDialog {
 								.toString();
 
 						String direcion = txtSector.getText() + " "
-								+ txtLocalidad.getText() + " "
+								+ spnlocalidad.getValue().toString()+ " "
 								+ txtCuidad.getText() + " "
 								+ txtReferencia.getText() + " "
 								+ txtCalle.getText();
@@ -443,7 +444,7 @@ if(modi){
 			String referencia = parts[3];
 			String calle = parts[4];
 			txtSector.setText(sector);
-			txtLocalidad.setText(localidad);
+			spnlocalidad.setValue(localidad);
 			txtCuidad.setText(cuidad);
 			txtReferencia.setText(referencia);
 			txtCalle.setText(calle);
