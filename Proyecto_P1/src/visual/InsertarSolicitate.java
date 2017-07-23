@@ -117,7 +117,7 @@ public class InsertarSolicitate extends JDialog {
 	private boolean error = false;
 	private boolean estado = false;
 	private Solicitante modiS = null;
-	private Solicitante verSoli= null;
+	private Solicitante verSoli = null;
 
 	/**
 	 * Launch the application.
@@ -140,8 +140,8 @@ public class InsertarSolicitate extends JDialog {
 				if (modificar) {
 					loadSolicitanteModi();
 				}
-				if(persona!=null){
-			
+				if (persona != null) {
+
 				}
 			}
 
@@ -1008,9 +1008,11 @@ public class InsertarSolicitate extends JDialog {
 											JOptionPane.INFORMATION_MESSAGE, null);
 
 									Principal.actualizarChart();
-									call();
-									
-								}  if(modificar){
+									clean();
+									// call();
+
+								}
+								if (modificar) {
 									int annos = new Integer((int) spnAnnosExpObrero.getValue());
 									Solicitante solicitante = new Obrero(cedula, nombre, apellido, telefono,
 											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
@@ -1042,9 +1044,10 @@ public class InsertarSolicitate extends JDialog {
 											"El solicitante se ha registrado de manera exitosa.", "Información",
 											JOptionPane.INFORMATION_MESSAGE, null);
 									Principal.actualizarChart();
-									call();
+									clean();
 
-								}  if(modificar){
+								}
+								if (modificar) {
 									int annos = new Integer((int) spnAnosExpUniversitario.getValue());
 									Solicitante solicitante = new Universitario(cedula, nombre, apellido, telefono,
 											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
@@ -1057,7 +1060,7 @@ public class InsertarSolicitate extends JDialog {
 									JOptionPane.showMessageDialog(null,
 											"El solicitante se ha modificado de manera exitosa.", "Información",
 											JOptionPane.INFORMATION_MESSAGE, null);
-									
+
 									Principal.actualizarChart();
 									dispose();
 								}
@@ -1079,8 +1082,9 @@ public class InsertarSolicitate extends JDialog {
 									BolsaLaboral.getInstance().updateSolicitante(solicitante);
 									Principal.actualizarChart();
 									estado = false;
-									call();
-								}  if(modificar){
+									clean();
+								}
+								if (modificar) {
 									int annos = new Integer((int) spnAnosExpTecnico.getValue());
 									Solicitante solicitante = new Tecnico(cedula, nombre, apellido, telefono,
 											fechaNacimiento, nacionalidad, sexo, estadoCivil, direccion, provincia,
@@ -1143,10 +1147,10 @@ public class InsertarSolicitate extends JDialog {
 										panel1.setVisible(false);
 										panel2.setVisible(true);
 									}
-									if(persona!=null){
-									
+									if (persona != null) {
+
 										btnRegistrar.setEnabled(false);
-										
+
 									}
 								}
 							}
@@ -1255,9 +1259,11 @@ public class InsertarSolicitate extends JDialog {
 		spnNumeroCasa.setValue(0);
 		btnMover.setText("Continuar >>");
 		btnRegistrar.setEnabled(false);
-
-		misHabilidades.removeAll(misHabilidades);
-		misIdiomas.removeAll(misIdiomas);
+		LocalDate fecha = LocalDate.now();
+		Date date = java.sql.Date.valueOf(fecha);
+		FechaNacimiento.setDate(date);
+		misHabilidades = new ArrayList<>();
+		misIdiomas = new ArrayList<>();
 		modeloHabilidad.clear();
 		error = false;
 		modeloIdiomas.clear();
@@ -1288,7 +1294,7 @@ public class InsertarSolicitate extends JDialog {
 
 	public void call() {
 		dispose();
-		InsertarSolicitate soli = new InsertarSolicitate("Insertar Solicitante", false, null,null);
+		InsertarSolicitate soli = new InsertarSolicitate("Insertar Solicitante", false, null, null);
 		soli.setModal(true);
 		soli.setLocationRelativeTo(null);
 		soli.setVisible(true);
@@ -1418,7 +1424,8 @@ public class InsertarSolicitate extends JDialog {
 
 		}
 	}
-	public void laodVer(){
+
+	public void laodVer() {
 		panel1.setEnabled(false);
 		panel2.setEnabled(false);
 		LocalDate fecha = verSoli.getFechaNacimiento();
@@ -1452,7 +1459,7 @@ public class InsertarSolicitate extends JDialog {
 		cbxProvincia.setSelectedItem(verSoli.getProvincia());
 		txtTelefono.setText(verSoli.getTelefono());
 		txtEmail.setText(verSoli.getEmail());
-		
+
 		if (verSoli.getSexo().equalsIgnoreCase("Femenino")) {
 			rdbFemenino.setSelected(true);
 		} else {
@@ -1519,7 +1526,7 @@ public class InsertarSolicitate extends JDialog {
 			rdbObrero.setEnabled(false);
 			rdbNoPost.setEnabled(false);
 			rdbSiPost.setEnabled(false);
-			if (((Universitario)verSoli).isPostGrado()) {
+			if (((Universitario) verSoli).isPostGrado()) {
 				rdbSiPost.setSelected(true);
 			} else {
 				rdbNoPost.setSelected(true);
@@ -1542,7 +1549,6 @@ public class InsertarSolicitate extends JDialog {
 		}
 
 	}
-	
 
 	public void validacion(KeyEvent e) {
 		char c = e.getKeyChar();

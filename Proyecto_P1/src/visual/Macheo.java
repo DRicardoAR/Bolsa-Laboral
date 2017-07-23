@@ -278,6 +278,7 @@ public class Macheo extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE, null);
 							Principal.actualizarChart();
 							Principal.actualizarPastel();
+							clean();
 						} else {
 							JOptionPane.showMessageDialog(null,
 									"No existen solicitantes en la actualidad para satisfacer esta solicitud",
@@ -390,5 +391,10 @@ public class Macheo extends JDialog {
 					"No existen solicitantes en la actualidad para satisfacer esta solicitud", "Información",
 					JOptionPane.INFORMATION_MESSAGE, null);
 		}
+	}
+	public void clean(){
+	model.clear();
+	misSolicitantesC = new ArrayList<>();
+	loadTable(null);
 	}
 }
