@@ -169,7 +169,7 @@ public class InsertarEmpresa extends JDialog {
 				"Elías Piña ", "El Seibo ", "Espaillat ",
 				"Hato Mayor ", "Independencia ", "La Altagracia ",
 				"La Romana ", "La Vega ", "María Trinidad Sánchez ",
-				"Monse\u00F1or Nouel ", "Montecristi ", "Monte Plata ",
+				"Monseñor Nouel ", "Montecristi ", "Monte Plata ",
 				"Pedernales ", "Peravia ", "Puerto Plata ",
 				"Hermanas Mirabal ", "Saman\u00E1 ",
 				"S\u00E1nchez Ram\u00EDrez ", "San Crist\u00F3bal ",
