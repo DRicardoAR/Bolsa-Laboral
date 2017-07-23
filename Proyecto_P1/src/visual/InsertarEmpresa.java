@@ -109,6 +109,20 @@ public class InsertarEmpresa extends JDialog {
 
 		txtNombre = new JTextField();
 		txtNombre.setBackground(Color.WHITE);
+		txtNombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isDigit(c)) {
+					getToolkit().beep();
+
+					e.consume();
+					JOptionPane.showMessageDialog(null,"Este campo no adminte número");
+
+				}
+
+			}
+		});
 		txtNombre.setBounds(405, 32, 174, 23);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
@@ -171,6 +185,20 @@ public class InsertarEmpresa extends JDialog {
 
 		txtSector = new JTextField();
 		txtSector.setBackground(Color.WHITE);
+		txtSector.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isDigit(c)) {
+					getToolkit().beep();
+
+					e.consume();
+					JOptionPane.showMessageDialog(null,"Este campo no adminte número");
+
+				}
+
+			}
+		});
 		txtSector.setBounds(93, 81, 174, 23);
 		panel_1.add(txtSector);
 		txtSector.setColumns(10);
