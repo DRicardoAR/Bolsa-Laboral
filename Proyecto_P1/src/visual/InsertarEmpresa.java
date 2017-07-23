@@ -173,7 +173,7 @@ public class InsertarEmpresa extends JDialog {
 				"Pedernales ", "Peravia ", "Puerto Plata ",
 				"Hermanas Mirabal ", "Samaná ",
 				"Sánchez Ramírez ", "San Cristóbal ",
-				"San Jos\u00E9 de Ocoa ", "San Juan ",
+				"San José de Ocoa ", "San Juan ",
 				"San Pedro de Macor\u00EDs ", "Santiago ",
 				"Santiago Rodr\u00EDguez ", "Santo Domingo ", "Valverde " }));
 		cbxProvincia.setBounds(93, 35, 174, 23);
