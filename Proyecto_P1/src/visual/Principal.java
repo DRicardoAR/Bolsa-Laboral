@@ -88,7 +88,7 @@ public class Principal extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "ï¿½Desea guardar los nuevos cambios en la bolsa laboral?",
+				if (JOptionPane.showConfirmDialog(null, "¿Desea guardar los nuevos cambios en la bolsa laboral?",
 						"Atenciï¿½n Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
 					ProgressBar progress = new ProgressBar(1);
@@ -474,7 +474,7 @@ public class Principal extends JFrame {
 		DefaultCategoryDataset setter = new DefaultCategoryDataset();
 		setter.setValue(BolsaLaboral.getInstance().desempleadoO(), "Tipo de Solicitante", "Obreros");
 		setter.setValue(BolsaLaboral.getInstance().desempleadoU(), "Tipo de Solicitante", "Universitarios");
-		setter.setValue(BolsaLaboral.getInstance().desempleadoT(), "Tipo de Solicitante", "Tï¿½cnicos");
+		setter.setValue(BolsaLaboral.getInstance().desempleadoT(), "Tipo de Solicitante", "Técnicos");
 		return setter;
 	}
 
