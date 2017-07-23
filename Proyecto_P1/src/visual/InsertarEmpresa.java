@@ -165,7 +165,7 @@ public class InsertarEmpresa extends JDialog {
 		cbxProvincia.setBackground(Color.WHITE);
 		cbxProvincia.setModel(new DefaultComboBoxModel(new String[] {
 				"<Seleccione>", "Azua ", "Bahoruco ", "Barahona ",
-				"Dajab\u00F3n ", "Distrito Nacional ", "Duarte ",
+				"Dajabón ", "Distrito Nacional ", "Duarte ",
 				"El\u00EDas Pi\u00F1a ", "El Seibo ", "Espaillat ",
 				"Hato Mayor ", "Independencia ", "La Altagracia ",
 				"La Romana ", "La Vega ", "Mar\u00EDa Trinidad S\u00E1nchez ",
