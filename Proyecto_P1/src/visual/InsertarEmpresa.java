@@ -99,7 +99,7 @@ public class InsertarEmpresa extends JDialog {
 		lblRnc.setBounds(10, 35, 46, 14);
 		panel.add(lblRnc);
 
-		JLabel lblTelefono = new JLabel("Tel\u00E9fono:");
+		JLabel lblTelefono = new JLabel("Teléfono:");
 		lblTelefono.setBounds(10, 84, 62, 14);
 		panel.add(lblTelefono);
 
