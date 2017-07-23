@@ -34,7 +34,7 @@ public abstract class Solicitud implements Serializable{
 		this.localidad = localidad;
 		this.empresa = empresa;
 		this.mudarse = mudarse;		
-		this.cantReal=cantVacantes;
+		this.cantReal=0;
 		this.categoriaLicencia = categoriaLicencia;
 		for (String idio : idiomas) {
 			this.idiomas.add(idio);
@@ -147,4 +147,8 @@ public abstract class Solicitud implements Serializable{
 		this.cantReal = cantReal;
 	}
 
+	
+	public void IncreasedCantReal(){
+		cantReal++;
+	}
 }
