@@ -33,15 +33,7 @@ public class ProgressBar extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ProgressBar dialog = new ProgressBar(1);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Create the dialog.
@@ -58,7 +50,7 @@ public class ProgressBar extends JDialog {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				if(option == 1 || option == 2 || option == 3){
-					timer = new Timer(25, new progreso());
+					timer = new Timer(18, new progreso());
 				}
 				
 				timer.start();
@@ -102,11 +94,7 @@ public class ProgressBar extends JDialog {
 				progressBar.setValue(valor);
 
 			} else {
-				if (option == 1) {
-					JOptionPane.showMessageDialog(null, "Los cambios se guardaron correctamente", "Bolsa Laboral",
-							JOptionPane.INFORMATION_MESSAGE, null);
-
-				}
+				
 				if (option == 2) {
 					JOptionPane.showMessageDialog(null, "La empresa se exporto correctamente", "Bolsa Laboral",
 							JOptionPane.INFORMATION_MESSAGE, null);
