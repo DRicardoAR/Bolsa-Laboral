@@ -859,5 +859,18 @@ public class BolsaLaboral implements Serializable {
 		writer_1.close();
 
 	}
+	//Remover solicitudes de contratados
+	public void removerContratados(ArrayList<Solicitante>misContratados){
+		
+		for (Solicitante contratado : misContratados) {
+			for (Solicitante solicitante : misSolicitantes) {
+				if(solicitante.isContratado()==false){
+					if(contratado.getCedula().equalsIgnoreCase(solicitante.getCedula())){
+						misSolicitantes.remove(solicitante);
+					}
+				}
+			}
+		}
+	}
 
 }

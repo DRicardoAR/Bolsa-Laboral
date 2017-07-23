@@ -278,6 +278,7 @@ public class Macheo extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE, null);
 							Principal.actualizarChart();
 							Principal.actualizarPastel();
+							BolsaLaboral.getInstance().removerContratados(misSolicitantesC);
 							clean();
 						} else {
 							JOptionPane.showMessageDialog(null,
