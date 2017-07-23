@@ -14,8 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-
-
 import javax.swing.ScrollPaneConstants;
 import javax.swing.ListSelectionModel;
 
@@ -42,9 +40,8 @@ public class ReporteSolicitud extends JDialog {
 	private JTable table;
 	private static Object[] fila;
 	private DefaultTableModel model;
-	private BolsaLaboral bolsa= BolsaLaboral.getInstance();
+	private BolsaLaboral bolsa = BolsaLaboral.getInstance();
 
-	
 	public ReporteSolicitud() {
 		setResizable(false);
 		setModal(true);
@@ -60,10 +57,11 @@ public class ReporteSolicitud extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			panel.setBackground(new Color(248, 248, 255));
-			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Reporte Solicitudes", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Reporte Solicitudes",
+					TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
-			
+
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.addMouseListener(new MouseAdapter() {
 				@Override
@@ -76,7 +74,8 @@ public class ReporteSolicitud extends JDialog {
 			{
 				table = new JTable();
 				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				String [] colimneNames  = { "Nombre Empresa","Tipo Solicitud","Cantidad Vacantes","Porcentaje Completado"};
+				String[] colimneNames = { "Nombre Empresa", "Tipo Solicitud", "Cantidad Vacantes",
+						"Porcentaje Completado" };
 				model = new DefaultTableModel();
 				model.setColumnIdentifiers(colimneNames);
 				table.setModel(model);
@@ -106,18 +105,15 @@ public class ReporteSolicitud extends JDialog {
 
 	private void loadTable() {
 		model.setRowCount(0);
-		fila = new Object [model.getColumnCount()];
-		for (Solicitud  soli : bolsa.getMisSolicitudes()) 
-		{ 
-		fila[0] = soli.getEmpresa().getNombre();
-		fila[1] =tipoSolicitud(soli);
-		fila[2] = soli.getCantVacantes();
-		
-		fila[3] = bolsa.porcientoSolicitud(soli);
-		model.addRow(fila);
-	    
-	    	
-	    	}
+		fila = new Object[model.getColumnCount()];
+		for (Solicitud soli : bolsa.getMisSolicitudes()) {
+			fila[0] = soli.getEmpresa().getNombre();
+			fila[1] = tipoSolicitud(soli);
+			fila[2] = soli.getCantVacantes();
+			fila[3] = bolsa.porcientoSolicitud(soli);
+			model.addRow(fila);
+
+		}
 		table.setModel(model);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getTableHeader().setReorderingAllowed(false);
@@ -126,24 +122,20 @@ public class ReporteSolicitud extends JDialog {
 		columnModel.getColumn(1).setPreferredWidth(167);
 		columnModel.getColumn(2).setPreferredWidth(167);
 		columnModel.getColumn(3).setPreferredWidth(167);
-		
-		
 
-		
-		
 	}
-	
-	public String tipoSolicitud(Solicitud soli){
-		String tipoSoli=null;
-		if(soli instanceof SolicitudObrero){
-			tipoSoli="Solicitud Obrero";
+
+	public String tipoSolicitud(Solicitud soli) {
+		String tipoSoli = null;
+		if (soli instanceof SolicitudObrero) {
+			tipoSoli = "Solicitud Obrero";
 		}
-		if(soli instanceof SolicitudTecnico){
-			tipoSoli="Solicitud Tecnico";
-		}else{
-			tipoSoli="Solicitud Universitario";
+		if (soli instanceof SolicitudTecnico) {
+			tipoSoli = "Solicitud Tecnico";
+		} else {
+			tipoSoli = "Solicitud Universitario";
 		}
 		return tipoSoli;
 	}
-	
+
 }

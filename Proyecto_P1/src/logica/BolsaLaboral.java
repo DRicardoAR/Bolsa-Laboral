@@ -710,9 +710,13 @@ public class BolsaLaboral implements Serializable {
 
 	public float porcientoSolicitud(Solicitud soli) {
 		float por = 0;
-		int cantActual = soli.getCantVacantes();
-		int cantTotal = soli.getCantReal();
+		if(soli.getCantReal()!=soli.cantVacantes){
+		int cantTotal = soli.getCantVacantes();
+		int cantActual = soli.getCantReal();
 		por = (cantActual / cantTotal) * 100;
+		}else {
+			por = 100;
+		}
 		return por;
 	}
 
