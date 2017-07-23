@@ -48,6 +48,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.border.BevelBorder;
 
 public class Principal extends JFrame {
 
@@ -384,7 +385,7 @@ public class Principal extends JFrame {
 
 		panelBarras = new JPanel();
 		panelBarras.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panelBarras.setBounds(44, 11, 579, 294);
+		panelBarras.setBounds(10, 127, 613, 294);
 		panel.add(panelBarras);
 		panelBarras.setLayout(null);
 
@@ -395,7 +396,7 @@ public class Principal extends JFrame {
 
 		panelPastel = new JPanel();
 		panelPastel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panelPastel.setBounds(667, 11, 579, 294);
+		panelPastel.setBounds(667, 127, 613, 294);
 		panel.add(panelPastel);
 		panelPastel.setLayout(null);
 
@@ -406,13 +407,19 @@ public class Principal extends JFrame {
 
 		lblhora = new JLabel("");
 		lblhora.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblhora.setBounds(0, 603, 140, 39);
+		lblhora.setBounds(10, 595, 140, 39);
 		panel.add(lblhora);
 		
 		lblYear = new JLabel("");
-		lblYear.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblYear.setBounds(112, 603, 116, 39);
+		lblYear.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblYear.setBounds(105, 595, 116, 39);
 		panel.add(lblYear);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_1.setBounds(0, 595, 1290, 58);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
 		actualizarChart();
 		actualizarPastel();
 		reloj();
