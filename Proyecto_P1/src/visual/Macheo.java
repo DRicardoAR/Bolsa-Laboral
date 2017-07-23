@@ -83,7 +83,7 @@ public class Macheo extends JDialog {
 		getContentPane().setBackground(new Color(248, 248, 255));
 		setBackground(new Color(248, 248, 255));
 
-		setTitle("Macheo");
+		setTitle("Ubicaci\u00F3n Laboral");
 		setBounds(100, 100, 853, 509);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
