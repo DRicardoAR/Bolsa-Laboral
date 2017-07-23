@@ -111,7 +111,7 @@ public class ReporteSolicitud extends JDialog {
 		{ 
 		fila[0] = soli.getEmpresa().getNombre();
 		fila[1] =tipoSolicitud(soli);
-		fila[2] = soli.getCantReal();
+		fila[2] = soli.getCantVacantes();
 		
 		fila[3] = bolsa.porcientoSolicitud(soli);
 		model.addRow(fila);
