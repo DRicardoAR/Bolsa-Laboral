@@ -147,4 +147,8 @@ public abstract class Solicitud implements Serializable{
 		this.cantReal = cantReal;
 	}
 
+	
+	public void IncreasedCantReal(){
+		cantReal++;
+	}
 }
