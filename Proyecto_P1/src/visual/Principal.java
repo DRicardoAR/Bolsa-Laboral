@@ -140,6 +140,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnMacheo);
 		
 				JMenuItem mntmRealizarMacheo = new JMenuItem("Realizar Pareo");
+				mntmRealizarMacheo.setIcon(new ImageIcon(Principal.class.getResource("/img/pareo.png")));
 				mntmRealizarMacheo.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Macheo macheo;
@@ -157,9 +158,11 @@ public class Principal extends JFrame {
 				mnMacheo.add(mntmRealizarMacheo);
 				
 				JMenu mnNewMenu = new JMenu("Exportar");
+				mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/img/exportar.png")));
 				mnMacheo.add(mnNewMenu);
 				
 				JMenuItem mntmExportarEmpresa = new JMenuItem("Exportar Empresa");
+				mntmExportarEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/img/addEmpresa.png")));
 				mntmExportarEmpresa.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						ImportarEmpresa imem = new ImportarEmpresa();
@@ -171,6 +174,7 @@ public class Principal extends JFrame {
 				mnNewMenu.add(mntmExportarEmpresa);
 				
 				JMenuItem mntmExportarSolicitud = new JMenuItem("Exportar Solicitante");
+				mntmExportarSolicitud.setIcon(new ImageIcon(Principal.class.getResource("/img/persona.png")));
 				mntmExportarSolicitud.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						ImportarEmpleado im = new ImportarEmpleado();
@@ -184,10 +188,23 @@ public class Principal extends JFrame {
 				JSeparator separator = new JSeparator();
 				mnMacheo.add(separator);
 				
-				JMenuItem mntmCerrar = new JMenuItem("Cerrar");
+				JMenuItem mntmCerrar = new JMenuItem("Salir");
+				mntmCerrar.setIcon(new ImageIcon(Principal.class.getResource("/img/cancelar.png")));
 				mntmCerrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						dispose();
+						if (JOptionPane.showConfirmDialog(null, "¿Desea guardar los nuevos cambios en la bolsa laboral?",
+								"Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+							
+							ProgressBar progress = new ProgressBar(1);
+							progress.setVisible(true);				
+							progress.setLocationRelativeTo(null);
+							BolsaLaboral.getInstance().esribirBolsa();
+							dispose();
+						}else{
+							dispose();
+							
+							
+						}
 					}
 				});
 				mnMacheo.add(mntmCerrar);
@@ -196,6 +213,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnCandidatos);
 
 		JMenuItem mntmRegistrarCandidato = new JMenuItem("Registrar Solicitante");
+		mntmRegistrarCandidato.setIcon(new ImageIcon(Principal.class.getResource("/img/agregarSolicitante.png")));
 		mntmRegistrarCandidato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InsertarSolicitate soli = new InsertarSolicitate("Insertar Solicitante", false, null,null);
@@ -208,6 +226,7 @@ public class Principal extends JFrame {
 		mnCandidatos.add(mntmRegistrarCandidato);
 
 		JMenuItem mntmListarCandidatos = new JMenuItem("Listar Solicitante");
+		mntmListarCandidatos.setIcon(new ImageIcon(Principal.class.getResource("/img/Listas.png")));
 		mntmListarCandidatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListarSolicitante soli = new ListarSolicitante();
@@ -234,6 +253,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnEmpresa);
 
 		JMenuItem mntmRegistrarEmpresa = new JMenuItem("Registrar Empresa");
+		mntmRegistrarEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/img/addEmpresa.png")));
 		mntmRegistrarEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InsertarEmpresa empre;
@@ -252,6 +272,7 @@ public class Principal extends JFrame {
 		mnEmpresa.add(mntmRegistrarEmpresa);
 
 		JMenuItem mntmListarEmpresas = new JMenuItem("Listar Empresas");
+		mntmListarEmpresas.setIcon(new ImageIcon(Principal.class.getResource("/img/Listas.png")));
 		mntmListarEmpresas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ListarEmpresa lista = new ListarEmpresa();
@@ -277,6 +298,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnSolicitud);
 
 		JMenuItem mntmRegistrarSolicitud = new JMenuItem("Registrar Solicitud");
+		mntmRegistrarSolicitud.setIcon(new ImageIcon(Principal.class.getResource("/img/addSolicitud.png")));
 		mntmRegistrarSolicitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InsertarSolicitud solicitud = new InsertarSolicitud(null);
@@ -287,6 +309,7 @@ public class Principal extends JFrame {
 		mnSolicitud.add(mntmRegistrarSolicitud);
 
 		JMenuItem mntmListarSolicitud = new JMenuItem("Listar Solicitud");
+		mntmListarSolicitud.setIcon(new ImageIcon(Principal.class.getResource("/img/Listas.png")));
 		mntmListarSolicitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListarSolicitud soli = new ListarSolicitud();
@@ -312,6 +335,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnReporte);
 
 		JMenuItem mntmReporteDeEmpresa = new JMenuItem("Reporte de Empresa");
+		mntmReporteDeEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/img/addEmpresa.png")));
 		mntmReporteDeEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListarEmpleados emple = new ListarEmpleados();
@@ -324,6 +348,7 @@ public class Principal extends JFrame {
 		mnReporte.add(mntmReporteDeEmpresa);
 
 		JMenuItem mntmReporteDeSolicitudes = new JMenuItem("Reporte de Solicitudes");
+		mntmReporteDeSolicitudes.setIcon(new ImageIcon(Principal.class.getResource("/img/addSolicitud.png")));
 		mntmReporteDeSolicitudes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ReporteSolicitud soli = new ReporteSolicitud();
