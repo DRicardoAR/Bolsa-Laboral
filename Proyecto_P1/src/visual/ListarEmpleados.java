@@ -168,6 +168,7 @@ public class ListarEmpleados extends JDialog {
 				fila[2] = tipo;
 				fila[3] = soli.getFechaContratado();
 				modeloTabla.addRow(fila);
+				
 			}
 			table.setModel(modeloTabla);
 			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
