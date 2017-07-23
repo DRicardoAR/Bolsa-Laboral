@@ -721,11 +721,9 @@ public class BolsaLaboral implements Serializable {
 	
 	public float porcientoSolicitud(Solicitud soli){
 		float por=0;
-		if(soli.getCantReal()!=soli.getCantVacantes()){
-		por= (soli.getCantVacantes()/soli.getCantReal())*100;
-	}else{
-		por= 0.0f;
-		}
+	
+		por= (soli.getCantReal()/soli.getCantVacantes())*100;
+	
 		return por;
 	}
 	// retorna una solicitud dado el rnc de una empresa
