@@ -187,14 +187,10 @@ public class BolsaLaboral implements Serializable {
 		if (persona.contratado == false) {
 			if (persona.isVehiculoPropio() == solicitud.isVehiculoPropio()) {
 				if (persona.isMudarse() == solicitud.isMudarse()) {
-					if (persona.getCategoriaLicencia() >= solicitud
-							.getCategoriaLicencia()) {
-						if (persona.getAnnosExperiencia() >= solicitud
-								.getAnnosExperiencia()) {
-							if ((persona.setEdadSolicitante() >= solicitud
-									.getEdadMin())
-									&& (persona.setEdadSolicitante() <= solicitud
-											.getEdadMax())) {
+					if (persona.getCategoriaLicencia() >= solicitud.getCategoriaLicencia()) {
+						if (persona.getAnnosExperiencia() >= solicitud.getAnnosExperiencia()) {
+							if ((persona.setEdadSolicitante() >= solicitud.getEdadMin())
+									&& (persona.setEdadSolicitante() <= solicitud.getEdadMax())) {
 								if (validarIdiomas(persona, solicitud)) {
 									valido = true;
 
@@ -215,10 +211,8 @@ public class BolsaLaboral implements Serializable {
 	// Validacion Obrero con solicitud
 	private boolean ValidarObrero(Solicitante solicitante, Solicitud solicitud) {
 		boolean validar = false;
-		for (String habilidadObrero : ((SolicitudObrero) solicitud)
-				.getHabilidades()) {
-			if (((Obrero) solicitante).getHabilidades().contains(
-					habilidadObrero)) {
+		for (String habilidadObrero : ((SolicitudObrero) solicitud).getHabilidades()) {
+			if (((Obrero) solicitante).getHabilidades().contains(habilidadObrero)) {
 				validar = true;
 			} else {
 				validar = false;
@@ -232,8 +226,7 @@ public class BolsaLaboral implements Serializable {
 	// Validacion Tecnico con solicitud
 	private boolean ValidarTecnico(Solicitante solicitante, Solicitud soli) {
 		boolean validar = false;
-		if (((Tecnico) solicitante).getArea().equalsIgnoreCase(
-				((SolicitudTecnico) soli).getArea())) {
+		if (((Tecnico) solicitante).getArea().equalsIgnoreCase(((SolicitudTecnico) soli).getArea())) {
 			validar = true;
 		}
 		return validar;
@@ -242,11 +235,9 @@ public class BolsaLaboral implements Serializable {
 	// Validacion Universitario con solicitud
 	private boolean validarUniversitario(Solicitante solicitante, Solicitud soli) {
 		boolean validar = false;
-		if (((Universitario) solicitante).getCarrera().equalsIgnoreCase(
-				((SolicitudUniversitario) soli).getCarrera())) {
+		if (((Universitario) solicitante).getCarrera().equalsIgnoreCase(((SolicitudUniversitario) soli).getCarrera())) {
 			validar = true;
-			if (!((Universitario) solicitante).isPostGrado()
-					&& ((SolicitudUniversitario) soli).isPostGrado()) {
+			if (!((Universitario) solicitante).isPostGrado() && ((SolicitudUniversitario) soli).isPostGrado()) {
 				validar = false;
 			}
 
@@ -382,8 +373,7 @@ public class BolsaLaboral implements Serializable {
 
 	// validacion de Email
 	public boolean validarEmail(String email) {
-		Pattern patt = Pattern
-				.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		Pattern patt = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 		Matcher match = patt.matcher(email);
 		if (!match.find()) {
 			return true;
@@ -709,8 +699,7 @@ public class BolsaLaboral implements Serializable {
 	}
 
 	// Contratar Candidatos
-	public void contratarCandidatos(Solicitud solicitud,
-			ArrayList<Solicitante> empleados) {
+	public void contratarCandidatos(Solicitud solicitud, ArrayList<Solicitante> empleados) {
 		Empresa empresa = solicitud.getEmpresa();
 		for (Solicitante solicitante : empleados) {
 			solicitud.IncreasedCantReal();
@@ -718,161 +707,153 @@ public class BolsaLaboral implements Serializable {
 		}
 
 	}
-	
-	public float porcientoSolicitud(Solicitud soli){
-		float por=0;
-	
-		por= (soli.getCantReal()/soli.getCantVacantes())*100;
-	
+
+	public float porcientoSolicitud(Solicitud soli) {
+		float por = 0;
+		int cantActual = soli.getCantVacantes();
+		int cantTotal = soli.getCantReal();
+		por = (cantActual / cantTotal) * 100;
 		return por;
 	}
-	
-	
-	
-	
+
 	// retorna una solicitud dado el rnc de una empresa
-	public Empresa RetornaEmpresaSoli (String rnc){
-		Empresa empre=null;
+	public Empresa RetornaEmpresaSoli(String rnc) {
+		Empresa empre = null;
 		for (Empresa empresa : misEmpresas) {
-			if(empresa.getRNC().equalsIgnoreCase(rnc)){
+			if (empresa.getRNC().equalsIgnoreCase(rnc)) {
 				empre = empresa;
 			}
-			
+
 		}
 		return empre;
-		
+
 	}
-	public boolean EmpresaExiste(String rnc){
-		boolean existe=false;
+
+	public boolean EmpresaExiste(String rnc) {
+		boolean existe = false;
 		for (Empresa empresa : misEmpresas) {
-			if(empresa.getRNC().equalsIgnoreCase(rnc)){
+			if (empresa.getRNC().equalsIgnoreCase(rnc)) {
 				existe = true;
 			}
 		}
 		return existe;
-		
+
 	}
 
-	
 	// escribe fichero texto de una empresa
-	public void writeEmpresaTXT(String rnc) throws IOException{
+	public void writeEmpresaTXT(String rnc) throws IOException {
 		writer_1 = new FileWriter(new File("Archivo.txt"));
-		Empresa soli =RetornaEmpresaSoli(rnc);
-		int cant =0;
-		int cot=0;
-		int cantcontratados=0;
-		writer_1.write("***********************************************************************************"+"\n");
-		writer_1.write("*                               Bolsa Laboral                                     *"+"\n");
-		writer_1.write("*                                   Empresa                                       *"+"\n");
-		writer_1.write("***********************************************************************************"+"\n");
-		writer_1.write("Empresa:                "+soli.getNombre()+"\n");
-		for(Solicitud misoli : misSolicitudes) {
-			if(misoli.getEmpresa().getRNC().equalsIgnoreCase(rnc)) {
+		Empresa soli = RetornaEmpresaSoli(rnc);
+		int cant = 0;
+		int cot = 0;
+		int cantcontratados = 0;
+		writer_1.write("***********************************************************************************" + "\n");
+		writer_1.write("*                               Bolsa Laboral                                     *" + "\n");
+		writer_1.write("*                                   Empresa                                       *" + "\n");
+		writer_1.write("***********************************************************************************" + "\n");
+		writer_1.write("Empresa:                " + soli.getNombre() + "\n");
+		for (Solicitud misoli : misSolicitudes) {
+			if (misoli.getEmpresa().getRNC().equalsIgnoreCase(rnc)) {
 				cant = misoli.getCantVacantes();
-			 cantcontratados= misoli.getCantReal();
-			 cot++;
+				cantcontratados = misoli.getCantReal();
+				cot++;
 			}
-			
-			
+
 		}
-		writer_1.write("Cantidad Vacantes inicial: "+cant+"\n");
-		writer_1.write("Cantidad Vacantes real:    "+cantcontratados+"\n");
-		writer_1.write("Cantidad Solicitudes       "+cot+"\n");
-		writer_1.write("***********************************************************************************"+"\n");
+		writer_1.write("Cantidad Vacantes inicial: " + cant + "\n");
+		writer_1.write("Cantidad Vacantes real:    " + cantcontratados + "\n");
+		writer_1.write("Cantidad Solicitudes       " + cot + "\n");
+		writer_1.write("***********************************************************************************" + "\n");
 		writer_1.close();
-		 
-	
-}
-//buscar solicitante por cedula
-	
-	public Solicitante BuscarSoliCedula(String Cedula){
-		Solicitante solicitante =null;
-		for (Solicitante soli: misSolicitantes) {
-			if(soli.getCedula().equalsIgnoreCase(Cedula)){
-				solicitante=soli;
+
+	}
+	// buscar solicitante por cedula
+
+	public Solicitante BuscarSoliCedula(String Cedula) {
+		Solicitante solicitante = null;
+		for (Solicitante soli : misSolicitantes) {
+			if (soli.getCedula().equalsIgnoreCase(Cedula)) {
+				solicitante = soli;
 			}
-			
+
 		}
 		return solicitante;
 	}
-	
-	
-	
-	
-		
-		// retorna si existe un solicitante
-		public boolean SolicitanteExiste(String cedula){
-			boolean existe = false;
-			for (Solicitante solicitante : misSolicitantes) {
 
-				if(solicitante.getCedula().equalsIgnoreCase(cedula)){
-					existe = true;
-				}
+	// retorna si existe un solicitante
+	public boolean SolicitanteExiste(String cedula) {
+		boolean existe = false;
+		for (Solicitante solicitante : misSolicitantes) {
+
+			if (solicitante.getCedula().equalsIgnoreCase(cedula)) {
+				existe = true;
 			}
-			return existe;
 		}
-		
-		// retorna el tipo de solicitante
-		public String tipoSolicitante(Solicitante soli){
-		String solici=null;
+		return existe;
+	}
 
-			if(soli instanceof Obrero){
-				solici="Obrero";
-				
-			}
-			if(soli instanceof Universitario){
-				solici="Universitario";
-				
-			}
-			if(soli instanceof Tecnico){
-				solici="Tecnico";
-				
-			}
-				
+	// retorna el tipo de solicitante
+	public String tipoSolicitante(Solicitante soli) {
+		String solici = null;
+
+		if (soli instanceof Obrero) {
+			solici = "Obrero";
+
+		}
+		if (soli instanceof Universitario) {
+			solici = "Universitario";
+
+		}
+		if (soli instanceof Tecnico) {
+			solici = "Tecnico";
+
+		}
+
 		return solici;
-		
+
+	}
+
+	// retorna si esta contratado o no
+
+	public String contradato(Solicitante soli) {
+		String estado = null;
+		if (soli.isContratado()) {
+			estado = "Contratado";
+
+		} else {
+			estado = "Desempleado";
 		}
-		
-		// retorna si esta contratado o no
-		
-		public String contradato(Solicitante soli){
-			String estado=null;
-			if(soli.isContratado()){
-				estado="Contratado";
-				
-			}else{
-				estado="Desempleado";
+		return estado;
+	}
+
+	// retorna cantidad de solicitudes del solicitane
+	public int cantidadSolicitante(Solicitante soli) {
+		int cant = 0;
+		for (Solicitante misoli : misSolicitantes) {
+			if (soli.getCedula().equalsIgnoreCase(misoli.getCedula())) {
+				cant++;
 			}
-			return estado;
+
 		}
-		
-		// retorna cantidad de solicitudes del solicitane
-		public int cantidadSolicitante(Solicitante soli){
-			int cant=0;
-			for (Solicitante misoli : misSolicitantes) {
-				if(soli.getCedula().equalsIgnoreCase(misoli.getCedula())){
-					cant++;
-				}
-				
-			}
-			return cant;
-			
-		}
-	public void writeSolicitanteTXT(String cedula) throws IOException{
+		return cant;
+
+	}
+
+	public void writeSolicitanteTXT(String cedula) throws IOException {
 		writer_1 = new FileWriter(new File("Archivo.txt"));
-		Solicitante soli =BuscarSoliCedula(cedula);
-		writer_1.write("***********************************************************************************"+"\n");
-		writer_1.write("*                               Bolsa Laboral                                     *"+"\n");
-		writer_1.write("*                                 Empleado                                        *"+"\n");
-		writer_1.write("***********************************************************************************"+"\n");
-		writer_1.write("Nombres:                 "+soli.getNombres()+"\n");
-		writer_1.write("Apellidos:               "+soli.getApellidos()+"\n");
-		writer_1.write("Tipo Solicitante:        "+tipoSolicitante(soli)+"\n");
-		writer_1.write("Estado:                  "+contradato(soli)+"\n");
-		writer_1.write("Cantidad de Solicitudes: "+cantidadSolicitante(soli)+"\n");
-		writer_1.write("***********************************************************************************"+"\n");
+		Solicitante soli = BuscarSoliCedula(cedula);
+		writer_1.write("***********************************************************************************" + "\n");
+		writer_1.write("*                               Bolsa Laboral                                     *" + "\n");
+		writer_1.write("*                                 Empleado                                        *" + "\n");
+		writer_1.write("***********************************************************************************" + "\n");
+		writer_1.write("Nombres:                 " + soli.getNombres() + "\n");
+		writer_1.write("Apellidos:               " + soli.getApellidos() + "\n");
+		writer_1.write("Tipo Solicitante:        " + tipoSolicitante(soli) + "\n");
+		writer_1.write("Estado:                  " + contradato(soli) + "\n");
+		writer_1.write("Cantidad de Solicitudes: " + cantidadSolicitante(soli) + "\n");
+		writer_1.write("***********************************************************************************" + "\n");
 		writer_1.close();
-		 
+
 	}
 
 }
