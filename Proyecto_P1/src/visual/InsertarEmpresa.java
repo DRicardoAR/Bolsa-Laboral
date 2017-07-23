@@ -247,6 +247,20 @@ public class InsertarEmpresa extends JDialog {
 
 		txtReferencia = new JTextField();
 		txtReferencia.setBackground(Color.WHITE);
+		txtReferencia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (Character.isDigit(c)) {
+					getToolkit().beep();
+
+					e.consume();
+					JOptionPane.showMessageDialog(null,"Este campo no adminte número");
+
+				}
+
+			}
+		});
 		txtReferencia.setBounds(405, 128, 174, 23);
 		panel_1.add(txtReferencia);
 		txtReferencia.setColumns(10);
