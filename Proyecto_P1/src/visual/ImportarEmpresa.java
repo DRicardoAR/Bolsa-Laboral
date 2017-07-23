@@ -73,7 +73,8 @@ public class ImportarEmpresa extends JDialog {
 								BolsaLaboral.getInstance().writeEmpresaTXT(ftxtrnc.getText());
 								ProgressBar pr = new ProgressBar(2);
 								pr.setLocationRelativeTo( null);
-								pr.setVisible(true);								
+								pr.setVisible(true);			
+								JOptionPane.showMessageDialog(null, "Empresa Exportadas");
 								ftxtrnc.setText(null);
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
