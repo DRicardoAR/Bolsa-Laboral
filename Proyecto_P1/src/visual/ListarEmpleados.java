@@ -173,10 +173,10 @@ public class ListarEmpleados extends JDialog {
 			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			table.getTableHeader().setReorderingAllowed(false);
 			TableColumnModel modeloColumna = table.getColumnModel();
-			modeloColumna.getColumn(0).setPreferredWidth(90);
-			modeloColumna.getColumn(1).setPreferredWidth(140);
-			modeloColumna.getColumn(2).setPreferredWidth(110);
-			modeloColumna.getColumn(3).setPreferredWidth(100);
+			modeloColumna.getColumn(0).setPreferredWidth(120);
+			modeloColumna.getColumn(1).setPreferredWidth(160);
+			modeloColumna.getColumn(2).setPreferredWidth(130);
+			modeloColumna.getColumn(3).setPreferredWidth(130);
 		}else{
 			JOptionPane.showMessageDialog(null, "No se encontró ningún solicitud para el RNC dado.",
 					"ATENCIÓN", JOptionPane.ERROR_MESSAGE, null);
