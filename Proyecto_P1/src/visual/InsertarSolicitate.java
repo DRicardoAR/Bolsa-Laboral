@@ -1228,7 +1228,7 @@ public class InsertarSolicitate extends JDialog {
 		panel_Universitario.setVisible(false);
 		panel1.setVisible(false);
 		panel2.setVisible(true);
-		btnMover.setText("<< Retroceder");
+		btnMover.setText(" Retroceder");
 		error = false;
 
 	}
@@ -1265,7 +1265,7 @@ public class InsertarSolicitate extends JDialog {
 		spnAnosExpTecnico.setValue(0);
 		spnAnosExpUniversitario.setValue(0);
 		spnNumeroCasa.setValue(0);
-		btnMover.setText("Continuar >>");
+		btnMover.setText("Continuar ");
 		btnRegistrar.setEnabled(false);
 		LocalDate fecha = LocalDate.now();
 		Date date = java.sql.Date.valueOf(fecha);
@@ -1286,7 +1286,7 @@ public class InsertarSolicitate extends JDialog {
 						if (estado) {
 							panel1.setVisible(false);
 							panel2.setVisible(true);
-							btnMover.setText("<< Retroceder");
+							btnMover.setText(" Retroceder");
 						}
 
 						sleep(10);
