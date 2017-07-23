@@ -798,8 +798,9 @@ public class InsertarSolicitate extends JDialog {
 
 		cbxAreaTecnico = new JComboBox();
 		cbxAreaTecnico.setBackground(new Color(248, 248, 255));
-		cbxAreaTecnico
-				.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Emprendimiento", "Mecanograf\u00EDa", "Dise\u00F1o Gr\u00E1fico", "Programaci\u00F3n", "Contabilidad", "Programaci\u00F3n Web"}));
+		cbxAreaTecnico.setModel(
+				new DefaultComboBoxModel(new String[] { "< Seleccione >", "Emprendimiento", "Mecanograf\u00EDa",
+						"Dise\u00F1o Gr\u00E1fico", "Programaci\u00F3n", "Contabilidad", "Programaci\u00F3n Web" }));
 		cbxAreaTecnico.setBounds(396, 46, 123, 23);
 		panel_Tecnico.add(cbxAreaTecnico);
 
@@ -1106,12 +1107,14 @@ public class InsertarSolicitate extends JDialog {
 					btnMover.setIcon(new ImageIcon(InsertarSolicitate.class.getResource("/img/Siguiente.png")));
 					btnMover.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							if(panel2.isVisible()){
-								btnMover.setIcon(new ImageIcon(InsertarSolicitate.class.getResource("/img/Siguiente.png")));
-							}else{
-								btnMover.setIcon(new ImageIcon(InsertarSolicitate.class.getResource("/img/retroceso.png")));
+							if (panel2.isVisible()) {
+								btnMover.setIcon(
+										new ImageIcon(InsertarSolicitate.class.getResource("/img/Siguiente.png")));
+							} else {
+								btnMover.setIcon(
+										new ImageIcon(InsertarSolicitate.class.getResource("/img/retroceso.png")));
 							}
-							
+
 							String fecha = ((JTextField) FechaNacimiento.getDateEditor().getUiComponent()).getText();
 							String sexo = "";
 							if (rdbFemenino.isSelected()) {
