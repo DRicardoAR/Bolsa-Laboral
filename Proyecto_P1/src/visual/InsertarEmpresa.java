@@ -171,7 +171,7 @@ public class InsertarEmpresa extends JDialog {
 				"La Romana ", "La Vega ", "María Trinidad Sánchez ",
 				"Monseñor Nouel ", "Montecristi ", "Monte Plata ",
 				"Pedernales ", "Peravia ", "Puerto Plata ",
-				"Hermanas Mirabal ", "Saman\u00E1 ",
+				"Hermanas Mirabal ", "Samaná ",
 				"S\u00E1nchez Ram\u00EDrez ", "San Crist\u00F3bal ",
 				"San Jos\u00E9 de Ocoa ", "San Juan ",
 				"San Pedro de Macor\u00EDs ", "Santiago ",
