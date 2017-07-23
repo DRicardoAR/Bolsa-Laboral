@@ -68,19 +68,12 @@ public class Macheo extends JDialog {
 
 	/**
 	 * Launch the application.
-	 
-	public static void main(String[] args) {
-		try {
-			Macheo dialog = new Macheo();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
+	 * 
+	 * public static void main(String[] args) { try { Macheo dialog = new
+	 * Macheo(); dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	 * dialog.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
+	 * 
+	 * /** Create the dialog.
 	 * 
 	 * @throws ParseException
 	 */
@@ -209,7 +202,6 @@ public class Macheo extends JDialog {
 								Solicitud soli = BolsaLaboral.getInstance().RetornarSolocitudCod(codigo);
 								if (soli != null) {
 									misSolicitantesC = BolsaLaboral.getInstance().matcheo(soli);
-								
 
 								}
 
@@ -282,15 +274,14 @@ public class Macheo extends JDialog {
 						if (misSolicitantesC.size() != 0) {
 							Solicitud solicitud = BolsaLaboral.getInstance().RetornarSolocitudCod(codigo);
 							BolsaLaboral.getInstance().contratarCandidatos(solicitud, misSolicitantesC);
-							JOptionPane.showMessageDialog(null,
-									"Los solicitantes han sido contratados.", "Información",
+							JOptionPane.showMessageDialog(null, "Los solicitantes han sido contratados.", "Información",
 									JOptionPane.INFORMATION_MESSAGE, null);
 							Principal.actualizarChart();
 							Principal.actualizarPastel();
-						}else{
+						} else {
 							JOptionPane.showMessageDialog(null,
-									"No existen solicitantes en la actualidad para satisfacer esta solicitud", "Información",
-									JOptionPane.INFORMATION_MESSAGE, null);
+									"No existen solicitantes en la actualidad para satisfacer esta solicitud",
+									"Información", JOptionPane.INFORMATION_MESSAGE, null);
 						}
 					}
 				});
@@ -345,7 +336,9 @@ public class Macheo extends JDialog {
 		} else {
 			ArrayList<Solicitud> solicitudesEmpresa = new ArrayList<>();
 			for (Solicitud solicitud : BolsaLaboral.getInstance().RetornaSolicitudEmp(empresa)) {
-				solicitudesEmpresa.add(solicitud);
+				if (solicitud.getCantReal() > 0) {
+					solicitudesEmpresa.add(solicitud);
+				}
 			}
 
 			for (Solicitud soli : solicitudesEmpresa) {
@@ -362,7 +355,7 @@ public class Macheo extends JDialog {
 				fila[2] = soli.getCantVacantes();
 				String min = Integer.toString(soli.getEdadMin());
 				String max = Integer.toString(soli.getEdadMax());
-				String rango = min + "-" + max+" Años";
+				String rango = min + "-" + max + " Años";
 				fila[3] = rango;
 				fila[4] = soli.getLocalidad();
 
