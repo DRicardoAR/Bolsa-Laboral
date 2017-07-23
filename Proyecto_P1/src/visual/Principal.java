@@ -89,7 +89,7 @@ public class Principal extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				if (JOptionPane.showConfirmDialog(null, "¿Desea guardar los nuevos cambios en la bolsa laboral?",
-						"Atenciï¿½n Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+						"Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
 					ProgressBar progress = new ProgressBar(1);
 					progress.setVisible(true);
