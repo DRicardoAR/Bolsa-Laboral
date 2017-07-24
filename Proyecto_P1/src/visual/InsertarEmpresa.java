@@ -445,6 +445,7 @@ public class InsertarEmpresa extends JDialog {
 						Empresa modiEmpre = new Empresa(rnc, nombre, tele, email, provincia, direcion, sector, ciudad, calle, local, referencia);
 							BolsaLaboral.getInstance().modificaEmpresa(modiEmpre);
 							JOptionPane.showMessageDialog(null, "Empresa Modificada");
+							dispose();
 							
 						}
 					}
