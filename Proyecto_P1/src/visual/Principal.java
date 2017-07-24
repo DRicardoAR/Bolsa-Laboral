@@ -49,6 +49,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.border.BevelBorder;
+import java.awt.Toolkit;
 
 public class Principal extends JFrame {
 
@@ -86,6 +87,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/logo.png")));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -106,7 +108,7 @@ public class Principal extends JFrame {
 		BolsaLaboral.getInstance().leerBolsa();
 		setBackground(new Color(248, 248, 255));
 		setResizable(false);
-		setTitle("Bolsa Laboral");
+		setTitle("Man Power Group");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 1306, 727);
 		dim = super.getToolkit().getScreenSize();
@@ -420,6 +422,11 @@ public class Principal extends JFrame {
 		panel_1.setBounds(0, 595, 1290, 58);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(Principal.class.getResource("/img/logo.png")));
+		label.setBounds(10, 27, 250, 48);
+		panel.add(label);
 		actualizarChart();
 		actualizarPastel();
 		reloj();
