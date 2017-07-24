@@ -1234,6 +1234,7 @@ public class InsertarSolicitate extends JDialog {
 	}
 
 	public void clean() {
+		btnMover.setIcon(new ImageIcon(InsertarSolicitate.class.getResource("/img/Siguiente.png")));
 		txtNombre.setText("");
 		txtApellidos.setText("");
 		txtCalle.setText("");
