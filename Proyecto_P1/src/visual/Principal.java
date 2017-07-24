@@ -401,7 +401,7 @@ public class Principal extends JFrame {
 
 		panelBarras = new JPanel();
 		panelBarras.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panelBarras.setBounds(10, 127, 613, 294);
+		panelBarras.setBounds(10, 250, 613, 294);
 		panel.add(panelBarras);
 		panelBarras.setLayout(null);
 
@@ -412,7 +412,7 @@ public class Principal extends JFrame {
 
 		panelPastel = new JPanel();
 		panelPastel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panelPastel.setBounds(667, 127, 613, 294);
+		panelPastel.setBounds(667, 250, 613, 294);
 		panel.add(panelPastel);
 		panelPastel.setLayout(null);
 
@@ -438,9 +438,13 @@ public class Principal extends JFrame {
 		panel_1.setLayout(null);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(Principal.class.getResource("/img/logo.png")));
-		label.setBounds(10, 27, 250, 48);
+		label.setIcon(new ImageIcon(Principal.class.getResource("/img/Manpower.png")));
+		label.setBounds(322, 26, 645, 182);
 		panel.add(label);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(10, 216, 1270, 12);
+		panel.add(separator_1);
 		actualizarChart();
 		actualizarPastel();
 		reloj();
