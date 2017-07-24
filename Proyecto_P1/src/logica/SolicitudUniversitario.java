@@ -10,7 +10,7 @@ public class SolicitudUniversitario extends Solicitud {
 	private boolean postGrado;
 	private String carrera;
 	
-	public SolicitudUniversitario(int cantVacantes, int annosExperiencia, int edadMax, int edadMin, String tipoContrato,
+	public SolicitudUniversitario(float cantVacantes, int annosExperiencia, int edadMax, int edadMin, String tipoContrato,
 			boolean vehiculoPropio, String localidad, Empresa empresa, boolean mudarse, ArrayList<String> idiomas,
 			int categoriaLicencia,boolean postGrado,String carrera) {
 		super(cantVacantes, annosExperiencia, edadMax, edadMin, tipoContrato, vehiculoPropio, localidad, empresa, mudarse,

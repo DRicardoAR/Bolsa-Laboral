@@ -9,7 +9,7 @@ public class SolicitudTecnico extends Solicitud {
 	private static final long serialVersionUID = 1L;
 	private String area;
 
-	public SolicitudTecnico(int cantVacantes, int annosExperiencia, int edadMax, int edadMin, String tipoContrato,
+	public SolicitudTecnico(float cantVacantes, int annosExperiencia, int edadMax, int edadMin, String tipoContrato,
 			boolean vehiculoPropio, String localidad, Empresa empresa, boolean mudarse, ArrayList<String> idiomas,
 			int categoriaLicencia,String area) {
 		super(cantVacantes, annosExperiencia, edadMax, edadMin, tipoContrato, vehiculoPropio, localidad, empresa,

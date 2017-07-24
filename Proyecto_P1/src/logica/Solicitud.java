@@ -22,7 +22,7 @@ public abstract class Solicitud implements Serializable{
 	protected boolean mudarse;
 	protected ArrayList<String> idiomas = new ArrayList<>();
 
-	public Solicitud(int cantVacantes, int annosExperiencia, int edadMax, int edadMin, String tipoContrato,
+	public Solicitud(float cantVacantes, int annosExperiencia, int edadMax, int edadMin, String tipoContrato,
 			boolean vehiculoPropio, String localidad, Empresa empresa, boolean mudarse, ArrayList<String> idiomas,int categoriaLicencia) {
 		super();
 		this.cantVacantes = cantVacantes;
@@ -71,7 +71,7 @@ public abstract class Solicitud implements Serializable{
 		return cantVacantes;
 	}
 
-	public void setCantVacantes(int cantVacantes) {
+	public void setCantVacantes(float cantVacantes) {
 		this.cantVacantes = cantVacantes;
 	}
 

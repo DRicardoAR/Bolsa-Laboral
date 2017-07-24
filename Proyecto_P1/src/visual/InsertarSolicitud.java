@@ -119,6 +119,7 @@ public class InsertarSolicitud extends JDialog {
 					}
 					ftxtRNC.setValue(modi.getEmpresa().getRNC());
 					ftxtRNC.setEnabled(false);
+					
 					txtNombre.setText(modi.getEmpresa().getNombre());
 					cbxContrato.setSelectedItem(modi.getTipoContrato());
 					if (modi.isMudarse()) {
@@ -777,7 +778,7 @@ public class InsertarSolicitud extends JDialog {
 						} else if (rbtnVehiculoNo.isSelected()) {
 							vehiculo = false;
 						}
-						int vacantes = (int) spnVacantes.getValue();
+						float vacantes = (float) spnVacantes.getValue();
 						String localidad = (String) cbxLocalidad.getSelectedItem();
 						int categoriaLicencia = 0;
 						if (cbxLicencia.getSelectedIndex() == 1) {
@@ -854,7 +855,7 @@ public class InsertarSolicitud extends JDialog {
 								}
 								if (rbtnTecnico.isSelected()) {
 									SolicitudTecnico nuevaSoli = new SolicitudTecnico(vacantes,
-											experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo,
+											experienciaTecnico, edadMaxima, edadMinima, Contrato, vehiculo,
 											localidad, empresa, reubicacion, misIdiomas, categoriaLicencia, area);
 									bolsa.insertSolicitud(nuevaSoli);
 									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
@@ -862,7 +863,7 @@ public class InsertarSolicitud extends JDialog {
 									clean(2);
 								}
 								if (rbtnObrero.isSelected()) {
-									SolicitudObrero nuevaSoli = new SolicitudObrero(vacantes, experienciaUniversitario,
+									SolicitudObrero nuevaSoli = new SolicitudObrero(vacantes, experienciaObrero,
 											edadMaxima, edadMinima, Contrato, vehiculo, localidad, empresa, reubicacion,
 											misIdiomas, categoriaLicencia, misHabilidades);
 									bolsa.insertSolicitud(nuevaSoli);
@@ -888,7 +889,7 @@ public class InsertarSolicitud extends JDialog {
 							} else {
 								modificarSoli.setVehiculoPropio(false);
 							}
-							modificarSoli.setCantVacantes((int) spnVacantes.getValue());
+							modificarSoli.setCantVacantes((float) spnVacantes.getValue());
 							modificarSoli.setLocalidad((String) cbxLocalidad.getSelectedItem());
 							modificarSoli.setEdadMin((int) spnEdadMinima.getValue());
 							modificarSoli.setEdadMax((int) spnEdadMaxima.getValue());
