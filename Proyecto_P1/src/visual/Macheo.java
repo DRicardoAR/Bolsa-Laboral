@@ -136,6 +136,7 @@ public class Macheo extends JDialog {
 					}
 					{
 						JButton button = new JButton("");
+						button.setIcon(new ImageIcon(Macheo.class.getResource("/img/buscar.png")));
 						button.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								ftxtCodSolicitud.setValue("");
