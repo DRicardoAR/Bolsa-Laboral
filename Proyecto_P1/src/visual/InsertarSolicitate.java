@@ -57,6 +57,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.border.EtchedBorder;
 import javax.swing.ImageIcon;
+import javax.swing.SpinnerNumberModel;
 
 public class InsertarSolicitate extends JDialog {
 
@@ -416,6 +417,7 @@ public class InsertarSolicitate extends JDialog {
 			panel_Direccion.add(lblNumeroDeLocalidad);
 
 			spnNumeroCasa = new JSpinner();
+			spnNumeroCasa.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 			spnNumeroCasa.setBackground(new Color(255, 255, 255));
 			spnNumeroCasa.setBounds(100, 111, 134, 23);
 			panel_Direccion.add(spnNumeroCasa);

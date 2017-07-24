@@ -122,6 +122,8 @@ public class ListarEmpresa extends JDialog {
 							if (answer == JOptionPane.YES_OPTION) {
 								BolsaLaboral.getInstance().eliminarEmpresa(cod);
 								loadTable();
+								BtnUpdate.setEnabled(false);
+								btnEliminar.setEnabled(false);
 							}
 						}
 						BolsaLaboral.getInstance().eliminarEmpresa(cod);
@@ -137,6 +139,7 @@ public class ListarEmpresa extends JDialog {
 					public void actionPerformed(ActionEvent arg0) {
 						if (cod != "") {
 							miem = BolsaLaboral.getInstance().RetornarEmpresa(cod);
+						
 
 						}
 						try {
@@ -145,6 +148,8 @@ public class ListarEmpresa extends JDialog {
 							modificaremore.setLocationRelativeTo(null);
 							modificaremore.setVisible(true);
 							loadTable();
+							BtnUpdate.setEnabled(false);
+							btnEliminar.setEnabled(false);
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

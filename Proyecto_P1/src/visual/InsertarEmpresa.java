@@ -39,6 +39,7 @@ import javax.swing.border.EtchedBorder;
 import java.awt.SystemColor;
 import javax.swing.border.BevelBorder;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class InsertarEmpresa extends JDialog {
 
@@ -266,6 +267,7 @@ public class InsertarEmpresa extends JDialog {
 		txtReferencia.setColumns(10);
 		
 		spnlocalidad = new JSpinner();
+		spnlocalidad.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spnlocalidad.setBounds(93, 131, 174, 21);
 		panel_1.add(spnlocalidad);
 
