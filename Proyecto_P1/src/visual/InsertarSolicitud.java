@@ -119,7 +119,7 @@ public class InsertarSolicitud extends JDialog {
 					}
 					ftxtRNC.setValue(modi.getEmpresa().getRNC());
 					ftxtRNC.setEnabled(false);
-					
+
 					txtNombre.setText(modi.getEmpresa().getNombre());
 					cbxContrato.setSelectedItem(modi.getTipoContrato());
 					if (modi.isMudarse()) {
@@ -750,13 +750,12 @@ public class InsertarSolicitud extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("");
-				if(modi == null ){
-					okButton.setIcon(new ImageIcon(InsertarSolicitud.class.getResource("/img/add.png")));					
-				}else{
+				if (modi == null) {
+					okButton.setIcon(new ImageIcon(InsertarSolicitud.class.getResource("/img/add.png")));
+				} else {
 					okButton.setIcon(new ImageIcon(InsertarSolicitud.class.getResource("/img/modificar.png")));
 				}
-				
-				
+
 				if (modificarSoli != null) {
 					okButton.setText("Modificar");
 				} else {
@@ -778,9 +777,9 @@ public class InsertarSolicitud extends JDialog {
 						} else if (rbtnVehiculoNo.isSelected()) {
 							vehiculo = false;
 						}
-						
+
 						float vacantes = (float) spnVacantes.getValue();
-						
+
 						String localidad = (String) cbxLocalidad.getSelectedItem();
 						int categoriaLicencia = 0;
 						if (cbxLicencia.getSelectedIndex() == 1) {
@@ -845,7 +844,7 @@ public class InsertarSolicitud extends JDialog {
 
 							} else {
 								if (rbtnUniversitario.isSelected()) {
-									SolicitudUniversitario nuevaSoli = new SolicitudUniversitario((float)vacantes,
+									SolicitudUniversitario nuevaSoli = new SolicitudUniversitario((float) vacantes,
 											experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo,
 											localidad, empresa, reubicacion, misIdiomas, categoriaLicencia, posGrado,
 											carrera);
@@ -856,9 +855,9 @@ public class InsertarSolicitud extends JDialog {
 									clean(1);
 								}
 								if (rbtnTecnico.isSelected()) {
-									SolicitudTecnico nuevaSoli = new SolicitudTecnico(vacantes,
-											experienciaTecnico, edadMaxima, edadMinima, Contrato, vehiculo,
-											localidad, empresa, reubicacion, misIdiomas, categoriaLicencia, area);
+									SolicitudTecnico nuevaSoli = new SolicitudTecnico(vacantes, experienciaTecnico,
+											edadMaxima, edadMinima, Contrato, vehiculo, localidad, empresa, reubicacion,
+											misIdiomas, categoriaLicencia, area);
 									bolsa.insertSolicitud(nuevaSoli);
 									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
 											"Información", JOptionPane.INFORMATION_MESSAGE, null);
