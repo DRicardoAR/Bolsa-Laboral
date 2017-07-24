@@ -38,7 +38,7 @@ public class Empresa implements Serializable{
 		this.calle = calle;
 		this.numeroLocal = numeroLocal;
 		this.referencia = referencia;
-		this.misContratados = misContratados;
+		this.misContratados = new ArrayList<>();
 	}
 	public ArrayList<Solicitante> getMisContratados() {
 		return misContratados;
