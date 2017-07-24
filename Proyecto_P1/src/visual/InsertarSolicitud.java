@@ -358,7 +358,7 @@ public class InsertarSolicitud extends JDialog {
 
 			spnVacantes = new JSpinner();
 			spnVacantes.setBackground(new Color(255, 255, 255));
-			spnVacantes.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+			spnVacantes.setModel(new SpinnerNumberModel(new Float(1), new Float(1), null, new Float(1)));
 			spnVacantes.setBounds(338, 23, 160, 23);
 			PanelGeneral.add(spnVacantes);
 
@@ -778,7 +778,9 @@ public class InsertarSolicitud extends JDialog {
 						} else if (rbtnVehiculoNo.isSelected()) {
 							vehiculo = false;
 						}
+						
 						float vacantes = (float) spnVacantes.getValue();
+						
 						String localidad = (String) cbxLocalidad.getSelectedItem();
 						int categoriaLicencia = 0;
 						if (cbxLicencia.getSelectedIndex() == 1) {
@@ -843,7 +845,7 @@ public class InsertarSolicitud extends JDialog {
 
 							} else {
 								if (rbtnUniversitario.isSelected()) {
-									SolicitudUniversitario nuevaSoli = new SolicitudUniversitario(vacantes,
+									SolicitudUniversitario nuevaSoli = new SolicitudUniversitario((float)vacantes,
 											experienciaUniversitario, edadMaxima, edadMinima, Contrato, vehiculo,
 											localidad, empresa, reubicacion, misIdiomas, categoriaLicencia, posGrado,
 											carrera);
