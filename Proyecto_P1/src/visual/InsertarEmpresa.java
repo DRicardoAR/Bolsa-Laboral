@@ -300,13 +300,14 @@ public class InsertarEmpresa extends JDialog {
 							String provincia = cbxProvincia.getSelectedItem()
 									.toString();
 
-							String direcion = txtSector.getText() + " "
-									+ spnlocalidad.getValue().toString() + " "
-									+ txtCuidad.getText() + " "
-									+ txtReferencia.getText() + " "
-									+ txtCalle.getText();
-							Empresa miEmpresa = new Empresa(rnc, nombre, tele,
-									email, provincia, direcion);
+							String direcion = "";
+							String ciudad = txtCuidad.getText();
+							String sector = txtSector.getText();
+							String calle = txtCalle.getText();
+							String referencia = txtReferencia.getText();
+							int local = (int) spnlocalidad.getValue();
+							Empresa miEmpresa = new Empresa(rnc, nombre, tele, email, provincia, direcion, sector, ciudad, calle, local, referencia);
+							
 
 							if (txtNombre.getText().isEmpty()) {
 								JOptionPane
@@ -435,13 +436,13 @@ public class InsertarEmpresa extends JDialog {
 						String provincia = cbxProvincia.getSelectedItem()
 								.toString();
 
-						String direcion = txtSector.getText() + " "
-								+ spnlocalidad.getValue().toString()+ " "
-								+ txtCuidad.getText() + " "
-								+ txtReferencia.getText() + " "
-								+ txtCalle.getText();
-						Empresa modiEmpre = new Empresa(rnc, nombre, tele,
-								email, provincia, direcion);
+						String direcion = "";
+						String ciudad = txtCuidad.getText();
+						String sector = txtSector.getText();
+						String calle = txtCalle.getText();
+						String referencia = txtReferencia.getText();
+						int local = (int) spnlocalidad.getValue();
+						Empresa modiEmpre = new Empresa(rnc, nombre, tele, email, provincia, direcion, sector, ciudad, calle, local, referencia);
 							BolsaLaboral.getInstance().modificaEmpresa(modiEmpre);
 							JOptionPane.showMessageDialog(null, "Empresa Modificada");
 							
@@ -479,17 +480,11 @@ if(modi){
 			txtEmail.setText(modificarEmpre.getEmail());
 			txtNombre.setText(modificarEmpre.getNombre());
 			txtTel.setText(modificarEmpre.getTelefono());
-			String[] parts = modificarEmpre.getDireccion().split(" ");
-			String sector = parts[0];
-			String localidad = parts[1];
-			String cuidad = parts[2];
-			String referencia = parts[3];
-			String calle = parts[4];
-			txtSector.setText(sector);
-			spnlocalidad.setValue(localidad);
-			txtCuidad.setText(cuidad);
-			txtReferencia.setText(referencia);
-			txtCalle.setText(calle);
+			txtSector.setText(modificarEmpre.getSector());
+			spnlocalidad.setValue(modificarEmpre.getNumeroLocal());
+			txtCuidad.setText(modificarEmpre.getCiudad());
+			txtReferencia.setText(modificarEmpre.getReferencia());
+			txtCalle.setText(modificarEmpre.getCalle());
 			cbxProvincia.setSelectedItem(modificarEmpre.getArea());
 		}
 
