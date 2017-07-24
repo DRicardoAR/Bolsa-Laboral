@@ -85,7 +85,6 @@ public class ListarEmpresa extends JDialog {
 
 							BtnUpdate.setEnabled(true);
 							btnEliminar.setEnabled(true);
-
 							cod = (String) table.getModel().getValueAt(aux, 0);
 
 						} else {
