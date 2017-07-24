@@ -87,7 +87,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/logo.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/icon.png")));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -198,6 +198,20 @@ public class Principal extends JFrame {
 			}
 		});
 		mnNewMenu.add(mntmExportarSolicitud);
+		
+		JMenuItem mntmGuardarTodo = new JMenuItem("Guardar Todo");
+		mntmGuardarTodo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BolsaLaboral.getInstance().esribirBolsa();
+				ProgressBar progress = new ProgressBar(4);
+				progress.setVisible(true);
+				progress.setLocationRelativeTo(null);
+				
+				
+			}
+		});
+		mntmGuardarTodo.setIcon(new ImageIcon(Principal.class.getResource("/img/guardar.png")));
+		mnMacheo.add(mntmGuardarTodo);
 
 		JSeparator separator = new JSeparator();
 		mnMacheo.add(separator);

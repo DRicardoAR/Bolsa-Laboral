@@ -24,7 +24,7 @@ import java.awt.Color;
 public class ProgressBar extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private int option = 0;
+	private int option;
 	private Timer timer;
 	private JProgressBar progressBar;
 	private JLabel lblTitulo ;
@@ -41,7 +41,7 @@ public class ProgressBar extends JDialog {
 	public ProgressBar(int i) {
 		getContentPane().setBackground(new Color(248, 248, 255));
 		setBackground(new Color(248, 248, 255));
-		option = 1;
+		option = i;
 		
 		this.setUndecorated(true);
 		this.setLocationRelativeTo(null);
@@ -49,7 +49,7 @@ public class ProgressBar extends JDialog {
 
 			@Override
 			public void windowOpened(WindowEvent e) {
-				if(option == 1 || option == 2 || option == 3){
+				if(option == 1 || option == 2 || option == 3 || option ==4){
 					timer = new Timer(18, new progreso());
 				}
 				
@@ -65,7 +65,7 @@ public class ProgressBar extends JDialog {
 		contentPanel.setLayout(null);
 		
 		lblTitulo = new JLabel("New label");
-		if(option == 1){
+		if(option == 1 || option ==4){
 			lblTitulo.setText("Guardando Cambios...");
 		}
 		if(option == 2){
@@ -96,12 +96,17 @@ public class ProgressBar extends JDialog {
 			} else {
 				
 				if (option == 2) {
-					JOptionPane.showMessageDialog(null, "La empresa se exporto correctamente", "Bolsa Laboral",
+					JOptionPane.showMessageDialog(null, "La empresa se exporto correctamente", "Manpower",
 							JOptionPane.INFORMATION_MESSAGE, null);
 
 				}
 				if (option == 3) {
-					JOptionPane.showMessageDialog(null, "El solicitante se exporto correctamente", "Bolsa Laboral",
+					JOptionPane.showMessageDialog(null, "El solicitante se exporto correctamente", "Manpower",
+							JOptionPane.INFORMATION_MESSAGE, null);
+
+				}
+				if (option == 4) {
+					JOptionPane.showMessageDialog(null, "Todos los cambios se guardaron correctamente", "Manpower",
 							JOptionPane.INFORMATION_MESSAGE, null);
 
 				}

@@ -14,12 +14,14 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.text.ParseException;
 
 import jdk.nashorn.internal.scripts.JO;
 import logica.BolsaLaboral;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.border.EtchedBorder;
+import javax.swing.text.MaskFormatter;
 
 public class ImportarEmpresa extends JDialog {
 
@@ -74,7 +76,6 @@ public class ImportarEmpresa extends JDialog {
 								ProgressBar pr = new ProgressBar(2);
 								pr.setLocationRelativeTo( null);
 								pr.setVisible(true);			
-								JOptionPane.showMessageDialog(null, "Empresa Exportadas");
 								ftxtrnc.setText(null);
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
@@ -93,9 +94,16 @@ public class ImportarEmpresa extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				ftxtrnc = new JFormattedTextField();
-				ftxtrnc.setBounds(52, 32, 197, 20);
-				panel.add(ftxtrnc);
+				try {
+					MaskFormatter mascara = new MaskFormatter("##########");
+					ftxtrnc = new JFormattedTextField(mascara);
+					ftxtrnc.setBounds(52, 32, 197, 20);
+					panel.add(ftxtrnc);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		}
 		{

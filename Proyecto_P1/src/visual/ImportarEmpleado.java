@@ -53,7 +53,7 @@ public class ImportarEmpleado extends JDialog {
 		getContentPane().setBackground(new Color(248, 248, 255));
 		setBackground(new Color(248, 248, 255));
 		setResizable(false);
-		setTitle("Exportar Empleado");
+		setTitle("Exportar Solicitante");
 		setBounds(100, 100, 371, 168);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(248, 248, 255));
@@ -89,7 +89,6 @@ public class ImportarEmpleado extends JDialog {
 										ProgressBar pr = new ProgressBar(3);
 										pr.setLocationRelativeTo( null);
 										pr.setVisible(true);			
-										JOptionPane.showMessageDialog(null, "Empleado Exportado");
 										txtCedula.setText(null);
 									} catch (IOException e1) {
 										// TODO Auto-generated catch block
