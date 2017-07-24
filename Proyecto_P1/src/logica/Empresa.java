@@ -15,19 +15,31 @@ public class Empresa implements Serializable{
 	private String email;
 	private String area;
 	private String direccion;
+	private String sector;
+	private String ciudad;
+	private String calle;
+	private int numeroLocal;
+	private String referencia;
 	private ArrayList<Solicitante>misContratados;
 
-	public Empresa(String RNC, String nombre, String telefono, String email, String area, String direccion) {
+
+
+	public Empresa(String rNC, String nombre, String telefono, String email, String area, String direccion,
+			String sector, String ciudad, String calle, int numeroLocal, String referencia) {
 		super();
-		this.RNC = RNC;
+		RNC = rNC;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.email = email;
 		this.area = area;
 		this.direccion = direccion;
-		misContratados = new ArrayList<>();
+		this.sector = sector;
+		this.ciudad = ciudad;
+		this.calle = calle;
+		this.numeroLocal = numeroLocal;
+		this.referencia = referencia;
+		this.misContratados = misContratados;
 	}
-
 	public ArrayList<Solicitante> getMisContratados() {
 		return misContratados;
 	}
@@ -38,6 +50,37 @@ public void insertContratado(Solicitante trabajador){
 	misContratados.add(trabajador);
 }
 
+
+	public String getSector() {
+	return sector;
+}
+public void setSector(String sector) {
+	this.sector = sector;
+}
+public String getCiudad() {
+	return ciudad;
+}
+public void setCiudad(String ciudad) {
+	this.ciudad = ciudad;
+}
+public String getCalle() {
+	return calle;
+}
+public void setCalle(String calle) {
+	this.calle = calle;
+}
+public int getNumeroLocal() {
+	return numeroLocal;
+}
+public void setNumeroLocal(int numeroLocal) {
+	this.numeroLocal = numeroLocal;
+}
+public String getReferencia() {
+	return referencia;
+}
+public void setReferencia(String referencia) {
+	this.referencia = referencia;
+}
 	public String getRNC() {
 		return RNC;
 	}
